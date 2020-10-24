@@ -20,7 +20,7 @@ spring:
         format_sql: true
   h2:
     console:
-      enabled: true # enable H2 console
+      enabled: false
 
 # Logger
 logging:

@@ -6,9 +6,18 @@ import fr.enssat.vehiclesrental.service.exception.already_exists.EmployeeAlready
 import fr.enssat.vehiclesrental.service.exception.not_found.EmployeeNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -63,5 +72,23 @@ public class EmployeeService implements IEmployeeService {
     @Override
     public void deleteEmployee(String id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+        Optional<Employee> employee = repository.findByEmail(email);
+        if (!employee.isPresent()) {
+            throw new UsernameNotFoundException("User mail " + email + " was not found in the database");
+        }
+
+        System.out.println("Found mail: " + email);
+        return new User(employee.get().getEmail(), employee.get().getPassword(), mapRolesToAuthorities(Collections.singletonList(employee.get().getPosition().label)));
+    }
+
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<String> positions) {
+        return positions.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
     }
 }

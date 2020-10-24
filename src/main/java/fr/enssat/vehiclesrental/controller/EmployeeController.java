@@ -1,14 +1,14 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.model.*;
+import fr.enssat.vehiclesrental.model.Employee;
 import fr.enssat.vehiclesrental.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.*;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
