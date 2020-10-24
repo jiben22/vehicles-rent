@@ -1,3 +1,7 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 # Created by https://www.toptal.com/developers/gitignore/api/intellij,eclipse,java,git
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij,eclipse,java,git
