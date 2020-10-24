@@ -1,2 +1,1 @@
-# vehicles-rent
-Rent of vehicles - Spring (JEE)
+# Vehicle Rental Manager - Spring web application
