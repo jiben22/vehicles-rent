@@ -57,15 +57,15 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public Employee addEmployee(Employee employee) {
-        if (repository.existsById(employee.getId()))
+        if (repository.existsById(String.valueOf(employee.getId())))
             throw new EmployeeAlreadyExistException(employee);
         return repository.saveAndFlush(employee);
     }
 
     @Override
     public Employee editEmployee(Employee employee) {
-        if (!repository.existsById(employee.getId()))
-            throw new EmployeeNotFoundException(employee.getId());
+        if (!repository.existsById(String.valueOf(employee.getId())))
+            throw new EmployeeNotFoundException(String.valueOf(employee.getId()));
         return repository.saveAndFlush(employee);
     }
 
