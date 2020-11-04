@@ -16,7 +16,7 @@ spring:
     show-sql: true # show all queries
     properties:
       hibernate:
-        generate_statistics: true # turn statistics on
+        generate_statistics: false # turn statistics on
         format_sql: true
   h2:
     console:

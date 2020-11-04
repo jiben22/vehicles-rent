@@ -22,7 +22,7 @@ import java.time.LocalDate;
 public class Employee extends Person implements Serializable {
 
     @Builder
-    private Employee(long id, String lastname, String firstname, LocalDate birthdate, String street, String zipcode, String city, String country, String email, Position position, String password) {
+    private Employee(Integer id, String lastname, String firstname, LocalDate birthdate, String street, String zipcode, String city, String country, String email, Position position, String password) {
         super(id, lastname, firstname, birthdate, street, zipcode, city, country, email);
         this.position = position;
         this.password = password;
