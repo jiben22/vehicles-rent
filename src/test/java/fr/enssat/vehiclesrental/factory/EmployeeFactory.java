@@ -1,7 +1,7 @@
 package fr.enssat.vehiclesrental.factory;
 
 import fr.enssat.vehiclesrental.model.Employee;
-import fr.enssat.vehiclesrental.model.Position;
+import fr.enssat.vehiclesrental.model.Function;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -19,7 +19,7 @@ public class EmployeeFactory {
             .city("Lannion")
             .country("France")
             .email("tony.stark@marvel.com")
-            .position(Position.RESPONSABLE_LOCATION)
+            .function(Function.RESPONSABLE_LOCATION)
             .password("Ironman12*")
             .build();
     }
@@ -35,7 +35,7 @@ public class EmployeeFactory {
                 .city("Lannion")
                 .country("France")
                 .email("thor@marvel.com")
-                .position(Position.GESTIONNAIRE_COMMERCIAL)
+                .function(Function.GESTIONNAIRE_COMMERCIAL)
                 .password("Thor56789*")
                 .build());
     }
@@ -51,7 +51,7 @@ public class EmployeeFactory {
                 .city("Nebraska")
                 .country("USA")
                 .email("antman@marvel.com")
-                .position(Position.GESTIONNAIRE_TECHNIQUE)
+                .function(Function.GESTIONNAIRE_TECHNIQUE)
                 .password("Antman123*")
                 .build();
     }
@@ -67,7 +67,7 @@ public class EmployeeFactory {
                 .city("PoleNord")
                 .country("Danemark")
                 .email("captain@marvel.com")
-                .position(Position.Collaborateur)
+                .function(Function.Collaborateur)
                 .password("Captain12*")
                 .build();
     }

@@ -1,9 +1,10 @@
 package fr.enssat.vehiclesrental.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @AllArgsConstructor
-public enum Position {
+public enum Function {
 
     RESPONSABLE_LOCATION("Responsable location"),
     GESTIONNAIRE_COMMERCIAL("Gestionnaire commercial"),
