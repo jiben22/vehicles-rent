@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html lang="fr" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
 
 <div th:fragment="menu">
     <div class="sidebar" data-background-color="white" data-color="azure" data-image="/img/sidebar-1.jpg">
@@ -8,39 +9,77 @@
                 Location de véhicules
             </a>
         </div>
-        <div class="sidebar-wrapper">
+        <ul class="sidebar-wrapper pl-0 pb-0">
             <div class="col-md-12">
                 <div class="card card-profile">
                     <i class="material-icons" style="font-size: 6em;">account_circle</i>
                     <h4 class="card-title">
-                        <span th:text="${session.employee.firstname + ' ' + session.employee.lastname}" th:unless="${session.employee == null}"></span>
+                        <span th:text="${session.employee.firstname + ' ' + session.employee.lastname}"
+                              th:unless="${session.employee == null}"></span>
                     </h4>
                 </div>
             </div>
-            <ul class="nav">
-                <li class="nav-item" th:classappend="${title == 'Vue d''ensemble' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/}">
-                        <i class="material-icons">dashboard</i>
-                        <p>Vue d'ensemble</p>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<div th:fragment="logoutMenu">
-    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse justify-content-end">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" id="navbarDropdownLogout" th:href="@{/deconnexion}" style="display: flex;flex-direction: column;align-items: center;">
-                            <i class="material-icons red">power_settings_new</i>Déconnexion
+            <nav class="nav">
+                <ul class="list-unstyled">
+                    <li class="nav-item" th:classappend="${title == 'Vue d''ensemble' ? 'active' : ''}">
+                        <a class="nav-link" href="">
+                            <i class="material-icons">dashboard</i>
+                            <p>Vue d'ensemble</p>
+                        </a>
+                    </li>
+                    <hr class="my-3"/>
+                    <li>
+                        <p class="ml-4 text-uppercase font-weight-bold">Recherche</p>
+                        <ul class="list-unstyled">
+                            <li class="nav-item" th:classappend="${title == 'Client' ? 'active' : ''}">
+                                <a class="nav-link" href="">
+                                    <i class="material-icons">person</i>
+                                    <p>Client</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" th:classappend="${title == 'Vehicule' ? 'active' : ''}">
+                                <a class="nav-link" href="">
+                                    <i class="material-icons">directions_car</i>
+                                    <p>Véhicule</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" th:classappend="${title == 'Reservation' ? 'active' : ''}">
+                                <a class="nav-link" href="">
+                                    <i class="material-icons">receipt_long</i>
+                                    <p>Réservation</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" th:classappend="${title == 'Collaborateur' ? 'active' : ''}">
+                                <a class="nav-link" href="">
+                                    <i class="material-icons">work</i>
+                                    <p>Collaborateur</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <hr class="my-3"/>
+                    <li class="nav-item" th:classappend="${title == 'Statistiques' ? 'active' : ''}">
+                        <a class="nav-link" href="">
+                            <i class="material-icons">poll</i>
+                            <p>Statistiques</p>
                         </a>
                     </li>
                 </ul>
+            </nav>
+        </ul>
+        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-bottom">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse justify-content-center">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" id="navbarDropdownLogout" th:href="@{/deconnexion}"
+                               style="display: flex;flex-direction: column;align-items: center;">
+                                <i class="material-icons red">power_settings_new</i>Déconnexion
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
 </div>
