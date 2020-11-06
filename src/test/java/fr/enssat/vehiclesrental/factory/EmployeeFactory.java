@@ -19,6 +19,7 @@ public class EmployeeFactory {
             .city("Lannion")
             .country("France")
             .email("tony.stark@marvel.com")
+            .phone("+33612482274")
             .function(Function.RESPONSABLE_LOCATION)
             .password("Ironman12*")
             .build();
@@ -35,6 +36,7 @@ public class EmployeeFactory {
                 .city("Lannion")
                 .country("France")
                 .email("thor@marvel.com")
+                .phone("+33612482274")
                 .function(Function.GESTIONNAIRE_COMMERCIAL)
                 .password("Thor56789*")
                 .build());
@@ -51,6 +53,7 @@ public class EmployeeFactory {
                 .city("Nebraska")
                 .country("USA")
                 .email("antman@marvel.com")
+                .phone("+33612482274")
                 .function(Function.GESTIONNAIRE_TECHNIQUE)
                 .password("Antman123*")
                 .build();
@@ -67,6 +70,7 @@ public class EmployeeFactory {
                 .city("PoleNord")
                 .country("Danemark")
                 .email("captain@marvel.com")
+                .phone("+33612482274")
                 .function(Function.Collaborateur)
                 .password("Captain12*")
                 .build();
