@@ -1,5 +1,6 @@
 package fr.enssat.vehiclesrental.controller;
 
+import fr.enssat.vehiclesrental.model.Function;
 import fr.enssat.vehiclesrental.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

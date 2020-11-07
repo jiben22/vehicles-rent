@@ -5,9 +5,10 @@
 
 <body class="">
     <div class="wrapper ">
-        <div th:replace="fragments/menus.html :: menu"></div>
-        <div class="main-panel">
-
+        <div th:replace="fragments/menus.html :: SideBarMenu"></div>
+        <div class="main-panel d-flex flex-column">
+            <div th:replace="fragments/menus.html :: TopMenu"></div>
+            <div th:replace="fragments/homepage.html :: dashboard"></div>
             <div class="row">
             </div>
             <footer th:replace="fragments/footer.html :: footer "></footer>

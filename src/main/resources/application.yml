@@ -13,6 +13,11 @@ spring:
     hibernate:
       ddl-auto: update # auto create or update database schema
     database: mysql
+  # dev: auto reload thymeleaf templates without restart
+  # https://attacomsian.com/blog/spring-boot-auto-reload-thymeleaf-templates/ #2
+  profiles:
+    active: dev
+
 
 # Logger
 logging:

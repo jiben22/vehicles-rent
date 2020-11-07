@@ -1,6 +1,7 @@
 package fr.enssat.vehiclesrental.service;
 
 import fr.enssat.vehiclesrental.model.Employee;
+import fr.enssat.vehiclesrental.model.Function;
 import fr.enssat.vehiclesrental.repository.EmployeeRepository;
 import fr.enssat.vehiclesrental.service.exception.already_exists.EmployeeAlreadyExistException;
 import fr.enssat.vehiclesrental.service.exception.not_found.EmployeeNotFoundException;
@@ -83,12 +84,10 @@ public class EmployeeService implements IEmployeeService {
         }
 
         System.out.println("Found mail: " + email);
-        return new User(employee.get().getEmail(), employee.get().getPassword(), mapRolesToAuthorities(Collections.singletonList(employee.get().getFunction().label)));
+        return new User(employee.get().getEmail(), employee.get().getPassword(), mapRolesToAuthorities(employee.get().getFunction()));
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<String> positions) {
-        return positions.stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Function function) {
+        return Collections.singleton(new SimpleGrantedAuthority(function.label));
     }
 }
