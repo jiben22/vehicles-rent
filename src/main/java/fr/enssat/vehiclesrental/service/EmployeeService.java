@@ -83,7 +83,7 @@ public class EmployeeService implements IEmployeeService {
         }
 
         System.out.println("Found mail: " + email);
-        return new User(employee.get().getEmail(), employee.get().getPassword(), mapRolesToAuthorities(Collections.singletonList(employee.get().getFunction().label)));
+        return new User(employee.get().getEmail(), employee.get().getPassword(), mapRolesToAuthorities(Collections.singletonList(employee.get().getPosition().label)));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<String> positions) {

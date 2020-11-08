@@ -2,7 +2,7 @@ package fr.enssat.vehiclesrental.repository;
 
 import fr.enssat.vehiclesrental.factory.EmployeeFactory;
 import fr.enssat.vehiclesrental.model.Employee;
-import fr.enssat.vehiclesrental.model.Function;
+import fr.enssat.vehiclesrental.model.Position;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +67,7 @@ public class EmployeeRepositoryTest {
         assertEquals(employee.getCountry(), "France");
         assertEquals(employee.getEmail(), "tony.stark@marvel.com");
         assertEquals(employee.getPhone(),"+33612482274");
-        assertEquals(employee.getFunction(), Function.RESPONSABLE_LOCATION);
+        assertEquals(employee.getPosition(), Position.RESPONSABLE_LOCATION);
         assertTrue(employee.matchesPassword("Ironman12*"));
     }
 
@@ -97,7 +97,7 @@ public class EmployeeRepositoryTest {
         assertEquals(employee.getCountry(), "France");
         assertEquals(employee.getEmail(), "tony.stark@marvel.com");
         assertEquals(employee.getPhone(),"+33612482274");
-        assertEquals(employee.getFunction(), Function.RESPONSABLE_LOCATION);
+        assertEquals(employee.getPosition(), Position.RESPONSABLE_LOCATION);
         assertTrue(employee.matchesPassword("Ironman12*"));
     }
 
@@ -120,7 +120,7 @@ public class EmployeeRepositoryTest {
         assertEquals(employee.getCountry(), "France");
         assertEquals(employee.getEmail(), "tony.stark@marvel.com");
         assertEquals(employee.getPhone(),"+33612482274");
-        assertEquals(employee.getFunction(), Function.RESPONSABLE_LOCATION);
+        assertEquals(employee.getPosition(), Position.RESPONSABLE_LOCATION);
         assertTrue(employee.matchesPassword("Ironman12*"));
     }
 

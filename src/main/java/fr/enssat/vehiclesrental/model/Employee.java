@@ -25,29 +25,29 @@ import java.time.LocalDate;
 public class Employee extends Person implements Serializable {
 
     /**
-     * Constructor of an Employee
-     *
-     */
-    @Builder
-    private Employee(long id, String lastname, String firstname, LocalDate birthdate, String street, String zipcode, String city, String country, String email, String phone, Function function, String password) {
-        super(id, lastname, firstname, birthdate, street, zipcode, city, country, email,phone);
-        this.function = function;
-        this.password = password;
-    }
-
-    /**
-     * Represent which function an employee own in the company
+     * Represent which position an employee own in the company
      */
     @Column(nullable = false, length = 45)
     @Size(max = 45, message = "La fonction ne doit pas dépasser les 45 caractères !")
     @NonNull
-    private Function function;
+    private Position position;
 
     /**
      * Password use by employee to be connect on website
      */
     @ToString.Exclude
     private String password;
+
+    /**
+     * Constructor of an Employee
+     *
+     */
+    @Builder
+    private Employee(long id, String lastname, String firstname, LocalDate birthdate, String street, String zipcode, String city, String country, String email, String phone, Position position, String password) {
+        super(id, lastname, firstname, birthdate, street, zipcode, city, country, email,phone);
+        this.position = position;
+        this.password = password;
+    }
 
     /**
      * Override Lombok Setter to encode password
@@ -59,7 +59,7 @@ public class Employee extends Person implements Serializable {
     }
 
     /**
-     * Override Builder 'password' function to encode password
+     * Override Builder 'password' position to encode password
      */
     public static class EmployeeBuilder {
         private String password;
