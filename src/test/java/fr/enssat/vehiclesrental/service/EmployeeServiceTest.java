@@ -38,17 +38,17 @@ public class EmployeeServiceTest {
     @DisplayName("Get employee with an id")
     @Test
     public void getEmployee() {
-        when(employeeRepository.findById(anyInt()))
+        when(employeeRepository.findById(anyLong()))
                 .thenReturn(ofNullable(EmployeeFactory.getEmployeeGestionnaireCommercial()));
 
-        Employee employee = employeeService.getEmployee(2);
+        Employee employee = employeeService.getEmployee(157314099170602L);
         assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeGestionnaireCommercial(), "password").matches(employee));
     }
 
     @DisplayName("Get employee with an unknown id")
     @Test()
     public void getEmployeeException() {
-        when(employeeRepository.findById(anyInt())).thenReturn(Optional.empty());
+        when(employeeRepository.findById(anyLong())).thenReturn(Optional.empty());
         assertThrows(EmployeeNotFoundException.class, () -> employeeService.getEmployee(-999));
     }
 
@@ -115,7 +115,7 @@ public class EmployeeServiceTest {
     @Test
     public void addEmployee() {
         when(employeeRepository.saveAndFlush(any(Employee.class))).thenReturn(EmployeeFactory.getEmployeeCollaborateur());
-        when(employeeRepository.existsById(anyInt())).thenReturn(false);
+        when(employeeRepository.existsById(anyLong())).thenReturn(false);
 
         Employee employee = employeeService.addEmployee(EmployeeFactory.getEmployeeCollaborateur());
         assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeCollaborateur(), "password").matches(employee));
@@ -124,7 +124,7 @@ public class EmployeeServiceTest {
     @DisplayName("Create an employee who already exists")
     @Test
     public void addEmployeeAlreadyExists() {
-        when(employeeRepository.existsById(anyInt())).thenReturn(true);
+        when(employeeRepository.existsById(anyLong())).thenReturn(true);
         assertThrows(EmployeeAlreadyExistException.class, () -> employeeService.addEmployee(EmployeeFactory.getEmployeeCollaborateur()));
     }
 
@@ -132,7 +132,7 @@ public class EmployeeServiceTest {
     @Test
     public void editEmployee() {
         when(employeeRepository.saveAndFlush(any(Employee.class))).thenReturn(EmployeeFactory.getEmployeeResponsableLocation());
-        when(employeeRepository.existsById(anyInt())).thenReturn(true);
+        when(employeeRepository.existsById(anyLong())).thenReturn(true);
 
         Employee employee = employeeService.editEmployee(EmployeeFactory.getEmployeeResponsableLocation());
         assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeResponsableLocation(), "password").matches(employee));
@@ -141,7 +141,7 @@ public class EmployeeServiceTest {
     @DisplayName("Update an unknown employee")
     @Test
     public void editEmployeeException() {
-        when(employeeRepository.existsById(anyInt())).thenReturn(false);
+        when(employeeRepository.existsById(anyLong())).thenReturn(false);
         assertThrows(EmployeeNotFoundException.class, () -> employeeService.editEmployee(EmployeeFactory.getEmployeeResponsableLocation()));
     }
 
