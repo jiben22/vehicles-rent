@@ -14,7 +14,7 @@
                     <a class="w-100 h-100 text-center py-2" href="#">
                         <i class="material-icons">list</i>
                     </a>
-                    <a th:if="${session.employee.function != T(fr.enssat.vehiclesrental.model.Function).RESPONSABLE_LOCATION}"
+                    <a sec:authorize="hasRole(T(fr.enssat.vehiclesrental.model.Position).RESPONSABLE_LOCATION.getLabel())"
                         class="w-100 h-100 border-left text-center py-2" href="#">
                         <i class="material-icons">add</i>
                     </a>
@@ -29,7 +29,7 @@
                     <a class="w-100 h-100 text-center py-2" href="#">
                         <i class="material-icons">list</i>
                     </a>
-                    <a th:if="${session.employee.function != T(fr.enssat.vehiclesrental.model.Function).RESPONSABLE_LOCATION}"
+                    <a sec:authorize="hasRole(T(fr.enssat.vehiclesrental.model.Position).RESPONSABLE_LOCATION.getLabel())"
                        class="w-100 h-100 border-left text-center py-2" href="#">
                         <i class="material-icons">add</i>
                     </a>
@@ -44,7 +44,7 @@
                     <a class="w-100 h-100 text-center py-2" href="#">
                         <i class="material-icons">list</i>
                     </a>
-                    <a th:if="${session.employee.function != T(fr.enssat.vehiclesrental.model.Function).RESPONSABLE_LOCATION}"
+                    <a sec:authorize="hasRole(T(fr.enssat.vehiclesrental.model.Position).RESPONSABLE_LOCATION.getLabel())"
                        class="w-100 h-100 border-left text-center py-2" href="#">
                         <i class="material-icons">add</i>
                     </a>
@@ -59,7 +59,7 @@
                     <a class="w-100 h-100 text-center py-2" href="#">
                         <i class="material-icons">list</i>
                     </a>
-                    <a th:if="${session.employee.function != T(fr.enssat.vehiclesrental.model.Function).RESPONSABLE_LOCATION}"
+                    <a sec:authorize="hasRole(T(fr.enssat.vehiclesrental.model.Position).RESPONSABLE_LOCATION.getLabel())"
                        class="w-100 h-100 border-left text-center py-2" href="#">
                         <i class="material-icons">add</i>
                     </a>
@@ -74,7 +74,7 @@
                     <a class="w-100 h-100 text-center py-2" href="#">
                         <i class="material-icons">list</i>
                     </a>
-                    <a th:if="${session.employee.function != T(fr.enssat.vehiclesrental.model.Function).RESPONSABLE_LOCATION}"
+                    <a sec:authorize="hasRole(T(fr.enssat.vehiclesrental.model.Position).RESPONSABLE_LOCATION.getLabel())"
                        class="w-100 h-100 border-left text-center py-2" href="#">
                         <i class="material-icons">add</i>
                     </a>
