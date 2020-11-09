@@ -19,7 +19,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@PrimaryKeyJoinColumn(name = "id")
 public class Plane extends Vehicule implements Serializable {
     /**
      * Number of hours when the plane has been used

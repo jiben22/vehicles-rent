@@ -17,7 +17,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@PrimaryKeyJoinColumn(name = "id")
 public class Client extends Person implements Serializable {
     /**
      * Constructor of a Client

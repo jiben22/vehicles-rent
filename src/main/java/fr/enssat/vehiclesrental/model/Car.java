@@ -19,7 +19,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@PrimaryKeyJoinColumn(name = "id")
 public class Car extends Vehicule implements Serializable {
     /**
      * Number of kilometer that a car has been used

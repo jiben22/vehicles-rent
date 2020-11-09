@@ -13,7 +13,6 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode()
-@PrimaryKeyJoinColumn(name = "id")
 public class Booking implements Serializable {
     /**
      * Id of a booking used to find her in database

@@ -1,8 +1,10 @@
 package fr.enssat.vehiclesrental.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public enum Position {
 
     RESPONSABLE_LOCATION("Responsable location"),
