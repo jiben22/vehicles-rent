@@ -1,16 +1,15 @@
 package fr.enssat.vehiclesrental.factory;
 
 import fr.enssat.vehiclesrental.model.Employee;
-import fr.enssat.vehiclesrental.model.Function;
+import fr.enssat.vehiclesrental.model.Position;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 public class EmployeeFactory {
 
     public static Employee getEmployeeResponsableLocation() {
          return Employee.builder()
-            .id(Long.parseLong("157314099170601"))
+            .id(1)
             .lastname("Stark")
             .firstname("Tony")
             .birthdate(LocalDate.parse("1978-05-03"))
@@ -19,14 +18,15 @@ public class EmployeeFactory {
             .city("Lannion")
             .country("France")
             .email("tony.stark@marvel.com")
-            .function(Function.RESPONSABLE_LOCATION)
+            .phone("+33612482274")
+            .position(Position.RESPONSABLE_LOCATION)
             .password("Ironman12*")
             .build();
     }
 
-    public static Optional<Employee> getEmployeeGestionnaireCommercial() {
-        return Optional.ofNullable(Employee.builder()
-                .id(Long.parseLong("157314099170602"))
+    public static Employee getEmployeeGestionnaireCommercial() {
+        return Employee.builder()
+                .id(2)
                 .lastname("Odinson")
                 .firstname("Thor")
                 .birthdate(LocalDate.parse("1945-05-03"))
@@ -35,14 +35,15 @@ public class EmployeeFactory {
                 .city("Lannion")
                 .country("France")
                 .email("thor@marvel.com")
-                .function(Function.GESTIONNAIRE_COMMERCIAL)
+                .phone("+33612482274")
+                .position(Position.GESTIONNAIRE_COMMERCIAL)
                 .password("Thor56789*")
-                .build());
+                .build();
     }
 
     public static Employee getEmployeeGestionnaireTechnique() {
         return Employee.builder()
-                .id(Long.parseLong("157314099170603"))
+                .id(3)
                 .lastname("Jonathan")
                 .firstname("Henry")
                 .birthdate(LocalDate.parse("1958-05-03"))
@@ -51,14 +52,15 @@ public class EmployeeFactory {
                 .city("Nebraska")
                 .country("USA")
                 .email("antman@marvel.com")
-                .function(Function.GESTIONNAIRE_TECHNIQUE)
+                .phone("+33612482274")
+                .position(Position.GESTIONNAIRE_TECHNIQUE)
                 .password("Antman123*")
                 .build();
     }
 
     public static Employee getEmployeeCollaborateur() {
         return Employee.builder()
-                .id(Long.parseLong("157314099170605"))
+                .id(5)
                 .lastname("Rogers")
                 .firstname("Steve")
                 .birthdate(LocalDate.parse("1985-05-03"))
@@ -67,7 +69,8 @@ public class EmployeeFactory {
                 .city("PoleNord")
                 .country("Danemark")
                 .email("captain@marvel.com")
-                .function(Function.Collaborateur)
+                .phone("+33612482274")
+                .position(Position.Collaborateur)
                 .password("Captain12*")
                 .build();
     }

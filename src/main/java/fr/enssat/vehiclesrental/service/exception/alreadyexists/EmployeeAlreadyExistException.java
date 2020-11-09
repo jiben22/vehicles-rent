@@ -1,4 +1,4 @@
-package fr.enssat.vehiclesrental.service.exception.already_exists;
+package fr.enssat.vehiclesrental.service.exception.alreadyexists;
 
 import fr.enssat.vehiclesrental.model.Employee;
 

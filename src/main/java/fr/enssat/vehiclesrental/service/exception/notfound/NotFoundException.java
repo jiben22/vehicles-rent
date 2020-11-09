@@ -1,4 +1,4 @@
-package fr.enssat.vehiclesrental.service.exception.not_found;
+package fr.enssat.vehiclesrental.service.exception.notfound;
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(String msg) {

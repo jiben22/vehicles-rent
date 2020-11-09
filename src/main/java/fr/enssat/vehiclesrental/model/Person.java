@@ -16,6 +16,8 @@ import java.time.LocalDate;
  * There is no table Person in database
  *
  * @see Employee
+ * @see Client
+ *
  */
 @MappedSuperclass
 @NoArgsConstructor
