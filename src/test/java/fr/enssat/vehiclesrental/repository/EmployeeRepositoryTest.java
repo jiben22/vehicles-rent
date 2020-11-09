@@ -22,7 +22,7 @@ public class EmployeeRepositoryTest {
     @DisplayName("Get employee with an id")
     @Test
     public void findById() {
-        Optional<Employee> optionalEmployee = employeeRepository.findById(1);
+        Optional<Employee> optionalEmployee = employeeRepository.findById(157314099170601L);
         assertTrue(optionalEmployee.isPresent());
         Employee employee = optionalEmployee.get();
         assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeResponsableLocation(), "password").matches(employee));
@@ -31,7 +31,7 @@ public class EmployeeRepositoryTest {
     @DisplayName("Get employee with an unknown id")
     @Test
     public void findByIdUnknown() {
-        Optional<Employee> optionalEmployee = employeeRepository.findById(-999);
+        Optional<Employee> optionalEmployee = employeeRepository.findById(-999L);
         assertFalse(optionalEmployee.isPresent());
     }
 
@@ -90,7 +90,7 @@ public class EmployeeRepositoryTest {
     @DisplayName("Delete an employee with an id")
     @Test
     public void deleteById() {
-        employeeRepository.deleteById(8);
-        assertFalse(employeeRepository.existsById(8));
+        employeeRepository.deleteById(157314099170608L);
+        assertFalse(employeeRepository.existsById(157314099170608L));
     }
 }

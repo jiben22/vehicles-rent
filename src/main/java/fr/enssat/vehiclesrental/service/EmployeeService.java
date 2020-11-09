@@ -26,12 +26,12 @@ public class EmployeeService implements IEmployeeService {
     private final EmployeeRepository repository;
 
     @Override
-    public boolean exists(Integer id) {
+    public boolean exists(long id) {
         return repository.existsById(id);
     }
 
     @Override
-    public Employee getEmployee(Integer id) {
+    public Employee getEmployee(long id) {
         return repository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(String.valueOf(id)));
     }
 
@@ -57,20 +57,20 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public Employee addEmployee(Employee employee) {
-        if (repository.existsById(Math.toIntExact(employee.getId())))
+        if (repository.existsById(employee.getId()))
             throw new EmployeeAlreadyExistException(employee);
         return repository.saveAndFlush(employee);
     }
 
     @Override
     public Employee editEmployee(Employee employee) {
-        if (!repository.existsById(Math.toIntExact(employee.getId())))
+        if (!repository.existsById(employee.getId()))
             throw new EmployeeNotFoundException(String.valueOf(employee.getId()));
         return repository.saveAndFlush(employee);
     }
 
     @Override
-    public void deleteEmployee(Integer id) {
+    public void deleteEmployee(long id) {
         repository.deleteById(id);
     }
 
