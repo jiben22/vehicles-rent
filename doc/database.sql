@@ -38,8 +38,8 @@ CREATE TABLE booking (
     id_client BIGINT NOT NULL,
     id_vehicule BIGINT NOT NULL,
     CONSTRAINT fk_booking_client
-        FOREIGN KEY (idClient)
-        REFERENCES Client(id)
+        FOREIGN KEY (id_client)
+        REFERENCES client(id)
 );
 
 CREATE TABLE car (
