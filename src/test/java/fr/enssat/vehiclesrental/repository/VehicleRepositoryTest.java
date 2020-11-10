@@ -10,14 +10,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 import java.util.Optional;
 
 import static fr.enssat.vehiclesrental.repository.VehicleRepository.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.data.jpa.domain.Specification.*;
+import static org.springframework.data.jpa.domain.Specification.where;
 
 @DataJpaTest
 public class VehicleRepositoryTest {
@@ -131,7 +130,7 @@ public class VehicleRepositoryTest {
         assertFalse(vehicleRepository.existsById(12681L));
     }
 
-    @DisplayName("Search a car with his brand, model and nbSeats")
+    @DisplayName("Search a vehicle with his brand, model and nbSeats")
     @Test
     public void searchVehicle() {
         List<Vehicle> vehicles = vehicleRepository.findAll(where(hasBrand("acura")).and(hasModel("ilx").and(hasNbSeats(7))));

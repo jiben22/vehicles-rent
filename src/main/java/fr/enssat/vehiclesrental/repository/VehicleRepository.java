@@ -13,7 +13,6 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long>, JpaSpec
 
     List<Vehicle> findByBrand(String brand);
     List<Vehicle> findByModel(String model);
-    List<Vehicle> findVehiclesByBrandAndModelAndNbSeats(String brand, String model, int nbSeats);
 
     static Specification<Vehicle> hasBrand(String brand) {
         return (vehicle, cq, cb) -> cb.like(vehicle.get("brand"), "%" + brand + "%");

@@ -1,7 +1,9 @@
 package fr.enssat.vehiclesrental.factory;
 
-import fr.enssat.vehiclesrental.model.*;
-import org.hibernate.collection.internal.PersistentSet;
+import fr.enssat.vehiclesrental.model.Car;
+import fr.enssat.vehiclesrental.model.Motorbike;
+import fr.enssat.vehiclesrental.model.Plane;
+import fr.enssat.vehiclesrental.model.State;
 
 public class VehicleFactory {
 
