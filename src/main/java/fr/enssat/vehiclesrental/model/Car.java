@@ -19,7 +19,7 @@ import java.util.Set;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @PrimaryKeyJoinColumn(name = "id")
-public class Car extends Vehicule implements Serializable {
+public class Car extends Vehicle implements Serializable {
     /**
      * Number of kilometer that a car has been used
      */

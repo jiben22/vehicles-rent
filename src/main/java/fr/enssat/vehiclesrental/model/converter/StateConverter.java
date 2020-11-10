@@ -1,6 +1,7 @@
 package fr.enssat.vehiclesrental.model.converter;
 
 import fr.enssat.vehiclesrental.model.State;
+import fr.enssat.vehiclesrental.model.Vehicle;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
@@ -10,7 +11,7 @@ import java.util.stream.Stream;
  * Convert enumeration named 'state' to switch between database and java object and vice-versa
  * see(https://www.baeldung.com/jpa-persisting-enums-in-jpa#converter)
  *
- * @see fr.enssat.vehiclesrental.model.Vehicule
+ * @see Vehicle
  */
 @Converter(autoApply = true)
 public class StateConverter implements AttributeConverter<State,String> {
