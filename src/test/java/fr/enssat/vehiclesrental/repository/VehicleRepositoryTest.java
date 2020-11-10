@@ -62,7 +62,7 @@ public class VehicleRepositoryTest {
     @Test
     public void findByBrand() {
         List<Vehicle> vehicles = vehicleRepository.findByBrand("acura");
-        assertEquals(vehicles.size(), 1);
+        assertEquals(1, vehicles.size());
         vehicles.forEach(vehicle ->
                 assertTrue(new ReflectionEquals(VehicleFactory.getCar(), "bookings").matches(vehicle))
         );
@@ -72,7 +72,7 @@ public class VehicleRepositoryTest {
     @Test
     public void findByModel() {
         List<Vehicle> vehicles = vehicleRepository.findByModel("vulcan s");
-        assertEquals(vehicles.size(), 1);
+        assertEquals(1, vehicles.size());
         vehicles.forEach(vehicle ->
                 assertTrue(new ReflectionEquals(VehicleFactory.getMotorbike(), "bookings").matches(vehicle))
         );
@@ -82,7 +82,7 @@ public class VehicleRepositoryTest {
     @Test
     public void findAll() {
         List<Vehicle> vehicles = vehicleRepository.findAll();
-        assertEquals(vehicles.size(), 13);
+        assertEquals(13, vehicles.size());
     }
 
     @DisplayName("Create a new car")
@@ -134,7 +134,7 @@ public class VehicleRepositoryTest {
     @Test
     public void searchVehicle() {
         List<Vehicle> vehicles = vehicleRepository.findAll(where(hasBrand("acura")).and(hasModel("ilx").and(hasNbSeats(7))));
-        assertEquals(vehicles.size(), 1);
+        assertEquals(1, vehicles.size());
         vehicles.forEach(vehicle ->
                 assertTrue(new ReflectionEquals(VehicleFactory.getCar(), "bookings").matches(vehicle))
         );

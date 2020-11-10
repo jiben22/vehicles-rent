@@ -25,7 +25,7 @@ public class PlaneRepositoryTest {
     @Test
     public void searchPlane() {
         List<Plane> planes = planeRepository.findAll(where(hasBrand("robin")).and(hasModel("dr400").and(hasNbSeats(4))));
-        assertEquals(planes.size(), 1);
+        assertEquals(1, planes.size());
         planes.forEach(plane ->
                 assertTrue(new ReflectionEquals(VehicleFactory.getPlane(), "bookings").matches(plane))
         );

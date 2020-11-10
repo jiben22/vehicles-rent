@@ -25,7 +25,7 @@ public class CarRepositoryTest {
     @Test
     public void searchCar() {
         List<Car> cars = carRepository.findAll(where(hasBrand("acura")).and(hasModel("ilx").and(hasNbSeats(7))));
-        assertEquals(cars.size(), 1);
+        assertEquals(1, cars.size());
         cars.forEach(car ->
                 assertTrue(new ReflectionEquals(VehicleFactory.getCar(), "bookings").matches(car))
         );

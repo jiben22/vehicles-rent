@@ -25,7 +25,7 @@ public class MotorbikeRepositoryTest {
     @Test
     public void searchMotorbike() {
         List<Motorbike> motorbikes = motorbikeRepository.findAll(where(hasBrand("kawasaki")).and(hasModel("vulcan s").and(hasNbSeats(2))));
-        assertEquals(motorbikes.size(), 1);
+        assertEquals(1, motorbikes.size());
         motorbikes.forEach(motorbike ->
                 assertTrue(new ReflectionEquals(VehicleFactory.getMotorbike(), "bookings").matches(motorbike))
         );
