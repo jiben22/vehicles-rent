@@ -1,9 +1,6 @@
 package fr.enssat.vehiclesrental.service;
 
-import fr.enssat.vehiclesrental.model.Car;
-import fr.enssat.vehiclesrental.model.Motorbike;
-import fr.enssat.vehiclesrental.model.Plane;
-import fr.enssat.vehiclesrental.model.Vehicle;
+import fr.enssat.vehiclesrental.model.*;
 import fr.enssat.vehiclesrental.repository.CarRepository;
 import fr.enssat.vehiclesrental.repository.MotorbikeRepository;
 import fr.enssat.vehiclesrental.repository.PlaneRepository;
@@ -17,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static fr.enssat.vehiclesrental.repository.VehicleRepository.*;
 import static org.springframework.data.jpa.domain.Specification.where;
@@ -46,34 +44,77 @@ public class VehicleService implements IVehicleService {
     }
 
     @Override
-    public List<Vehicle> searchVehicles(String brand, String model, int nbSeats) {
+    public List<Vehicle> getCars() {
+        return carRepository.findAll(Sort.by(Sort.Direction.ASC, "model"));
+    }
 
-        //TODO: don't do this! (use accumulation)
-        if (!brand.isEmpty() && !model.isEmpty() && nbSeats != 0) {
-            return vehicleRepository.findAll(where(hasBrand(brand)).and(hasModel(model).and(hasNbSeats(nbSeats))));
-        } else if (!brand.isEmpty() && nbSeats != 0) {
-            return vehicleRepository.findAll(where(hasBrand(brand)).and(hasNbSeats(nbSeats)));
+    @Override
+    public List<Vehicle> getMotorbikes() {
+        return motorbikeRepository.findAll(Sort.by(Sort.Direction.ASC, "model"));
+    }
+
+    @Override
+    public List<Vehicle> getPlanes() {
+        return planeRepository.findAll(Sort.by(Sort.Direction.ASC, "model"));
+    }
+
+    @Override
+    public List<Vehicle> searchVehicles(String brand, String model, int nbSeats) {
+        Specification<Vehicle> vehicleSpecification = buildSpecification(brand, model, nbSeats);
+        if (vehicleSpecification != null) {
+            return vehicleRepository.findAll(vehicleSpecification);
         } else {
             return getVehicles();
         }
     }
 
-    //TODO
     @Override
-    public List<Car> searchCars(String brand, String model, int nbSeats) {
-        return null;
+    public List<Vehicle> searchCars(String brand, String model, int nbSeats) {
+        Specification<Vehicle> vehicleSpecification = buildSpecification(brand, model, nbSeats);
+        if (vehicleSpecification != null) {
+            return carRepository.findAll(vehicleSpecification);
+        } else {
+            return getCars();
+        }
     }
 
-    //TODO
     @Override
-    public List<Motorbike> searchMotorbikes(String brand, String model, int nbSeats) {
-        return null;
+    public List<Vehicle> searchMotorbikes(String brand, String model, int nbSeats) {
+        Specification<Vehicle> vehicleSpecification = buildSpecification(brand, model, nbSeats);
+        if (vehicleSpecification != null) {
+            return motorbikeRepository.findAll(vehicleSpecification);
+        } else {
+            return getMotorbikes();
+        }
     }
 
-    //TODO
     @Override
-    public List<Plane> searchPlanes(String brand, String model, int nbSeats) {
-        return null;
+    public List<Vehicle> searchPlanes(String brand, String model, int nbSeats) {
+        Specification<Vehicle> vehicleSpecification = buildSpecification(brand, model, nbSeats);
+        if (vehicleSpecification != null) {
+            return planeRepository.findAll(vehicleSpecification);
+        } else {
+            return getPlanes();
+        }
+    }
+
+    public Specification<Vehicle> buildSpecification(String brand, String model, int nbSeats) {
+        List<Specification<Vehicle>> specifications = new ArrayList<>();
+        if (!brand.isEmpty()) specifications.add(hasBrand(brand));
+        if (!model.isEmpty()) specifications.add(hasModel(model));
+        if (nbSeats > 0) specifications.add(hasNbSeats(nbSeats));
+
+        if (specifications.size() > 0) {
+            Specification<Vehicle> vehicleSpecification = where(specifications.get(0));
+            specifications.remove(0);
+            for (Specification<Vehicle> specification: specifications) {
+                vehicleSpecification = Objects.requireNonNull(vehicleSpecification).and(specification);
+            }
+
+            return vehicleSpecification;
+        } else {
+            return null;
+        }
     }
 
     @Override

@@ -3,6 +3,9 @@ package fr.enssat.vehiclesrental.service;
 import fr.enssat.vehiclesrental.factory.EmployeeFactory;
 import fr.enssat.vehiclesrental.factory.VehicleFactory;
 import fr.enssat.vehiclesrental.model.Vehicle;
+import fr.enssat.vehiclesrental.repository.CarRepository;
+import fr.enssat.vehiclesrental.repository.MotorbikeRepository;
+import fr.enssat.vehiclesrental.repository.PlaneRepository;
 import fr.enssat.vehiclesrental.repository.VehicleRepository;
 import fr.enssat.vehiclesrental.service.exception.alreadyexists.VehicleAlreadyExistException;
 import fr.enssat.vehiclesrental.service.exception.notfound.VehicleNotFoundException;
@@ -14,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -32,6 +36,15 @@ public class VehicleServiceTest {
 
     @Mock
     private VehicleRepository vehicleRepository;
+
+    @Mock
+    private CarRepository carRepository;
+
+    @Mock
+    private MotorbikeRepository motorbikeRepository;
+
+    @Mock
+    private PlaneRepository planeRepository;
 
     @InjectMocks
     private VehicleService vehicleService;
@@ -70,19 +83,109 @@ public class VehicleServiceTest {
         );
     }
 
-//    //TODO: test with param null
-//    @DisplayName("Search vehicles")
-//    @Test
-//    public void searchVehicles() {
-//       lenient().when(vehicleRepository.findAll())
-//                .thenReturn(Collections.singletonList(VehicleFactory.getCar()));
-//
-//        List<Vehicle> vehicles = vehicleService.searchVehicles("acura", "", 7);
-//        assertEquals(vehicles.size(), 1);
-//        vehicles.forEach(vehicle ->
-//                assertTrue(new ReflectionEquals(VehicleFactory.getCar(), "bookings").matches(vehicle))
-//        );
-//    }
+    @DisplayName("Search vehicles with parameters")
+    @Test
+    public void searchVehicles() {
+       lenient().when(vehicleRepository.findAll(any(Specification.class)))
+                .thenReturn(Collections.singletonList(VehicleFactory.getCar()));
+
+        List<Vehicle> vehicles = vehicleService.searchVehicles("acura", "", 7);
+        assertEquals(1, vehicles.size());
+        vehicles.forEach(vehicle ->
+                assertTrue(new ReflectionEquals(VehicleFactory.getCar(), "bookings").matches(vehicle))
+        );
+    }
+
+    @DisplayName("Search vehicles with empty parameters")
+    @Test
+    public void searchAllVehicles() {
+        lenient().when(vehicleRepository.findAll(any(Sort.class)))
+                .thenReturn(Collections.singletonList(VehicleFactory.getCar()));
+
+        List<Vehicle> vehicles = vehicleService.searchVehicles("", "", 0);
+        assertEquals(1, vehicles.size());
+        vehicles.forEach(vehicle ->
+                assertTrue(new ReflectionEquals(VehicleFactory.getCar(), "bookings").matches(vehicle))
+        );
+    }
+
+    @DisplayName("Search cars with parameters")
+    @Test
+    public void searchCars() {
+        lenient().when(carRepository.findAll(any(Specification.class)))
+                .thenReturn(Collections.singletonList(VehicleFactory.getCar()));
+
+        List<Vehicle> vehicles = vehicleService.searchCars("acura", "", 7);
+        assertEquals(1, vehicles.size());
+        vehicles.forEach(vehicle ->
+                assertTrue(new ReflectionEquals(VehicleFactory.getCar(), "bookings").matches(vehicle))
+        );
+    }
+
+    @DisplayName("Search cars with empty parameters")
+    @Test
+    public void searchAllCars() {
+        lenient().when(carRepository.findAll(any(Sort.class)))
+                .thenReturn(Collections.singletonList(VehicleFactory.getCar()));
+
+        List<Vehicle> vehicles = vehicleService.searchCars("", "", 0);
+        assertEquals(1, vehicles.size());
+        vehicles.forEach(vehicle ->
+                assertTrue(new ReflectionEquals(VehicleFactory.getCar(), "bookings").matches(vehicle))
+        );
+    }
+
+    @DisplayName("Search motorbikes with parameters")
+    @Test
+    public void searchMotorbikes() {
+        lenient().when(motorbikeRepository.findAll(any(Specification.class)))
+                .thenReturn(Collections.singletonList(VehicleFactory.getMotorbike()));
+
+        List<Vehicle> vehicles = vehicleService.searchMotorbikes("acura", "", 7);
+        assertEquals(1, vehicles.size());
+        vehicles.forEach(vehicle ->
+                assertTrue(new ReflectionEquals(VehicleFactory.getMotorbike(), "bookings").matches(vehicle))
+        );
+    }
+
+    @DisplayName("Search motorbikes with empty parameters")
+    @Test
+    public void searchAllMotorbikes() {
+        lenient().when(motorbikeRepository.findAll(any(Sort.class)))
+                .thenReturn(Collections.singletonList(VehicleFactory.getMotorbike()));
+
+        List<Vehicle> vehicles = vehicleService.searchMotorbikes("", "", 0);
+        assertEquals(1, vehicles.size());
+        vehicles.forEach(vehicle ->
+                assertTrue(new ReflectionEquals(VehicleFactory.getMotorbike(), "bookings").matches(vehicle))
+        );
+    }
+
+    @DisplayName("Search planes with parameters")
+    @Test
+    public void searchPlanes() {
+        lenient().when(planeRepository.findAll(any(Specification.class)))
+                .thenReturn(Collections.singletonList(VehicleFactory.getPlane()));
+
+        List<Vehicle> vehicles = vehicleService.searchPlanes("acura", "", 7);
+        assertEquals(1, vehicles.size());
+        vehicles.forEach(vehicle ->
+                assertTrue(new ReflectionEquals(VehicleFactory.getPlane(), "bookings").matches(vehicle))
+        );
+    }
+
+    @DisplayName("Search planes with empty parameters")
+    @Test
+    public void searchAllPlanes() {
+        lenient().when(planeRepository.findAll(any(Sort.class)))
+                .thenReturn(Collections.singletonList(VehicleFactory.getPlane()));
+
+        List<Vehicle> vehicles = vehicleService.searchPlanes("", "", 0);
+        assertEquals(1, vehicles.size());
+        vehicles.forEach(vehicle ->
+                assertTrue(new ReflectionEquals(VehicleFactory.getPlane(), "bookings").matches(vehicle))
+        );
+    }
 
     @DisplayName("Create a new vehicle")
     @Test
