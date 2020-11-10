@@ -1,8 +1,8 @@
 # Vehicle Rental Manager - Spring web application
 
-[![CircleCI](https://circleci.com/gh/jiben22/vehicles-rental/tree/model.svg?style=svg)](https://circleci.com/gh/jiben22/vehicles-rental/tree/model)
+[![CircleCI](https://circleci.com/gh/jiben22/vehicles-rental/tree/service-repository.svg?style=svg)](https://circleci.com/gh/jiben22/vehicles-rental/tree/service-repository)
 
-[![codecov](https://codecov.io/gh/jiben22/vehicles-rental/branch/model/graph/badge.svg)](https://codecov.io/gh/jiben22/vehicles-rental/branch/model)
+[![codecov](https://codecov.io/gh/jiben22/vehicles-rental/branch/service-repository/graph/badge.svg)](https://codecov.io/gh/jiben22/vehicles-rental/branch/service-repository)
 
 ## Get started
 

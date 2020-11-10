@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -19,7 +18,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Plane extends Vehicule implements Serializable {
+@PrimaryKeyJoinColumn(name = "id")
+public class Plane extends Vehicle implements Serializable {
     /**
      * Number of hours when the plane has been used
      */

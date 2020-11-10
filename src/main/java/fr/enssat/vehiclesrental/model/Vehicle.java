@@ -11,8 +11,8 @@ import java.io.Serializable;
 import java.util.Set;
 
 /**
- * Represent a Vehicule used to create other vehicule
- * There is no table Vehicule in database
+ * Represent a Vehicle used to create other vehicle
+ * There is no table Vehicle in database
  *
  */
 @Entity
@@ -20,10 +20,10 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public abstract class Vehicule implements Serializable {
+public abstract class Vehicle implements Serializable {
 
     /**
-     * Id of a vehicule used to find him in the database.
+     * Id of a vehicle used to find him in the database.
      *
      * We use sequence strategie to generate id, because it creates unique id
      * for all chilren even between different entity.
@@ -34,21 +34,21 @@ public abstract class Vehicule implements Serializable {
     private long id;
 
     /**
-     * Brand of a vehicule
+     * Brand of a vehicle
      */
     @Column(nullable = false, length = 128)
     @Size(min = 1, max = 128, message = "La marque ne peut pas être vide et ne doit pas dépasser les 128 caractères !")
     @NonNull
     private String brand;
     /**
-     * Model of a vehicule
+     * Model of a vehicle
      */
     @Column(nullable = false, length = 128)
     @Size(min = 1, max = 128, message = "La modèle ne peut pas être vide et ne doit pas dépasser les 128 caractères !")
     @NonNull
     private String model;
     /**
-     * Maximum speed of a vehicule
+     * Maximum speed of a vehicle
      */
     @Column(nullable = false)
     @NonNull
@@ -60,21 +60,21 @@ public abstract class Vehicule implements Serializable {
     @NonNull
     private float rentPricePerDay;
     /**
-     * Number of seat available in the vehicule
+     * Number of seat available in the vehicle
      */
     @Column(nullable = false)
     @NonNull
     private int nbSeats;
     /**
-     * General state of a vehicule
+     * General state of a vehicle
      */
     @Column(nullable = false)
     @NonNull
     private State state;
 
     /**
-     * Represent list of bookings link to the current vehicule.
+     * Represent list of bookings link to the current vehicle.
      */
-    @OneToMany(mappedBy="vehicule")
+    @OneToMany(mappedBy="vehicle")
     private Set<Booking> bookings;
 }

@@ -4,13 +4,12 @@ import fr.enssat.vehiclesrental.model.Employee;
 import fr.enssat.vehiclesrental.model.Position;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 public class EmployeeFactory {
 
     public static Employee getEmployeeResponsableLocation() {
          return Employee.builder()
-            .id(Long.parseLong("157314099170601"))
+            .id(157314099170601L)
             .lastname("Stark")
             .firstname("Tony")
             .birthdate(LocalDate.parse("1978-05-03"))
@@ -25,9 +24,9 @@ public class EmployeeFactory {
             .build();
     }
 
-    public static Optional<Employee> getEmployeeGestionnaireCommercial() {
-        return Optional.ofNullable(Employee.builder()
-                .id(Long.parseLong("157314099170602"))
+    public static Employee getEmployeeGestionnaireCommercial() {
+        return Employee.builder()
+                .id(157314099170602L)
                 .lastname("Odinson")
                 .firstname("Thor")
                 .birthdate(LocalDate.parse("1945-05-03"))
@@ -39,12 +38,12 @@ public class EmployeeFactory {
                 .phone("+33612482274")
                 .position(Position.GESTIONNAIRE_COMMERCIAL)
                 .password("Thor56789*")
-                .build());
+                .build();
     }
 
     public static Employee getEmployeeGestionnaireTechnique() {
         return Employee.builder()
-                .id(Long.parseLong("157314099170603"))
+                .id(157314099170603L)
                 .lastname("Jonathan")
                 .firstname("Henry")
                 .birthdate(LocalDate.parse("1958-05-03"))
@@ -61,7 +60,7 @@ public class EmployeeFactory {
 
     public static Employee getEmployeeCollaborateur() {
         return Employee.builder()
-                .id(Long.parseLong("157314099170605"))
+                .id(157314099170605L)
                 .lastname("Rogers")
                 .firstname("Steve")
                 .birthdate(LocalDate.parse("1985-05-03"))

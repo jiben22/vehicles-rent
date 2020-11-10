@@ -34,6 +34,6 @@ INSERT INTO plane (id, brand, maximum_speed, model, nb_seats, rent_price_per_day
 (12681, 'beechraft',400,'baron g58',6,2500,'Etat passable',2,50000),
 (12682, 'piper',370,'seneca',4,200,'Etat très bien',2,12000);
 
-INSERT INTO booking (id, discount, end_date, expected_number_km, expected_price, is_discount, start_date, status, id_client, id_vehicule) VALUES
+INSERT INTO booking (id, discount, end_date, expected_number_km, expected_price, is_discount, start_date, status, id_client, id_vehicle) VALUES
 (148632579, 200.5, '2020-11-20', 2500, 502.5, true, '2020-11-15', 'Réservation prête', 9143686792, 782),
 (148632580, 0, '2020-12-12', 500, 300, false, '2020-12-15', 'Réservation prête', 9143686794, 44);

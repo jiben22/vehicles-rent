@@ -2,8 +2,8 @@ package fr.enssat.vehiclesrental.service;
 
 import fr.enssat.vehiclesrental.model.Employee;
 import fr.enssat.vehiclesrental.repository.EmployeeRepository;
-import fr.enssat.vehiclesrental.service.exception.already_exists.EmployeeAlreadyExistException;
-import fr.enssat.vehiclesrental.service.exception.not_found.EmployeeNotFoundException;
+import fr.enssat.vehiclesrental.service.exception.alreadyexists.EmployeeAlreadyExistException;
+import fr.enssat.vehiclesrental.service.exception.notfound.EmployeeNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,13 +26,13 @@ public class EmployeeService implements IEmployeeService {
     private final EmployeeRepository repository;
 
     @Override
-    public boolean exists(String id) {
+    public boolean exists(long id) {
         return repository.existsById(id);
     }
 
     @Override
-    public Employee getEmployee(String id) {
-        return repository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
+    public Employee getEmployee(long id) {
+        return repository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(String.valueOf(id)));
     }
 
     @Override
@@ -57,20 +57,20 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public Employee addEmployee(Employee employee) {
-        if (repository.existsById(String.valueOf(employee.getId())))
+        if (repository.existsById(employee.getId()))
             throw new EmployeeAlreadyExistException(employee);
         return repository.saveAndFlush(employee);
     }
 
     @Override
     public Employee editEmployee(Employee employee) {
-        if (!repository.existsById(String.valueOf(employee.getId())))
+        if (!repository.existsById(employee.getId()))
             throw new EmployeeNotFoundException(String.valueOf(employee.getId()));
         return repository.saveAndFlush(employee);
     }
 
     @Override
-    public void deleteEmployee(String id) {
+    public void deleteEmployee(long id) {
         repository.deleteById(id);
     }
 
@@ -78,7 +78,7 @@ public class EmployeeService implements IEmployeeService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         Optional<Employee> employee = repository.findByEmail(email);
-        if (!employee.isPresent()) {
+        if (employee.isEmpty()) {
             throw new UsernameNotFoundException("User mail " + email + " was not found in the database");
         }
 
