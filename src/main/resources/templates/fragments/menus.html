@@ -12,11 +12,10 @@
     <ul class="sidebar-wrapper pl-0 pb-0">
         <div class="col-md-12">
             <div class="card card-profile my-3">
-                <i class="material-icons" style="font-size: 6em;">account_circle</i>
+                <i class="material-icons">account_circle</i>
                 <h4 class="card-title">
                         <span th:text="${session.employee.firstname + ' ' + session.employee.lastname}"
                               th:unless="${session.employee == null}"></span>
-
                 </h4>
             </div>
         </div>

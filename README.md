@@ -53,6 +53,6 @@
 
 > blackwidow@marvel.com | Blackwidow1*
 
-> captain@marvel.com | Captain12*
+> captainmarvel@marvel.com | Captainmarvel1*
 
 > spiderman@marvel.com | Spiderman1*
