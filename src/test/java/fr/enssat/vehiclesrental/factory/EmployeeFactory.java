@@ -9,7 +9,7 @@ public class EmployeeFactory {
 
     public static Employee getEmployeeResponsableLocation() {
          return Employee.builder()
-            .id(1)
+            .id(157314099170601L)
             .lastname("Stark")
             .firstname("Tony")
             .birthdate(LocalDate.parse("1978-05-03"))
@@ -26,7 +26,7 @@ public class EmployeeFactory {
 
     public static Employee getEmployeeGestionnaireCommercial() {
         return Employee.builder()
-                .id(2)
+                .id(157314099170602L)
                 .lastname("Odinson")
                 .firstname("Thor")
                 .birthdate(LocalDate.parse("1945-05-03"))
@@ -43,7 +43,7 @@ public class EmployeeFactory {
 
     public static Employee getEmployeeGestionnaireTechnique() {
         return Employee.builder()
-                .id(3)
+                .id(157314099170603L)
                 .lastname("Jonathan")
                 .firstname("Henry")
                 .birthdate(LocalDate.parse("1958-05-03"))
@@ -60,7 +60,7 @@ public class EmployeeFactory {
 
     public static Employee getEmployeeCollaborateur() {
         return Employee.builder()
-                .id(5)
+                .id(157314099170605L)
                 .lastname("Rogers")
                 .firstname("Steve")
                 .birthdate(LocalDate.parse("1985-05-03"))
