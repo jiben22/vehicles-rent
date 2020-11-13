@@ -19,7 +19,7 @@ import java.util.Set;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @PrimaryKeyJoinColumn(name = "id")
-public class Plane extends Vehicule implements Serializable {
+public class Plane extends Vehicle implements Serializable {
     /**
      * Number of hours when the plane has been used
      */

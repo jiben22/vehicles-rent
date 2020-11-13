@@ -147,7 +147,7 @@ public class EmployeeServiceTest {
 
     @DisplayName("Delete an employee")
     @Test
-    public void deleteEmploye() {
+    public void deleteEmployee() {
         employeeService.deleteEmployee(4);
         assertFalse(employeeService.exists(4));
     }

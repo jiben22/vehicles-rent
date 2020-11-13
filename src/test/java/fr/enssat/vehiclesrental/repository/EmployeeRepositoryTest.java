@@ -55,7 +55,7 @@ public class EmployeeRepositoryTest {
     @Test
     public void findByFirstname() {
         List<Employee> employees = employeeRepository.findByFirstname("Tony");
-        assertEquals(employees.size(), 1);
+        assertEquals(1, employees.size());
         employees.forEach(employee ->
                 assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeResponsableLocation(), "password").matches(employee))
         );
@@ -65,7 +65,7 @@ public class EmployeeRepositoryTest {
     @Test
     public void findByLastname() {
         List<Employee> employees = employeeRepository.findByLastname("Stark");
-        assertEquals(employees.size(), 1);
+        assertEquals(1, employees.size());
         employees.forEach(employee ->
                 assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeResponsableLocation(), "password").matches(employee))
         );
@@ -75,7 +75,7 @@ public class EmployeeRepositoryTest {
     @Test
     public void findAll() {
         List<Employee> employees = employeeRepository.findAll();
-        assertEquals(employees.size(), 10);
+        assertEquals(10, employees.size());
     }
 
     @DisplayName("Create a new employee")

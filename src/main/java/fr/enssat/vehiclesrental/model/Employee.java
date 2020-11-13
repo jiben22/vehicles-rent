@@ -21,7 +21,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@PrimaryKeyJoinColumn(name = "id")
 public class Employee extends Person implements Serializable {
 
     /**
