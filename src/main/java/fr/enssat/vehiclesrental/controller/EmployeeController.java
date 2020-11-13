@@ -1,5 +1,6 @@
 package fr.enssat.vehiclesrental.controller;
 
+import fr.enssat.vehiclesrental.controller.constants.Constants;
 import fr.enssat.vehiclesrental.model.Employee;
 import fr.enssat.vehiclesrental.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
+import static fr.enssat.vehiclesrental.controller.constants.Constants.Controller.TITLE;
+import static fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController.*;
+
 @RequiredArgsConstructor
 @Controller
 @Slf4j
@@ -17,20 +21,15 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @GetMapping("/employes")
-    public String showEmployees(Model model) {
+    @GetMapping(GetEmployees.URL)
+    public String getEmployees(Model model) {
 
-        log.info("GET /employes");
+        log.info(String.format("GET %s", GetEmployees.URL));
+        model.addAttribute(TITLE, GetEmployees.TITLE);
 
-        model.addAttribute("title", "Liste des employés");
-
-        // Get employees
         List<Employee> employees = employeeService.getEmployees();
-        model.addAttribute("employees", employees);
+        model.addAttribute(EMPLOYEES, employees);
 
-        //TODO: test
-        log.info(employees.toString());
-
-        return "employees";
+        return GetEmployees.VIEW;
     }
 }
