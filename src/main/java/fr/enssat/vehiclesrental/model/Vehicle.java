@@ -1,5 +1,6 @@
 package fr.enssat.vehiclesrental.model;
 
+import fr.enssat.vehiclesrental.model.enums.State;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

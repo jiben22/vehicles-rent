@@ -1,5 +1,6 @@
 package fr.enssat.vehiclesrental.model;
 
+import fr.enssat.vehiclesrental.model.enums.Position;
 import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

@@ -1,5 +1,6 @@
 package fr.enssat.vehiclesrental.model;
 
+import fr.enssat.vehiclesrental.model.enums.State;
 import lombok.*;
 
 import javax.persistence.Column;

@@ -1,7 +1,7 @@
 package fr.enssat.vehiclesrental.service;
 
 import fr.enssat.vehiclesrental.model.Employee;
-import fr.enssat.vehiclesrental.model.Position;
+import fr.enssat.vehiclesrental.model.enums.Position;
 import fr.enssat.vehiclesrental.repository.EmployeeRepository;
 import fr.enssat.vehiclesrental.service.exception.alreadyexists.EmployeeAlreadyExistException;
 import fr.enssat.vehiclesrental.service.exception.notfound.EmployeeNotFoundException;

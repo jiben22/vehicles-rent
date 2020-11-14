@@ -3,7 +3,7 @@ package fr.enssat.vehiclesrental.factory;
 import fr.enssat.vehiclesrental.model.Car;
 import fr.enssat.vehiclesrental.model.Motorbike;
 import fr.enssat.vehiclesrental.model.Plane;
-import fr.enssat.vehiclesrental.model.State;
+import fr.enssat.vehiclesrental.model.enums.State;
 
 public class VehicleFactory {
 

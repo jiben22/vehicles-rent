@@ -1,7 +1,7 @@
 package fr.enssat.vehiclesrental.factory;
 
 import fr.enssat.vehiclesrental.model.Employee;
-import fr.enssat.vehiclesrental.model.Position;
+import fr.enssat.vehiclesrental.model.enums.Position;
 
 import java.time.LocalDate;
 

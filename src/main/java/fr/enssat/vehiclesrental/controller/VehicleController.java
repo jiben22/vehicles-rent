@@ -1,7 +1,7 @@
 package fr.enssat.vehiclesrental.controller;
 
 import fr.enssat.vehiclesrental.model.Vehicle;
-import fr.enssat.vehiclesrental.model.VehicleType;
+import fr.enssat.vehiclesrental.model.enums.VehicleType;
 import fr.enssat.vehiclesrental.service.VehicleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

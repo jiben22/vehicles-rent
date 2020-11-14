@@ -1,4 +1,4 @@
-package fr.enssat.vehiclesrental.model;
+package fr.enssat.vehiclesrental.model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
