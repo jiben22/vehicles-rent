@@ -82,7 +82,6 @@ public class EmployeeService implements IEmployeeService {
             throw new UsernameNotFoundException("User mail " + email + " was not found in the database");
         }
 
-        System.out.println("Found mail: " + email);
         return new User(employee.get().getEmail(), employee.get().getPassword(), mapRolesToAuthorities(employee.get().getPosition()));
     }
 

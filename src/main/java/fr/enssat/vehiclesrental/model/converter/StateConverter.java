@@ -1,7 +1,7 @@
 package fr.enssat.vehiclesrental.model.converter;
 
-import fr.enssat.vehiclesrental.model.enums.State;
 import fr.enssat.vehiclesrental.model.Vehicle;
+import fr.enssat.vehiclesrental.model.enums.State;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

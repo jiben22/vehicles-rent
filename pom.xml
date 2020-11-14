@@ -22,6 +22,7 @@
 		<validation-api.version>2.0.1.Final</validation-api.version>
 		<commons-beanutils.version>1.9.4</commons-beanutils.version>
 		<lombok.version>1.18.16</lombok.version>
+		<mailjet.version>4.2.0</mailjet.version>
 		<junit.jupiter.version>5.7.0</junit.jupiter.version>
 		<mockito.version>3.6.0</mockito.version>
 		<jacoco.version>0.8.6</jacoco.version>
@@ -103,6 +104,31 @@
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<!-- Send emails -->
+		<dependency>
+			<groupId>com.mailjet</groupId>
+			<artifactId>mailjet-client</artifactId>
+			<version>${mailjet.version}</version>
+		</dependency>
+
+		<!-- Spring mail-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<!-- Javax Mail -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.passay</groupId>
+			<artifactId>passay</artifactId>
+			<version>1.0</version>
 		</dependency>
 
 		<!-- Spring Test -->

@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @RequiredArgsConstructor
 @Configuration
@@ -48,22 +49,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/connexion**", "/deconnexion**", "/reinitialisation-mot-de-passe**", "/resetPassword/**").permitAll();
 
         // Config for Login Form
-//        http.authorizeRequests()
-//                .anyRequest().authenticated()
-//                .and().formLogin()
-//                // Submit URL of login page.
-//                .loginPage("/connexion")
-//                .defaultSuccessUrl("/", true) // always use it
-//                .failureUrl("/connexion?error=true")
-//                .usernameParameter("username")
-//                .passwordParameter("password")
-//                // Config for Logout PageexceptionHandling
-//                .and().logout()
-//                .invalidateHttpSession(true)
-//                .clearAuthentication(true)
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/deconnexion"))
-//                .logoutSuccessUrl("/connexion?logout")
-//                .permitAll();
+        http.authorizeRequests()
+                .anyRequest().authenticated()
+                .and().formLogin()
+                // Submit URL of login page.
+                .loginPage("/connexion")
+                .defaultSuccessUrl("/", true) // always use it
+                .failureUrl("/connexion?error=true")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                // Config for Logout PageexceptionHandling
+                .and().logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/deconnexion"))
+                .logoutSuccessUrl("/connexion?logout")
+                .permitAll();
     }
 
     @Bean

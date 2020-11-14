@@ -17,7 +17,23 @@ spring:
   # https://attacomsian.com/blog/spring-boot-auto-reload-thymeleaf-templates/ #2
   profiles:
     active: dev
-
+  # ===============================
+  # = MAIL configurations
+  # ===============================
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    username: klozinn@gmail.com
+    password:
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    protocol: smtp
+    test-connection: false
 
 # Logger
 logging:
