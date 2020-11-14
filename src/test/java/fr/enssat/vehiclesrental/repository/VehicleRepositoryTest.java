@@ -14,7 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.List;
 import java.util.Optional;
 
-import static fr.enssat.vehiclesrental.repository.VehicleRepository.*;
+import static fr.enssat.vehiclesrental.repository.VehicleBaseRepository.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.data.jpa.domain.Specification.where;
 

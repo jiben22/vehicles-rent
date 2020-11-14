@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;

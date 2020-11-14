@@ -1,6 +1,9 @@
 package fr.enssat.vehiclesrental.service;
 
-import fr.enssat.vehiclesrental.model.*;
+import fr.enssat.vehiclesrental.model.Car;
+import fr.enssat.vehiclesrental.model.Motorbike;
+import fr.enssat.vehiclesrental.model.Plane;
+import fr.enssat.vehiclesrental.model.Vehicle;
 import fr.enssat.vehiclesrental.repository.CarRepository;
 import fr.enssat.vehiclesrental.repository.MotorbikeRepository;
 import fr.enssat.vehiclesrental.repository.PlaneRepository;
@@ -16,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static fr.enssat.vehiclesrental.repository.VehicleRepository.*;
+import static fr.enssat.vehiclesrental.repository.VehicleBaseRepository.*;
 import static org.springframework.data.jpa.domain.Specification.where;
 
 @RequiredArgsConstructor
@@ -44,17 +47,17 @@ public class VehicleService implements IVehicleService {
     }
 
     @Override
-    public List<Vehicle> getCars() {
+    public List<Car> getCars() {
         return carRepository.findAll(Sort.by(Sort.Direction.ASC, "model"));
     }
 
     @Override
-    public List<Vehicle> getMotorbikes() {
+    public List<Motorbike> getMotorbikes() {
         return motorbikeRepository.findAll(Sort.by(Sort.Direction.ASC, "model"));
     }
 
     @Override
-    public List<Vehicle> getPlanes() {
+    public List<Plane> getPlanes() {
         return planeRepository.findAll(Sort.by(Sort.Direction.ASC, "model"));
     }
 
@@ -69,7 +72,7 @@ public class VehicleService implements IVehicleService {
     }
 
     @Override
-    public List<Vehicle> searchCars(String brand, String model, int nbSeats) {
+    public List<? extends Vehicle> searchCars(String brand, String model, int nbSeats) {
         Specification<Vehicle> vehicleSpecification = buildSpecification(brand, model, nbSeats);
         if (vehicleSpecification != null) {
             return carRepository.findAll(vehicleSpecification);
@@ -79,7 +82,7 @@ public class VehicleService implements IVehicleService {
     }
 
     @Override
-    public List<Vehicle> searchMotorbikes(String brand, String model, int nbSeats) {
+    public List<? extends Vehicle> searchMotorbikes(String brand, String model, int nbSeats) {
         Specification<Vehicle> vehicleSpecification = buildSpecification(brand, model, nbSeats);
         if (vehicleSpecification != null) {
             return motorbikeRepository.findAll(vehicleSpecification);
@@ -89,7 +92,7 @@ public class VehicleService implements IVehicleService {
     }
 
     @Override
-    public List<Vehicle> searchPlanes(String brand, String model, int nbSeats) {
+    public List<? extends Vehicle> searchPlanes(String brand, String model, int nbSeats) {
         Specification<Vehicle> vehicleSpecification = buildSpecification(brand, model, nbSeats);
         if (vehicleSpecification != null) {
             return planeRepository.findAll(vehicleSpecification);

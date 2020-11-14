@@ -1,6 +1,5 @@
 package fr.enssat.vehiclesrental.service;
 
-import fr.enssat.vehiclesrental.factory.EmployeeFactory;
 import fr.enssat.vehiclesrental.factory.VehicleFactory;
 import fr.enssat.vehiclesrental.model.Vehicle;
 import fr.enssat.vehiclesrental.repository.CarRepository;
@@ -18,8 +17,6 @@ import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -115,7 +112,7 @@ public class VehicleServiceTest {
         lenient().when(carRepository.findAll(any(Specification.class)))
                 .thenReturn(Collections.singletonList(VehicleFactory.getCar()));
 
-        List<Vehicle> vehicles = vehicleService.searchCars("acura", "", 7);
+        List<? extends Vehicle> vehicles = vehicleService.searchCars("acura", "", 7);
         assertEquals(1, vehicles.size());
         vehicles.forEach(vehicle ->
                 assertTrue(new ReflectionEquals(VehicleFactory.getCar(), "bookings").matches(vehicle))
@@ -128,7 +125,7 @@ public class VehicleServiceTest {
         lenient().when(carRepository.findAll(any(Sort.class)))
                 .thenReturn(Collections.singletonList(VehicleFactory.getCar()));
 
-        List<Vehicle> vehicles = vehicleService.searchCars("", "", 0);
+        List<? extends Vehicle> vehicles = vehicleService.searchCars("", "", 0);
         assertEquals(1, vehicles.size());
         vehicles.forEach(vehicle ->
                 assertTrue(new ReflectionEquals(VehicleFactory.getCar(), "bookings").matches(vehicle))
@@ -141,7 +138,7 @@ public class VehicleServiceTest {
         lenient().when(motorbikeRepository.findAll(any(Specification.class)))
                 .thenReturn(Collections.singletonList(VehicleFactory.getMotorbike()));
 
-        List<Vehicle> vehicles = vehicleService.searchMotorbikes("acura", "", 7);
+        List<? extends Vehicle> vehicles = vehicleService.searchMotorbikes("acura", "", 7);
         assertEquals(1, vehicles.size());
         vehicles.forEach(vehicle ->
                 assertTrue(new ReflectionEquals(VehicleFactory.getMotorbike(), "bookings").matches(vehicle))
@@ -154,7 +151,7 @@ public class VehicleServiceTest {
         lenient().when(motorbikeRepository.findAll(any(Sort.class)))
                 .thenReturn(Collections.singletonList(VehicleFactory.getMotorbike()));
 
-        List<Vehicle> vehicles = vehicleService.searchMotorbikes("", "", 0);
+        List<? extends Vehicle> vehicles = vehicleService.searchMotorbikes("", "", 0);
         assertEquals(1, vehicles.size());
         vehicles.forEach(vehicle ->
                 assertTrue(new ReflectionEquals(VehicleFactory.getMotorbike(), "bookings").matches(vehicle))
@@ -167,7 +164,7 @@ public class VehicleServiceTest {
         lenient().when(planeRepository.findAll(any(Specification.class)))
                 .thenReturn(Collections.singletonList(VehicleFactory.getPlane()));
 
-        List<Vehicle> vehicles = vehicleService.searchPlanes("acura", "", 7);
+        List<? extends Vehicle> vehicles = vehicleService.searchPlanes("acura", "", 7);
         assertEquals(1, vehicles.size());
         vehicles.forEach(vehicle ->
                 assertTrue(new ReflectionEquals(VehicleFactory.getPlane(), "bookings").matches(vehicle))
@@ -180,7 +177,7 @@ public class VehicleServiceTest {
         lenient().when(planeRepository.findAll(any(Sort.class)))
                 .thenReturn(Collections.singletonList(VehicleFactory.getPlane()));
 
-        List<Vehicle> vehicles = vehicleService.searchPlanes("", "", 0);
+        List<? extends Vehicle> vehicles = vehicleService.searchPlanes("", "", 0);
         assertEquals(1, vehicles.size());
         vehicles.forEach(vehicle ->
                 assertTrue(new ReflectionEquals(VehicleFactory.getPlane(), "bookings").matches(vehicle))

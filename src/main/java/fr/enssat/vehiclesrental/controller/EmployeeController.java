@@ -1,6 +1,5 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.controller.constants.Constants;
 import fr.enssat.vehiclesrental.model.Employee;
 import fr.enssat.vehiclesrental.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 import static fr.enssat.vehiclesrental.controller.constants.Constants.Controller.TITLE;
-import static fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController.*;
+import static fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController.EMPLOYEES;
+import static fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController.GetEmployees;
 
 @RequiredArgsConstructor
 @Controller
@@ -21,6 +21,7 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
+    //TODO: pre authorize
     @GetMapping(GetEmployees.URL)
     public String getEmployees(Model model) {
 

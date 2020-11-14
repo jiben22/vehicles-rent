@@ -34,5 +34,11 @@ public class Constants {
             public static final String TITLE = "Liste des véhicules";
             public static final String VIEW = "vehicles";
         }
+
+        public static final class GetSearchVehicles {
+            private GetSearchVehicles() {}
+
+            public static final String URL = "/vehicules/{}";
+        }
     }
 }

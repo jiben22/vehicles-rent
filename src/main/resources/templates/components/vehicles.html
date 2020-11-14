@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div class="card-body" th:fragment="vehicles(vehicles)">
+    <div class="toolbar">
+    </div>
+    <div class="material-datatables">
+        <div class="row">
+            <div class="col-sm-12">
+                <table id="datatables" class="table table-striped table-no-bordered table-hover dataTable dtr-inline" style="width: 100%;" role="grid" aria-describedby="datatables_info" width="100%" cellspacing="0">
+                    <thead>
+                    <tr role="row">
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 20px;" aria-label="Position: activate to sort column ascending">
+                            <!-- Type -->
+                        </th>
+                        <th class="sorting_asc" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">
+                            Marque
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Position: activate to sort column ascending">
+                            Modèle
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Office: activate to sort column ascending">
+                            Vitesse max.
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Position: activate to sort column ascending">
+                            Prix par jour
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Office: activate to sort column ascending">
+                            Nombre de sièges
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Position: activate to sort column ascending">
+                            État
+                        </th>
+                        <th class="disabled-sorting text-right sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 70px;" aria-label="Actions: activate to sort column ascending"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--TODO: use if-else block -->
+                    <tr th:each="vehicle, i : ${vehicles}" th:data-id="${vehicle.id}" role="row" th:style="${i.odd}? 'odd' : 'even'" th:class="${vehicle.id}">
+                        <td>
+                            <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}" ><i class="material-icons">drive_eta</i></span>
+                            <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" ><i class="material-icons">two_wheeler</i></span>
+                            <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" ><i class="material-icons">flight</i></span>
+                        </td>
+                        <td th:text="${vehicle.brand}" tabindex="0" class="sorting_1">Marque</td>
+                        <td th:text="${vehicle.model}">Modèle</td>
+                        <td th:text="${vehicle.maximumSpeed + ' km/h'}">Vitesse max.</td>
+                        <td th:text="${vehicle.rentPricePerDay + ' €'}">Prix par jour</td>
+                        <td th:text="${vehicle.nbSeats}">Nombre de sièges</td>
+                        <td th:text="${vehicle.state.description}">État</td>
+                        <td class="text-right">
+                            <!-- <a th:href="@{/employe/modifier/} + ${employee.eid}" class="btn btn-link btn-info btn-just-icon"><i class="material-icons">edit</i></a> -->
+                            <a th:href="@{/vehicle/} + ${vehicle.id}" class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
+                            <button class="btn btn-link btn-danger btn-just-icon remove" data-target="#deleteEmployeeModal" data-toggle="modal"><i class="material-icons">close</i></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+<!--        <div th:replace="modals/employeeModals.html :: deleteEmployeeModal"></div>-->
+    </div>
+<!--    <script>-->
+<!--        (function($) {-->
+<!--            let that;-->
+<!--            $(".remove").click(function() {-->
+<!--                that = $(this);-->
+<!--                $(".remove-modal-btn").click(function(){-->
+<!--                    let tr = that.parent().parent()[0];-->
+<!--                    let eid = tr.dataset.id;-->
+<!--                    $(tr).fadeOut();-->
+<!--                    $.get("employe/supprimer/"+eid);-->
+<!--                });-->
+<!--            });-->
+<!--        })(jQuery);-->
+<!--    </script>-->
+</div>
+
