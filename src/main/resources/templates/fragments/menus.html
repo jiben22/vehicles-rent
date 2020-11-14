@@ -5,6 +5,7 @@
 <div th:fragment="SideBarMenu" class="sidebar" data-background-color="white" data-color="azure"
      data-image="/img/sidebar-1.jpg">
     <div class="logo my-0 py-1">
+        <!-- TODO : use constant -->
         <a th:href="@{/}" class="simple-text logo-normal my-0">
             Vehi'rental
         </a>
@@ -22,9 +23,10 @@
         <nav class="nav">
             <ul class="list-unstyled">
                 <li class="nav-item" th:classappend="${title == 'Vue d''ensemble' ? 'active' : ''}">
-                    <a class="nav-link my-0" href="">
+                    <!-- TODO : use constant -->
+                    <a class="nav-link my-0" th:href="@{/}">
                         <i class="material-icons">dashboard</i>
-                        <p>Dashboard</p>
+                        <p>Vue d'ensemble</p>
                     </a>
                 </li>
                 <hr class="my-2"/>
@@ -32,36 +34,41 @@
                     <p class="ml-4 text-uppercase font-weight-bold">Search</p>
                     <ul class="list-unstyled">
                         <li class="nav-item" th:classappend="${title == 'Client' ? 'active' : ''}">
-                            <a class="nav-link my-0" href="">
+                            <!-- TODO : use constant -->
+                            <a class="nav-link my-0" th:href="@{/clients}">
                                 <i class="material-icons">person</i>
                                 <p>Clients</p>
                             </a>
                         </li>
                         <li class="nav-item" th:classappend="${title == 'Vehicule' ? 'active' : ''}">
-                            <a class="nav-link my-0" href="">
+                            <!-- TODO : use constant -->
+                            <a class="nav-link my-0" th:href="@{/vehicules}">
                                 <i class="material-icons">directions_car</i>
-                                <p>Vehicles</p>
+                                <p>Véhicules</p>
                             </a>
                         </li>
                         <li class="nav-item" th:classappend="${title == 'Reservation' ? 'active' : ''}">
-                            <a class="nav-link my-0" href="">
+                            <!-- TODO : use constant -->
+                            <a class="nav-link my-0" th:href="@{/reservations}">
                                 <i class="material-icons">receipt_long</i>
-                                <p>Bookings</p>
+                                <p>Réservations</p>
                             </a>
                         </li>
                         <li class="nav-item" th:classappend="${title == 'Collaborateur' ? 'active' : ''}">
-                            <a class="nav-link my-0" href="">
+                            <!-- TODO : use constant -->
+                            <a class="nav-link my-0" th:href="@{/collaborateurs}">
                                 <i class="material-icons">work</i>
-                                <p>Employees</p>
+                                <p>Collaborateurs</p>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <hr class="my-2"/>
                 <li class="nav-item" th:classappend="${title == 'Statistiques' ? 'active' : ''}">
-                    <a class="nav-link my-0" href="">
+                    <!-- TODO : use constant -->
+                    <a class="nav-link my-0" th:href="@{/statistiques}">
                         <i class="material-icons">poll</i>
-                        <p>Statistics</p>
+                        <p>Statistiques</p>
                     </a>
                 </li>
             </ul>
@@ -96,6 +103,7 @@
                     </a>
                 </li>
                 <li class="nav-item" th:else>
+                    <!-- TODO : use constant -->
                     <a class="nav-link py-0" id="navbarDropdownLogout" th:href="@{/deconnexion}">
                         <i class="material-icons red">power_settings_new</i>
                         <p class="d-lg-none d-md-block">

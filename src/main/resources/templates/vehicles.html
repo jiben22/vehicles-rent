@@ -5,9 +5,9 @@
 
 <body class="">
     <div class="wrapper">
-<!--        <div th:replace="fragments/menus.html :: menu"></div>-->
+        <div th:replace="fragments/menus.html :: SideBarMenu"></div>
         <div class="main-panel">
-<!--            <div th:replace="fragments/menus.html :: logoutMenu"></div>-->
+            <div th:replace="fragments/menus.html :: TopMenu"></div>
             <div class="content">
                 <div class="container-fluid">
                     <h2 th:text="${message}" class="text-danger"></h2>
@@ -36,7 +36,7 @@
             <footer th:replace="fragments/footer.html :: footer"></footer>
         </div>
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $('#datatables').DataTable({
                     "pagingType ": "full_numbers ",
                     "lengthMenu ": [
