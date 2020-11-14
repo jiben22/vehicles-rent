@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Set;
@@ -18,7 +17,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@PrimaryKeyJoinColumn(name = "id")
 public class Motorbike extends Vehicle implements Serializable {
     /**
      * Number of kilometer that a motorbike has been used
