@@ -73,6 +73,13 @@ public abstract class Vehicle implements Serializable {
     private State state;
 
     /**
+     * Hold the registration of a vehicle
+     */
+    @Column(nullable = false,unique = true)
+    @NonNull
+    private String registration;
+
+    /**
      * Represent list of bookings link to the current vehicle.
      */
     @OneToMany(mappedBy="vehicle")

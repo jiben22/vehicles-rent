@@ -26,7 +26,6 @@ public class Employee extends Person implements Serializable {
      * Represent which position an employee own in the company
      */
     @Column(nullable = false, length = 45)
-    @Size(max = 45, message = "La fonction ne doit pas dépasser les 45 caractères !")
     @NonNull
     private Position position;
 
@@ -37,14 +36,22 @@ public class Employee extends Person implements Serializable {
     private String password;
 
     /**
+     * Serial number to identify an employee when search in the web app
+     */
+    @Column(nullable = false)
+    @NonNull
+    private int serialNumber;
+
+    /**
      * Constructor of an Employee
      *
      */
     @Builder
-    private Employee(long id, String lastname, String firstname, LocalDate birthdate, String street, String zipcode, String city, String country, String email, String phone, Position position, String password) {
+    private Employee(long id, String lastname, String firstname, LocalDate birthdate, String street, String zipcode, String city, String country, String email, String phone, Position position, String password, int serialNumber) {
         super(id, lastname, firstname, birthdate, street, zipcode, city, country, email,phone);
         this.position = position;
         this.password = password;
+        this.serialNumber = serialNumber;
     }
 
     /**

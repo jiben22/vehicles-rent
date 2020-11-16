@@ -2,10 +2,8 @@ package fr.enssat.vehiclesrental.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
@@ -24,9 +22,17 @@ public class Client extends Person implements Serializable {
      * Constructor of a Client
      */
     @Builder
-    private Client(long id, String lastname, String firstname, LocalDate birthdate, String street, String zipcode, String city, String country, String email, String phone) {
+    private Client(long id, String lastname, String firstname, LocalDate birthdate, String street, String zipcode, String city, String country, String email, String phone, boolean isArchived) {
         super(id, lastname, firstname, birthdate, street, zipcode, city, country, email,phone);
+        this.isArchived = isArchived;
     }
+
+    /**
+     * Used to know if a client is archived
+     */
+    @Column(nullable = false)
+    @NonNull
+    private Boolean isArchived;
 
     /**
      * Represent list of bookings link to the current client.

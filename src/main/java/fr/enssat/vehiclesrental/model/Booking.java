@@ -3,6 +3,7 @@ package fr.enssat.vehiclesrental.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
@@ -40,9 +41,14 @@ public class Booking implements Serializable {
     /**
      * Expected number of kilometer define when create booking
      */
-    @Column(nullable = false)
-    @NonNull
+    @Column()
     private int expectedNumberKm;
+
+    /**
+     * Expected number of hours define when create booking
+     */
+    @Column()
+    private int expectedNumberHours;
 
     /**
      * Expected price of booking
@@ -69,7 +75,6 @@ public class Booking implements Serializable {
      * Represent which state is a booking.
      */
     @Column(nullable = false, length = 45)
-    @Size(max = 45, message = "La fonction ne doit pas dépasser les 45 caractères !")
     @NonNull
     private Status status;
 
