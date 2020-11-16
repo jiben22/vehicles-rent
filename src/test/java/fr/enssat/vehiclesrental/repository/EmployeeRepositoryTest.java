@@ -2,146 +2,95 @@ package fr.enssat.vehiclesrental.repository;
 
 import fr.enssat.vehiclesrental.factory.EmployeeFactory;
 import fr.enssat.vehiclesrental.model.Employee;
-import fr.enssat.vehiclesrental.model.Position;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
 @DataJpaTest
 public class EmployeeRepositoryTest {
+
     @Autowired
-    private EmployeeRepository repository;
+    private EmployeeRepository employeeRepository;
 
-//    @Test
-//    public void testGetEmployee() {
-//        Optional<Employee> optionalEmployee = repository.findById("157314099170601");
-//
-//        assertTrue(optionalEmployee.isPresent());
-//
-//        Employee employee = optionalEmployee.get();
-//
-//        //TODO: use hamcrest
-//        assertEquals(employee.getId(), "157314099170601");
-//        assertEquals(employee.getLastname(), "Stark");
-//        assertEquals(employee.getFirstname(), "Tony");
-//        assertEquals(employee.getStreet(), "9 rue du chene germain");
-//        assertEquals(employee.getZipcode(), "22700");
-//        assertEquals(employee.getCity(), "Lannion");
-//        assertEquals(employee.getCountry(), "France");
-//        assertEquals(employee.getEmail(), "tony.stark@marvel.com");
-//        assertEquals(employee.getPosition(), Position.RESPONSABLE_LOCATION);
-//        assertTrue(employee.matchesPassword("Ironman12*"));
-//    }
-
-//    @Test
-//    public void testGetEmployeeException() {
-//        Optional<Employee> optionalEmployee = repository.findById("UNKNOWN ID");
-//
-//        assertFalse(optionalEmployee.isPresent());
-//    }
-
+    @DisplayName("Get employee with an id")
     @Test
-    public void testGetEmployeeByEmail() {
-        Optional<Employee> optionalEmployee = repository.findByEmail("tony.stark@marvel.com");
-
+    public void findById() {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(157314099170601L);
         assertTrue(optionalEmployee.isPresent());
-
         Employee employee = optionalEmployee.get();
-
-        //TODO: use hamcrest
-        assertEquals(employee.getId(), Long.parseLong("157314099170601"));
-        assertEquals(employee.getLastname(), "Stark");
-        assertEquals(employee.getFirstname(), "Tony");
-        assertEquals(employee.getStreet(), "9 rue du chene germain");
-        assertEquals(employee.getZipcode(), "22700");
-        assertEquals(employee.getCity(), "Lannion");
-        assertEquals(employee.getCountry(), "France");
-        assertEquals(employee.getEmail(), "tony.stark@marvel.com");
-        assertEquals(employee.getPosition(), Position.RESPONSABLE_LOCATION);
-        assertTrue(employee.matchesPassword("Ironman12*"));
+        assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeResponsableLocation(), "password").matches(employee));
     }
 
+    @DisplayName("Get employee with an unknown id")
     @Test
-    public void testGetEmployeeByEmailException() {
-        Optional<Employee> optionalEmployee = repository.findByEmail("unknown");
-
+    public void findByIdUnknown() {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(-999L);
         assertFalse(optionalEmployee.isPresent());
     }
 
+    @DisplayName("Get employee with an email")
     @Test
-    public void testGetEmployeeByFirstname() {
-        List<Employee> employees = repository.findByFirstname("Tony");
-
-        assertNotNull(employees);
-        assertNotEquals(employees.size(), 0);
-
-        Employee employee = employees.get(0);
-
-        //TODO: use hamcrest
-        assertEquals(employee.getId(), Long.parseLong("157314099170601"));
-        assertEquals(employee.getLastname(), "Stark");
-        assertEquals(employee.getFirstname(), "Tony");
-        assertEquals(employee.getStreet(), "9 rue du chene germain");
-        assertEquals(employee.getZipcode(), "22700");
-        assertEquals(employee.getCity(), "Lannion");
-        assertEquals(employee.getCountry(), "France");
-        assertEquals(employee.getEmail(), "tony.stark@marvel.com");
-        assertEquals(employee.getPosition(), Position.RESPONSABLE_LOCATION);
-        assertTrue(employee.matchesPassword("Ironman12*"));
+    public void findByEmail() {
+        Optional<Employee> optionalEmployee = employeeRepository.findByEmail("tony.stark@marvel.com");
+        assertTrue(optionalEmployee.isPresent());
+        Employee employee = optionalEmployee.get();
+        assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeResponsableLocation(), "password").matches(employee));
     }
 
+    @DisplayName("Get employee with an unknown email")
     @Test
-    public void testGetEmployeeByLastname() {
-        List<Employee> employees = repository.findByLastname("Stark");
-
-        assertNotNull(employees);
-        assertNotEquals(employees.size(), 0);
-
-        Employee employee = employees.get(0);
-
-        //TODO: use hamcrest
-        assertEquals(employee.getId(), Long.parseLong("157314099170601"));
-        assertEquals(employee.getLastname(), "Stark");
-        assertEquals(employee.getFirstname(), "Tony");
-        assertEquals(employee.getStreet(), "9 rue du chene germain");
-        assertEquals(employee.getZipcode(), "22700");
-        assertEquals(employee.getCity(), "Lannion");
-        assertEquals(employee.getCountry(), "France");
-        assertEquals(employee.getEmail(), "tony.stark@marvel.com");
-        assertEquals(employee.getPosition(), Position.RESPONSABLE_LOCATION);
-        assertTrue(employee.matchesPassword("Ironman12*"));
+    public void testGetEmployeeByEmailException() {
+        Optional<Employee> optionalEmployee = employeeRepository.findByEmail("unknown@unknown.fr");
+        assertFalse(optionalEmployee.isPresent());
     }
 
+    @DisplayName("Get employee with a firstname")
     @Test
-    public void testGetEmployees() {
-        List<Employee> employee_list = repository.findAll();
-
-        assertNotNull(employee_list);
-        assertNotEquals(employee_list.size(), 0);
+    public void findByFirstname() {
+        List<Employee> employees = employeeRepository.findByFirstname("Tony");
+        assertEquals(1, employees.size());
+        employees.forEach(employee ->
+                assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeResponsableLocation(), "password").matches(employee))
+        );
     }
 
+    @DisplayName("Get employee with a lastname")
     @Test
-    public void testSaveEmployee() {
+    public void findByLastname() {
+        List<Employee> employees = employeeRepository.findByLastname("Stark");
+        assertEquals(1, employees.size());
+        employees.forEach(employee ->
+                assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeResponsableLocation(), "password").matches(employee))
+        );
+    }
+
+    @DisplayName("Get all employees")
+    @Test
+    public void findAll() {
+        List<Employee> employees = employeeRepository.findAll();
+        assertEquals(10, employees.size());
+    }
+
+    @DisplayName("Create a new employee")
+    @Test
+    public void saveAndFlush() {
         Employee employee = EmployeeFactory.getEmployeeResponsableLocation();
-        Employee addedEmploye = repository.saveAndFlush(employee);
-
-        assertThat(employee).isEqualToComparingFieldByField(addedEmploye);
+        Employee addedEmploye = employeeRepository.saveAndFlush(employee);
+        assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeResponsableLocation(), "password").matches(addedEmploye));
         assertTrue(employee.matchesPassword("Ironman12*"));
     }
 
-//    @Test
-//    public void testDeleteEmployeeById() {
-//        repository.deleteById("157314099170608");
-//
-//        assertFalse(repository.existsById("157314099170608"));
-//    }
+    @DisplayName("Delete an employee with an id")
+    @Test
+    public void deleteById() {
+        employeeRepository.deleteById(157314099170608L);
+        assertFalse(employeeRepository.existsById(157314099170608L));
+    }
 }

@@ -1,8 +1,8 @@
 # Vehicle Rental Manager - Spring web application
 
-[![CircleCI](https://circleci.com/gh/jiben22/vehicles-rental/tree/develop.svg?style=svg)](https://circleci.com/gh/jiben22/vehicles-rental/tree/develop)
+[![CircleCI](https://circleci.com/gh/jiben22/vehicles-rental/tree/front.svg?style=svg)](https://circleci.com/gh/jiben22/vehicles-rental/tree/front)
 
-[![codecov](https://codecov.io/gh/jiben22/vehicles-rental/branch/develop/graph/badge.svg)](https://codecov.io/gh/jiben22/vehicles-rental/branch/develop)
+[![codecov](https://codecov.io/gh/jiben22/vehicles-rental/branch/front/graph/badge.svg)](https://codecov.io/gh/jiben22/vehicles-rental/branch/front)
 
 ## Get started
 
@@ -53,6 +53,6 @@
 
 > blackwidow@marvel.com | Blackwidow1*
 
-> captain@marvel.com | Captain12*
+> captainmarvel@marvel.com | Captainmarvel1*
 
 > spiderman@marvel.com | Spiderman1*

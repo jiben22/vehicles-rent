@@ -1,14 +1,98 @@
 <!DOCTYPE HTML>
-<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/head.html :: head"></head>
 
-<body class="">
-    <div class="wrapper ">
-        <div th:replace="fragments/menus.html :: menu"></div>
-        <div class="main-panel">
-            <div th:replace="fragments/menus.html :: logoutMenu"></div>
-            <div class="row">
+<body>
+    <div class="wrapper">
+        <div th:replace="fragments/menus.html :: SideBarMenu"></div>
+        <div class="main-panel d-flex flex-column">
+            <div th:replace="fragments/menus.html :: TopMenu"></div>
+            <div class="page-main-fragment">
+                <div class="container d-flex flex-column justify-content-around h-100">
+                    <div class="row justify-content-around">
+                        <div id="card-vehicle" class="custom-card col-sm-6 col-md-4 col-xl-3 rounded position-relative m-4 px-0 w-75">
+                            <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
+                                <span>Vehicles</span>
+                            </h4>
+                            <div class="bg-white w-100 d-flex justify-content-around">
+                                <a class="w-100 h-100 text-center py-2" href="#">
+                                    <i class="material-icons">list</i>
+                                </a>
+                                <a sec:authorize="hasAnyAuthority(
+                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
+                                   class="w-100 h-100 border-left text-center py-2"
+                                   href="#">
+                                    <i class="material-icons">add</i>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div id="card-client" class="custom-card col-sm-6 col-md-4 col-xl-3 rounded position-relative m-4 px-0 w-75">
+                            <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
+                                <span>Clients</span>
+                            </h4>
+                            <div class="bg-white w-100 d-flex justify-content-around">
+                                <a class="w-100 h-100 text-center py-2" href="#">
+                                    <i class="material-icons">list</i>
+                                </a>
+                                <a sec:authorize="hasAnyAuthority(
+                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)"
+                                   class="w-100 h-100 border-left text-center py-2" href="#">
+                                    <i class="material-icons">add</i>
+                                </a>
+                            </div>
+                        </div>
+                        <div id="card-booking" class="custom-card col-sm-6 col-md-4 col-xl-3 rounded position-relative m-4 px-0 w-75">
+                            <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
+                                <span>Bookings</span>
+                            </h4>
+                            <div class="bg-white w-100 d-flex justify-content-around">
+                                <a class="w-100 h-100 text-center py-2" href="#">
+                                    <i class="material-icons">list</i>
+                                </a>
+                                <a sec:authorize="hasAnyAuthority(
+                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)"
+                                   class="w-100 h-100 border-left text-center py-2" href="#">
+                                    <i class="material-icons">add</i>
+                                </a>
+                            </div>
+                        </div>
+                        <div sec:authorize="hasAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label)"
+                             id="card-employee" class="custom-card col-sm-6 col-md-4 col-xl-3 rounded position-relative m-4 px-0 w-75">
+                            <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
+                                <span>Employees</span>
+                            </h4>
+                            <div class="bg-white w-100 d-flex justify-content-around">
+                                <a class="w-100 h-100 text-center py-2" href="#">
+                                    <i class="material-icons">list</i>
+                                </a>
+                                <a class="w-100 h-100 border-left text-center py-2" href="#">
+                                    <i class="material-icons">add</i>
+                                </a>
+                            </div>
+                        </div>
+                        <div sec:authorize="hasAnyAuthority(
+                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_COMMERCIAL.label)"
+                             id="card-statistic"
+                             class="custom-card col-sm-6 col-md-4 col-xl-3 rounded position-relative m-4 px-0 w-75">
+                            <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
+                                <span>Statistics</span>
+                            </h4>
+                            <div class="bg-white w-100 d-flex justify-content-around">
+                                <a class="w-100 h-100 text-center py-2" href="#">
+                                    <i class="material-icons">list</i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <footer th:replace="fragments/footer.html :: footer "></footer>
         </div>
