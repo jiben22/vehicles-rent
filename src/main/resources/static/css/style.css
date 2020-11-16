@@ -1,6 +1,22 @@
+/* inputs */
+
+input.form-control {
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+    height: 2.6rem;
+}
+
 /* navigation */
 .card-profile i{
     font-size: 6em;
+}
+
+#navigation-example {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
 }
 
 /* page disposition */
@@ -13,6 +29,19 @@
 }
 
 /* dashboard */
+
+.main-panel {
+
+}
+
+.dark-edition .card {
+    background-color: #a9afbbd1;
+}
+
+.dark-edition li.nav-item a {
+    color: #a9afbbd1;
+}
+
 .custom-card {
     background-size: cover;
     background-position: center;
@@ -45,22 +74,26 @@ height: 200px;
     position: absolute;
     bottom: 0;
 }
-.custom-card:hover h4 span {
-    animation: mv_title ease-out forwards .3s;
+
+.custom-card h4 {
+    height: 2.5em;
+    transition: height .3s ease-in-out;
 }
 
 .custom-card:hover h4 {
-    height:85%;
+    height: 85%;
 }
+
 .custom-card a:hover {
-background-color: gainsboro; /* #dcdcdc */
+    background-color: gainsboro; /* #dcdcdc */
 }
 
 * {
     transition: .3s all ease-in-out;
 }
 
-@keyframes mv_title {
-    from {}
-    to {top:35%;}
-}
+/*[data-color=azure] a,*/
+/*[data-color=azure] p,*/
+/*[data-color=azure] i {*/
+/*    color: #2CA8FF;*/
+/*}*/
