@@ -52,7 +52,6 @@ public abstract class Person implements Serializable {
      * Birthdate of a person. Used to know age of a person.
      */
     @Column(nullable = false)
-    @Size(min = 1, max = 45, message = "La date de naissance ne peut pas être vide et doit être une date valide !")
     @NonNull
     private LocalDate birthdate;
 

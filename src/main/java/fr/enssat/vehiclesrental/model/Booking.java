@@ -70,7 +70,6 @@ public class Booking implements Serializable {
      * Represent which state is a booking.
      */
     @Column(nullable = false, length = 45)
-    @Size(max = 45, message = "La fonction ne doit pas dépasser les 45 caractères !")
     @NonNull
     private Status status;
 

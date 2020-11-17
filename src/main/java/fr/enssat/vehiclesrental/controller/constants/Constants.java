@@ -6,6 +6,7 @@ public class Constants {
         private Controller() {}
 
         public static final String TITLE = "title";
+        public static final String MESSAGE = "message";
     }
 
     public static final class DashboardController {
@@ -37,14 +38,51 @@ public class Constants {
     public static final class VehicleController {
         private VehicleController() {}
 
+        public static final String BASE_URL = "/vehicules";
         public static final String VEHICLES = "vehicles";
+        public static final String VEHICLE = "vehicle";
 
         public static final class GetVehicles {
             private GetVehicles() {}
 
-            public static final String URL = "/vehicules";
+            public static final String URL = BASE_URL;
             public static final String TITLE = "Liste des véhicules";
             public static final String VIEW = "vehicles";
+        }
+
+        public static final class GetVehicleById {
+            private GetVehicleById() {}
+
+            public static final String URL = BASE_URL + "/{id}";
+            public static final String TITLE = "Fiche du véhicule";
+            public static final String VIEW = "vehicle";
+        }
+
+        public static final class AddVehicle {
+            private AddVehicle() {}
+
+            public static final String URL = BASE_URL;
+            public static final String TITLE = "Ajouter un véhicule";
+            public static final String VIEW = "addVehicle";
+            public static final String ERROR_MESSAGE = "Impossible d'enregister le véhicule";
+        }
+
+        public static final class UpdateVehicle {
+            private UpdateVehicle() {}
+
+            public static final String URL = BASE_URL + "/{id}";
+            public static final String TITLE = "Modifier le véhicule";
+            public static final String VIEW = "updateVehicle";
+            public static final String ERROR_MESSAGE = "Impossible de modifier le véhicule";
+        }
+
+        public static final class DeleteVehicle {
+            private DeleteVehicle() {}
+
+            public static final String URL = BASE_URL + "/{id}";
+            public static final String TITLE = "Supprimer le véhicule";
+            public static final String VIEW = "deleteVehicle";
+            public static final String ERROR_MESSAGE = "Impossible de supprimer le véhicule";
         }
     }
 

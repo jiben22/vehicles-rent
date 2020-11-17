@@ -42,6 +42,11 @@ public class VehicleService implements IVehicleService {
     }
 
     @Override
+    public Vehicle getVehicleByRegistration(String registration) {
+        return vehicleRepository.findByRegistration(registration).orElseThrow(() -> new VehicleNotFoundException(String.valueOf(registration)));
+    }
+
+    @Override
     public List<Vehicle> getVehicles() {
         return vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "model"));
     }
