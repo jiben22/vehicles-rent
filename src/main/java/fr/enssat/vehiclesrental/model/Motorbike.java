@@ -39,8 +39,8 @@ public class Motorbike extends Vehicle implements Serializable {
      * Constructor of a motorbike
      */
     @Builder
-    private Motorbike(long id, String brand, String model, int maximumSpeed, float rentPricePerDay, int nbSeats, State state, int km, int horsePower, Set<Booking> bookings) {
-        super(id, brand, model, maximumSpeed, rentPricePerDay, nbSeats, state, bookings);
+    private Motorbike(long id, String brand, String model, int maximumSpeed, float rentPricePerDay, int nbSeats, State state, String registration, Set<Booking> bookings, int km, int horsePower) {
+        super(id, brand, model, maximumSpeed, rentPricePerDay, nbSeats, state, registration, bookings);
         this.km = km;
         this.horsePower = horsePower;
     }

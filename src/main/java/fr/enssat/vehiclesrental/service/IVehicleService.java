@@ -10,6 +10,7 @@ import java.util.List;
 public interface IVehicleService {
     boolean exists(long id);
     Vehicle getVehicle(long id);
+    Vehicle getVehicleByRegistration(String registration);
     List<Vehicle> getVehicles();
     List<Car> getCars();
     List<Motorbike> getMotorbikes();

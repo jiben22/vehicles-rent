@@ -4,7 +4,6 @@ import fr.enssat.vehiclesrental.model.enums.Status;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode()
+@PrimaryKeyJoinColumn(name = "id")
 public class Booking implements Serializable {
     /**
      * Id of a booking used to find her in database
@@ -49,7 +49,6 @@ public class Booking implements Serializable {
      * Expected price of booking
      */
     @Column(nullable = false)
-    @NonNull
     private float expectedPrice;
 
     /**
@@ -63,14 +62,12 @@ public class Booking implements Serializable {
      * It's the size of the discount
      */
     @Column(nullable = false)
-    @NonNull
     private float discount;
 
     /**
      * Represent which state is a booking.
      */
     @Column(nullable = false, length = 45)
-    @Size(max = 45, message = "La fonction ne doit pas dépasser les 45 caractères !")
     @NonNull
     private Status status;
 
@@ -83,10 +80,10 @@ public class Booking implements Serializable {
     private Client client;
 
     /**
-     * Link a booking to a vehicle
+     * Link a booking to a vehicule
      */
     @ManyToOne
-    @JoinColumn(name="id_vehicle")
+    @JoinColumn(name="id_vehicule")
     @NonNull
     private Vehicle vehicle;
 }

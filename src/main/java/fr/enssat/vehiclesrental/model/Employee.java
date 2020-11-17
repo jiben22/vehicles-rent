@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -27,7 +26,6 @@ public class Employee extends Person implements Serializable {
      * Represent which position an employee own in the company
      */
     @Column(nullable = false, length = 45)
-    @Size(max = 45, message = "La fonction ne doit pas dépasser les 45 caractères !")
     @NonNull
     private Position position;
 
