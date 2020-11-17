@@ -1,6 +1,5 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.controller.constants.Constants;
 import fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController.GetVehicles;
 import fr.enssat.vehiclesrental.service.VehicleService;
 import org.junit.jupiter.api.BeforeEach;

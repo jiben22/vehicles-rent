@@ -72,6 +72,12 @@ public abstract class Vehicle implements Serializable {
     @Column(nullable = false)
     @NonNull
     private State state;
+    /**
+     * Reegistration of a vehicle
+     */
+    @Column(nullable = false)
+    @NonNull
+    private String registration;
 
     /**
      * Represent list of bookings link to the current vehicle.

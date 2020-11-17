@@ -1,7 +1,6 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.controller.constants.Constants;
-import fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController.GetVehicleById;
+import fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController.*;
 import fr.enssat.vehiclesrental.model.Vehicle;
 import fr.enssat.vehiclesrental.model.enums.VehicleType;
 import fr.enssat.vehiclesrental.service.VehicleService;
