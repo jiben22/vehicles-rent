@@ -120,11 +120,11 @@ public class VehicleController {
                 log.error(exception.getMessage() + exception.getCause());
                 redirectAttributes.addFlashAttribute(MESSAGE, AddVehicle.ERROR_MESSAGE);
 
-                return "redirect:/vehicles";
+                return "redirect:/vehicules";
             }
         }
 
-        return String.format("redirect:/vehicles/%d", vehicle.getId());
+        return String.format("redirect:/vehicules/%d", vehicle.getId());
     }
 
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
@@ -150,10 +150,10 @@ public class VehicleController {
             log.error(exception.getMessage() + exception.getCause());
             redirectAttributes.addFlashAttribute(MESSAGE, UpdateVehicle.ERROR_MESSAGE);
 
-            return "redirect:/vehicles";
+            return "redirect:/vehicules";
         }
 
-        return String.format("redirect:/vehicles/%d", vehicle.getId());
+        return String.format("redirect:/vehicules/%d", vehicle.getId());
     }
 
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
@@ -175,9 +175,9 @@ public class VehicleController {
             log.error(exception.getMessage() + exception.getCause());
             redirectAttributes.addFlashAttribute(MESSAGE, DeleteVehicle.ERROR_MESSAGE);
 
-            return "redirect:/vehicles";
+            return "redirect:/vehicules";
         }
 
-        return String.format("redirect:/vehicles/%d", vehicle.getId());
+        return String.format("redirect:/vehicules/%d", vehicle.getId());
     }
 }
