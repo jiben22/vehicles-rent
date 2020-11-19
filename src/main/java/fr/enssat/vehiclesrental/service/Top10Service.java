@@ -2,20 +2,24 @@ package fr.enssat.vehiclesrental.service;
 
 import fr.enssat.vehiclesrental.model.top10.*;
 import fr.enssat.vehiclesrental.repository.top10.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class Top10Service implements ITop10Service{
     /**
      * Initialise all repositories allowing to get different top 10
      */
-    Top10SpenderYearRepository top10SpenderYearRepository;
-    Top10SpenderMonthRepository top10SpenderMonthRepository;
-    Top10SpenderWeekRepository top10SpenderWeekRepository;
+    private final Top10SpenderYearRepository top10SpenderYearRepository;
+    private final Top10SpenderMonthRepository top10SpenderMonthRepository;
+    private final Top10SpenderWeekRepository top10SpenderWeekRepository;
 
-    Top10ReserverYearRepository top10ReserverYearRepository;
-    Top10ReserverMonthRepository top10ReserverMonthRepository;
-    Top10ReserverWeekRepository top10ReserverWeekRepository;
+    private final Top10ReserverYearRepository top10ReserverYearRepository;
+    private final Top10ReserverMonthRepository top10ReserverMonthRepository;
+    private final Top10ReserverWeekRepository top10ReserverWeekRepository;
 
     /**
      * Allow to get top 10 of spender in the current year

@@ -2,7 +2,6 @@ package fr.enssat.vehiclesrental.service;
 
 import fr.enssat.vehiclesrental.factory.ClientFactory;
 import fr.enssat.vehiclesrental.model.top10.*;
-import fr.enssat.vehiclesrental.repository.EmployeeRepository;
 import fr.enssat.vehiclesrental.repository.top10.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
 
@@ -34,13 +35,10 @@ public class Top10ServiceTest {
 
     @InjectMocks
     private Top10Service top10Service;
-/**
+
     @DisplayName("Get top 10 reserver in year")
     @Test
     public void getTop10ReserverYear() {
-        /**
-        List<Top10ReserverYear> allTop10ReserverYear = null;
-        when(top10ReserverYearRepository.findAll()).thenReturn();
 
         List<Top10ReserverYear> top10ReserverYears = top10Service.getTop10ReserverYear();
         assertEquals(3,top10ReserverYears.size());
@@ -80,5 +78,5 @@ public class Top10ServiceTest {
     public void getTop10SpenderWeek() {
         List<Top10SpenderWeek> top10SpenderWeek = top10Service.getTop10SpenderWeek();
         assertEquals(1,top10SpenderWeek.size());
-    }**/
+    }
 }
