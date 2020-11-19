@@ -1,6 +1,5 @@
 package fr.enssat.vehiclesrental.service;
 
-import fr.enssat.vehiclesrental.factory.EmployeeFactory;
 import fr.enssat.vehiclesrental.factory.VehicleFactory;
 import fr.enssat.vehiclesrental.model.Vehicle;
 import fr.enssat.vehiclesrental.repository.CarRepository;
@@ -18,8 +17,6 @@ import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Arrays;
 import java.util.Collections;

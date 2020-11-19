@@ -1,22 +1,16 @@
 package fr.enssat.vehiclesrental.repository;
 
 import fr.enssat.vehiclesrental.factory.ClientFactory;
-import fr.enssat.vehiclesrental.factory.EmployeeFactory;
-import fr.enssat.vehiclesrental.factory.VehicleFactory;
-import fr.enssat.vehiclesrental.model.Client;
-import fr.enssat.vehiclesrental.model.Person;
 import fr.enssat.vehiclesrental.model.top10.*;
 import fr.enssat.vehiclesrental.repository.top10.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 public class Top10RepositoryTest {

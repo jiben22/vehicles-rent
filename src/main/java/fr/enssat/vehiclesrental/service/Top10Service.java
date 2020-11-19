@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class Top10Service implements ITop10Service{
     /**
      * Initialise all repositories allowing to get different top 10
