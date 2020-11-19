@@ -21,6 +21,7 @@ public class EmployeeFactory {
             .phone("+33612482274")
             .position(Position.RESPONSABLE_LOCATION)
             .password("Ironman12*")
+            .serialNumber(1462)
             .build();
     }
 

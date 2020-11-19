@@ -13,7 +13,6 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode()
-@PrimaryKeyJoinColumn(name = "id")
 public class Booking implements Serializable {
     /**
      * Id of a booking used to find her in database
@@ -41,9 +40,14 @@ public class Booking implements Serializable {
     /**
      * Expected number of kilometer define when create booking
      */
-    @Column(nullable = false)
-    @NonNull
+    @Column()
     private int expectedNumberKm;
+
+    /**
+     * Expected number of hours define when create booking
+     */
+    @Column()
+    private int expectedNumberHours;
 
     /**
      * Expected price of booking
@@ -80,10 +84,10 @@ public class Booking implements Serializable {
     private Client client;
 
     /**
-     * Link a booking to a vehicule
+     * Link a booking to a vehicle
      */
     @ManyToOne
-    @JoinColumn(name="id_vehicule")
+    @JoinColumn(name="id_vehicle")
     @NonNull
     private Vehicle vehicle;
 }

@@ -73,9 +73,9 @@ public abstract class Vehicle implements Serializable {
     @NonNull
     private State state;
     /**
-     * Reegistration of a vehicle
+     * Hold the registration of a vehicle
      */
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     @NonNull
     private String registration;
 

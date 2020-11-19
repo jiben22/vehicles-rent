@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Set;
@@ -19,7 +18,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = true)
-@PrimaryKeyJoinColumn(name = "id")
 public class Plane extends Vehicle implements Serializable {
     /**
      * Number of hours when the plane has been used
@@ -40,7 +38,7 @@ public class Plane extends Vehicle implements Serializable {
      */
     @Builder
     private Plane(long id, String brand,String model, int maximumSpeed, float rentPricePerDay, int nbSeats, State state, String registration, Set<Booking> bookings, int nbHours, int nbEngines) {
-        super(id, brand, model, maximumSpeed, rentPricePerDay, nbSeats, state, registration, bookings);
+        super(id, brand, model, maximumSpeed, rentPricePerDay, nbSeats, state,registration, bookings);
         this.nbHours = nbHours;
         this.nbEngines = nbEngines;
     }
