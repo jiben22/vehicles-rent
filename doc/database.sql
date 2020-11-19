@@ -122,6 +122,6 @@ INSERT INTO plane (id, brand, maximum_speed, model, nb_seats, rent_price_per_day
 (12682, 'piper',370,'seneca',4,200,'Etat très bien',2,12000,'F-ZTNK');
 
 INSERT INTO booking (id, discount, end_date, expected_number_km, expected_price, is_discount, start_date, status, id_client, id_vehicle) VALUES
-(148632579, 200.5, '2020-11-20', 2500, 2000.5, true, '2020-11-15', 'Réservation prête', 9143686792, 782),
+(148632579, 200.5, concat(YEAR(curdate()),'-',month(curdate()),'-20'), 2500, 2000.5, true, concat(YEAR(curdate()),'-',month(curdate()),'-15'), 'Réservation prête', 9143686792, 782);
 (148632581, 200.5, DATE_ADD(CURDATE(), INTERVAL 7 DAY), 2500, 502.5, true, curdate(), 'Réservation prête', 9143686793, 12679),
-(148632580, 0, '2020-12-12', 500, 300, false, '2020-12-15', 'Réservation prête', 9143686794, 44);
+(148632580, 0, concat(YEAR(curdate()),'-10-12'), 500, 300, false, concat(YEAR(curdate()),'-10-15'), 'Réservation prête', 9143686794, 44);
