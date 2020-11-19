@@ -99,7 +99,6 @@ public class VehicleController {
             return AddVehicle.VIEW;
         }
 
-        //TODO: check if registration already exists!
         try {
             Vehicle existedVehicle = vehicleService.getVehicleByRegistration(vehicle.getRegistration());
 
@@ -129,7 +128,10 @@ public class VehicleController {
 
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
     @PutMapping(UpdateVehicle.URL)
-    public String updateVehicle(@PathVariable String id, @Valid @ModelAttribute("vehicle") Vehicle vehicle, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
+    public String updateVehicle(@PathVariable String id,
+                                @Valid @ModelAttribute("vehicle") Vehicle vehicle,
+                                BindingResult result,
+                                RedirectAttributes redirectAttributes) {
         log.info(String.format("PUT %s", UpdateVehicle.URL));
 
         if (result.hasErrors()) {
@@ -141,7 +143,7 @@ public class VehicleController {
 
         try {
             // Update vehicle
-            if (vehicleService.exists(vehicle.getId())) {
+            if (vehicleService.exists(Long.parseLong(id))) {
                 vehicle = vehicleService.editVehicle(vehicle);
             } else {
                 throw new Exception("Le véhicule n'existe pas " + vehicle.getId());
@@ -158,7 +160,9 @@ public class VehicleController {
 
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
     @DeleteMapping(DeleteVehicle.URL)
-    public String deleteVehicle(@PathVariable String id, @Valid @ModelAttribute("vehicle") Vehicle vehicle, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
+    public String deleteVehicle(@PathVariable String id,
+                                BindingResult result,
+                                RedirectAttributes redirectAttributes) {
         log.info(String.format("DELETE %s", DeleteVehicle.URL));
 
         if (result.hasErrors()) {
@@ -170,14 +174,12 @@ public class VehicleController {
 
         try {
             // Delete vehicle
-            vehicleService.deleteVehicle(vehicle.getId());
+            vehicleService.deleteVehicle(Long.parseLong(id));
         } catch (Exception exception) {
             log.error(exception.getMessage() + exception.getCause());
             redirectAttributes.addFlashAttribute(MESSAGE, DeleteVehicle.ERROR_MESSAGE);
-
-            return "redirect:/vehicules";
         }
 
-        return String.format("redirect:/vehicules/%d", vehicle.getId());
+        return "redirect:/vehicules";
     }
 }
