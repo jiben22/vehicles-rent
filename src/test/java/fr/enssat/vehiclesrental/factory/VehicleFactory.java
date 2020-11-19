@@ -16,6 +16,7 @@ public class VehicleFactory {
                  .nbSeats(7)
                  .rentPricePerDay(318.2f)
                  .state(State.EXCELLENT)
+                 .registration("CM-455-ZP")
                  .horsePower(201)
                  .km(150)
                  .build();
@@ -30,6 +31,7 @@ public class VehicleFactory {
                 .nbSeats(2)
                 .rentPricePerDay(100.5f)
                 .state(State.EXCELLENT)
+                .registration("KL-789-KJ")
                 .horsePower(60)
                 .km(1200)
                 .build();
@@ -44,6 +46,7 @@ public class VehicleFactory {
                 .nbSeats(4)
                 .rentPricePerDay(900)
                 .state(State.GOOD)
+                .registration("RS-111-TR")
                 .nbEngines(1)
                 .nbHours(1000)
                 .build();
