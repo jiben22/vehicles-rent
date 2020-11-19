@@ -39,44 +39,37 @@ public abstract class Vehicle implements Serializable {
      */
     @Column(nullable = false, length = 128)
     @Size(min = 1, max = 128, message = "La marque ne peut pas être vide et ne doit pas dépasser les 128 caractères !")
-    @NonNull
     private String brand;
     /**
      * Model of a vehicle
      */
     @Column(nullable = false, length = 128)
     @Size(min = 1, max = 128, message = "La modèle ne peut pas être vide et ne doit pas dépasser les 128 caractères !")
-    @NonNull
     private String model;
     /**
      * Maximum speed of a vehicle
      */
     @Column(nullable = false)
-    @NonNull
     private int maximumSpeed;
     /**
      * Price of a rent per day
      */
     @Column(nullable = false)
-    @NonNull
     private float rentPricePerDay;
     /**
      * Number of seat available in the vehicle
      */
     @Column(nullable = false)
-    @NonNull
     private int nbSeats;
     /**
      * General state of a vehicle
      */
     @Column(nullable = false)
-    @NonNull
     private State state;
     /**
      * Reegistration of a vehicle
      */
     @Column(nullable = false)
-    @NonNull
     private String registration;
 
     /**

@@ -25,14 +25,12 @@ public class Motorbike extends Vehicle implements Serializable {
      * Number of kilometer that a motorbike has been used
      */
     @Column(nullable = false)
-    @NonNull
     private int km;
 
     /**
      * Power of the motorbike
      */
     @Column(nullable = false)
-    @NonNull
     private int horsePower;
 
     /**
