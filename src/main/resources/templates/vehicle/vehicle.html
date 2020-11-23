@@ -14,13 +14,15 @@
                     <a sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                         T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
-                       th:href="@{/vehicule/modifier/} + ${vehicle.id}">
+                       th:href="@{/vehicules/modifier/} + ${vehicle.registration}">
                         <button type="button" class="btn btn-warning pull-right">Modifier</button>
                     </a>
                     <div class="card">
                         <div class="card-header card-header-primary card-header-icon">
                             <div class="card-icon">
-                                <i class="material-icons">directions_car</i>
+                                <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}" class="material-icons">drive_eta</i>
+                                <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" class="material-icons">two_wheeler</i>
+                                <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" class="material-icons">flight</i>
                             </div>
                             <h4 class="card-title">Fiche du véhicule</h4>
                         </div>

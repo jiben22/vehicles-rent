@@ -35,6 +35,7 @@ public class Constants {
         }
     }
 
+    //TODO: update URL format
     public static final class VehicleController {
 
         private VehicleController() {}
@@ -75,7 +76,10 @@ public class Constants {
         public static final class UpdateVehicle {
             private UpdateVehicle() {}
 
-            public static final String URL = BASE_URL + "/{id}";
+            public static final String URL = BASE_URL + "/modifier/{registration}";
+            public static final String URL_CAR = BASE_URL + "/Car/{registration}";
+            public static final String URL_MOTORBIKE = BASE_URL + "/Motorbike/{registration}";
+            public static final String URL_PLANE = BASE_URL + "/Plane/{registration}";
             public static final String TITLE = "Modifier le véhicule";
             public static final String VIEW = BASE_VIEW + "editVehicle";
             public static final String ERROR_MESSAGE = "Impossible de modifier le véhicule";
