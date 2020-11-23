@@ -180,19 +180,19 @@ public class VehicleController {
 
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
     @PostMapping(AddVehicle.URL_CAR)
-    public String addCar(Car car, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
+    public String addCar(@Valid @ModelAttribute("vehicle") Car car, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
         return addVehicle(car, result, springModel, redirectAttributes);
     }
 
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
     @PostMapping(AddVehicle.URL_MOTORBIKE)
-    public String addMotorbike(Motorbike motorbike, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
+    public String addMotorbike(@Valid @ModelAttribute("vehicle") Motorbike motorbike, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
         return addVehicle(motorbike, result, springModel, redirectAttributes);
     }
 
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
     @PostMapping(AddVehicle.URL_PLANE)
-    public String addPlane(Plane plane, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
+    public String addPlane(@Valid @ModelAttribute("vehicle") Plane plane, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
         return addVehicle(plane, result, springModel, redirectAttributes);
     }
 

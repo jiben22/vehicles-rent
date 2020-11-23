@@ -64,9 +64,9 @@ public class Constants {
             private AddVehicle() {}
 
             public static final String URL = BASE_URL + "/ajouter";
-            public static final String URL_CAR = URL + "/Car";
-            public static final String URL_MOTORBIKE = URL + "/MOTORBIKE";
-            public static final String URL_PLANE = URL + "/PLANE";
+            public static final String URL_CAR = BASE_URL + "/fr.enssat.vehiclesrental.model.Car";
+            public static final String URL_MOTORBIKE = BASE_URL + "/fr.enssat.vehiclesrental.model.Motorbike";
+            public static final String URL_PLANE = BASE_URL + "/fr.enssat.vehiclesrental.model.Plane";
             public static final String TITLE = "Ajouter un véhicule";
             public static final String VIEW = BASE_VIEW + "addVehicle";
             public static final String ERROR_MESSAGE = "Impossible d'enregister le véhicule";
