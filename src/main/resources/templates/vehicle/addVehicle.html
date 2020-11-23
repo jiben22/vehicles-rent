@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head.html :: head"></head>
+
+<body class="">
+    <div class="wrapper ">
+        <div th:replace="fragments/menus.html :: SideBarMenu"></div>
+        <div class="main-panel">
+            <div th:replace="fragments/menus.html :: TopMenu"></div>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="card ">
+                        <div class="card-header card-header-primary card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">person</i>
+                            </div>
+                            <h4 class="card-title">Ajouter un véhicule</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="#" method="post" th:action="@{/vehicules}" th:object="${vehicle}" class="form-horizontal">
+                                <input type="hidden" th:field="*{id}" />
+                                <div class="row">
+                                    <div class="offset-md-2 col-md-4">
+                                        <span class="text-danger" th:errors="*{brand}"> </span>
+                                    </div>
+                                    <div class="offset-md-2 col-md-4">
+                                        <span class="text-danger" th:errors="*{model}"> </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Marque</label>
+                                    <div class="col-md-4">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input th:field="*{brand}" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">Modèle</label>
+                                    <div class="col-md-4">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input th:field="*{model}" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="offset-md-2 col-md-4">
+                                        <span class="text-danger" th:errors="*{maximumSpeed}"> </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Vitesse maximum</label>
+                                    <div class="col-md-4">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input th:field="*{maximumSpeed}" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="offset-md-2 col-md-10">
+                                        <span class="text-danger" th:errors="*{rentPricePerDay}"> </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Prix de location par jour</label>
+                                    <div class="col-md-10">
+                                        <div class="form-group bmd-form-group">
+                                            <input th:field="*{rentPricePerDay}" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="offset-md-2 col-md-2">
+                                        <span class="text-danger" th:errors="*{nbSeats}"> </span>
+                                    </div>
+                                    <div class="offset-md-2 col-md-2">
+                                        <span class="text-danger" th:errors="*{registration}"> </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Nombre de sièges</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input th:field="*{nbSeats}" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">Immatriculation</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input th:field="*{registration}" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="offset-md-2 col-md-8">
+                                        <span class="text-danger" th:errors="*{state}"> </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">État</label>
+                                    <div class="col-md-8">
+                                        <div class="form-group bmd-form-group">
+                                            <select th:field="*{state}" class="form-control">
+                                                    <option th:each="state : ${T(fr.enssat.vehiclesrental.model.enums.State).values()}" th:value="${state}" th:text="${state.description}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="offset-md-2 col-md-4">
+                                        <span class="text-danger" th:errors="*{km}"> </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Kilométrage</label>
+                                    <div class="col-md-4">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input th:field="*{km}" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="offset-md-2 col-md-10">
+                                        <span class="text-danger" th:errors="*{horsePower}"> </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Puissance DIN.</label>
+                                    <div class="col-md-10">
+                                        <div class="form-group bmd-form-group">
+                                            <input th:field="*{horsePower}" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pull-right">
+                                    <a th:href="@{/vehicules}">
+                                        <button type="button" class="btn btn-secondary">Annuler</button>
+                                    </a>
+                                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer th:replace="fragments/footer.html :: footer"></footer>
+        </div>
+    </div>
+</body>
+
+</html>

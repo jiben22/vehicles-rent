@@ -36,9 +36,11 @@ public class Constants {
     }
 
     public static final class VehicleController {
+
         private VehicleController() {}
 
-        public static final String BASE_URL = "/vehicules";
+        private static final String BASE_URL = "/vehicules";
+        private static final String BASE_VIEW = "vehicle/";
         public static final String VEHICLES = "vehicles";
         public static final String VEHICLE = "vehicle";
 
@@ -47,15 +49,15 @@ public class Constants {
 
             public static final String URL = BASE_URL;
             public static final String TITLE = "Liste des véhicules";
-            public static final String VIEW = "vehicles";
+            public static final String VIEW = BASE_VIEW + "vehicles";
         }
 
         public static final class GetVehicleById {
             private GetVehicleById() {}
 
-            public static final String URL = BASE_URL + "/{id}";
+            public static final String URL = BASE_URL + "/{registration}";
             public static final String TITLE = "Fiche du véhicule";
-            public static final String VIEW = "vehicle";
+            public static final String VIEW = BASE_VIEW + "vehicle";
         }
 
         public static final class AddVehicle {
@@ -63,7 +65,7 @@ public class Constants {
 
             public static final String URL = BASE_URL;
             public static final String TITLE = "Ajouter un véhicule";
-            public static final String VIEW = "addVehicle";
+            public static final String VIEW = BASE_VIEW + "addVehicle";
             public static final String ERROR_MESSAGE = "Impossible d'enregister le véhicule";
         }
 
@@ -72,7 +74,7 @@ public class Constants {
 
             public static final String URL = BASE_URL + "/{id}";
             public static final String TITLE = "Modifier le véhicule";
-            public static final String VIEW = "updateVehicle";
+            public static final String VIEW = BASE_VIEW + "editVehicle";
             public static final String ERROR_MESSAGE = "Impossible de modifier le véhicule";
         }
 
@@ -81,7 +83,7 @@ public class Constants {
 
             public static final String URL = BASE_URL + "/{id}";
             public static final String TITLE = "Supprimer le véhicule";
-            public static final String VIEW = "deleteVehicle";
+            public static final String VIEW = BASE_VIEW + "archiveVehicle";
             public static final String ERROR_MESSAGE = "Impossible de supprimer le véhicule";
         }
     }

@@ -49,9 +49,9 @@
                         <td th:text="${vehicle.nbSeats}">Nombre de sièges</td>
                         <td th:text="${vehicle.state.description}">État</td>
                         <td class="text-right">
-                             <a th:href="@{/vehicule/modifier/} + ${vehicle.id}" class="btn btn-link btn-info btn-just-icon"><i class="material-icons">edit</i></a>
-                            <a th:href="@{/vehicule/} + ${vehicle.id}" class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
-                            <button class="btn btn-link btn-danger btn-just-icon remove" data-target="#deleteVehicleModal" data-toggle="modal"><i class="material-icons">close</i></button>
+<!--                             <a th:href="@{/vehicule/modifier/} + ${vehicle.id}" class="btn btn-link btn-info btn-just-icon"><i class="material-icons">edit</i></a>-->
+                            <a th:href="@{/vehicules/} + ${vehicle.registration}" class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
+<!--                            <button class="btn btn-link btn-danger btn-just-icon remove" data-target="#deleteVehicleModal" data-toggle="modal"><i class="material-icons">close</i></button>-->
                         </td>
                     </tr>
                     </tbody>
