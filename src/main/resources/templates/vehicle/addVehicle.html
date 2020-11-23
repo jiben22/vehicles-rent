@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <div th:if="${vehicle != null}" class="card-body">
-                            <form action="#" method="post" th:action="@{'/vehicules/'+ ${vehicle.class.name}}" th:object="${vehicle}" class="form-horizontal">
+                            <form action="#" method="post" th:action="@{'/vehicules/'+ ${vehicle.class.simpleName}}" th:object="${vehicle}" class="form-horizontal">
                                 <input type="hidden" th:field="*{id}" />
                                 <div class="row">
                                     <label class="col-md-2 col-form-label">Immatriculation</label>
@@ -64,7 +64,7 @@
                                     <label class="col-md-2 col-form-label">Prix de location par jour</label>
                                     <div class="col-md-2">
                                         <div class="form-group has-default bmd-form-group">
-                                            <input th:field="*{rentPricePerDay}" type="number" class="form-control">
+                                            <input th:field="*{rentPricePerDay}" type="text" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -103,22 +103,22 @@
                                     <label th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" class="col-md-2 col-form-label">Nombre d'heures</label>
                                     <div class="col-md-2">
                                         <div class="form-group bmd-form-group">
-                                            <input th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)} or ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" th:field="*{horsePower}" type="number" class="form-control">
-                                            <input th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" th:field="*{nbEngines}" type="number" class="form-control">
+                                            <input th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)} or ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" th:field="*{km}" type="text" class="form-control">
+                                            <input th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" th:field="*{nbHours}" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <label class="col-md-2 col-form-label">Vitesse maximum</label>
                                     <div class="col-md-2">
                                         <div class="form-group has-default bmd-form-group">
-                                            <input th:field="*{maximumSpeed}" type="number" class="form-control">
+                                            <input th:field="*{maximumSpeed}" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <label th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)} or ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" class="col-md-2 col-form-label">Puissance din</label>
                                     <label th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" class="col-md-2 col-form-label">Nombre de moteurs</label>
                                     <div class="col-md-2">
                                         <div class="form-group has-default bmd-form-group">
-                                            <input th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)} or ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" th:field="*{horsePower}" type="number" class="form-control">
-                                            <input th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" th:field="*{nbEngines}" type="number" class="form-control">
+                                            <input th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)} or ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" th:field="*{horsePower}" type="text" class="form-control">
+                                            <input th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" th:field="*{nbEngines}" type="text" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -126,6 +126,9 @@
                                     <div class="offset-md-2 col-md-2">
                                         <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)} or ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" class="text-danger" th:errors="*{km}"> </span>
                                         <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" class="text-danger" th:errors="*{nbHours}"> </span>
+                                    </div>
+                                    <div class="offset-md-2 col-md-2">
+                                        <span class="text-danger" th:errors="*{maximumSpeed}"> </span>
                                     </div>
                                     <div class="offset-md-2 col-md-2">
                                         <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)} or ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" class="text-danger" th:errors="*{horsePower}"> </span>
@@ -136,7 +139,7 @@
                                     <label class="col-md-2 col-form-label">Nombre de sièges</label>
                                     <div class="col-md-2">
                                         <div class="form-group has-default bmd-form-group">
-                                            <input th:field="*{nbSeats}" type="number" class="form-control">
+                                            <input th:field="*{nbSeats}" type="text" class="form-control">
                                         </div>
                                     </div>
                                     <label class="col-md-2 col-form-label">État</label>

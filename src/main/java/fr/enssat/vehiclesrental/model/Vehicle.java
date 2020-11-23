@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
@@ -52,18 +54,21 @@ public abstract class Vehicle implements Serializable {
      * Maximum speed of a vehicle
      */
     @Column(nullable = false)
+    @Min(value = 0, message="La vitesse maximum doit être positive !")
     @NonNull
     private int maximumSpeed;
     /**
      * Price of a rent per day
      */
     @Column(nullable = false)
+    @Min(value = 0, message="Le prix de location par jour doit être positif !")
     @NonNull
     private float rentPricePerDay;
     /**
      * Number of seat available in the vehicle
      */
     @Column(nullable = false)
+    @Min(value = 0, message="Le nombre de sièges doit être positif !")
     @NonNull
     private int nbSeats;
     /**

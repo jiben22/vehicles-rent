@@ -75,7 +75,7 @@
                                     <div class="col-md-2">
                                         <div class="form-group has-default bmd-form-group">
                                             <input th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)} or ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" disabled="" th:value="*{horsePower + ' ch'}" type="text" class="form-control disabled">
-                                            <input th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" disabled="" th:value="*{nbEngines}" type="number" class="form-control disabled">
+                                            <input th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" disabled="" th:value="*{nbEngines}" type="text" class="form-control disabled">
                                         </div>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                                     <label class="col-md-2 col-form-label">Nombre de sièges</label>
                                     <div class="col-md-2">
                                         <div class="form-group has-default bmd-form-group">
-                                            <input disabled="" th:value="*{nbSeats}" type="number" class="form-control disabled">
+                                            <input disabled="" th:value="*{nbSeats}" type="text" class="form-control disabled">
                                         </div>
                                     </div>
                                     <label class="col-md-2 col-form-label">État</label>

@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -23,6 +24,7 @@ public class Plane extends Vehicle implements Serializable {
      * Number of hours when the plane has been used
      */
     @Column(nullable = false)
+    @Min(value = 0, message="Le nombre d'heures doit être positif !")
     @NonNull
     private int nbHours;
 
@@ -30,6 +32,7 @@ public class Plane extends Vehicle implements Serializable {
      * Number of engines used by the plane
      */
     @Column(nullable = false)
+    @Min(value = 0, message="Le nombre de moteurs doit être positif !")
     @NonNull
     private int nbEngines;
 

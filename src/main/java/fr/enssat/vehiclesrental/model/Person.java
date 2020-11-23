@@ -59,8 +59,8 @@ public abstract class Person implements Serializable {
      * Name of the street where live a person
      */
     @Column(nullable = false, length = 128)
-    @NonNull
     @Size(min = 1, max = 128, message = "La rue ne peut pas être vide et ne doit pas dépasser les 128 caractères !")
+    @NonNull
     private String street;
 
     /**
