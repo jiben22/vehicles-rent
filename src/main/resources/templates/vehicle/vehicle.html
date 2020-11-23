@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments/head.html :: head"></head>
 
@@ -11,7 +11,10 @@
             <div class="content">
                 <div class="container-fluid">
                     <!--TODO: use constant -->
-                    <a th:href="@{/vehicule/modifier/} + ${vehicle.id}">
+                    <a sec:authorize="hasAnyAuthority(
+                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
+                       th:href="@{/vehicule/modifier/} + ${vehicle.id}">
                         <button type="button" class="btn btn-warning pull-right">Modifier</button>
                     </a>
                     <div class="card">
@@ -64,7 +67,7 @@
                                     <label class="col-md-2 col-form-label">Vitesse maximum</label>
                                     <div class="col-md-2">
                                         <div class="form-group has-default bmd-form-group">
-                                            <input disabled="" th:value="*{maximumSpeed + ' km/h'}" type="email" class="form-control disabled">
+                                            <input disabled="" th:value="*{maximumSpeed + ' km/h'}" type="text" class="form-control disabled">
                                         </div>
                                     </div>
                                     <label th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)} or ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" class="col-md-2 col-form-label">Puissance din</label>
@@ -72,7 +75,7 @@
                                     <div class="col-md-2">
                                         <div class="form-group has-default bmd-form-group">
                                             <input th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)} or ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" disabled="" th:value="*{horsePower + ' ch'}" type="text" class="form-control disabled">
-                                            <input th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" disabled="" th:value="*{nbEngines}" type="text" class="form-control disabled">
+                                            <input th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" disabled="" th:value="*{nbEngines}" type="number" class="form-control disabled">
                                         </div>
                                     </div>
                                 </div>
@@ -80,7 +83,7 @@
                                     <label class="col-md-2 col-form-label">Nombre de sièges</label>
                                     <div class="col-md-2">
                                         <div class="form-group has-default bmd-form-group">
-                                            <input disabled="" th:value="*{nbSeats}" type="text" class="form-control disabled">
+                                            <input disabled="" th:value="*{nbSeats}" type="number" class="form-control disabled">
                                         </div>
                                     </div>
                                     <label class="col-md-2 col-form-label">État</label>

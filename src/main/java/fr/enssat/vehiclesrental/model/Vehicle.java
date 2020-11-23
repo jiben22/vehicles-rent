@@ -75,8 +75,8 @@ public abstract class Vehicle implements Serializable {
     /**
      * Hold the registration of a vehicle
      */
-    @Column(nullable = false,unique = true)
-    @NonNull
+    @Column(nullable = false, unique = true, length = 9)
+    @Size(min = 1, max = 9, message = "L'immatriculation ne peut pas être vide et ne doit pas dépasser les 9 caractères !")
     private String registration;
 
     /**

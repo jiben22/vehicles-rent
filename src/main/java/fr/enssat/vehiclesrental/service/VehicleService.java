@@ -127,6 +127,7 @@ public class VehicleService implements IVehicleService {
 
     @Override
     public Vehicle addVehicle(Vehicle vehicle) {
+        System.out.println(vehicle);
         if (vehicleRepository.existsById(vehicle.getId()))
             throw new VehicleAlreadyExistException(vehicle);
         return vehicleRepository.saveAndFlush(vehicle);

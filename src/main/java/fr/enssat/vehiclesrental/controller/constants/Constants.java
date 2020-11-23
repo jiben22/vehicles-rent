@@ -39,7 +39,7 @@ public class Constants {
 
         private VehicleController() {}
 
-        private static final String BASE_URL = "/vehicules";
+        public static final String BASE_URL = "/vehicules";
         private static final String BASE_VIEW = "vehicle/";
         public static final String VEHICLES = "vehicles";
         public static final String VEHICLE = "vehicle";
@@ -63,7 +63,10 @@ public class Constants {
         public static final class AddVehicle {
             private AddVehicle() {}
 
-            public static final String URL = BASE_URL;
+            public static final String URL = BASE_URL + "/ajouter";
+            public static final String URL_CAR = URL + "/Car";
+            public static final String URL_MOTORBIKE = URL + "/MOTORBIKE";
+            public static final String URL_PLANE = URL + "/PLANE";
             public static final String TITLE = "Ajouter un véhicule";
             public static final String VIEW = BASE_VIEW + "addVehicle";
             public static final String ERROR_MESSAGE = "Impossible d'enregister le véhicule";

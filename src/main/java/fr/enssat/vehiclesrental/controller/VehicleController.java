@@ -1,5 +1,6 @@
 package fr.enssat.vehiclesrental.controller;
 
+import fr.enssat.vehiclesrental.controller.constants.Constants;
 import fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController.*;
 import fr.enssat.vehiclesrental.model.Car;
 import fr.enssat.vehiclesrental.model.Motorbike;
@@ -84,8 +85,8 @@ public class VehicleController {
      * @return la fiche d'un véhicule
      */
     @GetMapping(GetVehicleById.URL)
-    public String getVehicleById(Model springModel, @PathVariable String registration) {
-        log.info(String.format("GET %s", GetVehicleById.URL));
+    public String showVehicleById(Model springModel, @PathVariable String registration) {
+        log.info(String.format("GET %s/%s", BASE_URL, registration));
         springModel.addAttribute(TITLE, GetVehicleById.TITLE);
 
         Vehicle vehicle = vehicleService.getVehicleByRegistration(registration);
@@ -95,20 +96,54 @@ public class VehicleController {
     }
 
     /**
-     * Ajouter un véhicule
-     * @param vehicle Vehicule
-     * @param result X
-     * @param redirectAttributes
-     * @return X
+     * Afficher le formulaire d'ajout d'un véhicule
+     * @param springModel Modèle
+     * @return le formulaire d'ajout
      */
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
-    @PostMapping(AddVehicle.URL)
-    public String addVehicle(@Valid @ModelAttribute("vehicle") Vehicle vehicle,
-                             BindingResult result,
-                             RedirectAttributes redirectAttributes) {
-        log.info(String.format("POST %s", AddVehicle.URL));
+    @GetMapping(AddVehicle.URL)
+    public String showAddVehicle(Model springModel, @RequestParam Optional<String> vehicleType) {
+        log.info(String.format("GET %s", AddVehicle.URL));
+        springModel.addAttribute(TITLE, AddVehicle.TITLE);
 
-        System.out.println(vehicle);
+        Vehicle vehicle = null;
+        if (vehicleType.isPresent()) {
+            VehicleType type = VehicleType.valueOf(vehicleType.get());
+            switch (type) {
+                case CAR:
+                    vehicle = new Car();
+                    break;
+                case MOTORBIKE:
+                    vehicle = new Motorbike();
+                    break;
+                case PLANE:
+                    vehicle = new Plane();
+                    break;
+                default:
+                    log.error(String.valueOf(new IllegalStateException("Unexpected value: " + vehicleType)));
+            }
+        }
+
+        springModel.addAttribute(VEHICLE, vehicle);
+
+        return AddVehicle.VIEW;
+    }
+
+    /**
+     * Ajouter une voiture
+     * @param vehicle Vehicule
+     * @param result Binding result
+     * @param springModel Modèle
+     * @param redirectAttributes Redirect attributes
+     * @param <T> Type du véhicule
+     * @return la fiche du véhicule enregistrée ou le formulaire d'ajout avec les erreurs
+     */
+    private <T extends Vehicle> String addVehicle(T vehicle,
+                                                  BindingResult result,
+                                                  Model springModel,
+                                                  RedirectAttributes redirectAttributes) {
+        log.info(String.format("POST %s", BASE_URL));
+        springModel.addAttribute(TITLE, AddVehicle.TITLE);
 
         // Check if form has errors
         if (result.hasErrors()) {
@@ -118,9 +153,9 @@ public class VehicleController {
             return AddVehicle.VIEW;
         }
 
+        // TODO: reduce code complexity
         try {
             Vehicle existedVehicle = vehicleService.getVehicleByRegistration(vehicle.getRegistration());
-            System.out.println(existedVehicle);
             if (existedVehicle != null) {
                 result.rejectValue("registration", "vehicle.registration",
                         "Le numéro d'immatriculation est déjà attribué pour un autre véhicule");
@@ -129,11 +164,9 @@ public class VehicleController {
                 return AddVehicle.VIEW;
             }
         } catch (VehicleNotFoundException vehicleNotFoundException) {
-            log.info("Registration doesn't exist: %s", vehicle.getRegistration(), vehicleNotFoundException);
-
             try {
                 // Save vehicle
-                vehicle = vehicleService.addVehicle(vehicle);
+                vehicle = (T) vehicleService.addVehicle(vehicle);
             } catch (Exception exception) {
                 log.error(exception.getMessage() + exception.getCause());
                 redirectAttributes.addFlashAttribute(MESSAGE, AddVehicle.ERROR_MESSAGE);
@@ -142,7 +175,25 @@ public class VehicleController {
             }
         }
 
-        return String.format("redirect:/vehicules/%d", vehicle.getId());
+        return String.format("redirect:/vehicules/%s", vehicle.getRegistration());
+    }
+
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
+    @PostMapping(AddVehicle.URL_CAR)
+    public String addCar(Car car, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
+        return addVehicle(car, result, springModel, redirectAttributes);
+    }
+
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
+    @PostMapping(AddVehicle.URL_MOTORBIKE)
+    public String addMotorbike(Motorbike motorbike, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
+        return addVehicle(motorbike, result, springModel, redirectAttributes);
+    }
+
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
+    @PostMapping(AddVehicle.URL_PLANE)
+    public String addPlane(Plane plane, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
+        return addVehicle(plane, result, springModel, redirectAttributes);
     }
 
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
@@ -198,33 +249,5 @@ public class VehicleController {
         }
 
 //        return "redirect:/vehicules";
-    }
-
-    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
-    @GetMapping("/vehicules/ajouter/{vehicleType}")
-    public String showAddEmployeeForm(Model model, @PathVariable String vehicleType) {
-
-        log.info("GET /vehicules/ajouter/" + vehicleType);
-
-        model.addAttribute("title", "Ajouter un véhicule");
-
-        Vehicle vehicle;
-        VehicleType type = VehicleType.valueOf(vehicleType);
-        switch (type) {
-            case CAR:
-                vehicle = new Car();
-                break;
-            case MOTORBIKE:
-                vehicle = new Motorbike();
-                break;
-            case PLANE:
-                vehicle = new Plane();
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + vehicleType);
-        }
-        model.addAttribute("vehicle", vehicle);
-
-        return "addVehicleForm";
     }
 }
