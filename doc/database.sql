@@ -111,7 +111,7 @@ INSERT INTO car (id, brand, maximum_speed, model, nb_seats, rent_price_per_day, 
 
 INSERT INTO motorbike (id, brand, maximum_speed, model, nb_seats, rent_price_per_day, state, horse_power, km, registration) VALUES
 (782,'kawasaki',190,'vulcan s',2,100.5,'Etat excellent',60,1200,'CQ-175-VT'),
-(783,'suzuki','250','cb100rr',1,350.8,'Etat bon',120,5000,'EN-2430-QW'),
+(783,'suzuki','250','cb100rr',1,350.8,'Etat bon',120,5000,'EN-243-QW'),
 (784,'moto guzzi','160','v7III',2,200.12,'Etat très bien',70,2000,'CD-031-FG'),
 (785,'yahma','195','mt-07',2,160.49,'Etat passable',67,15000,'EX-043-RU');
 
