@@ -280,6 +280,14 @@ public class VehicleController {
         return String.format("redirect:/vehicules/%s", vehicle.getRegistration());
     }
 
+    /**
+     * Met à jour la fiche d'une voiture
+     * @param car Instance d'une voiture
+     * @param result Binding result
+     * @param springModel Modèle
+     * @param redirectAttributes Redirect attributes
+     * @return la fiche d'une voiture ou le formulaire de modification avec les erreurs
+     */
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
     @PostMapping(UpdateVehicle.URL_CAR)
     public String editCar(@Valid @ModelAttribute("vehicle") Car car, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
@@ -288,6 +296,14 @@ public class VehicleController {
         return updateVehicle(car, result, springModel, redirectAttributes);
     }
 
+    /**
+     * Met à jour la fiche d'une moto
+     * @param motorbike Instance d'une moto
+     * @param result Binding result
+     * @param springModel Modèle
+     * @param redirectAttributes Redirect attributes
+     * @return la fiche d'une moto ou le formulaire de modification avec les erreurs
+     */
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
     @PostMapping(UpdateVehicle.URL_MOTORBIKE)
     public String updateMotorbike(@Valid @ModelAttribute("vehicle") Motorbike motorbike, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
@@ -296,6 +312,14 @@ public class VehicleController {
         return updateVehicle(motorbike, result, springModel, redirectAttributes);
     }
 
+    /**
+     * Met à jour la fiche d'un avion
+     * @param plane Instance d'un avion
+     * @param result Binding result
+     * @param springModel Modèle
+     * @param redirectAttributes Redirect attributes
+     * @return la fiche d'un avion ou le formulaire de modification avec les erreurs
+     */
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
     @PostMapping(UpdateVehicle.URL_PLANE)
     public String updatePlane(@Valid @ModelAttribute("vehicle") Plane plane, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
@@ -304,26 +328,28 @@ public class VehicleController {
         return updateVehicle(plane, result, springModel, redirectAttributes);
     }
 
-//    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
-    @DeleteMapping(DeleteVehicle.URL)
-    public void deleteVehicle(@PathVariable String id) {
-        log.info(String.format("DELETE %s", DeleteVehicle.URL));
-
-//        if (result.hasErrors()) {
-//            log.info(result.toString());
-//
-//            // Return form with errors
-//            return DeleteVehicle.VIEW;
-//        }
+    /**
+     * Supprimer un véhicule
+     * @param id ID du véhicule
+     * @param redirectAttributes Redirect attributes
+     * @return la liste des véhicules ou un message d'erreur si l'archivage échoue
+     */
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
+    @GetMapping(ArchiveVehicle.URL)
+    public String archiveVehicle(@PathVariable String id,
+                              RedirectAttributes redirectAttributes) {
+        //TODO: replace {id}
+        log.info(String.format("GET %s", ArchiveVehicle.URL));
 
         try {
+            //TODO: archive vehicle / NOT delete
             // Delete vehicle
             vehicleService.deleteVehicle(Long.parseLong(id));
         } catch (Exception exception) {
             log.error(exception.getMessage() + exception.getCause());
-//            redirectAttributes.addFlashAttribute(MESSAGE, DeleteVehicle.ERROR_MESSAGE);
+            redirectAttributes.addFlashAttribute(MESSAGE, ArchiveVehicle.ERROR_MESSAGE);
         }
 
-//        return "redirect:/vehicules";
+        return "redirect:/vehicules";
     }
 }

@@ -85,13 +85,13 @@ public class Constants {
             public static final String ERROR_MESSAGE = "Impossible de modifier le véhicule";
         }
 
-        public static final class DeleteVehicle {
-            private DeleteVehicle() {}
+        public static final class ArchiveVehicle {
+            private ArchiveVehicle() {}
 
-            public static final String URL = BASE_URL + "/{id}";
-            public static final String TITLE = "Supprimer le véhicule";
+            public static final String URL = BASE_URL + "/supprimer/{id}";
+            public static final String TITLE = "Archiver le véhicule";
             public static final String VIEW = BASE_VIEW + "archiveVehicle";
-            public static final String ERROR_MESSAGE = "Impossible de supprimer le véhicule";
+            public static final String ERROR_MESSAGE = "Impossible d'archiver le véhicule";
         }
     }
 
