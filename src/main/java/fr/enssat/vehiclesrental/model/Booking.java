@@ -4,7 +4,6 @@ import fr.enssat.vehiclesrental.model.enums.Status;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Null;
 import java.io.Serializable;
 import java.util.Date;
 

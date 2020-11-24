@@ -7,8 +7,8 @@ import fr.enssat.vehiclesrental.service.exception.alreadyarchived.BookAlreadyArc
 import fr.enssat.vehiclesrental.service.exception.alreadybook.VehicleAlreadyBookException;
 import fr.enssat.vehiclesrental.service.exception.alreadyexists.BookingAlreadyExistsException;
 import fr.enssat.vehiclesrental.service.exception.alreadyrent.BookAlreadyRentException;
-import fr.enssat.vehiclesrental.service.exception.inconsistentDate.StartDateBeforeTodayException;
 import fr.enssat.vehiclesrental.service.exception.inconsistentDate.StartDateAfterEndDateExceptionException;
+import fr.enssat.vehiclesrental.service.exception.inconsistentDate.StartDateBeforeTodayException;
 import fr.enssat.vehiclesrental.service.exception.notfound.BookingNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;

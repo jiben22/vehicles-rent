@@ -1,7 +1,6 @@
 package fr.enssat.vehiclesrental.service;
 
 import fr.enssat.vehiclesrental.model.Booking;
-import fr.enssat.vehiclesrental.model.Client;
 import fr.enssat.vehiclesrental.model.enums.Status;
 
 import java.util.Date;

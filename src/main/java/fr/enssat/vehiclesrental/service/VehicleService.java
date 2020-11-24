@@ -1,7 +1,5 @@
 package fr.enssat.vehiclesrental.service;
 
-import fr.enssat.vehiclesrental.model.Motorbike;
-import fr.enssat.vehiclesrental.model.Plane;
 import fr.enssat.vehiclesrental.model.Vehicle;
 import fr.enssat.vehiclesrental.repository.CarRepository;
 import fr.enssat.vehiclesrental.repository.MotorbikeRepository;
@@ -69,7 +67,7 @@ public class VehicleService implements IVehicleService {
     public List<Vehicle> searchVehicles(String brand, String model, int nbSeats) {
         Specification<Vehicle> vehicleSpecification = buildSpecification(brand, model, nbSeats);
         if (vehicleSpecification != null) {
-            return vehicleRepository.findAll(vehicleSpecification);
+            return vehicleRepository.findAll(vehicleSpecification, Sort.by(Sort.Direction.ASC, "model"));
         } else {
             return getVehicles();
         }
@@ -79,7 +77,7 @@ public class VehicleService implements IVehicleService {
     public List<? extends Vehicle> searchCars(String brand, String model, int nbSeats) {
         Specification<Vehicle> vehicleSpecification = buildSpecification(brand, model, nbSeats);
         if (vehicleSpecification != null) {
-            return carRepository.findAll(vehicleSpecification);
+            return carRepository.findAll(vehicleSpecification, Sort.by(Sort.Direction.ASC, "model"));
         } else {
             return getCars();
         }
@@ -89,7 +87,7 @@ public class VehicleService implements IVehicleService {
     public List<? extends Vehicle> searchMotorbikes(String brand, String model, int nbSeats) {
         Specification<Vehicle> vehicleSpecification = buildSpecification(brand, model, nbSeats);
         if (vehicleSpecification != null) {
-            return motorbikeRepository.findAll(vehicleSpecification);
+            return motorbikeRepository.findAll(vehicleSpecification, Sort.by(Sort.Direction.ASC, "model"));
         } else {
             return getMotorbikes();
         }
@@ -99,7 +97,7 @@ public class VehicleService implements IVehicleService {
     public List<? extends Vehicle> searchPlanes(String brand, String model, int nbSeats) {
         Specification<Vehicle> vehicleSpecification = buildSpecification(brand, model, nbSeats);
         if (vehicleSpecification != null) {
-            return planeRepository.findAll(vehicleSpecification);
+            return planeRepository.findAll(vehicleSpecification, Sort.by(Sort.Direction.ASC, "model"));
         } else {
             return getPlanes();
         }

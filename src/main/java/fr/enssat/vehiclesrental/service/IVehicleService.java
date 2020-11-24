@@ -1,7 +1,5 @@
 package fr.enssat.vehiclesrental.service;
 
-import fr.enssat.vehiclesrental.model.Motorbike;
-import fr.enssat.vehiclesrental.model.Plane;
 import fr.enssat.vehiclesrental.model.Vehicle;
 
 import java.util.List;
