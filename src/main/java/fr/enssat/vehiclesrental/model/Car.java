@@ -37,8 +37,8 @@ public class Car extends Vehicle implements Serializable {
     private int horsePower;
 
     @Builder
-    public Car(long id, String brand, String model, int maximumSpeed, float rentPricePerDay, int nbSeats, State state, String registration, Set<Booking> bookings, int km, int horsePower) {
-        super(id, brand, model, maximumSpeed, rentPricePerDay, nbSeats, state, registration,bookings);
+    public Car(long id, String brand, String model, int maximumSpeed, float rentPricePerDay, int nbSeats, State state, String registration, boolean isArchived,Set<Booking> bookings, int km, int horsePower) {
+        super(id, brand, model, maximumSpeed, rentPricePerDay, nbSeats, state, registration,isArchived,bookings);
         this.km = km;
         this.horsePower = horsePower;
     }

@@ -15,24 +15,24 @@ INSERT INTO client (id, birthdate, city, country, email, firstname, lastname, ph
 (9143686793, '2001-08-07', 'New-York', 'Etats-Unis', 'garth.ennis@hotmail.eu', 'Garth', 'Ennis', '+33425464119', '5 Rue des CAMELIAS', '56925',false),
 (9143686794, '1956-01-14', 'Moscou', 'Russie', 'michael.straczynski@orange.ru', 'Michael', 'Straczynski', '+33786106413', '11 Rue du quai SOLIDOR', '92541',false);
 
-INSERT INTO car (id, brand, maximum_speed, model, nb_seats, rent_price_per_day, state, horse_power, km, registration) VALUES
-(42, 'acura', 185, 'ilx', 7, 318.2, 'Etat excellent', 201, 150, 'CQ-001-AA'),
-(43,'ferrari',300,'roma',2,600.5,'Etat bon',500,20000,'DR-001-VD'),
-(44,'renault',160,'clio',5,100,'Etat excellent',100,15000,'EN-880-ZR'),
-(45,'mazda',200,'mx5',2,160.4,'Etat très bien',170,5000,'EX-001-AA'),
-(46,'toyota',160,'yaris',5,70,'Etat passable',90,50000,'CD-001-AA');
+INSERT INTO car (id, brand, maximum_speed, model, nb_seats, rent_price_per_day, state, horse_power, km, registration, is_archived) VALUES
+(42, 'acura', 185, 'ilx', 7, 318.2, 'Etat excellent', 201, 150, 'CQ-001-AA',false),
+(43,'ferrari',300,'roma',2,600.5,'Etat bon',500,20000,'DR-001-VD',false),
+(44,'renault',160,'clio',5,100,'Etat excellent',100,15000,'EN-880-ZR',false),
+(45,'mazda',200,'mx5',2,160.4,'Etat très bien',170,5000,'EX-001-AA',false),
+(46,'toyota',160,'yaris',5,70,'Etat passable',90,50000,'CD-001-AA',false);
 
-INSERT INTO motorbike (id, brand, maximum_speed, model, nb_seats, rent_price_per_day, state, horse_power, km, registration) VALUES
-(782,'kawasaki',190,'vulcan s',2,100.5,'Etat excellent',60,1200,'CQ-175-VT'),
-(783,'suzuki','250','cb100rr',1,350.8,'Etat bon',120,5000,'EN-243-QW'),
-(784,'moto guzzi','160','v7III',2,200.12,'Etat très bien',70,2000,'CD-031-FG'),
-(785,'yahma','195','mt-07',2,160.49,'Etat passable',67,15000,'EX-043-RU');
+INSERT INTO motorbike (id, brand, maximum_speed, model, nb_seats, rent_price_per_day, state, horse_power, km, registration, is_archived) VALUES
+(782,'kawasaki',190,'vulcan s',2,100.5,'Etat excellent',60,1200,'CQ-175-VT',false),
+(783,'suzuki','250','cb100rr',1,350.8,'Etat bon',120,5000,'EN-243-QW',false),
+(784,'moto guzzi','160','v7III',2,200.12,'Etat très bien',70,2000,'CD-031-FG',false),
+(785,'yahma','195','mt-07',2,160.49,'Etat passable',67,15000,'EX-043-RU',false);
 
-INSERT INTO plane (id, brand, maximum_speed, model, nb_seats, rent_price_per_day, state, nb_engines, nb_hours, registration) VALUES
-(12679, 'robin',300,'dr400',4,900,'Etat bon',1,1000,'F-GXRI'),
-(12680, 'cessna',350,'172sp',4,1500,'Etat excellent',1,50,'F-LARX'),
-(12681, 'beechraft',400,'baron g58',6,2500,'Etat passable',2,50000,'F-LRJU'),
-(12682, 'piper',370,'seneca',4,200,'Etat très bien',2,12000,'F-ZTNK');
+INSERT INTO plane (id, brand, maximum_speed, model, nb_seats, rent_price_per_day, state, nb_engines, nb_hours, registration, is_archived) VALUES
+(12679, 'robin',300,'dr400',4,900,'Etat bon',1,1000,'F-GXRI',false),
+(12680, 'cessna',350,'172sp',4,1500,'Etat excellent',1,50,'F-LARX',false),
+(12681, 'beechraft',400,'baron g58',6,2500,'Etat passable',2,50000,'F-LRJU',false),
+(12682, 'piper',370,'seneca',4,200,'Etat très bien',2,12000,'F-ZTNK',false);
 
 INSERT INTO booking (id, discount, end_date, expected_number_km, expected_price, is_discount, start_date, status, id_client, id_vehicle) VALUES
 (148632579, 200.5, concat(YEAR(CURRENT_DATE),'-',MONTH(CURRENT_DATE),'-20'), 2500, 2000.5, true, concat(YEAR(CURRENT_DATE),'-',MONTH(CURRENT_DATE),'-14'), 'Réservation prête', 9143686792, 782),
