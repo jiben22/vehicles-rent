@@ -150,6 +150,7 @@ public class EmployeeController {
                 token.setExpiryDate(30);
                 passwordResetTokenRepository.save(token);
 
+                //TODO: use constants!
                 // send mail
                 Map<String, String> mailContent = new HashMap<>();
                 mailContent.put("recipient", employee.getEmail());
@@ -157,7 +158,7 @@ public class EmployeeController {
                 mailContent.put("subject", "Bienvenue dans l'entreprise " + employee.getFirstname());
                 String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
                 mailContent.put("resetUrl", url + "/resetPassword/new/?token=" + token.getToken());
-                mailContent.put("templateId", "1894529");
+                mailContent.put("templateId", "1958686");
                 MailSender.sendMail(mailContent);
             } catch (Exception exception) {
                 log.error(exception.getMessage() + exception.getCause());

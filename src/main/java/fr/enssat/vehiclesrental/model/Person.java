@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -52,6 +53,7 @@ public abstract class Person implements Serializable {
      * Birthdate of a person. Used to know age of a person.
      */
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @NonNull
     private LocalDate birthdate;
 
