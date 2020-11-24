@@ -1,3 +1,12 @@
+/*
+DROP TABLE IF EXISTS plane;
+DROP TABLE IF EXISTS motorbike;
+DROP TABLE IF EXISTS car;
+DROP TABLE IF EXISTS booking;
+DROP TABLE IF EXISTS client;
+DROP TABLE IF EXISTS employee;
+ */
+
 CREATE TABLE employee (
     id BIGINT PRIMARY KEY,
     lastname VARCHAR(45) NOT NULL,
@@ -10,7 +19,8 @@ CREATE TABLE employee (
     email VARCHAR(128) NOT NULL UNIQUE,
     phone VARCHAR(20) NOT NULL,
     position VARCHAR(128) NOT NULL,
-    password TEXT NOT NULL
+    password TEXT NOT NULL,
+    serial_number INTEGER NOT NULL
 );
 
 CREATE TABLE client (
@@ -40,8 +50,8 @@ CREATE TABLE booking (
     id_client BIGINT NOT NULL,
     id_vehicle BIGINT NOT NULL,
     CONSTRAINT fk_booking_client
-        FOREIGN KEY (idClient)
-        REFERENCES Client(id)
+        FOREIGN KEY (id_client)
+        REFERENCES client(id)
 );
 
 CREATE TABLE car (
@@ -54,7 +64,8 @@ CREATE TABLE car (
   state varchar(255) NOT NULL,
   horse_power int NOT NULL,
   registration VARCHAR(128) NOT NULL,
-  km int NOT NULL
+  km int NOT NULL,
+  is_archived BOOLEAN NOT NULL
 );
 
 CREATE TABLE motorbike (
@@ -67,7 +78,8 @@ CREATE TABLE motorbike (
   state varchar(255) NOT NULL,
   horse_power int NOT NULL,
   registration VARCHAR(128) NOT NULL,
-  km int NOT NULL
+  km int NOT NULL,
+  is_archived BOOLEAN NOT NULL
 );
 
 CREATE TABLE plane (
@@ -80,7 +92,8 @@ CREATE TABLE plane (
   state varchar(255) NOT NULL,
   nb_engines int NOT NULL,
   registration VARCHAR(128) NOT NULL,
-  nb_hours int NOT NULL
+  nb_hours int NOT NULL,
+  is_archived BOOLEAN NOT NULL
 );
 
 /*==== INSERT ====*/
@@ -122,6 +135,6 @@ INSERT INTO plane (id, brand, maximum_speed, model, nb_seats, rent_price_per_day
 (12682, 'piper',370,'seneca',4,200,'Etat très bien',2,12000,'F-ZTNK',false);
 
 INSERT INTO booking (id, discount, end_date, expected_number_km, expected_price, is_discount, start_date, status, id_client, id_vehicle) VALUES
-(148632579, 200.5, concat(YEAR(curdate()),'-',month(curdate()),'-20'), 2500, 2000.5, true, concat(YEAR(curdate()),'-',month(curdate()),'-15'), 'Réservation prête', 9143686792, 782);
+(148632579, 200.5, concat(YEAR(curdate()),'-',month(curdate()),'-20'), 2500, 2000.5, true, concat(YEAR(curdate()),'-',month(curdate()),'-15'), 'Réservation prête', 9143686792, 782),
 (148632581, 200.5, DATE_ADD(CURDATE(), INTERVAL 7 DAY), 2500, 502.5, true, curdate(), 'Réservation prête', 9143686793, 12679),
 (148632580, 0, concat(YEAR(curdate()),'-10-12'), 500, 300, false, concat(YEAR(curdate()),'-10-15'), 'Réservation prête', 9143686794, 44);
