@@ -17,7 +17,8 @@ import java.util.Set;
 @Table(name = "Client")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
 public class Client extends Person implements Serializable {
     /**
