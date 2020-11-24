@@ -10,10 +10,18 @@ import org.springframework.stereotype.Repository;
 public interface ClientRepository extends JpaRepository<Client, Long> , JpaSpecificationExecutor<Client> {
 
     static Specification<Client> hasZipcode(String zipcode) {
-        return (client, cq, cb) -> cb.equal(client.get("zipcode"), zipcode);
+        return (client, cq, cb) -> cb.like(client.get("zipcode"), zipcode);
     }
 
+    static Specification<Client> hasFirstname(String firstname) {
+        return (client, cq, cb) -> cb.like(client.get("firstname"), firstname);
+    }
 
+    static Specification<Client> hasLastname(String lastname) {
+        return (client, cq, cb) -> cb.like(client.get("lastname"), lastname);
+    }
 
-
+    static Specification<Client> hasEmail(String email) {
+        return (client, cq, cb) -> cb.like(client.get("email"), email);
+    }
 }
