@@ -40,8 +40,8 @@ public class Plane extends Vehicle implements Serializable {
      * Constructor of an a plane
      */
     @Builder
-    private Plane(long id, String brand,String model, int maximumSpeed, float rentPricePerDay, int nbSeats, State state, String registration, Set<Booking> bookings, int nbHours, int nbEngines) {
-        super(id, brand, model, maximumSpeed, rentPricePerDay, nbSeats, state,registration, bookings);
+    private Plane(long id, String brand,String model, int maximumSpeed, float rentPricePerDay, int nbSeats, State state, String registration, Set<Booking> bookings, int nbHours, int nbEngines, boolean isArchived) {
+        super(id, brand, model, maximumSpeed, rentPricePerDay, nbSeats, state,registration, isArchived, bookings);
         this.nbHours = nbHours;
         this.nbEngines = nbEngines;
     }
