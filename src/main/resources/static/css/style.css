@@ -1,5 +1,9 @@
 /* inputs */
 
+html, body {
+    height: 100%;
+}
+
 input.form-control {
     padding-top: 0.9rem;
     padding-bottom: 0.9rem;
@@ -11,37 +15,88 @@ input.form-control {
     font-size: 6em;
 }
 
-#navigation-example {
+#navigation {
     position: sticky;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1;
+    z-index: 999;
 }
 
 /* page disposition */
-.page-main-fragment {
-    flex:1 0 auto;
+.full-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
 
-.footer {
+.full-page > * {
+    flex: 1 0 auto;
+    height: auto;
+}
+
+.full-page > :first-child {
+    flex: 0 0 auto;
+}
+
+.full-page > :last-child {
     flex:0 0 auto;
 }
 
-/* dashboard */
-.dark-edition .card {
-    background-color: #a9afbbd1;
+.login-page .container {
+    padding-top: unset !important;
 }
 
-.dark-edition li.nav-item a {
-    color: #a9afbbd1;
+/* dark edition */
+.dark-edition {
+    background-color: #33658a;
 }
+
+.dark-edition .text-primary {
+    color: #2196f3 !important;
+}
+
+
+.dark-edition .card,
+.dark-edition .custom-card > div,
+.dark-edition .custom-card a:hover,
+.dark-edition .sidebar li.nav-item.active a.nav-link {
+    background-color: #86bbd8 !important;
+}
+
+.dark-edition #navigation,
+.dark-edition .footer,
+.dark-edition .sidebar,
+.dark-edition .sidebar .sidebar-background::after {
+    background-color: #2f4858 !important;
+}
+
+/*.dark-edition .card-title,*/
+.dark-edition label,
+.dark-edition span,
+.dark-edition li.nav-item a,
+.dark-edition li.nav-item a:hover,
+.dark-edition #datatables thead th,
+.dark-edition #datatables tbody td,
+.dark-edition #datatables_info,
+.dark-edition #datatables_length label,
+.dark-edition #datatables_filter label {
+    color: #606477 !important;
+}
+
+
+.dark-edition #datatables_length label span,
+.dark-edition #datatables_filter label span {
+    display: inline-block;
+}
+
+/* custom cards */
 
 .custom-card {
     background-size: cover;
     background-position: center;
-box-shadow: 0.4em .6em 2em -1em #000000; /* #000000 */
-height: 200px;
+    box-shadow: 0.4em .6em 2em -1em #000000; /* #000000 */
+    height: 200px;
     overflow:hidden;
 }
 
@@ -83,6 +138,27 @@ height: 200px;
     background-color: gainsboro; /* #dcdcdc */
 }
 
-* {
+.custom-card * {
     transition: .3s all ease-in-out;
+}
+
+/* footer */
+
+.footer {
+    background: rgba(255, 255, 255, 0.60);
+}
+
+.footer .copyright i.text-primary {
+    background-image: unset;
+}
+
+/* navbar */
+
+
+.navbar-nav li.nav-item:hover a.nav-link {
+    cursor: pointer;
+    background-color: #777;
+}
+.navbar-nav li.nav-item i {
+    margin-right: 0 !important;
 }

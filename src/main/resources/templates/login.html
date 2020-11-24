@@ -3,8 +3,9 @@
 
 <head th:replace="fragments/head.html :: head"></head>
 
-<body class="off-canvas-sidebar">
-    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top text-white">
+<body class="off-canvas-sidebar full-page"
+      style="background-image: url('/img/wallpapers/devon-janse-van-rensburg.jpg'); background-size: cover; background-position: top center;">
+    <nav class="navbar navbar-expand-lg navbar-transparent text-white">
         <div class="container">
             <div class="navbar-wrapper">
                 <p class="navbar-brand">Connexion</p>
@@ -12,9 +13,8 @@
         </div>
     </nav>
     <!-- End Navbar -->
-    <div class="wrapper wrapper-full-page">
-        <div class="page-header login-page header-filter" filter-color="black"
-            style="background-image: url('/img/wallpapers/devon-janse-van-rensburg.jpg'); background-size: cover; background-position: top center;">
+    <div class="wrapper">
+        <div class="login-page header-filter" data-color="black">
             <div class="container">
                 <div class="row">
                     <span class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             <div class="card card-login card-hidden">
-                                <div class="card-header card-header-primary text-center">
+                                <div class="card-header card-header-info text-center">
                                     <h3 class="card-title">
                                         Bienvenue sur votre espace personnel
                                     </h3>
@@ -67,13 +67,13 @@
                                         </div>
                                     </span>
                                     <hr />
-                                    <label class="form-check-label">
+                                    <label class="form-check-label text-center d-block p-0">
                                         <a th:href="@{/reinitialisation-mot-de-passe}">Mot de passe oublié ?</a>
                                     </label>
                                 </div>
                                 <div class="card-footer justify-content-center">
                                     <button name="submit" type="submit" value="submit"
-                                        class="btn btn-primary btn-link btn-lg">Connexion</button>
+                                        class="btn btn-primary btn-link btn-lg p-0 font-weight-bold">Connexion</button>
                                 </div>
                             </div>
                         </form>
@@ -81,9 +81,8 @@
                 </div>
             </div>
         </div>
-        <footer th:replace="fragments/footer.html :: footer"></footer>
     </div>
-    </div>
+    <footer th:replace="fragments/footer.html :: footer"></footer>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-CREATE TABLE employee (
+CREATE TABLE IF NOT EXISTS employee (
     id BIGINT PRIMARY KEY,
     lastname VARCHAR(45) NOT NULL,
     firstname VARCHAR(45) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE employee (
     password TEXT NOT NULL
 );
 
-CREATE TABLE client (
+CREATE TABLE IF NOT EXISTS client (
     id BIGINT PRIMARY KEY,
     lastname VARCHAR(45) NOT NULL,
     firstname VARCHAR(45) NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE client (
     phone VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE booking (
+CREATE TABLE IF NOT EXISTS booking (
     id BIGINT PRIMARY KEY,
     start_date DATETIME NOT NULL,
     end_date DATETIME NOT NULL,
@@ -38,11 +38,11 @@ CREATE TABLE booking (
     id_client BIGINT NOT NULL,
     id_vehicule BIGINT NOT NULL,
     CONSTRAINT fk_booking_client
-        FOREIGN KEY (idClient)
+        FOREIGN KEY (id_client)
         REFERENCES Client(id)
 );
 
-CREATE TABLE car (
+CREATE TABLE IF NOT EXISTS car (
   id bigint NOT NULL PRIMARY KEY,
   brand varchar(128) NOT NULL,
   maximum_speed int NOT NULL,
@@ -50,11 +50,12 @@ CREATE TABLE car (
   nb_seats int NOT NULL,
   rent_price_per_day NUMERIC NOT NULL,
   state varchar(255) NOT NULL,
+  registration varchar(255) NOT NULL,
   horse_power int NOT NULL,
   km int NOT NULL
 );
 
-CREATE TABLE motorbike (
+CREATE TABLE IF NOT EXISTS motorbike (
   id bigint NOT NULL PRIMARY KEY,
   brand varchar(128) NOT NULL,
   maximum_speed int NOT NULL,
@@ -62,11 +63,12 @@ CREATE TABLE motorbike (
   nb_seats int NOT NULL,
   rent_price_per_day NUMERIC NOT NULL,
   state varchar(255) NOT NULL,
+  registration varchar(255) NOT NULL,
   horse_power int NOT NULL,
   km int NOT NULL
 );
 
-CREATE TABLE plane (
+CREATE TABLE IF NOT EXISTS plane (
   id bigint NOT NULL PRIMARY KEY,
   brand varchar(128) NOT NULL,
   maximum_speed int NOT NULL,
@@ -74,6 +76,7 @@ CREATE TABLE plane (
   nb_seats int NOT NULL,
   rent_price_per_day NUMERIC NOT NULL,
   state varchar(255) NOT NULL,
+  registration varchar(255) NOT NULL,
   nb_engines int NOT NULL,
   nb_hours int NOT NULL
 );
