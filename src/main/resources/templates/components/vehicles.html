@@ -6,6 +6,28 @@
     </div>
     <div class="material-datatables">
         <div class="row">
+            <div class="offset-md-2 col-md-2">
+                <a th:href="@{/vehicules}" class="btn" th:classappend="${param.vehicleType == null} ? btn-light : btn-secondary">
+                    <i class="material-icons" style="font-size:30px;">clear_all</i> Tous les véhicules
+                </a>
+            </div>
+            <div class="col-md-2">
+                <a th:href="@{/vehicules?vehicleType=CAR}" class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'CAR'} ? btn-light : btn-secondary">
+                    <i class="material-icons" style="font-size:30px;">drive_eta</i> Voitures
+                </a>
+            </div>
+            <div class="col-md-2">
+                <a th:href="@{/vehicules?vehicleType=MOTORBIKE}" class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'MOTORBIKE'} ? btn-light : btn-secondary">
+                    <i class="material-icons" style="font-size:30px;">two_wheeler</i> Motos
+                </a>
+            </div>
+            <div class="col-md-2">
+                <a th:href="@{/vehicules?vehicleType=PLANE}" class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'PLANE'} ? btn-light : btn-secondary">
+                    <i class="material-icons" style="font-size:30px;">flight</i> Avions
+                </a>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-sm-12">
                 <table id="vehicles_datatable" class="table table-striped table-no-bordered table-hover dataTable dtr-inline w-100" role="grid" aria-describedby="datatables_info" cellspacing="0">
                     <thead>
@@ -48,9 +70,9 @@
 
                         <!-- Actions -->
                         <td class="text-right">
-                             <a th:href="@{/vehicule/edit/} + ${vehicle.id}" class="btn btn-link btn-info btn-just-icon"><i class="material-icons">edit</i></a>
-                            <a th:href="@{/vehicule/} + ${vehicle.id}" class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
-                            <button class="btn btn-link btn-danger btn-just-icon remove" data-target="#deleteVehicleModal" data-toggle="modal"><i class="material-icons">close</i></button>
+<!--                             <a th:href="@{/vehicule/modifier/} + ${vehicle.id}" class="btn btn-link btn-info btn-just-icon"><i class="material-icons">edit</i></a>-->
+                            <a th:href="@{/vehicules/} + ${vehicle.registration}" class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
+                            <button class="btn btn-link btn-danger btn-just-icon remove" data-target="#deleteVehicleModal" data-toggle="modal"><i class="material-icons">archive</i></button>
                         </td>
                     </tr>
                     </tbody>
@@ -78,7 +100,7 @@
                 $(".remove-modal-btn").click(function(){
                     let tr = that.parent().parent()[0];
                     $(tr).fadeOut();
-                    $.get("vehicle/delete/" + tr.dataset.id);
+                    $.get("vehicules/supprimer/" + id);
                 });
             });
         })(jQuery);

@@ -4,7 +4,6 @@ import fr.enssat.vehiclesrental.model.enums.Status;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -40,8 +39,14 @@ public class Booking implements Serializable {
     /**
      * Expected number of kilometer define when create booking
      */
-    @Column(nullable = false)
+    @Column()
     private int expectedNumberKm;
+
+    /**
+     * Expected number of hours define when create booking
+     */
+    @Column()
+    private int expectedNumberHours;
 
     /**
      * Expected price of booking
@@ -65,6 +70,7 @@ public class Booking implements Serializable {
      * Represent which state is a booking.
      */
     @Column(nullable = false, length = 45)
+    @NonNull
     private Status status;
 
     /**
@@ -75,9 +81,10 @@ public class Booking implements Serializable {
     private Client client;
 
     /**
-     * Link a booking to a vehicule
+     * Link a booking to a vehicle
      */
     @ManyToOne
-    @JoinColumn(name="id_vehicule")
+    @JoinColumn(name="id_vehicle")
+    @NonNull
     private Vehicle vehicle;
 }
