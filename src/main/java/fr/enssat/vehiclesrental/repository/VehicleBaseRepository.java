@@ -27,4 +27,8 @@ public interface VehicleBaseRepository<T extends Vehicle> extends JpaRepository<
     static Specification<Vehicle> hasNbSeats(int nbSeats) {
         return (vehicle, cq, cb) -> cb.equal(vehicle.get("nbSeats"), nbSeats);
     }
+
+    static Specification<Vehicle> isNotArchived() {
+        return (vehicle, cq, cb) -> cb.equal(vehicle.get("isArchived"), false);
+    }
 }

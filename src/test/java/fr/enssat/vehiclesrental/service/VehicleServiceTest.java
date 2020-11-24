@@ -1,6 +1,7 @@
 package fr.enssat.vehiclesrental.service;
 
 import fr.enssat.vehiclesrental.factory.VehicleFactory;
+import fr.enssat.vehiclesrental.model.Car;
 import fr.enssat.vehiclesrental.model.Vehicle;
 import fr.enssat.vehiclesrental.repository.CarRepository;
 import fr.enssat.vehiclesrental.repository.MotorbikeRepository;
@@ -218,10 +219,15 @@ public class VehicleServiceTest {
         assertThrows(VehicleNotFoundException.class, () -> vehicleService.editVehicle(VehicleFactory.getCar()));
     }
 
-    @DisplayName("Delete a vehicle")
+    @DisplayName("Archive a vehicle")
     @Test
-    public void deleteVehicle() {
-        vehicleService.deleteVehicle(784);
-        assertFalse(vehicleService.exists(784));
+    public void archiveVehicle() {
+        Vehicle vehicle = VehicleFactory.getCar();
+        when(vehicleRepository.findById(anyLong())).thenReturn(Optional.ofNullable(vehicle));
+        vehicle.setArchived(true);
+        when(vehicleRepository.saveAndFlush(any(Vehicle.class))).thenReturn(vehicle);
+
+        vehicleService.archiveVehicle(42L);
+        assertTrue(vehicle.isArchived());
     }
 }

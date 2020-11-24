@@ -342,9 +342,8 @@ public class VehicleController {
         log.info(String.format("GET %s", ArchiveVehicle.URL));
 
         try {
-            //TODO: archive vehicle / NOT delete
-            // Delete vehicle
-            vehicleService.deleteVehicle(Long.parseLong(id));
+            // Archive vehicle
+            vehicleService.archiveVehicle(Long.parseLong(id));
         } catch (Exception exception) {
             log.error(exception.getMessage() + exception.getCause());
             redirectAttributes.addFlashAttribute(MESSAGE, ArchiveVehicle.ERROR_MESSAGE);
