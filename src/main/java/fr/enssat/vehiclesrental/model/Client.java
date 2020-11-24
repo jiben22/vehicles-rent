@@ -18,7 +18,8 @@ import java.util.Set;
 @Table(name = "Client")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
 @PrimaryKeyJoinColumn(name = "id")
 public class Client extends Person implements Serializable {
