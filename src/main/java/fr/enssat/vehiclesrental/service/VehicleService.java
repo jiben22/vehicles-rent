@@ -106,7 +106,7 @@ public class VehicleService implements IVehicleService {
         }
     }
 
-    public Specification<Vehicle> buildSpecification(String brand, String model, int nbSeats) {
+    private Specification<Vehicle> buildSpecification(String brand, String model, int nbSeats) {
         List<Specification<Vehicle>> specifications = new ArrayList<>();
         if (!brand.isEmpty()) specifications.add(hasBrand(brand));
         if (!model.isEmpty()) specifications.add(hasModel(model));

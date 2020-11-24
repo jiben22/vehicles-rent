@@ -71,7 +71,7 @@ public class EmployeeFactory {
                 .country("Danemark")
                 .email("captain@marvel.com")
                 .phone("+33612482274")
-                .position(Position.Collaborateur)
+                .position(Position.COLLABORATEUR)
                 .password("Captain12*")
                 .build();
     }
