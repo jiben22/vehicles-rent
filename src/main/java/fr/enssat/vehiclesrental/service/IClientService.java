@@ -5,9 +5,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface IClientService extends UserDetailsService {
+public interface IClientService {
     boolean exists(long id);
+    Client getClient(long id);
+    List<Client> getClients();
     List<Client> searchClients(String firstname, String lastname, String email, String zipcode);
-    boolean addClient(Client client);
-
+    Client addClient(Client client);
+    Client editClient(Client client);
+    void deleteClient(long id);
 }
