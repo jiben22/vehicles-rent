@@ -1,9 +1,7 @@
 package fr.enssat.vehiclesrental.service;
 
 import fr.enssat.vehiclesrental.factory.BookingFactory;
-import fr.enssat.vehiclesrental.factory.VehicleFactory;
 import fr.enssat.vehiclesrental.model.Booking;
-import fr.enssat.vehiclesrental.model.Vehicle;
 import fr.enssat.vehiclesrental.model.enums.Status;
 import fr.enssat.vehiclesrental.repository.BookingRepository;
 import fr.enssat.vehiclesrental.service.exception.alreadyarchived.BookAlreadyArchivedException;
@@ -11,7 +9,6 @@ import fr.enssat.vehiclesrental.service.exception.alreadyrent.BookAlreadyRentExc
 import fr.enssat.vehiclesrental.service.exception.inconsistentDate.StartDateAfterEndDateExceptionException;
 import fr.enssat.vehiclesrental.service.exception.inconsistentDate.StartDateBeforeTodayException;
 import fr.enssat.vehiclesrental.service.exception.notfound.BookingNotFoundException;
-import fr.enssat.vehiclesrental.service.exception.notfound.VehicleNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +19,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.Optional.ofNullable;

@@ -1,7 +1,6 @@
 package fr.enssat.vehiclesrental.service;
 
 import fr.enssat.vehiclesrental.model.Client;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
