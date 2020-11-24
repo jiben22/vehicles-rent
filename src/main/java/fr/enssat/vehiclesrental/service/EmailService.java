@@ -30,7 +30,6 @@ public class EmailService implements IEmailService {
 
             mail.getModel().forEach(context::setVariable);
             String html = templateEngine.process("email/email-template", context);
-            System.out.println(html);
 
             helper.setTo(mail.getTo());
             helper.setText(html, true);

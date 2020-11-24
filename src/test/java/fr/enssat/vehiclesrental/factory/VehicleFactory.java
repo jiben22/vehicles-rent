@@ -18,6 +18,8 @@ public class VehicleFactory {
                  .state(State.EXCELLENT)
                  .horsePower(201)
                  .km(150)
+                 .registration("CQ-001-AA")
+                 .isArchived(false)
                  .build();
     }
 
@@ -32,6 +34,8 @@ public class VehicleFactory {
                 .state(State.EXCELLENT)
                 .horsePower(60)
                 .km(1200)
+                .registration("CQ-175-VT")
+                .isArchived(false)
                 .build();
     }
 
@@ -46,6 +50,8 @@ public class VehicleFactory {
                 .state(State.GOOD)
                 .nbEngines(1)
                 .nbHours(1000)
+                .registration("F-GXRI")
+                .isArchived(false)
                 .build();
     }
 }
