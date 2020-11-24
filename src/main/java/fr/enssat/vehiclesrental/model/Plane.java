@@ -25,14 +25,12 @@ public class Plane extends Vehicle implements Serializable {
      * Number of hours when the plane has been used
      */
     @Column(nullable = false)
-    @NonNull
     private int nbHours;
 
     /**
      * Number of engines used by the plane
      */
     @Column(nullable = false)
-    @NonNull
     private int nbEngines;
 
     /**

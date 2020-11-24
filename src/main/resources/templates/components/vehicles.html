@@ -10,29 +10,14 @@
                 <table id="vehicles_datatable" class="table table-striped table-no-bordered table-hover dataTable dtr-inline w-100" role="grid" aria-describedby="datatables_info" cellspacing="0">
                     <thead>
                     <tr role="row">
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 20px;" aria-label="Type: activate to sort column ascending">
-                            <!-- Type -->
-                        </th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="Brand: activate to sort column descending">
-                            Marque
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Model: activate to sort column ascending">
-                            Modèle
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Max speed: activate to sort column ascending">
-                            Vitesse max.
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Price by day: activate to sort column ascending">
-                            Prix par jour
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Number of seats: activate to sort column ascending">
-                            Nombre de sièges
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="State: activate to sort column ascending">
-                            État
-                        </th>
-                        <th class="disabled-sorting text-right sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 70px;" aria-label="Actions: activate to sort column ascending"></th>
-                    </tr>
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 20px;" aria-label="Type: activate to sort column ascending"><!-- Type --></th>
+                        <th class="sorting_asc" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="Brand: activate to sort column descending">Marque</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Model: activate to sort column ascending">Modèle</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Max speed: activate to sort column ascending">Vitesse max.</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Price by day: activate to sort column ascending">Prix par jour</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Number of seats: activate to sort column ascending">Nombre de sièges</th>
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="State: activate to sort column ascending">État</th>
+                        <th class="disabled-sorting text-right sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 70px;" aria-label="Actions: activate to sort column ascending"></th></tr>
                     </thead>
                     <tbody>
                     <tr th:each="vehicle, i : ${vehicles}" th:data-id="${vehicle.id}" role="row" th:style="${i.odd}? 'odd' : 'even'" th:class="${vehicle.id}">
@@ -69,6 +54,17 @@
                         </td>
                     </tr>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -86,6 +82,29 @@
                 });
             });
         })(jQuery);
+
+        $(document).ready(function() {
+            // Setup - add a text input to each footer cell
+            $('#vehicles_datatable tfoot th').each( function (colIdx) {
+                if (colIdx !== 0) {
+                    var title = $('#vehicles_datatable thead th').eq($(this).index()).text();
+                    $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+                }
+            } );
+
+            // DataTable
+            var table = $('#vehicles_datatable').DataTable();
+
+            // Apply the search
+            table.columns().eq( 0 ).each( function ( colIdx ) {
+                $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
+                    table
+                        .column( colIdx )
+                        .search( this.value )
+                        .draw();
+                } );
+            } );
+        } );
     </script>
 </div>
 

@@ -25,14 +25,12 @@ public class Car extends Vehicle implements Serializable {
      * Number of kilometer that a car has been used
      */
     @Column(nullable = false)
-    @NonNull
     private int km;
 
     /**
      * Power of the car
      */
     @Column(nullable = false)
-    @NonNull
     private int horsePower;
 
     @Builder
