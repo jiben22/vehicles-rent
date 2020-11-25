@@ -1,6 +1,6 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController.GetVehicles;
+import fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController.GetVehicles;
 import fr.enssat.vehiclesrental.service.VehicleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController.BASE_URL;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -39,7 +40,7 @@ public class VehicleControllerTest {
     @DisplayName("Get vehicles")
     @Test
     public void getVehicles() throws Exception {
-        mockMvc.perform(get(GetVehicles.URL))
+        mockMvc.perform(get(BASE_URL))
                 .andDo(print())
                 .andExpect(view().name(GetVehicles.VIEW));
     }
