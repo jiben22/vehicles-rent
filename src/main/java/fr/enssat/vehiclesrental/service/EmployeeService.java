@@ -42,16 +42,6 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployeeByFirstname(String firstname) {
-        return repository.findByFirstname(firstname);
-    }
-
-    @Override
-    public List<Employee> getEmployeeByLastname(String lastname) {
-        return repository.findByLastname(lastname);
-    }
-
-    @Override
     public List<Employee> getEmployees() {
         return repository.findAll(Sort.by(Sort.Direction.ASC, "lastname"));
     }

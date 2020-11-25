@@ -51,26 +51,6 @@ public class EmployeeRepositoryTest {
         assertFalse(optionalEmployee.isPresent());
     }
 
-    @DisplayName("Get employee with a firstname")
-    @Test
-    public void findByFirstname() {
-        List<Employee> employees = employeeRepository.findByFirstname("Tony");
-        assertEquals(1, employees.size());
-        employees.forEach(employee ->
-                assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeResponsableLocation(), "password").matches(employee))
-        );
-    }
-
-    @DisplayName("Get employee with a lastname")
-    @Test
-    public void findByLastname() {
-        List<Employee> employees = employeeRepository.findByLastname("Stark");
-        assertEquals(1, employees.size());
-        employees.forEach(employee ->
-                assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeResponsableLocation(), "password").matches(employee))
-        );
-    }
-
     @DisplayName("Get all employees")
     @Test
     public void findAll() {

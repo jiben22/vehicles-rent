@@ -30,6 +30,7 @@ import static fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeCo
 @Slf4j
 public class EmployeeController {
 
+
     private final EmployeeService employeeService;
 
     private final PasswordResetTokenRepository passwordResetTokenRepository;
