@@ -1,3 +1,5 @@
+/*==== INSERT ====*/
+
 INSERT INTO employee (id, lastname, firstname, birthdate, street, zipcode, city, country, email, phone,position, password, serial_number) VALUES
 (157314099170601, 'Stark', 'Tony', '1978-05-03', '9 rue du chene germain', '22700', 'Lannion', 'France', 'tony.stark@marvel.com', '+33612482274','Responsable location', '$2a$10$TCdrvG6zWUwrryQ.7Id6Qe9lJCWXaykTFH1vfRyrSRkmF5KK0DoCa',1462),
 (157314099170602, 'Odinson', 'Thor', '1945-05-03', '5 avenue Asgardian ', '22700', 'Lannion', 'France', 'thor@marvel.com', '+33612482274','Gestionnaire commercial', '$2a$10$i/8ECxz8OTwlvVxHwKzEaOq7kWYy/OWNDVo8JcOQsb5yk.Je.9gFW',784),
@@ -36,5 +38,5 @@ INSERT INTO plane (id, brand, maximum_speed, model, nb_seats, rent_price_per_day
 
 INSERT INTO booking (id, discount, end_date, expected_number_km, expected_price, is_discount, start_date, status, id_client, id_vehicle) VALUES
 (148632579, 200.5, concat(YEAR(curdate()),'-',month(curdate()),'-20'), 2500, 2000.5, true, concat(YEAR(curdate()),'-',month(curdate()),'-15'), 'Réservation prête', 9143686792, 782),
-(148632581, 200.5, DATE_ADD(CURDATE(), INTERVAL 7 DAY), 2500, 502.5, true, curdate(), 'Réservation prête', 9143686793, 12679),
+(148632581, 200.5, DATE_ADD(CURDATE(), INTERVAL 7 DAY), 2500, 502.5, true, curdate(), 'En cours de location', 9143686793, 12679),
 (148632580, 0, concat(YEAR(curdate()),'-10-12'), 500, 300, false, concat(YEAR(curdate()),'-10-15'), 'Réservation prête', 9143686794, 44);

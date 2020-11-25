@@ -122,21 +122,29 @@ public class ControllerConstants {
 
     public static final class BookingController {
         private BookingController() {}
-        public static final String BASE_URL = "/bookings";
-        private static final String BASE_VIEW = "booking/";
 
-        public static final String BOOKING = "booking";
-        public static final String BOOKING_LABEL = "réservation";
+        public static final String BASE_URL = "/reservations";
+        private static final String BASE_VIEW = "booking/";
+        
         public static final String BOOKINGS = "bookings";
         public static final String BOOKINGS_LABEL = "réservations";
-
-        public static final String ICON = "receipt_long";
+        public static final String BOOKING = "booking";
+        public static final String BOOKING_LABEL = "réservation";
 
         public static final class GetBookings {
             private GetBookings() {}
+
             public static final String URL = BASE_URL;
             public static final String TITLE = "Liste des réservations";
-            public static final String VIEW = BOOKINGS;
+            public static final String VIEW = BASE_VIEW+BOOKINGS;
+        }
+
+        public static final class GetBookingById {
+            private GetBookingById() {}
+
+            public static final String URL = BASE_URL + "/{id}";
+            public static final String TITLE = "Fiche d'une réservation";
+            public static final String VIEW = BASE_VIEW + "booking";
         }
     }
 
