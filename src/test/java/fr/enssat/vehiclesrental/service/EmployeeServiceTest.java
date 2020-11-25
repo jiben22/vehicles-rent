@@ -69,30 +69,6 @@ public class EmployeeServiceTest {
         assertThrows(EmployeeNotFoundException.class, () -> employeeService.getEmployeeByEmail("unknown@unknown.fr"));
     }
 
-    @DisplayName("Get employee with a firstname")
-    @Test
-    public void getEmployeeByFirstname() {
-        when(employeeRepository.findByFirstname(anyString()))
-                .thenReturn(Collections.singletonList(EmployeeFactory.getEmployeeGestionnaireTechnique()));
-
-        List<Employee> employees = employeeService.getEmployeeByFirstname("Henry");
-        employees.forEach(employee ->
-                assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeGestionnaireTechnique(), "password").matches(employee))
-        );
-    }
-
-    @DisplayName("Get employee with a lastname")
-    @Test
-    public void getEmployeeByLastname() {
-        when(employeeRepository.findByLastname(anyString()))
-                .thenReturn(Collections.singletonList(EmployeeFactory.getEmployeeGestionnaireTechnique()));
-
-        List<Employee> employees = employeeService.getEmployeeByLastname("Jonathan");
-        employees.forEach(employee ->
-            assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeGestionnaireTechnique(), "password").matches(employee))
-        );
-    }
-
     @DisplayName("Get all employees")
     @Test
     public void getEmployees() {
