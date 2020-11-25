@@ -1,8 +1,7 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.controller.constants.Constants;
 import fr.enssat.vehiclesrental.controller.constants.Constants.ChartController.GetCharts;
-import fr.enssat.vehiclesrental.model.Client;
+import fr.enssat.vehiclesrental.model.Person;
 import fr.enssat.vehiclesrental.model.enums.Interval;
 import fr.enssat.vehiclesrental.model.enums.Type;
 import fr.enssat.vehiclesrental.service.Top10Service;
@@ -14,12 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.time.LocalDate;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static fr.enssat.vehiclesrental.controller.constants.Constants.ChartController.GetCharts.*;
 import static fr.enssat.vehiclesrental.controller.constants.Constants.ClientController.CLIENTS;
 import static fr.enssat.vehiclesrental.controller.constants.Constants.Controller.TITLE;
 
@@ -31,94 +29,83 @@ public class ChartController {
     private final Top10Service top10Service;
 
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_COMMERCIAL.label)")
-    @GetMapping(URL)
+    @GetMapping(GetCharts.URL)
     public String showStatistics(Model springModel, @PathVariable Type type, @PathVariable Interval interval) {
         log.info(String.format("GET %s", GetCharts.URL));
         springModel.addAttribute(TITLE, GetCharts.TITLE);
+        springModel.addAttribute(GetCharts.TOP10, String.format(GetCharts.TOP10_NAME, type.name));
+        springModel.addAttribute(GetCharts.INTERVAL, String.format(GetCharts.INTERVAL_NAME, interval.name));
 
-        System.out.println(type);
-        System.out.println(interval);
-
-//        List<Client> clients;
-//        switch (type){
-//            case MOST_RESERVER_CLIENT:
-//                clients = getTop10Reserver(interval);
-//                break;
-//            case MOST_SPENDER_CLIENT:
-//                clients = getTop10Spender(interval);
-//                break;
-//            default:
-//                log.error(String.valueOf(new IllegalStateException("Unexpected value: " + type)));
-//                clients = Collections.emptyList();
-//                break;
-//        }
-//        List<? extends Person> clients = Collections.singletonList(getClient());
-        Map<String, Integer> clients = new LinkedHashMap<>();
-        clients.put("Tim", 100);
-        clients.put("Bertrand", 90);
-        clients.put("Denis", 80);
-        clients.put("Bernard", 70);
-        clients.put("Jacques", 60);
-        clients.put("Mathilde", 50);
-        clients.put("Carole", 40);
-        clients.put("Sophie", 30);
-        clients.put("Julie", 20);
-        clients.put("Toufik", 10);
+        Map<String, Integer> clients;
+        switch (type){
+            case MOST_RESERVER_CLIENT:
+                clients = getTop10Reserver(interval);
+                break;
+            case MOST_SPENDER_CLIENT:
+                clients = getTop10Spender(interval);
+                break;
+            default:
+                log.error(String.valueOf(new IllegalStateException("Unexpected value: " + type)));
+                clients = new LinkedHashMap<>();
+                break;
+        }
 
         springModel.addAttribute(CLIENTS, clients);
-        System.out.println(clients);
 
         return GetCharts.VIEW;
     }
 
-    private List<Client> getTop10Depensiers(Interval interval){
-        switch (interval){
+    private Map<String, Integer> getTop10Spender(Interval interval) {
+        log.info(String.format("Get TOP 10 spender %s", interval.name));
+
+        List<? extends Person> top10Spender = Collections.emptyList();
+        switch (interval) {
             case ONE_WEEK:
-                //SELECT client.* FROM locateam.booking inner join locateam.client on booking.id_client = client.id where week(start_date) = week(now()) group by client.id order by sum(booking.expected_price) desc limit 10
+                top10Spender = top10Service.getTop10SpenderWeek();
                 break;
             case ONE_MONTH:
-                //SELECT client.* FROM locateam.booking inner join locateam.client on booking.id_client = client.id where month(start_date) = month(now()) group by client.id order by sum(booking.expected_price) desc limit 10
+                top10Spender = top10Service.getTop10SpenderMonth();
                 break;
             case ONE_YEAR:
-                //SELECT client.* FROM locateam.booking inner join locateam.client on booking.id_client = client.id where year(start_date) = year(now()) group by client.id order by sum(booking.expected_price) desc limit 10
+                top10Spender = top10Service.getTop10SpenderYear();
                 break;
             default:
-                // @TODO Déclencher une exception ("This type of interval doesn't exist")
+                log.error(String.valueOf(new IllegalStateException("Unexpected value: " + interval)));
                 break;
         }
-        return null;
+
+        return createCharts(top10Spender);
     }
 
-    private List<Client> getTop10Reservations(Interval interval){
-        switch (interval){
+    private Map<String, Integer> getTop10Reserver(Interval interval) {
+        log.info(String.format("Get TOP 10 spender %s", interval.name));
+
+        List<? extends Person> top10Reserver = Collections.emptyList();;
+        switch (interval) {
             case ONE_WEEK:
-                //SELECT client.* FROM locateam.booking inner join locateam.client on booking.id_client = client.id where week(start_date) = week(now()) group by client.id order by count(*) desc limit 10
+                top10Reserver = top10Service.getTop10ReserverWeek();
                 break;
             case ONE_MONTH:
-                //SELECT client.* FROM locateam.booking inner join locateam.client on booking.id_client = client.id where month(start_date) = month(now()) group by client.id order by count(*) desc limit 10
+                top10Reserver = top10Service.getTop10ReserverMonth();
                 break;
             case ONE_YEAR:
-                //SELECT client.* FROM locateam.booking inner join locateam.client on booking.id_client = client.id where year(start_date) = year(now()) group by client.id order by count(*) desc limit 10
+                top10Reserver = top10Service.getTop10ReserverYear();
                 break;
             default:
-                // @TODO Déclencher une exception ("This type of interval doesn't exist")
+                log.error(String.valueOf(new IllegalStateException("Unexpected value: " + interval)));
                 break;
         }
-        return null;
+
+        return createCharts(top10Reserver);
     }
 
-    public static Client getClient(){
-        return Client.builder()
-                .id(Long.parseLong("9143686792"))
-                .birthdate(LocalDate.parse("1998-12-06"))
-                .city("Lannion")
-                .country("France")
-                .email("tim.bradstreet@gmail.com")
-                .firstname("Tim")
-                .lastname("Bradstreet")
-                .phone("+33938333613")
-                .street("6 Rue des ARTILLEURS")
-                .zipcode("35288")
-                .build();
+    private Map<String, Integer> createCharts(List<? extends Person> top10) {
+        Map<String, Integer> clients = new LinkedHashMap<>();
+        for (Person person: top10) {
+            //TODO: replace 150 by the number of rows by client (count)
+            clients.put(String.format("%s %s", person.getLastname(), person.getFirstname()), 150);
+        }
+
+        return clients;
     }
 }

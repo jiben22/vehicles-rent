@@ -206,9 +206,15 @@ public class ControllerConstants {
 
         public static final class GetCharts {
             private GetCharts() {}
-            public static final String URL = BASE_URL;
+
+
+            public static final String URL = BASE_URL + "/{type}/{interval}";
             public static final String TITLE = "Statistiques";
-            public static final String VIEW = "charts";
+            public static final String VIEW = "statistics";
+            public static final String TOP10 = "top10";
+            public static final String INTERVAL = "interval";
+            public static final String TOP10_NAME = "TOP 10 : %s";
+            public static final String INTERVAL_NAME = "Période : %s";
         }
     }
 
