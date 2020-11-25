@@ -98,14 +98,25 @@ public class Constants {
     public static final class BookingController {
         private BookingController() {}
 
+        public static final String BASE_URL = "/reservations";
+        private static final String BASE_VIEW = "booking/";
         public static final String BOOKINGS = "bookings";
+        public static final String BOOKING = "booking";
 
         public static final class GetBookings {
             private GetBookings() {}
 
-            public static final String URL = "/bookings";
+            public static final String URL = BASE_URL;
             public static final String TITLE = "Liste des réservations";
-            public static final String VIEW = "bookings";
+            public static final String VIEW = BASE_VIEW+"bookings";
+        }
+
+        public static final class GetBookingById {
+            private GetBookingById() {}
+
+            public static final String URL = BASE_URL + "/{id}";
+            public static final String TITLE = "Fiche d'une réservation";
+            public static final String VIEW = BASE_VIEW + "booking";
         }
     }
 
