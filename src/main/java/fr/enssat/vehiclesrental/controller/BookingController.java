@@ -1,8 +1,7 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.controller.constants.Constants;
+import fr.enssat.vehiclesrental.constants.ControllerConstants;
 import fr.enssat.vehiclesrental.model.Booking;
-import fr.enssat.vehiclesrental.model.Vehicle;
 import fr.enssat.vehiclesrental.model.enums.Status;
 import fr.enssat.vehiclesrental.service.BookingService;
 import lombok.RequiredArgsConstructor;
@@ -11,18 +10,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import fr.enssat.vehiclesrental.controller.constants.Constants.BookingController.*;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import static fr.enssat.vehiclesrental.constants.ControllerConstants.Controller.*;
+import static fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController.*;
 
 import java.util.Date;
 import java.util.List;
 
-import static fr.enssat.vehiclesrental.controller.constants.Constants.BookingController.BOOKING;
-import static fr.enssat.vehiclesrental.controller.constants.Constants.BookingController.BOOKINGS;
-import static fr.enssat.vehiclesrental.controller.constants.Constants.Controller.TITLE;
-import static fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController.BASE_URL;
-import static fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController.VEHICLE;
 
 @RequiredArgsConstructor
 @Controller
@@ -43,7 +39,7 @@ public class BookingController {
      * @param status Status de la réservation
      * @return La liste des réservations correspondant aux paramètres de requête
      */
-    @GetMapping(GetBookings.URL)
+    @GetMapping(ControllerConstants.BookingController.GetBookings.URL)
     public String showBookings(Model springModel,
                                @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date startDate,
                                @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date endDate,
