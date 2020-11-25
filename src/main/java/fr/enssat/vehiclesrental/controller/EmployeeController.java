@@ -1,6 +1,6 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController.*;
+import fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController.*;
 import fr.enssat.vehiclesrental.controller.utils.MailSender;
 import fr.enssat.vehiclesrental.model.Employee;
 import fr.enssat.vehiclesrental.model.enums.Position;
@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,13 +22,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.*;
 
-import static fr.enssat.vehiclesrental.controller.constants.Constants.Controller.MESSAGE;
-import static fr.enssat.vehiclesrental.controller.constants.Constants.Controller.TITLE;
-import static fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController.*;
+import static fr.enssat.vehiclesrental.constants.ControllerConstants.Controller.*;
+import static fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController.*;
+import static fr.enssat.vehiclesrental.constants.MailConstants.*;
 
 @RequiredArgsConstructor
 @Controller
 @Slf4j
+@RequestMapping(BASE_URL)
 public class EmployeeController {
 
     private final EmployeeService employeeService;
@@ -44,14 +46,14 @@ public class EmployeeController {
      * @return la liste des collaborateurs correspondant aux paramètres de requête
      */
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label)")
-    @GetMapping(GetEmployees.URL)
+    @GetMapping
     public String showEmployees(Model springModel,
                                 @RequestParam Optional<String> position,
                                 @RequestParam(defaultValue = "") String firstname,
                                 @RequestParam(defaultValue = "") String lastname,
                                 @RequestParam(defaultValue = "") String email,
                                 @RequestParam(defaultValue = "") String zipcode) {
-        log.info(String.format("GET %s", GetEmployees.URL));
+        log.info(String.format("GET %s", BASE_URL));
         springModel.addAttribute(TITLE, GetEmployees.TITLE);
 
         List<Employee> employees;
@@ -77,8 +79,7 @@ public class EmployeeController {
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label)")
     @GetMapping(GetEmployeeById.URL)
     public String showEmployeeById(Model springModel, @PathVariable String id) {
-        //TODO: use replace {id}
-        log.info(String.format("GET %s/%s", BASE_URL, id));
+        log.info(String.format("GET %s", StringUtils.replace(GetEmployeeById.URL, PATTERN_ID, id)));
         springModel.addAttribute(TITLE, GetEmployeeById.TITLE);
 
         Employee employee = employeeService.getEmployee(Long.parseLong(id));
@@ -129,7 +130,6 @@ public class EmployeeController {
             return AddEmployee.VIEW;
         }
 
-        // TODO: reduce code complexity
         try {
             Employee existedEmployee = employeeService.getEmployeeByEmail(employee.getEmail());
             if (existedEmployee != null) {
@@ -150,25 +150,42 @@ public class EmployeeController {
                 token.setExpiryDate(30);
                 passwordResetTokenRepository.save(token);
 
-                //TODO: use constants!
-                // send mail
+                // Send mail to create password
                 Map<String, String> mailContent = new HashMap<>();
-                mailContent.put("recipient", employee.getEmail());
-                mailContent.put("firstname", employee.getFirstname());
-                mailContent.put("subject", "Bienvenue dans l'entreprise " + employee.getFirstname());
+                mailContent.put(RECIPIENT, employee.getEmail());
+                mailContent.put(FIRSTNAME, employee.getFirstname());
+                mailContent.put(SUBJECT, String.format(CreatePassword.SUBJECT, employee.getFirstname()));
                 String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-                mailContent.put("resetUrl", url + "/resetPassword/new/?token=" + token.getToken());
-                mailContent.put("templateId", "1958686");
+                mailContent.put(RESET_URL, String.format(CreatePassword.URL, url, token.getToken()));
+                mailContent.put(TEMPLATE_ID, CreatePassword.TEMPLATE_ID);
                 MailSender.sendMail(mailContent);
             } catch (Exception exception) {
                 log.error(exception.getMessage() + exception.getCause());
                 redirectAttributes.addFlashAttribute(MESSAGE, AddEmployee.ERROR_MESSAGE);
 
-                return "redirect:/collaborateurs";
+                return REDIRECT_EMPLOYEES;
             }
         }
 
-        return String.format("redirect:/collaborateurs/%s", employee.getId());
+        return String.format(REDIRECT_EMPLOYEE_BY_ID, employee.getId());
+    }
+
+    /**
+     * Afficher le formulaire de modification d'un collaborateur
+     * @param springModel Modèle
+     * @param id Identifiant du collaborateur
+     * @return le formulaire de modification d'un collaborateur
+     */
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label)")
+    @GetMapping(UpdateEmployee.URL)
+    public String showUpdateEmployee(Model springModel, @PathVariable String id) {
+        log.info(String.format("GET %s", StringUtils.replace(UpdateEmployee.URL, PATTERN_ID, id)));
+        springModel.addAttribute(TITLE, UpdateEmployee.TITLE);
+
+        Employee employee = employeeService.getEmployee(Long.parseLong(id));
+        springModel.addAttribute(EMPLOYEE, employee);
+
+        return UpdateEmployee.VIEW;
     }
 
     /**
@@ -206,29 +223,10 @@ public class EmployeeController {
             log.error(exception.getMessage() + exception.getCause());
             redirectAttributes.addFlashAttribute(MESSAGE, UpdateEmployee.ERROR_MESSAGE);
 
-            return "redirect:/collaborateurs";
+            return REDIRECT_EMPLOYEES;
         }
 
-        return String.format("redirect:/collaborateurs/%s", employee.getId());
-    }
-
-    /**
-     * Afficher le formulaire de modification d'un collaborateur
-     * @param springModel Modèle
-     * @param id Identifiant du collaborateur
-     * @return le formulaire de modification d'un collaborateur
-     */
-    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label)")
-    @GetMapping(UpdateEmployee.URL)
-    public String showUpdateEmployee(Model springModel, @PathVariable String id) {
-        //TODO: replace {id}
-        log.info(String.format("GET %s", UpdateEmployee.URL));
-        springModel.addAttribute(TITLE, UpdateEmployee.TITLE);
-
-        Employee employee = employeeService.getEmployee(Long.parseLong(id));
-        springModel.addAttribute(EMPLOYEE, employee);
-
-        return UpdateEmployee.VIEW;
+        return String.format(REDIRECT_EMPLOYEE_BY_ID, employee.getId());
     }
 
     /**
@@ -241,8 +239,7 @@ public class EmployeeController {
     @GetMapping(DeleteEmployee.URL)
     public String deleteEmployee(@PathVariable String id,
                                  RedirectAttributes redirectAttributes) {
-        //TODO: replace {id}
-        log.info(String.format("GET %s", DeleteEmployee.URL));
+        log.info(String.format("GET %s", StringUtils.replace(DeleteEmployee.URL, PATTERN_ID, id)));
 
         try {
             // Delete employee
@@ -252,6 +249,6 @@ public class EmployeeController {
             redirectAttributes.addFlashAttribute(MESSAGE, DeleteEmployee.ERROR_MESSAGE);
         }
 
-        return "redirect:/collaborateurs";
+        return REDIRECT_EMPLOYEES;
     }
 }

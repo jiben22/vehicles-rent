@@ -15,22 +15,38 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
+import static fr.enssat.vehiclesrental.constants.ControllerConstants.PasswordResetController.*;
+
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/resetPassword/{option}")
 @Slf4j
+@RequestMapping(BASE_URL)
 public class PasswordResetController {
 
+    /**
+     * Service pour les collaborateurs
+     */
     private final EmployeeService employeeService;
+
+    /**
+     * Repository pour la réinitialisation du mot de passe
+     */
     private final PasswordResetTokenRepository passwordResetTokenRepository;
 
-    @ModelAttribute("passwordResetForm")
+    @ModelAttribute(PASSWORD_RESET)
     public PasswordReset passwordReset() {
         return new PasswordReset();
     }
 
+    /**
+     * Afficher la page de réinitialisation du mot de passe
+     * @param token Token
+     * @param model Modèle
+     * @param option Option
+     * @return le formulaire pour la réinitialisation du mot de passe
+     */
     @GetMapping
-    public String displayResetPasswordPage(@RequestParam(required = false) String token,
+    public String showResetPassword(@RequestParam(required = false) String token,
                                            Model model, @PathVariable String option) {
 
         PasswordResetToken resetToken = passwordResetTokenRepository.findByToken(token);
@@ -54,9 +70,17 @@ public class PasswordResetController {
             model.addAttribute("option", "pwd");
         }
 
-        return "resetPassword";
+        return VIEW;
     }
 
+    /**
+     * Met à jour le mot de passe
+     * @param form Instance de PasswordReset
+     * @param result Binding result
+     * @param redirectAttributes Redirect attributes
+     * @param option Option
+     * @return la page de connexion ou le formulaire de réinitialisation du mot de passe avec les erreurs
+     */
     @PostMapping
     public String handlePasswordReset(@ModelAttribute("passwordResetForm") @Valid PasswordReset form,
                                       BindingResult result,
@@ -65,7 +89,7 @@ public class PasswordResetController {
         if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute(BindingResult.class.getName() + ".passwordResetForm", result);
             redirectAttributes.addFlashAttribute("passwordResetForm", form);
-            return "redirect:/resetPassword/"+option+"?token=" + form.getToken();
+            return String.format(REDIRECT_URL_FAIL, option, form.getToken());
         }
 
         PasswordResetToken token = passwordResetTokenRepository.findByToken(form.getToken());
@@ -75,6 +99,6 @@ public class PasswordResetController {
         employeeService.editEmployee(employee);
         passwordResetTokenRepository.delete(token);
 
-        return "redirect:/connexion?resetSuccess";
+        return REDIRECT_URL_SUCCESS;
     }
 }
