@@ -1,6 +1,5 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.controller.constants.Constants;
 import fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController.*;
 import fr.enssat.vehiclesrental.model.Car;
 import fr.enssat.vehiclesrental.model.Motorbike;
