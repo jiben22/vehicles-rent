@@ -208,3 +208,12 @@ input.form-control {
 .navbar-nav li.nav-item i {
     margin-right: 0 !important;
 }
+
+
+
+
+.sorting:before,
+.sorting_asc:before,
+.sorting_desc:before {
+    z-index: 1;
+}
