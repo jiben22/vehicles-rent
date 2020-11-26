@@ -35,7 +35,7 @@ public class Client extends Person implements Serializable {
      */
     @Column(nullable = false)
     @NonNull
-    private Boolean isArchived;
+    private boolean isArchived;
 
     /**
      * Represent list of bookings link to the current client.

@@ -7,9 +7,10 @@ import java.util.List;
 public interface IClientService {
     boolean exists(long id);
     Client getClient(long id);
+    Client getClientByEmail(String email);
     List<Client> getClients();
     List<Client> searchClients(String firstname, String lastname, String email, String zipcode);
     Client addClient(Client client);
     Client editClient(Client client);
-    void deleteClient(long id);
+    Client archiveClient(long id);
 }

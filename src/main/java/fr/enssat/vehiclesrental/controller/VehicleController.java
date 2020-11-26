@@ -86,7 +86,7 @@ public class VehicleController {
      */
     @GetMapping(GetVehicleByRegistration.URL)
     public String showVehicleByRegistration(Model springModel, @PathVariable String registration) {
-        log.info(String.format("GET %s", StringUtils.replace(GetVehicleByRegistration.URL, "{registration}", registration)));
+        log.info(String.format("GET %s", StringUtils.replace(GetVehicleByRegistration.URL, PATTERN_REGISTRATION, registration)));
         springModel.addAttribute(TITLE, GetVehicleByRegistration.TITLE);
 
         Vehicle vehicle = vehicleService.getVehicleByRegistration(registration);
@@ -98,6 +98,7 @@ public class VehicleController {
     /**
      * Afficher le formulaire d'ajout d'un véhicule
      * @param springModel Modèle
+     * @param vehicleType Type du véhicule
      * @return le formulaire d'ajout
      */
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
@@ -341,7 +342,7 @@ public class VehicleController {
     }
 
     /**
-     * Supprimer un véhicule
+     * Archiver un véhicule
      * @param id ID du véhicule
      * @param redirectAttributes Redirect attributes
      * @return la liste des véhicules ou un message d'erreur si l'archivage échoue
