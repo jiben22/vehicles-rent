@@ -156,6 +156,35 @@ public class BookingController {
         return EditBooking.VIEW;
     }
 
+    /**
+     * Mettre à jour une réservation
+     * @param springModel Modèle
+     * @return Une réservation mise à jour
+     */
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
+    @PostMapping(EditBooking.URL)
+    public String updateBooking(@Valid @ModelAttribute(BOOKING)  Booking booking,
+                                BindingResult result,
+                                Model springModel,
+                                RedirectAttributes redirectAttributes) {
+        log.info(String.format("GET %s", EditBooking.URL));
+        springModel.addAttribute(TITLE, EditBooking.TITLE);
+        try{
+            Booking b = bookingService.getBooking(booking.getId());
+            b.setStartDate(booking.getStartDate());
+            b.setEndDate(booking.getEndDate());
+            bookingService.editBooking(b);
+            springModel.addAttribute(BOOKING, b);
+        } catch (Exception exception) {
+            log.error(exception.getMessage() + exception.getCause());
+            redirectAttributes.addFlashAttribute(MESSAGE, ControllerConstants.BookingController.EditBooking.ERROR_MESSAGE);
+
+            return REDIRECT_BOOKINGS;
+        }
+
+        return EditBooking.VIEW;
+    }
+
 
     /**
      * Créer une réservation
