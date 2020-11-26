@@ -146,6 +146,8 @@ public class ControllerConstants {
         private static final String BASE_VIEW = "booking/";
         public static final String BOOKINGS = "bookings";
         public static final String BOOKING = "booking";
+        public static final String REDIRECT_BOOKINGS = "redirect:/reservations";
+        public static final String REDIRECT_BOOKING_BY_ID = "redirect:/reservations/%s";
 
         public static final class GetBookings {
             private GetBookings() {}
@@ -161,6 +163,24 @@ public class ControllerConstants {
             public static final String URL = BASE_URL + "/{id}";
             public static final String TITLE = "Fiche d'une réservation";
             public static final String VIEW = BASE_VIEW + "booking";
+        }
+
+        public static final class CreateBooking {
+            private CreateBooking() {}
+
+            public static final String URL = BASE_URL+"/creer";
+            public static final String TITLE = "Créer une réservation";
+            public static final String VIEW = BASE_VIEW + "createBooking";
+            public static final String ERROR_MESSAGE = "Impossible de créer la réservation";
+        }
+
+        public static final class CancelBooking {
+            private CancelBooking() {}
+
+            public static final String URL = BASE_URL+"/annuler/{id}";
+            public static final String TITLE = "Annuler une réservation";
+            public static final String VIEW = BASE_VIEW + "cancelVehicle";
+            public static final String ERROR_MESSAGE = "Impossible d'annuler la réservation";
         }
     }
 

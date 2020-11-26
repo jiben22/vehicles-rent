@@ -3,6 +3,7 @@ package fr.enssat.vehiclesrental.service;
 import fr.enssat.vehiclesrental.model.Booking;
 import fr.enssat.vehiclesrental.model.enums.Status;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public interface IBookingService {
      * @see Status
      * @return Toutes les réservations correspondants à la recherche
      */
-    List<Booking> searchBookings(Date startDate, Date endDate, Status status);
+    List<Booking> searchBookings(LocalDate startDate, LocalDate endDate, Status status);
 
     /**
      * Annuler une réservation qui n'a pas commencé

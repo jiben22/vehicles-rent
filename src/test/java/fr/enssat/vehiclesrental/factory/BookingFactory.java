@@ -4,6 +4,8 @@ import fr.enssat.vehiclesrental.model.Booking;
 import fr.enssat.vehiclesrental.model.enums.Status;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 
 /**
@@ -23,12 +25,16 @@ public class BookingFactory {
         startDate.set(Calendar.MINUTE,0);
         startDate.set(Calendar.SECOND,0);
 
+        LocalDate startLocal = LocalDate.ofInstant(startDate.toInstant(), ZoneId.systemDefault());
+
         // Nous crééons un date de fin de réservation qui termin dans une semaine
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.DATE, 7);
         endDate.set(Calendar.HOUR_OF_DAY,0);
         endDate.set(Calendar.MINUTE,0);
         endDate.set(Calendar.SECOND,0);
+
+        LocalDate endLocal = LocalDate.ofInstant(endDate.toInstant(), ZoneId.systemDefault());
 
         /**
          * On convertit les dates en timestamp pour pouvoir
@@ -41,8 +47,8 @@ public class BookingFactory {
 
         return Booking.builder()
         .id(148632579L)
-        .startDate(startTime)
-        .endDate(endTime)
+        .startDate(startLocal)
+        .endDate(endLocal)
         .expectedNumberKm(2500)
         .expectedPrice(2000.5f)
         .isDiscount(true)
@@ -66,12 +72,16 @@ public class BookingFactory {
         startDate.set(Calendar.MINUTE,0);
         startDate.set(Calendar.SECOND,0);
 
+        LocalDate startLocal = LocalDate.ofInstant(startDate.toInstant(), ZoneId.systemDefault());
+
         // Nous crééons un date de fin de réservation qui termin dans une semaine
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.DATE, -1);
         endDate.set(Calendar.HOUR_OF_DAY,0);
         endDate.set(Calendar.MINUTE,0);
         endDate.set(Calendar.SECOND,0);
+
+        LocalDate endLocal = LocalDate.ofInstant(endDate.toInstant(), ZoneId.systemDefault());
 
         /**
          * On convertit les dates en timestamp pour pouvoir
@@ -84,8 +94,8 @@ public class BookingFactory {
 
         return Booking.builder()
                 .id(148632579L)
-                .startDate(startTime)
-                .endDate(endTime)
+                .startDate(startLocal)
+                .endDate(endLocal)
                 .expectedNumberKm(2500)
                 .expectedPrice(2000.5f)
                 .isDiscount(true)
@@ -109,12 +119,16 @@ public class BookingFactory {
         startDate.set(Calendar.MINUTE,0);
         startDate.set(Calendar.SECOND,0);
 
+        LocalDate startLocal = LocalDate.ofInstant(startDate.toInstant(), ZoneId.systemDefault());
+
         // Nous crééons un date de fin de réservation qui termin dans une semaine
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.MONTH, 2);
         endDate.set(Calendar.HOUR_OF_DAY,0);
         endDate.set(Calendar.MINUTE,0);
         endDate.set(Calendar.SECOND,0);
+
+        LocalDate endLocal = LocalDate.ofInstant(endDate.toInstant(), ZoneId.systemDefault());
 
         /**
          * On convertit les dates en timestamp pour pouvoir
@@ -127,8 +141,8 @@ public class BookingFactory {
 
         return Booking.builder()
                 .id(148632579L)
-                .startDate(startTime)
-                .endDate(endTime)
+                .startDate(startLocal)
+                .endDate(endLocal)
                 .expectedNumberKm(2500)
                 .expectedPrice(2000.5f)
                 .isDiscount(true)
@@ -158,6 +172,9 @@ public class BookingFactory {
         endDate.set(Calendar.MINUTE,0);
         endDate.set(Calendar.SECOND,0);
 
+        LocalDate startLocal = LocalDate.ofInstant(startDate.toInstant(), ZoneId.systemDefault());
+        LocalDate endLocal = LocalDate.ofInstant(endDate.toInstant(), ZoneId.systemDefault());
+
         /**
          * On convertit les dates en timestamp pour pouvoir
          * les utiliser dans le modèle de Booking.
@@ -169,8 +186,8 @@ public class BookingFactory {
 
         return Booking.builder()
                 .id(148632581L)
-                .startDate(startTime)
-                .endDate(endTime)
+                .startDate(startLocal)
+                .endDate(endLocal)
                 .expectedNumberKm(250)
                 .expectedPrice(1000.0f)
                 .isDiscount(true)
@@ -194,6 +211,9 @@ public class BookingFactory {
         Calendar endDate = Calendar.getInstance();
         startDate.set(startDate.get(Calendar.YEAR),10,15,0,0,0);
 
+        LocalDate startLocal = LocalDate.ofInstant(startDate.toInstant(), ZoneId.systemDefault());
+        LocalDate endLocal = LocalDate.ofInstant(endDate.toInstant(), ZoneId.systemDefault());
+
         /**
          * On convertit les dates en timestamp pour pouvoir
          * les utiliser dans le modèle de Booking.
@@ -205,8 +225,8 @@ public class BookingFactory {
 
         return Booking.builder()
                 .id(148632580L)
-                .startDate(startTime)
-                .endDate(endTime)
+                .startDate(startLocal)
+                .endDate(endLocal)
                 .expectedNumberKm(500)
                 .expectedPrice(300f)
                 .isDiscount(false)
@@ -237,6 +257,9 @@ public class BookingFactory {
         endDate.set(Calendar.MINUTE,0);
         endDate.set(Calendar.SECOND,0);
 
+        LocalDate startLocal = LocalDate.ofInstant(startDate.toInstant(), ZoneId.systemDefault());
+        LocalDate endLocal = LocalDate.ofInstant(endDate.toInstant(), ZoneId.systemDefault());
+
         /**
          * On convertit les dates en timestamp pour pouvoir
          * les utiliser dans le modèle de Booking.
@@ -248,8 +271,8 @@ public class BookingFactory {
 
         return Booking.builder()
                 .id(148632579L)
-                .startDate(startTime)
-                .endDate(endTime)
+                .startDate(startLocal)
+                .endDate(endLocal)
                 .expectedNumberKm(2500)
                 .expectedPrice(2000.5f)
                 .isDiscount(true)
@@ -275,6 +298,9 @@ public class BookingFactory {
         endDate.set(Calendar.MINUTE,0);
         endDate.set(Calendar.SECOND,0);
 
+        LocalDate startLocal = LocalDate.ofInstant(startDate.toInstant(), ZoneId.systemDefault());
+        LocalDate endLocal = LocalDate.ofInstant(endDate.toInstant(), ZoneId.systemDefault());
+
         /**
          * On convertit les dates en timestamp pour pouvoir
          * les utiliser dans le modèle de Booking.
@@ -286,8 +312,8 @@ public class BookingFactory {
 
         return Booking.builder()
                 .id(148632579L)
-                .startDate(startTime)
-                .endDate(endTime)
+                .startDate(startLocal)
+                .endDate(endLocal)
                 .expectedNumberKm(2500)
                 .expectedPrice(2000.5f)
                 .isDiscount(true)

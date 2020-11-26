@@ -2,9 +2,11 @@ package fr.enssat.vehiclesrental.model;
 
 import fr.enssat.vehiclesrental.model.enums.Status;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -25,18 +27,18 @@ public class Booking implements Serializable {
     /**
      * Date when a location should start
      */
-    @Column(nullable = false, columnDefinition = "DATETIME")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @NonNull
-    private Date startDate;
+    private LocalDate startDate;
 
     /**
      * Date when a location should end
      */
-    @Column(nullable = false, columnDefinition = "DATETIME")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @NonNull
-    private Date endDate;
+    private LocalDate endDate;
 
     /**
      * Expected number of kilometer define when create booking
@@ -93,7 +95,7 @@ public class Booking implements Serializable {
     private Vehicle vehicle;
 
     @Builder
-    private Booking(long id, Date startDate, Date endDate, int expectedNumberKm, int expectedNumberHours, float expectedPrice, boolean isDiscount, float discount, Status status, Client client, Vehicle vehicle) {
+    private Booking(long id, LocalDate startDate, LocalDate endDate, int expectedNumberKm, int expectedNumberHours, float expectedPrice, boolean isDiscount, float discount, Status status, Client client, Vehicle vehicle) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
