@@ -1,8 +1,5 @@
 package fr.enssat.vehiclesrental.service;
 
-import fr.enssat.vehiclesrental.model.Car;
-import fr.enssat.vehiclesrental.model.Motorbike;
-import fr.enssat.vehiclesrental.model.Plane;
 import fr.enssat.vehiclesrental.model.Vehicle;
 import fr.enssat.vehiclesrental.repository.CarRepository;
 import fr.enssat.vehiclesrental.repository.MotorbikeRepository;
@@ -48,29 +45,29 @@ public class VehicleService implements IVehicleService {
 
     @Override
     public List<Vehicle> getVehicles() {
-        return vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "model"));
+        return vehicleRepository.findAll(where(isNotArchived()), Sort.by(Sort.Direction.ASC, "model"));
     }
 
     @Override
-    public List<Car> getCars() {
-        return carRepository.findAll(Sort.by(Sort.Direction.ASC, "model"));
+    public List<Vehicle> getCars() {
+        return carRepository.findAll(where(isNotArchived()), Sort.by(Sort.Direction.ASC, "model"));
     }
 
     @Override
-    public List<Motorbike> getMotorbikes() {
-        return motorbikeRepository.findAll(Sort.by(Sort.Direction.ASC, "model"));
+    public List<Vehicle> getMotorbikes() {
+        return motorbikeRepository.findAll(where(isNotArchived()), Sort.by(Sort.Direction.ASC, "model"));
     }
 
     @Override
-    public List<Plane> getPlanes() {
-        return planeRepository.findAll(Sort.by(Sort.Direction.ASC, "model"));
+    public List<Vehicle> getPlanes() {
+        return planeRepository.findAll(where(isNotArchived()), Sort.by(Sort.Direction.ASC, "model"));
     }
 
     @Override
     public List<Vehicle> searchVehicles(String brand, String model, int nbSeats) {
         Specification<Vehicle> vehicleSpecification = buildSpecification(brand, model, nbSeats);
         if (vehicleSpecification != null) {
-            return vehicleRepository.findAll(vehicleSpecification);
+            return vehicleRepository.findAll(vehicleSpecification, Sort.by(Sort.Direction.ASC, "model"));
         } else {
             return getVehicles();
         }
@@ -80,7 +77,7 @@ public class VehicleService implements IVehicleService {
     public List<? extends Vehicle> searchCars(String brand, String model, int nbSeats) {
         Specification<Vehicle> vehicleSpecification = buildSpecification(brand, model, nbSeats);
         if (vehicleSpecification != null) {
-            return carRepository.findAll(vehicleSpecification);
+            return carRepository.findAll(vehicleSpecification, Sort.by(Sort.Direction.ASC, "model"));
         } else {
             return getCars();
         }
@@ -90,7 +87,7 @@ public class VehicleService implements IVehicleService {
     public List<? extends Vehicle> searchMotorbikes(String brand, String model, int nbSeats) {
         Specification<Vehicle> vehicleSpecification = buildSpecification(brand, model, nbSeats);
         if (vehicleSpecification != null) {
-            return motorbikeRepository.findAll(vehicleSpecification);
+            return motorbikeRepository.findAll(vehicleSpecification, Sort.by(Sort.Direction.ASC, "model"));
         } else {
             return getMotorbikes();
         }
@@ -100,7 +97,7 @@ public class VehicleService implements IVehicleService {
     public List<? extends Vehicle> searchPlanes(String brand, String model, int nbSeats) {
         Specification<Vehicle> vehicleSpecification = buildSpecification(brand, model, nbSeats);
         if (vehicleSpecification != null) {
-            return planeRepository.findAll(vehicleSpecification);
+            return planeRepository.findAll(vehicleSpecification, Sort.by(Sort.Direction.ASC, "model"));
         } else {
             return getPlanes();
         }
@@ -108,6 +105,7 @@ public class VehicleService implements IVehicleService {
 
     private Specification<Vehicle> buildSpecification(String brand, String model, int nbSeats) {
         List<Specification<Vehicle>> specifications = new ArrayList<>();
+        specifications.add(isNotArchived());
         if (!brand.isEmpty()) specifications.add(hasBrand(brand));
         if (!model.isEmpty()) specifications.add(hasModel(model));
         if (nbSeats > 0) specifications.add(hasNbSeats(nbSeats));
@@ -140,7 +138,9 @@ public class VehicleService implements IVehicleService {
     }
 
     @Override
-    public void deleteVehicle(long id) {
-        vehicleRepository.deleteById(id);
+    public Vehicle archiveVehicle(long id) {
+        Vehicle vehicle = getVehicle(id);
+        vehicle.setArchived(true);
+        return vehicleRepository.saveAndFlush(vehicle);
     }
 }

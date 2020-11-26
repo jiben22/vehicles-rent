@@ -11,7 +11,8 @@ import java.util.Date;
 @Table(name = "Booking")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode()
 public class Booking implements Serializable {
     /**
@@ -47,7 +48,7 @@ public class Booking implements Serializable {
      * Expected number of hours define when create booking
      */
     @Column()
-    private int expectedNumberHours;
+    private Integer expectedNumberHours;
 
     /**
      * Expected price of booking
@@ -90,4 +91,19 @@ public class Booking implements Serializable {
     @JoinColumn(name="id_vehicle")
     @NonNull
     private Vehicle vehicle;
+
+    @Builder
+    private Booking(long id, Date startDate, Date endDate, int expectedNumberKm, int expectedNumberHours, float expectedPrice, boolean isDiscount, float discount, Status status, Client client, Vehicle vehicle) {
+        this.id = id;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.expectedNumberKm = expectedNumberKm;
+        this.expectedNumberHours = expectedNumberHours;
+        this.expectedPrice = expectedPrice;
+        this.isDiscount = isDiscount;
+        this.discount = discount;
+        this.status = status;
+        this.client = client;
+        this.vehicle = vehicle;
+    }
 }

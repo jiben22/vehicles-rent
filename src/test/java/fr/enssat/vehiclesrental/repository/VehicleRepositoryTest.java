@@ -109,27 +109,6 @@ public class VehicleRepositoryTest {
         assertTrue(new ReflectionEquals(VehicleFactory.getPlane()).matches(addedPlane));
     }
 
-    @DisplayName("Delete a car with an id")
-    @Test
-    public void deleteCarById() {
-        vehicleRepository.deleteById(45L);
-        assertFalse(vehicleRepository.existsById(45L));
-    }
-
-    @DisplayName("Delete a motorbike with an id")
-    @Test
-    public void deleteMotorbikeById() {
-        vehicleRepository.deleteById(784L);
-        assertFalse(vehicleRepository.existsById(784L));
-    }
-
-    @DisplayName("Delete a plane with an id")
-    @Test
-    public void deletePlaneById() {
-        vehicleRepository.deleteById(12681L);
-        assertFalse(vehicleRepository.existsById(12681L));
-    }
-
     @DisplayName("Search a vehicle with his brand, model and nbSeats")
     @Test
     public void searchVehicle() {

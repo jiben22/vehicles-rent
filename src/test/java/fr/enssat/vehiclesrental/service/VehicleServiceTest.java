@@ -70,7 +70,7 @@ public class VehicleServiceTest {
                 VehicleFactory.getMotorbike(),
                 VehicleFactory.getPlane());
 
-        when(vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "model")))
+        lenient().when(vehicleRepository.findAll(Sort.by(Sort.Direction.ASC, "model")))
                 .thenReturn(allVehicles);
 
         List<Vehicle> vehicles = vehicleService.getVehicles();
@@ -83,7 +83,7 @@ public class VehicleServiceTest {
     @DisplayName("Search vehicles with parameters")
     @Test
     public void searchVehicles() {
-       lenient().when(vehicleRepository.findAll(any(Specification.class)))
+       lenient().when(vehicleRepository.findAll(any(Specification.class), any(Sort.class)))
                 .thenReturn(Collections.singletonList(VehicleFactory.getCar()));
 
         List<Vehicle> vehicles = vehicleService.searchVehicles("acura", "", 7);
@@ -96,7 +96,7 @@ public class VehicleServiceTest {
     @DisplayName("Search vehicles with empty parameters")
     @Test
     public void searchAllVehicles() {
-        lenient().when(vehicleRepository.findAll(any(Sort.class)))
+        lenient().when(vehicleRepository.findAll(any(Specification.class), any(Sort.class)))
                 .thenReturn(Collections.singletonList(VehicleFactory.getCar()));
 
         List<Vehicle> vehicles = vehicleService.searchVehicles("", "", 0);
@@ -109,7 +109,7 @@ public class VehicleServiceTest {
     @DisplayName("Search cars with parameters")
     @Test
     public void searchCars() {
-        lenient().when(carRepository.findAll(any(Specification.class)))
+        lenient().when(carRepository.findAll(any(Specification.class), any(Sort.class)))
                 .thenReturn(Collections.singletonList(VehicleFactory.getCar()));
 
         List<? extends Vehicle> vehicles = vehicleService.searchCars("acura", "", 7);
@@ -122,7 +122,7 @@ public class VehicleServiceTest {
     @DisplayName("Search cars with empty parameters")
     @Test
     public void searchAllCars() {
-        lenient().when(carRepository.findAll(any(Sort.class)))
+        lenient().when(carRepository.findAll(any(Specification.class), any(Sort.class)))
                 .thenReturn(Collections.singletonList(VehicleFactory.getCar()));
 
         List<? extends Vehicle> vehicles = vehicleService.searchCars("", "", 0);
@@ -135,7 +135,7 @@ public class VehicleServiceTest {
     @DisplayName("Search motorbikes with parameters")
     @Test
     public void searchMotorbikes() {
-        lenient().when(motorbikeRepository.findAll(any(Specification.class)))
+        lenient().when(motorbikeRepository.findAll(any(Specification.class), any(Sort.class)))
                 .thenReturn(Collections.singletonList(VehicleFactory.getMotorbike()));
 
         List<? extends Vehicle> vehicles = vehicleService.searchMotorbikes("acura", "", 7);
@@ -148,7 +148,7 @@ public class VehicleServiceTest {
     @DisplayName("Search motorbikes with empty parameters")
     @Test
     public void searchAllMotorbikes() {
-        lenient().when(motorbikeRepository.findAll(any(Sort.class)))
+        lenient().when(motorbikeRepository.findAll(any(Specification.class), any(Sort.class)))
                 .thenReturn(Collections.singletonList(VehicleFactory.getMotorbike()));
 
         List<? extends Vehicle> vehicles = vehicleService.searchMotorbikes("", "", 0);
@@ -161,7 +161,7 @@ public class VehicleServiceTest {
     @DisplayName("Search planes with parameters")
     @Test
     public void searchPlanes() {
-        lenient().when(planeRepository.findAll(any(Specification.class)))
+        lenient().when(planeRepository.findAll(any(Specification.class), any(Sort.class)))
                 .thenReturn(Collections.singletonList(VehicleFactory.getPlane()));
 
         List<? extends Vehicle> vehicles = vehicleService.searchPlanes("acura", "", 7);
@@ -174,7 +174,7 @@ public class VehicleServiceTest {
     @DisplayName("Search planes with empty parameters")
     @Test
     public void searchAllPlanes() {
-        lenient().when(planeRepository.findAll(any(Sort.class)))
+        lenient().when(planeRepository.findAll(any(Specification.class), any(Sort.class)))
                 .thenReturn(Collections.singletonList(VehicleFactory.getPlane()));
 
         List<? extends Vehicle> vehicles = vehicleService.searchPlanes("", "", 0);
@@ -218,10 +218,15 @@ public class VehicleServiceTest {
         assertThrows(VehicleNotFoundException.class, () -> vehicleService.editVehicle(VehicleFactory.getCar()));
     }
 
-    @DisplayName("Delete a vehicle")
+    @DisplayName("Archive a vehicle")
     @Test
-    public void deleteVehicle() {
-        vehicleService.deleteVehicle(784);
-        assertFalse(vehicleService.exists(784));
+    public void archiveVehicle() {
+        Vehicle vehicle = VehicleFactory.getCar();
+        when(vehicleRepository.findById(anyLong())).thenReturn(Optional.ofNullable(vehicle));
+        vehicle.setArchived(true);
+        when(vehicleRepository.saveAndFlush(any(Vehicle.class))).thenReturn(vehicle);
+
+        vehicleService.archiveVehicle(42L);
+        assertTrue(vehicle.isArchived());
     }
 }

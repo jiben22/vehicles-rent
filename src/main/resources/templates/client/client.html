@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/head.html :: head"></head>
+
+<body class="">
+    <div class="wrapper ">
+        <div th:replace="fragments/menus.html :: SideBarMenu"></div>
+        <div class="main-panel">
+            <div th:replace="fragments/menus.html :: TopMenu"></div>
+            <div class="content">
+                <div class="container-fluid">
+                    <!--TODO: use constant -->
+                    <a sec:authorize="hasAnyAuthority(
+                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label)"
+                       th:href="@{/clients/modifier/} + ${client.id}">
+                        <button type="button" class="btn btn-warning pull-right">Modifier</button>
+                    </a>
+                    <div class="card">
+                        <div class="card-header card-header-primary card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">work</i>
+                            </div>
+                            <h4 class="card-title">Fiche du client</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="#" th:object="${client}" class="form-horizontal">
+                                <input type="hidden" th:field="*{id}" />
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Nom</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input disabled="" th:value="*{lastname}" type="text" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">Prénom</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input disabled="" th:value="*{firstname}" type="text" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="offset-md-2 col-md-2">
+                                        <span class="text-danger" th:errors="*{lastname}"> </span>
+                                    </div>
+                                    <div class="offset-md-2 col-md-2">
+                                        <span class="text-danger" th:errors="*{firstname}"> </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Numéro d'immatriculation</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input disabled="" th:value="*{serialNumber}" type="text" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">Téléphone</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input disabled="" th:value="*{phone}" type="tel" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="offset-md-2 col-md-2">
+                                        <span class="text-danger" th:errors="*{serialNumber}"> </span>
+                                    </div>
+                                    <div class="offset-md-2 col-md-2">
+                                        <span class="text-danger" th:errors="*{phone}"> </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Date de naissance</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input disabled="" th:field="*{birthdate}" type="text" class="form-control datepicker datepickerCalendar disabled">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">Email</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input disabled="" th:value="*{email}" type="email" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="offset-md-2 col-md-2">
+                                        <span class="text-danger" th:errors="*{birthdate}"> </span>
+                                    </div>
+                                    <div class="offset-md-2 col-md-2">
+                                        <span class="text-danger" th:errors="*{email}"> </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Adresse</label>
+                                    <div class="col-md-4">
+                                        <div class="form-group bmd-form-group">
+                                            <input disabled="" th:value="*{street}" type="text" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="offset-md-2 col-md-10">
+                                        <span class="text-danger" th:errors="*{street}"> </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Code Postal</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input disabled="" th:value="*{zipcode}" type="text" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">Ville</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input disabled="" th:value="*{city}" type="text" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">Pays</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input disabled="" th:value="*{country}" type="text" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="offset-md-2 col-md-2">
+                                        <span class="text-danger" th:errors="*{zipcode}"> </span>
+                                    </div>
+                                    <div class="offset-md-2 col-md-2">
+                                        <span class="text-danger" th:errors="*{city}"> </span>
+                                    </div>
+                                    <div class="offset-md-2 col-md-2">
+                                        <span class="text-danger" th:errors="*{country}"> </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Fonction</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group bmd-form-group">
+                                            <input disabled="" th:value="*{position.label}" type="text" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="offset-md-2 col-md-2">
+                                        <span class="text-danger" th:errors="*{position}"> </span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer th:replace="fragments/footer.html :: footer"></footer>
+        </div>
+</body>
+
+</html>

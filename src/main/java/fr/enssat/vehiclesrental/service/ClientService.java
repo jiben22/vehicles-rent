@@ -34,6 +34,11 @@ public class ClientService implements IClientService {
     }
 
     @Override
+    public Client getClientByEmail(String email) {
+        return repository.findByEmail(email).orElseThrow(() -> new ClientNotFoundException(email));
+    }
+
+    @Override
     public List<Client> getClients() {
         return repository.findAll(Sort.by(Sort.Direction.ASC, "lastname"));
     }
@@ -82,11 +87,10 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public void archiveClient(long id) {
-
+    public Client archiveClient(long id) {
         Client client = getClient(id);
-        client.setIsArchived(true);
-        editClient(client);
+        client.setArchived(true);
+        return repository.saveAndFlush(client);
     }
 
 }

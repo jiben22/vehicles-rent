@@ -1,88 +1,3 @@
-CREATE TABLE employee (
-    id BIGINT PRIMARY KEY,
-    lastname VARCHAR(45) NOT NULL,
-    firstname VARCHAR(45) NOT NULL,
-    birthdate DATE NOT NULL,
-    street VARCHAR(128) NOT NULL,
-    zipcode VARCHAR(16) NOT NULL,
-    city VARCHAR(128) NOT NULL,
-    country VARCHAR(128) NOT NULL,
-    email VARCHAR(128) NOT NULL UNIQUE,
-    phone VARCHAR(20) NOT NULL,
-    position VARCHAR(128) NOT NULL,
-    password TEXT NOT NULL
-);
-
-CREATE TABLE client (
-    id BIGINT PRIMARY KEY,
-    lastname VARCHAR(45) NOT NULL,
-    firstname VARCHAR(45) NOT NULL,
-    birthdate DATE NOT NULL,
-    street VARCHAR(128) NOT NULL,
-    zipcode VARCHAR(16) NOT NULL,
-    city VARCHAR(128) NOT NULL,
-    country VARCHAR(128) NOT NULL,
-    email VARCHAR(128) NOT NULL UNIQUE,
-    phone VARCHAR(20) NOT NULL,
-    isArchived BOOLEAN NOT NULL
-);
-
-CREATE TABLE booking (
-    id BIGINT PRIMARY KEY,
-    start_date DATETIME NOT NULL,
-    end_date DATETIME NOT NULL,
-    expected_number_km INT,
-    expected_number_hours INT,
-    expected_price NUMERIC NOT NULL,
-    is_discount BOOLEAN NOT NULL,
-    discount NUMERIC NOT NULL,
-    status VARCHAR(45) NOT NULL,
-    id_client BIGINT NOT NULL,
-    id_vehicle BIGINT NOT NULL,
-    CONSTRAINT fk_booking_client
-        FOREIGN KEY (idClient)
-        REFERENCES Client(id)
-);
-
-CREATE TABLE car (
-  id bigint NOT NULL PRIMARY KEY,
-  brand varchar(128) NOT NULL,
-  maximum_speed int NOT NULL,
-  model varchar(128) NOT NULL,
-  nb_seats int NOT NULL,
-  rent_price_per_day NUMERIC NOT NULL,
-  state varchar(255) NOT NULL,
-  horse_power int NOT NULL,
-  registration VARCHAR(128) NOT NULL,
-  km int NOT NULL
-);
-
-CREATE TABLE motorbike (
-  id bigint NOT NULL PRIMARY KEY,
-  brand varchar(128) NOT NULL,
-  maximum_speed int NOT NULL,
-  model varchar(128) NOT NULL,
-  nb_seats int NOT NULL,
-  rent_price_per_day NUMERIC NOT NULL,
-  state varchar(255) NOT NULL,
-  horse_power int NOT NULL,
-  registration VARCHAR(128) NOT NULL,
-  km int NOT NULL
-);
-
-CREATE TABLE plane (
-  id bigint NOT NULL PRIMARY KEY,
-  brand varchar(128) NOT NULL,
-  maximum_speed int NOT NULL,
-  model varchar(128) NOT NULL,
-  nb_seats int NOT NULL,
-  rent_price_per_day NUMERIC NOT NULL,
-  state varchar(255) NOT NULL,
-  nb_engines int NOT NULL,
-  registration VARCHAR(128) NOT NULL,
-  nb_hours int NOT NULL
-);
-
 /*==== INSERT ====*/
 
 INSERT INTO employee (id, lastname, firstname, birthdate, street, zipcode, city, country, email, phone,position, password, serial_number) VALUES
@@ -122,6 +37,6 @@ INSERT INTO plane (id, brand, maximum_speed, model, nb_seats, rent_price_per_day
 (12682, 'piper',370,'seneca',4,200,'Etat très bien',2,12000,'F-ZTNK',false);
 
 INSERT INTO booking (id, discount, end_date, expected_number_km, expected_price, is_discount, start_date, status, id_client, id_vehicle) VALUES
-(148632579, 200.5, concat(YEAR(curdate()),'-',month(curdate()),'-20'), 2500, 2000.5, true, concat(YEAR(curdate()),'-',month(curdate()),'-15'), 'Réservation prête', 9143686792, 782);
-(148632581, 200.5, DATE_ADD(CURDATE(), INTERVAL 7 DAY), 2500, 502.5, true, curdate(), 'Réservation prête', 9143686793, 12679),
+(148632579, 200.5, concat(YEAR(curdate()),'-',month(curdate()),'-20'), 2500, 2000.5, true, concat(YEAR(curdate()),'-',month(curdate()),'-15'), 'Réservation prête', 9143686792, 782),
+(148632581, 200.5, DATE_ADD(CURDATE(), INTERVAL 7 DAY), 2500, 502.5, true, curdate(), 'En cours de location', 9143686793, 12679),
 (148632580, 0, concat(YEAR(curdate()),'-10-12'), 500, 300, false, concat(YEAR(curdate()),'-10-15'), 'Réservation prête', 9143686794, 44);
