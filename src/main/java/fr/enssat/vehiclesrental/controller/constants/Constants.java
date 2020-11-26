@@ -131,7 +131,7 @@ public class Constants {
         public static final class GetCharts {
             private GetCharts() {}
 
-            public static final String URL = "/statistiques/{type}/{interval}";
+            public static final String URL = "/statistiques";
             public static final String TITLE = "Statistiques";
             public static final String VIEW = "statistics";
             public static final String TOP10 = "top10";
