@@ -58,7 +58,7 @@ public class ControllerConstants {
 
             public static final String URL = "/{id}";
             public static final String TITLE = "Fiche du client";
-            public static final String VIEW = BASE_VIEW + "clients";
+            public static final String VIEW = BASE_VIEW + "client";
         }
 
         public static final class AddClient {
@@ -86,6 +86,15 @@ public class ControllerConstants {
             public static final String TITLE = "Archiver le client";
             public static final String VIEW = BASE_VIEW + "archiveClient";
             public static final String ERROR_MESSAGE = "Impossible d'archiver le client";
+        }
+
+        public static final class SearchClient {
+            private SearchClient() {}
+
+            public static final String URL = "/rechercher";
+            public static final String TITLE = "Rechercher un client";
+            public static final String VIEW = BASE_VIEW + "searchClients";
+            public static final String ERROR_MESSAGE = "Impossible de rechercher le client";
         }
     }
 
