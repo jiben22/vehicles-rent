@@ -13,25 +13,25 @@
                     <!--TODO: use constant -->
                     <a sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
-                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)"
                        th:href="@{/reservations/modifier/} + ${booking.id}">
                         <button type="button" class="btn btn-warning pull-right">Modifier</button>
                     </a>
                     <a th:if="${booking.status.name == 'En cours de location'}" sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
-                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)"
                        th:href="@{/reservations/archiver/} + ${booking.id}">
                         <button type="button" class="btn btn-danger pull-right">Archiver</button>
                     </a>
                     <a th:if="${booking.status.name == 'Réservation prête'}" sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
-                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)"
                        th:href="@{/reservations/annuler/} + ${booking.id}">
                         <button type="button" class="btn btn-danger pull-right">Annuler</button>
                     </a>
                     <a th:if="${booking.status.name == 'Réservation prête'}" sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
-                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)">
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)">
                         <button type="button" class="btn btn-success pull-right rentBooking" data-target="#rentBookingModal" data-toggle="modal">Commencer la location</button>
                     </a>
                     <div class="card">
@@ -104,26 +104,10 @@
                         </div>
                     </div>
                 </div>
-                <div th:replace="modals/bookingModals.html :: rentBookingModal"></div>
             </div>
             <footer th:replace="fragments/footer.html :: footer"></footer>
         </div>
     </div>
 </body>
-
-<script>
-    (function($) {
-        let that;
-        $(".rentBooking").click(function() {
-            that = $(this);
-            $(".rent-booking-modal-btn").click(function(){
-                let tr = that.parent().parent()[0];
-                let id = tr.dataset.id;
-                $(tr).fadeOut();
-                $.get("reservations/louer/" + id);
-            });
-        });
-    })(jQuery);
-</script>
 
 </html>

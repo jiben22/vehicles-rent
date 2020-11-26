@@ -17,6 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.List;
 
 import static fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController.*;
@@ -34,7 +36,7 @@ public class BookingController {
     private final float RATEFORMOTOAUTO=10f;
     private final float RATEFORPLANE=20f;
     private final float RATEFORPOWER=1.3f;
-    private final float RATEPERDAY=0.1f;
+    private final float RATEPERDAY=1.0f;
     private final float RATEPERDAYPLANE=1.1f;
     /**
      * Service qui permet de gérer les réservations
@@ -146,61 +148,7 @@ public class BookingController {
             return CreateBooking.VIEW;
         }*/
 
-        // déterminer le type de véhicule selectionné
-        long nbDayOfRent = DAYS.between(booking.getStartDate(), booking.getEndDate());
-        float expectedPrice = 0f;
-        if(booking.getVehicle() instanceof Car || booking.getVehicle() instanceof Motorbike){
-            if(booking.getVehicle() instanceof Car){
-                // calcul du prix pour une voiture
-                Car car = (Car) booking.getVehicle();
-                expectedPrice = RATEFORMOTOAUTO+car.getHorsePower()*RATEFORPOWER+(float)nbDayOfRent*RATEPERDAY;
-            }else{
-                // calcul du prix pour une moto
-                Motorbike moto = (Motorbike) booking.getVehicle();
-                expectedPrice = RATEFORMOTOAUTO+moto.getHorsePower()*RATEFORPOWER+(float)nbDayOfRent*RATEPERDAY;
-            }
-            booking.setExpectedNumberKm(booking.getExpectedNumberKm());
-            booking.setExpectedNumberHours(null);
-            // on calcul le prix correspondant au kilomètres supplémentaires parcourus
-            float priceForMoreKm = 0f;
-            float kmPerDay = booking.getExpectedNumberKm()/nbDayOfRent;
-            if(kmPerDay > 50){
-                if(kmPerDay > 50 && kmPerDay <= 100){
-                    priceForMoreKm = nbDayOfRent*kmPerDay*0.5f;
-                }else if(kmPerDay > 100 && kmPerDay <= 200){
-                    priceForMoreKm = nbDayOfRent*kmPerDay*0.3f;
-                }else if(kmPerDay > 200 && kmPerDay <= 300){
-                    priceForMoreKm = nbDayOfRent*kmPerDay*0.2f;
-                }else if(kmPerDay > 300){
-                    priceForMoreKm = nbDayOfRent*kmPerDay*0.1f;
-                }
-                expectedPrice += priceForMoreKm;
-            }
-
-        }else if(booking.getVehicle() instanceof Plane){
-            Plane plane = (Plane) booking.getVehicle();
-            booking.setExpectedNumberHours(booking.getExpectedNumberKm());
-            booking.setExpectedNumberKm(0);
-            // calcul du prix pour un avion
-            expectedPrice = RATEFORPLANE+ plane.getNbEngines()*RATEFORPOWER+(float)nbDayOfRent*RATEPERDAYPLANE;
-            // on calcul le prix correspondant au kilomètres supplémentaires parcourus
-            float priceForMoreHours = 0f;
-            float hourPerDay = booking.getExpectedNumberHours()/nbDayOfRent;
-            if(hourPerDay > 1.5) {
-                if (hourPerDay > 1.5 && hourPerDay <= 2.5) {
-                    priceForMoreHours = nbDayOfRent * hourPerDay * 0.5f;
-                } else if (hourPerDay > 2.5 && hourPerDay <= 4) {
-                    priceForMoreHours = nbDayOfRent * hourPerDay * 0.3f;
-                } else if (hourPerDay > 4 && hourPerDay <= 6) {
-                    priceForMoreHours = nbDayOfRent * hourPerDay * 0.2f;
-                } else if (hourPerDay > 6) {
-                    priceForMoreHours = nbDayOfRent * hourPerDay * 0.1f;
-                }
-                expectedPrice += priceForMoreHours;
-            }
-        }
-
-        booking.setExpectedPrice(expectedPrice);
+        booking.setExpectedPrice(processPrice(booking));
         // A la création la réservation est forcément à l'état disponible
         booking.setStatus(Status.AVAILABLE);
         // Il n'y a pas de réduction au début, on la calcul à la fin de la location
@@ -256,5 +204,135 @@ public class BookingController {
         }
 
         return REDIRECT_BOOKINGS;
+    }
+
+    /**
+     * Afficher le formulaire d'archivage d'une réservation
+     * @param springModel Modèle
+     * @return le formulaire d'archivage
+     */
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
+    @GetMapping(ArchiveBooking.URL)
+    public String showArchiveBooking(Model springModel, @PathVariable long id) {
+        log.info(String.format("GET %s", ArchiveBooking.URL));
+        springModel.addAttribute(TITLE, ArchiveBooking.TITLE);
+
+        Calendar todayDate = Calendar.getInstance();
+        todayDate.set(Calendar.HOUR_OF_DAY,0);
+        todayDate.set(Calendar.MINUTE,0);
+        todayDate.set(Calendar.SECOND,0);
+        LocalDate todayLocal = LocalDate.ofInstant(todayDate.toInstant(), ZoneId.systemDefault());
+
+        Booking booking = bookingService.getBooking(id);
+        springModel.addAttribute(BOOKING, booking);
+        return ArchiveBooking.VIEW;
+    }
+
+    /**
+     * Demander le formulaire de confirmation d'archivage d'une réservation
+     * @param springModel Modèle
+     * @return le formulaire de confirmation d'archivage
+     */
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
+    @PostMapping(ConfirmArchiveBooking.URL)
+    public String showConfirmeArchiveBooking(@Valid @ModelAttribute(BOOKING)  Booking booking,
+                                             BindingResult result,
+                                             Model springModel,
+                                             RedirectAttributes redirectAttributes) {
+        log.info(String.format("GET %s", ConfirmArchiveBooking.URL));
+        springModel.addAttribute(TITLE, ConfirmArchiveBooking.TITLE);
+
+        Booking book = bookingService.getBooking(booking.getId());
+
+        Calendar todayDate = Calendar.getInstance();
+        todayDate.set(Calendar.HOUR_OF_DAY,0);
+        todayDate.set(Calendar.MINUTE,0);
+        todayDate.set(Calendar.SECOND,0);
+        LocalDate todayLocal = LocalDate.ofInstant(todayDate.toInstant(), ZoneId.systemDefault());
+        book.setEndDate(todayLocal);
+        book.setExpectedPrice(processPrice(book));
+
+        // on applique une réduction de 10% si la location a durée plus de 7 jours
+        /**if(DAYS.between(booking.getStartDate(),book.getEndDate()) >= 7){
+            float reducePrice = book.getExpectedPrice()-((book.getExpectedPrice()*10f)/100f);
+            book.setExpectedPrice(reducePrice);
+        }**/
+
+        bookingService.editBooking(book);
+
+        springModel.addAttribute(BOOKING, book);
+
+        return ConfirmArchiveBooking.VIEW;
+    }
+
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
+    @GetMapping(CompleteArchiveBooking.URL)
+    public String archiveBooking(Model springModel, @PathVariable long id) {
+        log.info(String.format("GET %s", CompleteArchiveBooking.URL));
+        springModel.addAttribute(TITLE, CompleteArchiveBooking.TITLE);
+
+        bookingService.archiveBooking(id);
+
+        return REDIRECT_BOOKINGS;
+    }
+
+    private float processPrice(Booking booking){
+        long nbDayOfRent = DAYS.between(booking.getStartDate(), booking.getEndDate());
+        if(nbDayOfRent == 0){
+            nbDayOfRent=1;
+        }
+        System.out.println(nbDayOfRent);
+        float expectedPrice = 0f;
+        if(booking.getVehicle() instanceof Car || booking.getVehicle() instanceof Motorbike){
+            if(booking.getVehicle() instanceof Car){
+                // calcul du prix pour une voiture
+                Car car = (Car) booking.getVehicle();
+                expectedPrice = RATEFORMOTOAUTO+car.getHorsePower()*RATEFORPOWER+car.getRentPricePerDay()*nbDayOfRent*RATEPERDAY;
+            }else{
+                // calcul du prix pour une moto
+                Motorbike moto = (Motorbike) booking.getVehicle();
+                expectedPrice = RATEFORMOTOAUTO+moto.getHorsePower()*RATEFORPOWER+ moto.getRentPricePerDay()*nbDayOfRent*RATEPERDAY;
+            }
+            booking.setExpectedNumberKm(booking.getExpectedNumberKm());
+            booking.setExpectedNumberHours(null);
+            // on calcul le prix correspondant au kilomètres supplémentaires parcourus
+            float priceForMoreKm = 0f;
+            float kmPerDay = booking.getExpectedNumberKm()/nbDayOfRent;
+            if(kmPerDay > 50){
+                if(kmPerDay > 50 && kmPerDay <= 100){
+                    priceForMoreKm = nbDayOfRent*kmPerDay*0.5f;
+                }else if(kmPerDay > 100 && kmPerDay <= 200){
+                    priceForMoreKm = nbDayOfRent*kmPerDay*0.3f;
+                }else if(kmPerDay > 200 && kmPerDay <= 300){
+                    priceForMoreKm = nbDayOfRent*kmPerDay*0.2f;
+                }else if(kmPerDay > 300){
+                    priceForMoreKm = nbDayOfRent*kmPerDay*0.1f;
+                }
+                expectedPrice += priceForMoreKm;
+            }
+
+        }else if(booking.getVehicle() instanceof Plane) {
+            Plane plane = (Plane) booking.getVehicle();
+            booking.setExpectedNumberHours(booking.getExpectedNumberKm());
+            booking.setExpectedNumberKm(0);
+            // calcul du prix pour un avion
+            expectedPrice = RATEFORPLANE+ plane.getNbEngines() * RATEFORPOWER + plane.getRentPricePerDay()*nbDayOfRent * RATEPERDAYPLANE;
+            // on calcul le prix correspondant au kilomètres supplémentaires parcourus
+            float priceForMoreHours = 0f;
+            float hourPerDay = booking.getExpectedNumberHours() / nbDayOfRent;
+            if (hourPerDay > 1.5) {
+                if (hourPerDay > 1.5 && hourPerDay <= 2.5) {
+                    priceForMoreHours = nbDayOfRent * hourPerDay * 0.5f;
+                } else if (hourPerDay > 2.5 && hourPerDay <= 4) {
+                    priceForMoreHours = nbDayOfRent * hourPerDay * 0.3f;
+                } else if (hourPerDay > 4 && hourPerDay <= 6) {
+                    priceForMoreHours = nbDayOfRent * hourPerDay * 0.2f;
+                } else if (hourPerDay > 6) {
+                    priceForMoreHours = nbDayOfRent * hourPerDay * 0.1f;
+                }
+                expectedPrice += priceForMoreHours;
+            }
+        }
+        return expectedPrice;
     }
 }
