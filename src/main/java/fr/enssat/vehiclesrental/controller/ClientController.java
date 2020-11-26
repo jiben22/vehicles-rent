@@ -24,31 +24,28 @@ import static fr.enssat.vehiclesrental.constants.ControllerConstants.ClientContr
 @Controller
 @Slf4j
 @RequestMapping(BASE_URL)
-//TODO: check PreAuthority
 public class ClientController {
 
     private final ClientService clientService;
 
     /**
      * Afficher la liste des clients
-     * @param springModel
+     * @param springModel Modèle
+     * @param lastname Nom
      * @param firstname Prénom
-     * @param lastname Nom de famille
      * @param email Email
      * @param zipcode Code postal
      * @return la liste des clients correspondant aux paramètres de requête
      */
-    @GetMapping
-    public String showClients(Model springModel,
-                              @RequestParam(defaultValue = "") String firstname,
+    private String showClients(Model springModel,
                               @RequestParam(defaultValue = "") String lastname,
+                              @RequestParam(defaultValue = "") String firstname,
                               @RequestParam(defaultValue = "") String email,
                               @RequestParam(defaultValue = "") String zipcode) {
         log.info(String.format("GET %s", BASE_URL));
         springModel.addAttribute(TITLE, GetClients.TITLE);
 
         List<Client> clients = clientService.searchClients(firstname, lastname, email, zipcode);
-        System.out.println(clients);
         springModel.addAttribute(CLIENTS, clients);
 
         return GetClients.VIEW;
@@ -60,6 +57,7 @@ public class ClientController {
      * @param id ID du client
      * @return la fiche du client
      */
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
     @GetMapping(GetClientById.URL)
     public String showClientById(Model springModel, @PathVariable String id) {
         log.info(String.format("GET %s", StringUtils.replace(GetClientById.URL, PATTERN_ID, id)));
@@ -77,7 +75,7 @@ public class ClientController {
      * @param springModel Modèle
      * @return le formulaire d'ajout
      */
-    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
     @GetMapping(AddClient.URL)
     public String showAddClient(Model springModel) {
         log.info(String.format("GET %s", AddClient.URL));
@@ -97,7 +95,7 @@ public class ClientController {
      * @param redirectAttributes Redirect attributes
      * @return la fiche du client ou le formulaire d'ajout avec les erreurs
      */
-    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
     @PostMapping(AddClient.URL)
     public String addClient(@Valid @ModelAttribute(CLIENT) Client client,
                             BindingResult result,
@@ -144,7 +142,7 @@ public class ClientController {
      * @param id ID du client
      * @return le formulaire de modification d'un client
      */
-    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
     @GetMapping(UpdateClient.URL)
     public String showUpdateClient(Model springModel, @PathVariable String id) {
         log.info(String.format("GET %s", StringUtils.replace(UpdateClient.URL, PATTERN_ID, id)));
@@ -165,7 +163,7 @@ public class ClientController {
      * @param redirectAttributes Redirect attributes
      * @return la fiche du client mise à jour ou le formulaire de modification avec les erreurs
      */
-    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
     @PostMapping(UpdateClient.URL)
     public String updateClient(@Valid @ModelAttribute(CLIENT) Client client,
                                 @PathVariable String id,
@@ -205,7 +203,7 @@ public class ClientController {
      * @param redirectAttributes Redirect attributes
      * @return la liste des clients ou un message d'erreur si l'archivage échoue
      */
-    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
     @GetMapping(ArchiveClient.URL)
     public String archiveClient(@PathVariable String id,
                               RedirectAttributes redirectAttributes) {
@@ -220,5 +218,37 @@ public class ClientController {
         }
 
         return REDIRECT_CLIENTS;
+    }
+
+    /**
+     * Afficher le formulaire de recherche d'un client
+     * @param springModel Modèle
+     * @return le formulaire de modification d'un client
+     */
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
+    @GetMapping(SearchClient.URL)
+    public String showSearchClients(Model springModel) {
+        log.info(String.format("GET %s", SearchClient.URL));
+        springModel.addAttribute(TITLE, SearchClient.TITLE);
+
+        Client client = new Client();
+        springModel.addAttribute(CLIENT, client);
+
+        return SearchClient.VIEW;
+    }
+
+    /**
+     * Afficher la liste des clients
+     * @param client Client
+     * @param springModel Modèle
+     * @return la liste des clients correspondant aux paramètres de requête
+     */
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
+    @PostMapping(SearchClient.URL)
+    public String searchClient(@ModelAttribute(CLIENT) Client client,
+                               Model springModel) {
+        log.info(String.format("POST %s", SearchClient.URL));
+
+        return showClients(springModel, client.getLastname(), client.getFirstname(), client.getEmail(), client.getZipcode());
     }
 }

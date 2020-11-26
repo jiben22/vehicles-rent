@@ -12,7 +12,8 @@
                 <div class="container-fluid">
                     <h2 th:text="${message}" class="text-danger"></h2>
                     <div sec:authorize="hasAnyAuthority(
-                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label)"
+                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)"
                          class="container">
                         <div class="offset-md-11">
                             <a th:href="@{/clients/ajouter}" class="btn btn-primary">
