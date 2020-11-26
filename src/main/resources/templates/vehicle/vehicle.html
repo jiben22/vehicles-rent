@@ -10,7 +10,6 @@
             <div th:replace="fragments/menus.html :: TopMenu"></div>
             <div class="content">
                 <div class="container-fluid">
-                    <!--TODO: use constant -->
                     <a sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                         T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
@@ -20,11 +19,15 @@
                     <div class="card">
                         <div class="card-header card-header-primary card-header-icon">
                             <div class="card-icon">
-                                <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}" class="material-icons">drive_eta</i>
-                                <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" class="material-icons">two_wheeler</i>
-                                <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" class="material-icons">flight</i>
+                                <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}" class="material-icons"
+                                   th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_CAR}"></i>
+                                <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" class="material-icons"
+                                   th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_MOTORBIKE}"></i>
+                                <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" class="material-icons"
+                                   th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_PLANE}"></i>
                             </div>
-                            <h4 class="card-title">Fiche du véhicule</h4>
+                            <h4 class="card-title"
+                                th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$GetVehicleByRegistration).TITLE}"></h4>
                         </div>
                         <div class="card-body">
                             <form action="#" th:object="${vehicle}" class="form-horizontal">

@@ -13,17 +13,23 @@
             </div>
             <div>
                 <a th:href="@{/vehicules?vehicleType=CAR}" class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'CAR'} ? btn-light : btn-secondary">
-                    <i class="material-icons" style="font-size:30px;">drive_eta</i> Voitures
+                    <i class="material-icons" style="font-size:30px;"
+                       th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_CAR}"></i>
+                    [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).CARS} ]]
                 </a>
             </div>
             <div>
                 <a th:href="@{/vehicules?vehicleType=MOTORBIKE}" class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'MOTORBIKE'} ? btn-light : btn-secondary">
-                    <i class="material-icons" style="font-size:30px;">two_wheeler</i> Motos
+                    <i class="material-icons" style="font-size:30px;"
+                       th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_MOTORBIKE}"></i>
+                    [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).MOTORBIKES} ]]
                 </a>
             </div>
             <div>
                 <a th:href="@{/vehicules?vehicleType=PLANE}" class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'PLANE'} ? btn-light : btn-secondary">
-                    <i class="material-icons" style="font-size:30px;">flight</i> Avions
+                    <i class="material-icons" style="font-size:30px;"
+                       th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_PLANE}"></i>
+                    [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).PLANES} ]]
                 </a>
             </div>
         </div>
@@ -59,9 +65,18 @@
                 <!--TODO: use if-else block -->
                 <tr th:each="vehicle, i : ${vehicles}" th:data-id="${vehicle.id}" role="row" th:style="${i.odd}? 'odd' : 'even'" th:class="${vehicle.id}">
                     <td>
-                        <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}" ><i class="material-icons">drive_eta</i></span>
-                        <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" ><i class="material-icons">two_wheeler</i></span>
-                        <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" ><i class="material-icons">flight</i></span>
+                        <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}">
+                            <i class="material-icons"
+                               th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_CAR}">
+                            </i></span>
+                        <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}">
+                            <i class="material-icons"
+                               th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_MOTORBIKE}">
+                            </i></span>
+                        <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}">
+                            <i class="material-icons"
+                               th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_PLANE}">
+                            </i></span>
                     </td>
                     <td th:text="${vehicle.brand}" tabindex="0" class="sorting_1">Marque</td>
                     <td th:text="${vehicle.model}">Modèle</td>
@@ -107,32 +122,32 @@
             // setup datatable with langage translation
             let table = $('#datatables').DataTable({
                 language: {
-                    emptyTable: "Aucune donnée disponible dans le tableau ",
+                    emptyTable: "Aucune donnée disponible dans le tableau",
                     info: "Affichage de l 'élément _START_ à _END_ sur _TOTAL_ éléments",
-                    infoEmpty: "Affichage de l'élément 0 à 0 sur 0 élément ",
-                    infoFiltered: "(filtré à partir de _MAX_ éléments au total) ",
-                    infoPostFix: " ",
-                    infoThousands: ", ",
-                    lengthMenu: "Afficher _MENU_ éléments ",
-                    loadingRecords: "Chargement... ",
-                    processing: "Traitement... ",
-                    search: "Rechercher : ",
-                    zeroRecords: "Aucun élément correspondant trouvé ",
+                    infoEmpty: "Affichage de l'élément 0 à 0 sur 0 élément",
+                    infoFiltered: "(filtré à partir de _MAX_ éléments au total)",
+                    infoPostFix: "",
+                    infoThousands: ",",
+                    lengthMenu: "Afficher _MENU_ éléments",
+                    loadingRecords: "Chargement...",
+                    processing: "Traitement...",
+                    search: "Rechercher :",
+                    zeroRecords: "Aucun élément correspondant trouvé",
                     paginate: {
-                        first: "Premier ",
-                        last: "Dernier ",
-                        next: "Suivant ",
-                        previous: "Précédent "
+                        first: "Premier",
+                        last: "Dernier",
+                        next: "Suivant",
+                        previous: "Précédent"
                     },
                     aria: {
-                        sortAscending: ": activer pour trier la colonne par ordre croissant ",
-                        sortDescending: ": activer pour trier la colonne par ordre décroissant "
+                        sortAscending: ": activer pour trier la colonne par ordre croissant",
+                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
                     },
                     select: {
                         rows: {
-                            _: "%d lignes sélectionnées ",
-                            0: "Aucune ligne sélectionnée ",
-                            1: "1 ligne sélectionnée "
+                            _: "%d lignes sélectionnées",
+                            0: "Aucune ligne sélectionnée",
+                            1: "1 ligne sélectionnée"
                         }
                     }
                 }

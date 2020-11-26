@@ -10,7 +10,6 @@
             <div th:replace="fragments/menus.html :: TopMenu"></div>
             <div class="content">
                 <div class="container-fluid">
-                    <!--TODO: use constant -->
                     <a sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label)"
                        th:href="@{/collaborateurs/modifier/} + ${employee.id}">
@@ -18,10 +17,11 @@
                     </a>
                     <div class="card">
                         <div class="card-header card-header-primary card-header-icon">
-                            <div class="card-icon">
-                                <i class="material-icons">work</i>
-                            </div>
-                            <h4 class="card-title">Fiche du collaborateur</h4>
+                            <div class="card-icon"><i class="material-icons"
+                                                      th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).ICON}">
+                            </i></div>
+                            <h4 class="card-title"
+                                th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController$GetEmployeeById).TITLE}"></h4>
                         </div>
                         <div class="card-body">
                             <form action="#" th:object="${employee}" class="form-horizontal">

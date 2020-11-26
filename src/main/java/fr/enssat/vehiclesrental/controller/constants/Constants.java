@@ -9,9 +9,13 @@ public class Constants {
 
     public static final class DashboardController {
         private DashboardController() {}
+        public static final String BASE_URL = "/";
+
+        public static final String ICON = "dashboard";
+
         public static final class GetDashboard {
             private GetDashboard() {}
-            public static final String URL = "/";
+            public static final String URL = BASE_URL;
             public static final String TITLE = "Vue d'ensemble";
             public static final String VIEW = "dashboard";
         }
@@ -19,10 +23,19 @@ public class Constants {
 
     public static final class ClientController {
         private ClientController() {}
+        public static final String BASE_URL = "/clients";
+        private static final String BASE_VIEW = "vehicle/";
+
+        public static final String CLIENT = "client";
+        public static final String CLIENT_LABEL = CLIENT;
         public static final String CLIENTS = "clients";
+        public static final String CLIENTS_LABEL = CLIENTS;
+
+        public static final String ICON = "person";
+
         public static final class GetClients {
             private GetClients() {}
-            public static final String URL = "/clients";
+            public static final String URL = BASE_URL;
             public static final String TITLE = "Liste des clients";
             public static final String VIEW = "clients";
         }
@@ -35,15 +48,27 @@ public class Constants {
 
         public static final String BASE_URL = "/vehicules";
         private static final String BASE_VIEW = "vehicle/";
-        public static final String VEHICLES = "vehicles";
+
         public static final String VEHICLE = "vehicle";
+        public static final String VEHICLE_LABEL = "véhicule";
+        public static final String VEHICLES = "vehicles";
+        public static final String VEHICLES_LABEL = "véhicules";
+
+        public static final String CARS = "voitures";
+        public static final String MOTORBIKES = "motos";
+        public static final String PLANES = "avions";
+
+        public static final String ICON = "directions_car";
+        public static final String ICON_CAR = "drive_eta";
+        public static final String ICON_MOTORBIKE = "two_wheeler";
+        public static final String ICON_PLANE = "flight";
 
         public static final class GetVehicles {
             private GetVehicles() {}
 
             public static final String URL = BASE_URL;
             public static final String TITLE = "Liste des véhicules";
-            public static final String VIEW = BASE_VIEW + "vehicles";
+            public static final String VIEW = BASE_VIEW + VEHICLES;
         }
 
         public static final class GetVehicleByRegistration {
@@ -51,7 +76,7 @@ public class Constants {
 
             public static final String URL = BASE_URL + "/{registration}";
             public static final String TITLE = "Fiche du véhicule";
-            public static final String VIEW = BASE_VIEW + "vehicle";
+            public static final String VIEW = BASE_VIEW + VEHICLE;
         }
 
         public static final class AddVehicle {
@@ -90,22 +115,33 @@ public class Constants {
 
     public static final class BookingController {
         private BookingController() {}
+        public static final String BASE_URL = "/bookings";
+        private static final String BASE_VIEW = "booking/";
+
+        public static final String BOOKING = "booking";
+        public static final String BOOKING_LABEL = "réservation";
         public static final String BOOKINGS = "bookings";
+        public static final String BOOKINGS_LABEL = "réservations";
+
+        public static final String ICON = "receipt_long";
+
         public static final class GetBookings {
             private GetBookings() {}
-            public static final String URL = "/bookings";
+            public static final String URL = BASE_URL;
             public static final String TITLE = "Liste des réservations";
-            public static final String VIEW = "bookings";
+            public static final String VIEW = BOOKINGS;
         }
     }
 
     public static final class EmployeeController {
         private EmployeeController() {}
-
         public static final String BASE_URL = "/collaborateurs";
         private static final String BASE_VIEW = "employee/";
-        public static final String EMPLOYEES = "employees";
         public static final String EMPLOYEE = "employee";
+        public static final String EMPLOYEE_LABEL = "collaborateur";
+        public static final String EMPLOYEES = "employees";
+        public static final String EMPLOYEES_LABEL = "collaborateurs";
+        public static final String ICON = "work";
 
         public static final class GetEmployees {
             private GetEmployees() {}
@@ -153,10 +189,16 @@ public class Constants {
 
     public static final class ChartController {
         private ChartController() {}
+        public static final String BASE_URL = "/statistiques";
+
         public static final String CHARTS = "charts";
+        public static final String CHARTS_LABEL = "statistiques";
+
+        public static final String ICON = "poll";
+
         public static final class GetCharts {
             private GetCharts() {}
-            public static final String URL = "/statistiques";
+            public static final String URL = BASE_URL;
             public static final String TITLE = "Statistiques";
             public static final String VIEW = "charts";
         }
