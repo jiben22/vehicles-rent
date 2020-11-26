@@ -13,10 +13,12 @@
                     <div class="card">
                         <div class="card-header card-header-primary card-header-icon">
                             <div class="card-icon">
-                                <i th:if="${vehicle != null} and ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}"
-                                   class="material-icons" th:text="${T()}"></i>
-                                <i th:if="${vehicle != null} and ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" class="material-icons">two_wheeler</i>
-                                <i th:if="${vehicle != null} and ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" class="material-icons">flight</i>
+                                <i th:if="${vehicle != null} and ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}" class="material-icons"
+                                   th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_CAR}"></i>
+                                <i th:if="${vehicle != null} and ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" class="material-icons"
+                                   th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_MOTORBIKE}"></i>
+                                <i th:if="${vehicle != null} and ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" class="material-icons"
+                                   th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_PLANE}"></i>
                                 <i th:if="${vehicle == null}" class="material-icons">directions_car</i>
                             </div>
                             <h4 th:if="${vehicle != null} and ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}" class="card-title">Ajouter une voiture</h4>
@@ -26,24 +28,21 @@
                         </div>
                         <div th:if="${vehicle == null}" class="card-body">
                             <div class="row">
-                                <!--TODO: don't use same id and a href like that-->
-                                <a href="http://localhost:8080/vehicules/ajouter?vehicleType=CAR" class="col-sm-4 col-md-4 col-xl-4">
+                                <a href="/vehicules/ajouter?vehicleType=CAR" class="col-sm-4 col-md-4 col-xl-4">
                                     <div id="card-vehicle" class="custom-card rounded position-relative m-4 px-0 w-75">
                                         <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
                                             <span>Voiture</span>
                                         </h4>
                                     </div>
                                 </a>
-                                <!--TODO: don't use same id and a href like that-->
-                                <a href="http://localhost:8080/vehicules/ajouter?vehicleType=MOTORBIKE" class="col-sm-4 col-md-4 col-xl-4">
+                                <a href="/vehicules/ajouter?vehicleType=MOTORBIKE" class="col-sm-4 col-md-4 col-xl-4">
                                     <div id="card-vehicle" class="custom-card rounded position-relative m-4 px-0 w-75">
                                         <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
                                             <span>Moto</span>
                                         </h4>
                                     </div>
                                 </a>
-                                <!--TODO: don't use same id and a href like that-->
-                                <a href="http://localhost:8080/vehicules/ajouter?vehicleType=PLANE" class="col-sm-4 col-md-4 col-xl-4">
+                                <a href="/vehicules/ajouter?vehicleType=PLANE" class="col-sm-4 col-md-4 col-xl-4">
                                     <div id="card-vehicle" class="custom-card rounded position-relative m-4 px-0 w-75">
                                         <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
                                             <span>Avion</span>
