@@ -191,6 +191,13 @@ public class ControllerConstants {
             public static final String VIEW = BASE_VIEW + "cancelVehicle";
             public static final String ERROR_MESSAGE = "Impossible d'annuler la réservation";
         }
+
+        public static final class RentedBooking {
+            private RentedBooking() {}
+
+            public static final String URL = BASE_URL+"/louer/{id}";
+            public static final String ERROR_MESSAGE = "Impossible de commencer la location";
+        }
     }
 
     public static final class EmployeeController {
