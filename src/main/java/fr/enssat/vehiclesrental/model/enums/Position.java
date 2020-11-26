@@ -11,7 +11,7 @@ public enum Position {
     GESTIONNAIRE_COMMERCIAL("Gestionnaire commercial"),
     GESTIONNAIRE_TECHNIQUE("Gestionnaire technique"),
     GESTIONNAIRE_CLIENT("Gestionnaire client"),
-    Collaborateur("Collaborateur");
+    COLLABORATEUR("Collaborateur");
 
     public final String label;
 }

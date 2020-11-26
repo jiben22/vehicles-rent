@@ -2,17 +2,16 @@
 <html lang="fr" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       xmlns:th="http://www.thymeleaf.org">
 
-<div th:fragment="SideBarMenu" class="sidebar" data-background-color="white" data-color="azure"
-     data-image="/img/sidebar-1.jpg">
+<div th:fragment="SideBarMenu" class="sidebar"
+     data-image="/img/sidebar-1.jpg" data-color="purple">
     <div class="logo my-0 py-1">
-        <!-- TODO : use constant -->
-        <a th:href="@{/}" class="simple-text logo-normal my-0">
+        <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.DashboardController$GetDashboard).URL}}" class="simple-text logo-normal my-0">
             Vehi'rental
         </a>
     </div>
     <ul class="sidebar-wrapper pl-0 pb-0">
         <div class="col-md-12">
-            <div class="card card-profile my-3">
+            <div class="card card-profile my-3 py-2">
                 <i class="material-icons">account_circle</i>
                 <h4 class="card-title">
                         <span th:text="${session.employee.firstname + ' ' + session.employee.lastname}"
@@ -22,53 +21,56 @@
         </div>
         <nav class="nav">
             <ul class="list-unstyled">
-                <li class="nav-item" th:classappend="${title == 'Vue d''ensemble' ? 'active' : ''}">
-                    <!-- TODO : use constant -->
-                    <a class="nav-link my-0" th:href="@{/}">
-                        <i class="material-icons">dashboard</i>
-                        <p>Vue d'ensemble</p>
+                <!-- /* using $ instead of . to access nested class */ -->
+                <!-- /* checks if the request URI equals to the base url constant of the controller */ -->
+                <li class="nav-item" th:classappend="${ #httpServletRequest.requestURI ==
+                    T(fr.enssat.vehiclesrental.controller.constants.Constants.DashboardController).BASE_URL ? 'active' : '' }">
+                    <a class="nav-link my-0"
+                       th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.DashboardController$GetDashboard).URL}}">
+                        <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.DashboardController).ICON}"></i>
+                        <p th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.DashboardController$GetDashboard).TITLE}"></p>
                     </a>
                 </li>
                 <hr class="my-2"/>
                 <li>
-                    <p class="ml-4 text-uppercase font-weight-bold">Search</p>
+                    <p class="ml-4 text-uppercase font-weight-bold">Catégories</p>
                     <ul class="list-unstyled">
-                        <li class="nav-item" th:classappend="${title == 'Client' ? 'active' : ''}">
-                            <!-- TODO : use constant -->
-                            <a class="nav-link my-0" th:href="@{/clients}">
-                                <i class="material-icons">person</i>
-                                <p>Clients</p>
+                        <li class="nav-item" th:classappend="${#strings.startsWith(#httpServletRequest.requestURI,
+                            T(fr.enssat.vehiclesrental.controller.constants.Constants.ClientController).BASE_URL) ? 'active' : '' }">
+                            <a class="nav-link my-0" th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.ClientController$GetClients).URL}}">
+                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ClientController).ICON}"></i>
+                                <p th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ClientController).CLIENTS_LABEL}"></p>
                             </a>
                         </li>
-                        <li class="nav-item" th:classappend="${title == 'Vehicule' ? 'active' : ''}">
-                            <!-- TODO : use constant -->
-                            <a class="nav-link my-0" th:href="@{/vehicules}">
-                                <i class="material-icons">directions_car</i>
-                                <p>Véhicules</p>
+                        <li class="nav-item" th:classappend="${#strings.startsWith(#httpServletRequest.requestURI,
+                            T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL) ? 'active' : '' }">
+                            <a class="nav-link my-0" th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$GetVehicles).URL}}">
+                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON}"></i>
+                                <p th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).VEHICLES_LABEL}"></p>
                             </a>
                         </li>
-                        <li class="nav-item" th:classappend="${title == 'Reservation' ? 'active' : ''}">
-                            <!-- TODO : use constant -->
-                            <a class="nav-link my-0" th:href="@{/reservations}">
-                                <i class="material-icons">receipt_long</i>
-                                <p>Réservations</p>
+                        <li class="nav-item" th:classappend="${#strings.startsWith(#httpServletRequest.requestURI,
+                            T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController).BASE_URL) ? 'active' : '' }">
+                            <a class="nav-link my-0" th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController$GetBookings).URL}}">
+                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController).ICON}"></i>
+                                <p th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController).BOOKINGS_LABEL}"></p>
                             </a>
                         </li>
-                        <li class="nav-item" th:classappend="${title == 'Collaborateur' ? 'active' : ''}">
-                            <!-- TODO : use constant -->
-                            <a class="nav-link my-0" th:href="@{/collaborateurs}">
-                                <i class="material-icons">work</i>
-                                <p>Collaborateurs</p>
+                        <li class="nav-item" th:classappend="${#strings.startsWith(#httpServletRequest.requestURI,
+                            T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).BASE_URL) ? 'active' : '' }">
+                            <a class="nav-link my-0" th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController$GetEmployees).URL}}">
+                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).ICON}"></i>
+                                <p th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).EMPLOYEES_LABEL}"></p>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <hr class="my-2"/>
-                <li class="nav-item" th:classappend="${title == 'Statistiques' ? 'active' : ''}">
-                    <!-- TODO : use constant -->
-                    <a class="nav-link my-0" th:href="@{/statistiques}">
-                        <i class="material-icons">poll</i>
-                        <p>Statistiques</p>
+                <li class="nav-item" th:classappend="${#strings.startsWith(#httpServletRequest.requestURI,
+                            T(fr.enssat.vehiclesrental.controller.constants.Constants.ChartController).BASE_URL) ? 'active' : '' }">
+                    <a class="nav-link my-0" th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.ChartController$GetCharts).URL}}">
+                        <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ChartController).ICON}"></i>
+                        <p th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ChartController).CHARTS_LABEL}"></p>
                     </a>
                 </li>
             </ul>
@@ -77,7 +79,7 @@
 </div>
 
 
-<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example"
+<nav class="navbar navbar-expand-lg" id="navigation"
      th:fragment="TopMenu">
     <div class="container-fluid">
         <div class="navbar-wrapper">
@@ -94,6 +96,41 @@
         <div class="collapse navbar-collapse justify-content-end">
             <form class="navbar-form my-0"></form>
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" id="dark-theme-switch">
+                        <i class="material-icons" id="dark-button">brightness_2</i>
+                        <i class="material-icons" id="light-button">brightness_7</i>
+                        <script>
+                            const darkButton = document.getElementById("dark-button");
+                            const lightButton = document.getElementById("light-button");
+
+                            const theme = localStorage.getItem('theme');
+                            if(theme === 'dark-edition'){
+                                document.body.classList.add('dark-edition');
+                                darkButton.style.display = 'none';
+                            } else {
+                                lightButton.style.display = 'none';
+                            }
+
+                            document.getElementById('dark-theme-switch').addEventListener('click', function (event) {
+                                if(localStorage.getItem('theme') !== 'dark-edition'){
+                                    darkButton.style.display = 'none';
+                                    lightButton.style.display = '';
+                                    document.body.classList.add('dark-edition');
+                                    localStorage.setItem('theme', 'dark-edition');
+                                } else {
+                                    darkButton.style.display = '';
+                                    lightButton.style.display = 'none';
+                                    document.body.classList.remove('dark-edition');
+                                    localStorage.setItem('theme', '');
+                                }
+                            });
+                        </script>
+                        <p class="d-lg-none d-md-block">
+                            Mode nuit
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item" th:if="${session.employee == null}">
                     <a class="nav-link">
                         <i class="material-icons">person</i>
@@ -104,7 +141,7 @@
                 </li>
                 <li class="nav-item" th:else>
                     <!-- TODO : use constant -->
-                    <a class="nav-link py-0" id="navbarDropdownLogout" th:href="@{/deconnexion}">
+                    <a class="nav-link my-0" id="navbarDropdownLogout" th:href="@{/deconnexion}">
                         <i class="material-icons red">power_settings_new</i>
                         <p class="d-lg-none d-md-block">
                             Déconnexion

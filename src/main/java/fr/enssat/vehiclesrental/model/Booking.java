@@ -27,7 +27,6 @@ public class Booking implements Serializable {
      */
     @Column(nullable = false, columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @NonNull
     private Date startDate;
 
     /**
@@ -35,15 +34,19 @@ public class Booking implements Serializable {
      */
     @Column(nullable = false, columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
-    @NonNull
     private Date endDate;
 
     /**
      * Expected number of kilometer define when create booking
      */
-    @Column(nullable = false)
-    @NonNull
+    @Column()
     private int expectedNumberKm;
+
+    /**
+     * Expected number of hours define when create booking
+     */
+    @Column()
+    private int expectedNumberHours;
 
     /**
      * Expected price of booking
@@ -55,7 +58,6 @@ public class Booking implements Serializable {
      * Hold if there is a discount on the booking
      */
     @Column(nullable = false)
-    @NonNull
     private boolean isDiscount;
 
     /**
@@ -76,14 +78,13 @@ public class Booking implements Serializable {
      */
     @ManyToOne
     @JoinColumn(name="id_client")
-    @NonNull
     private Client client;
 
     /**
-     * Link a booking to a vehicule
+     * Link a booking to a vehicle
      */
     @ManyToOne
-    @JoinColumn(name="id_vehicule")
+    @JoinColumn(name="id_vehicle")
     @NonNull
     private Vehicle vehicle;
 }

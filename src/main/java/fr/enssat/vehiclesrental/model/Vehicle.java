@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
@@ -39,45 +40,49 @@ public abstract class Vehicle implements Serializable {
      */
     @Column(nullable = false, length = 128)
     @Size(min = 1, max = 128, message = "La marque ne peut pas être vide et ne doit pas dépasser les 128 caractères !")
-    @NonNull
     private String brand;
     /**
      * Model of a vehicle
      */
     @Column(nullable = false, length = 128)
     @Size(min = 1, max = 128, message = "La modèle ne peut pas être vide et ne doit pas dépasser les 128 caractères !")
-    @NonNull
     private String model;
     /**
      * Maximum speed of a vehicle
      */
     @Column(nullable = false)
+    @Min(value = 0, message="La vitesse maximum doit être positive !")
     @NonNull
     private int maximumSpeed;
     /**
      * Price of a rent per day
      */
     @Column(nullable = false)
+    @Min(value = 0, message="Le prix de location par jour doit être positif !")
     @NonNull
     private float rentPricePerDay;
     /**
      * Number of seat available in the vehicle
      */
     @Column(nullable = false)
+    @Min(value = 0, message="Le nombre de sièges doit être positif !")
     @NonNull
     private int nbSeats;
     /**
      * General state of a vehicle
      */
     @Column(nullable = false)
-    @NonNull
     private State state;
     /**
-     * Reegistration of a vehicle
+     * Hold the registration of a vehicle
      */
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true, length = 9)
+    @Size(min = 1, max = 9, message = "L'immatriculation ne peut pas être vide et ne doit pas dépasser les 9 caractères !")
     @NonNull
     private String registration;
+
+    @Column(nullable = false)
+    private boolean isArchived;
 
     /**
      * Represent list of bookings link to the current vehicle.

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/head.html :: head"></head>
+
+<body class="">
+<div class="wrapper">
+    <div th:replace="fragments/menus.html :: SideBarMenu"></div>
+    <div class="main-panel">
+        <div th:replace="fragments/menus.html :: TopMenu"></div>
+        <div class="page-main-fragment">
+            <div sec:authorize="hasAnyAuthority(
+                    T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                    T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_COMMERCIAL.label)"
+                 class="d-flex col-sm-12 mt-4">
+                <div class="col pl-0 mb-1">
+                    <h3 th:text="${message}" th:if="${message != null}" class="alert m-0 h-100 py-3" style="background-color: #86bbd8; color: #606477;">Erreur</h3>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ChartController).ICON}"></i>
+                        </div>
+                        <h4 class="card-title" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ChartController$GetCharts).TITLE}"></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="fragments/footer.html :: footer"></footer>
+    </div>
+</div>
+</body>
+
+</html>
