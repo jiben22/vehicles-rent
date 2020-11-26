@@ -7,37 +7,73 @@
     <div class="material-datatables">
         <div class="row">
             <div class="col-sm-12">
-                <table id="datatables" class="table table-striped table-no-bordered table-hover dataTable dtr-inline" style="width: 100%;" role="grid" aria-describedby="datatables_info" width="100%" cellspacing="0">
+                <table id="bookings_datatable" class="table table-striped table-no-bordered table-hover dataTable dtr-inline w-100" role="grid" aria-describedby="datatables_info" cellspacing="0">
                     <thead>
                     <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">
-                            Date de début
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 20px;" aria-label="Status: activate to sort column ascending">
+                            <!-- Status -->
+                            Statut
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Position: activate to sort column ascending">
-                            Date de fin
+                        <th class="sorting_asc" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Client: activate to sort column descending">
+                            <!-- Client -->
+                            Client
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Office: activate to sort column ascending">
-                            Etat
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Vehicle: activate to sort column ascending">
+                            <!-- Vehicle -->
+                            Véhicule
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="StartingDate: activate to sort column ascending">
+                            <!-- Starting Date -->
+                            Début
+                        </th>
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="EndDate: activate to sort column ascending">
+                            <!-- End Date -->
+                            Fin
                         </th>
                         <th class="disabled-sorting text-right sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 70px;" aria-label="Actions: activate to sort column ascending"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <!--TODO: use if-else block -->
                     <tr th:each="booking, i : ${bookings}" th:data-id="${booking.id}" role="row" th:style="${i.odd}? 'odd' : 'even'" th:class="${booking.id}">
-                        <td th:text="${booking.startDate}" tabindex="0" class="sorting_1">Date de début</td>
-                        <td th:text="${booking.endDate}">Date de fin</td>
-                        <td th:text="${booking.status.name}">État</td>
+                        <!-- Status -->
+                        <td th:text="${booking.status.name}" tabindex="0">Statut</td>
+
+                        <!-- Client -->
+                        <td th:text="${booking.client.firstname + '' + booking.client.lastname.uppercase()}">Client</td>
+
+                        <!-- Vehicle -->
+                        <td th:text="${booking.vehicle.model}">Véhicule</td>
+
+                        <!-- StartingDate -->
+                        <td th:text="${booking.startDate}" class="sorting_1">Début</td>
+
+                        <!-- EndDate -->
+                        <td th:text="${booking.endDate}">Fin</td>
+
+                        <!-- Actions -->
                         <td class="text-right">
-                            <!--                             <a th:href="@{/vehicule/modifier/} + ${vehicle.id}" class="btn btn-link btn-info btn-just-icon"><i class="material-icons">edit</i></a>-->
-                            <a th:href="@{/reservations/} + ${booking.id}" class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
-                            <button class="btn btn-link btn-danger btn-just-icon remove" data-target="#deleteVehicleModal" data-toggle="modal"><i class="material-icons">archive</i></button>
+                            <a th:href="@{/booking/edit/} + ${booking.id}" class="btn btn-link btn-info btn-just-icon"><i class="material-icons">edit</i></a>
+                            <a th:href="@{/booking/} + ${booking.id}" class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
+                            <button class="btn btn-link btn-danger btn-just-icon remove" data-target="#cancelBookingModal" data-toggle="modal"><i class="material-icons">close</i></button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <div th:replace="modals/bookingModals.html :: cancelBookingModal"></div>
     </div>
+    <script>
+        (function($) {
+            let that;
+            $(".remove").click(function() {
+                that = $(this);
+                $(".remove-modal-btn").click(function(){
+                    let tr = that.parent().parent()[0];
+                    $(tr).fadeOut();
+                    $.get("booking/cancel/" + tr.dataset.id);
+                });
+            });
+        })(jQuery);
+    </script>
 </div>
-

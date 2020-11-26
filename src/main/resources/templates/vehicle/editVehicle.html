@@ -13,11 +13,11 @@
                     <div class="card ">
                         <div class="card-header card-header-primary card-header-icon">
                             <div class="card-icon">
-                                <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}" class="material-icons">drive_eta</i>
-                                <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" class="material-icons">two_wheeler</i>
-                                <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" class="material-icons">flight</i>
+                                <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}" class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_CAR}"></i>
+                                <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_MOTORBIKE}"></i>
+                                <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_PLANE}"></i>
                             </div>
-                            <h4 class="card-title">Modifier le véhicule</h4>
+                            <h4 class="card-title" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$UpdateVehicle).TITLE}"></h4>
                         </div>
                         <div class="card-body">
                             <form action="#" method="post" th:action="@{'/vehicules/'+ ${vehicle.class.simpleName} + '/' + ${vehicle.registration}}" th:object="${vehicle}" class="form-horizontal">

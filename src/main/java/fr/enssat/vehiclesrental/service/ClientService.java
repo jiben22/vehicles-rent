@@ -91,5 +91,4 @@ public class ClientService implements IClientService {
         client.setArchived(true);
         return repository.saveAndFlush(client);
     }
-
 }

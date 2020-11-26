@@ -1,87 +1,43 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments/head.html :: head"></head>
 
-<body class="">
+<body>
     <div class="wrapper">
         <div th:replace="fragments/menus.html :: SideBarMenu"></div>
         <div class="main-panel">
             <div th:replace="fragments/menus.html :: TopMenu"></div>
             <div class="content">
-                <div class="container-fluid">
-                    <h2 th:text="${message}" class="text-danger"></h2>
-                    <div sec:authorize="hasAnyAuthority(
+                <div sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                         T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)"
-                         class="container">
-                        <div class="offset-md-11">
-                            <a th:href="@{/clients/ajouter}" class="btn btn-primary">
-                                <i class="material-icons" style="font-size:30px;">control_point</i> Ajouter un client
-                            </a>
-                        </div>
+                     class="col-sm-12 mt-4">
+                    <div class="col pl-0 mb-1">
+                        <h3 th:text="${message}" th:if="${message != null}" class="alert m-0 h-100 py-3">Erreur</h3>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header card-header-primary card-header-icon">
-                                    <div class="card-icon">
-                                        <i class="material-icons">work</i>
-                                    </div>
-                                    <h4 class="card-title">Liste des clients</h4>
-                                </div>
-                                <div th:replace="components/clients.html :: clients(clients=${clients})"></div>
+                    <div class="align-self-end mb-1">
+                        <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.ClientController$AddClient).URL}}" class="btn">
+                            <i class="material-icons" style="font-size:30px;">control_point</i>
+                            [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.ClientController$AddClient).TITLE} ]]
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ClientController).ICON}"></i>
                             </div>
+                            <h4 class="card-title" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ClientController$GetClients).TITLE}"></h4>
                         </div>
+                        <div th:replace="components/clients.html :: clients(clients=${clients})"></div>
                     </div>
                 </div>
             </div>
             <footer th:replace="fragments/footer.html :: footer"></footer>
         </div>
-        <script>
-            $(document).ready(function() {
-                $('#datatables').DataTable({
-                    "pagingType ": "full_numbers ",
-                    "lengthMenu ": [
-                        [10, 25, 50, -1],
-                        [10, 25, 50, "All "]
-                    ],
-                    responsive: true,
-                    language: {
-                        "sEmptyTable ": "Aucune donnée disponible dans le tableau ",
-                        "sInfo ": "Affichage de l 'élément _START_ à _END_ sur _TOTAL_ éléments",
-                        "sInfoEmpty": "Affichage de l'élément 0 à 0 sur 0 élément ",
-                        "sInfoFiltered ": "(filtré à partir de _MAX_ éléments au total) ",
-                        "sInfoPostFix ": " ",
-                        "sInfoThousands ": ", ",
-                        "sLengthMenu ": "Afficher _MENU_ éléments ",
-                        "sLoadingRecords ": "Chargement... ",
-                        "sProcessing ": "Traitement... ",
-                        "sSearch ": "Rechercher : ",
-                        "sZeroRecords ": "Aucun élément correspondant trouvé ",
-                        "oPaginate ": {
-                            "sFirst ": "Premier ",
-                            "sLast ": "Dernier ",
-                            "sNext ": "Suivant ",
-                            "sPrevious ": "Précédent "
-                        },
-                        "oAria ": {
-                            "sSortAscending ": ": activer pour trier la colonne par ordre croissant ",
-                            "sSortDescending ": ": activer pour trier la colonne par ordre décroissant "
-                        },
-                        "select ": {
-                            "rows ": {
-                                "_ ": "%d lignes sélectionnées ",
-                                "0 ": "Aucune ligne sélectionnée ",
-                                "1 ": "1 ligne sélectionnée "
-                            }
-                        }
-                    }
-                });
-
-                var table = $('#datatable').DataTable();
-            });
-        </script>
     </div>
 </body>
 

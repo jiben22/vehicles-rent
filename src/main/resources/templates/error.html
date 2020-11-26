@@ -3,12 +3,20 @@
 
 <head th:replace="fragments/head.html :: head"></head>
 
-<div id="notfound">
-    <div class="notfound">
-        <div class="notfound-404">
-            <h1 th:text="${statusCode}">404</h1>
-        </div>
-        <h2>Oops!</h2>
-        <a th:href="@{/}">Retourner à l'accueil</a>
-    </div>
+<div class="h-100 d-flex flex-column justify-content-center align-items-center">
+    <h1 class="status-code" th:text="${status}">404</h1>
+    <th:block th:switch="${#numbers.formatInteger(status / 100, 1)}">
+        <th:block th:case="'4'">
+            <h2 th:if="${status == 404}">Page introuvable.</h2>
+            <h2 th:unless="${status == 404}">Page inaccessible.</h2>
+        </th:block>
+        <th:block th:case="'5'">
+            <h2>Erreur interne.</h2>
+        </th:block>
+        <th:block th:case="*">
+            <h2>Erreur inconnue. Veuillez contacter l'administrateur du site.</h2>
+        </th:block>
+    </th:block>
+    <br>
+    <a th:href="@{/}">Retourner à l'accueil</a>
 </div>

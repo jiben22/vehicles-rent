@@ -4,87 +4,111 @@
 <div class="card-body" th:fragment="vehicles(vehicles)">
     <div class="toolbar">
     </div>
-    <div class="material-datatables">
-        <div class="row">
-            <div class="offset-md-2 col-md-2">
+    <div class="col material-datatables">
+        <div class="d-flex flex-column flex-md-row justify-content-around align-items-center mb-2 border-bottom border-secondary pb-3">
+            <div>
                 <a th:href="@{/vehicules}" class="btn" th:classappend="${param.vehicleType == null} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;">clear_all</i> Tous les véhicules
                 </a>
             </div>
-            <div class="col-md-2">
+            <div>
                 <a th:href="@{/vehicules?vehicleType=CAR}" class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'CAR'} ? btn-light : btn-secondary">
-                    <i class="material-icons" style="font-size:30px;">drive_eta</i> Voitures
+                    <i class="material-icons" style="font-size:30px;"
+                       th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_CAR}"></i>
+                    [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).CARS} ]]
                 </a>
             </div>
-            <div class="col-md-2">
+            <div>
                 <a th:href="@{/vehicules?vehicleType=MOTORBIKE}" class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'MOTORBIKE'} ? btn-light : btn-secondary">
-                    <i class="material-icons" style="font-size:30px;">two_wheeler</i> Motos
+                    <i class="material-icons" style="font-size:30px;"
+                       th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_MOTORBIKE}"></i>
+                    [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).MOTORBIKES} ]]
                 </a>
             </div>
-            <div class="col-md-2">
+            <div>
                 <a th:href="@{/vehicules?vehicleType=PLANE}" class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'PLANE'} ? btn-light : btn-secondary">
-                    <i class="material-icons" style="font-size:30px;">flight</i> Avions
+                    <i class="material-icons" style="font-size:30px;"
+                       th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_PLANE}"></i>
+                    [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).PLANES} ]]
                 </a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <table id="datatables" class="table table-striped table-no-bordered table-hover dataTable dtr-inline" style="width: 100%;" role="grid" aria-describedby="datatables_info" width="100%" cellspacing="0">
-                    <thead>
-                    <tr role="row">
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 20px;" aria-label="Position: activate to sort column ascending">
-                            <!-- Type -->
-                        </th>
-                        <th class="sorting_asc" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">
-                            Marque
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Position: activate to sort column ascending">
-                            Modèle
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Office: activate to sort column ascending">
-                            Vitesse max.
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Position: activate to sort column ascending">
-                            Prix par jour
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Office: activate to sort column ascending">
-                            Nombre de sièges
-                        </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Position: activate to sort column ascending">
-                            État
-                        </th>
-                        <th class="disabled-sorting text-right sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 70px;" aria-label="Actions: activate to sort column ascending"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!--TODO: use if-else block -->
-                    <tr th:each="vehicle, i : ${vehicles}" th:data-id="${vehicle.id}" role="row" th:style="${i.odd}? 'odd' : 'even'" th:class="${vehicle.id}">
-                        <td>
-                            <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}" ><i class="material-icons">drive_eta</i></span>
-                            <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" ><i class="material-icons">two_wheeler</i></span>
-                            <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" ><i class="material-icons">flight</i></span>
-                        </td>
-                        <td th:text="${vehicle.brand}" tabindex="0" class="sorting_1">Marque</td>
-                        <td th:text="${vehicle.model}">Modèle</td>
-                        <td th:text="${vehicle.maximumSpeed + ' km/h'}">Vitesse max.</td>
-                        <td th:text="${vehicle.rentPricePerDay + ' €'}">Prix par jour</td>
-                        <td th:text="${vehicle.nbSeats}">Nombre de sièges</td>
-                        <td th:text="${vehicle.state.description}">État</td>
-                        <td class="text-right">
+        <div class="col" style="overflow: auto;">
+            <table id="datatables" class="table table-striped table-no-bordered table-hover dataTable dtr-inline" style="width: 100%;" role="grid" aria-describedby="datatables_info" width="100%" cellspacing="0">
+                <thead>
+                <tr role="row">
+                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 20px;" aria-label="Position: activate to sort column ascending">
+                        <!-- Type -->
+                    </th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">
+                        Marque
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Position: activate to sort column ascending">
+                        Modèle
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Office: activate to sort column ascending">
+                        Vitesse max.
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Position: activate to sort column ascending">
+                        Prix par jour
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Office: activate to sort column ascending">
+                        Nombre de sièges
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Position: activate to sort column ascending">
+                        État
+                    </th>
+                    <th class="disabled-sorting text-right sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 70px;" aria-label="Actions: activate to sort column ascending"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--TODO: use if-else block -->
+                <tr th:each="vehicle, i : ${vehicles}" th:data-id="${vehicle.id}" role="row" th:style="${i.odd}? 'odd' : 'even'" th:class="${vehicle.id}">
+                    <td>
+                        <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}">
+                            <i class="material-icons"
+                               th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_CAR}">
+                            </i></span>
+                        <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}">
+                            <i class="material-icons"
+                               th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_MOTORBIKE}">
+                            </i></span>
+                        <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}">
+                            <i class="material-icons"
+                               th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_PLANE}">
+                            </i></span>
+                    </td>
+                    <td th:text="${vehicle.brand}" tabindex="0" class="sorting_1">Marque</td>
+                    <td th:text="${vehicle.model}">Modèle</td>
+                    <td th:text="${vehicle.maximumSpeed + ' km/h'}">Vitesse max.</td>
+                    <td th:text="${vehicle.rentPricePerDay + ' €'}">Prix par jour</td>
+                    <td th:text="${vehicle.nbSeats}">Nombre de sièges</td>
+                    <td th:text="${vehicle.state.description}">État</td>
+                    <td class="text-right">
 <!--                             <a th:href="@{/vehicule/modifier/} + ${vehicle.id}" class="btn btn-link btn-info btn-just-icon"><i class="material-icons">edit</i></a>-->
-                            <a th:href="@{/vehicules/} + ${vehicle.registration}" class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
-                            <button class="btn btn-link btn-danger btn-just-icon remove" data-target="#deleteVehicleModal" data-toggle="modal"><i class="material-icons">archive</i></button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                        <a th:href="@{/vehicules/} + ${vehicle.registration}" class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
+                        <button class="btn btn-link btn-danger btn-just-icon remove" data-target="#deleteVehicleModal" data-toggle="modal"><i class="material-icons">archive</i></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <div th:replace="modals/vehicleModals.html :: deleteVehicleModal"></div>
     </div>
-    <script>
-        (function($) {
+    <script th:inline="javascript">
+        // loading status values using thymeleaf template
+        /*<![CDATA[*/
+
+        const stateValues = [
+            /*[# th:each="status : ${T(fr.enssat.vehiclesrental.model.enums.State).values()}"]
+             - [# th:utext="'\\'' + ${status.description} + '\\','" /]
+            [/]*/
+        ];
+        /*]]>*/
+
+        $(document).ready(function(){
             let that;
+            // for each
             $(".remove").click(function() {
                 that = $(this);
                 $(".remove-modal-btn").click(function(){
@@ -94,7 +118,93 @@
                     $.get("vehicules/supprimer/" + id);
                 });
             });
-        })(jQuery);
+
+            // setup datatable with langage translation
+            let table = $('#datatables').DataTable({
+                language: {
+                    emptyTable: "Aucune donnée disponible dans le tableau",
+                    info: "Affichage de l 'élément _START_ à _END_ sur _TOTAL_ éléments",
+                    infoEmpty: "Affichage de l'élément 0 à 0 sur 0 élément",
+                    infoFiltered: "(filtré à partir de _MAX_ éléments au total)",
+                    infoPostFix: "",
+                    infoThousands: ",",
+                    lengthMenu: "Afficher _MENU_ éléments",
+                    loadingRecords: "Chargement...",
+                    processing: "Traitement...",
+                    search: "Rechercher :",
+                    zeroRecords: "Aucun élément correspondant trouvé",
+                    paginate: {
+                        first: "Premier",
+                        last: "Dernier",
+                        next: "Suivant",
+                        previous: "Précédent"
+                    },
+                    aria: {
+                        sortAscending: ": activer pour trier la colonne par ordre croissant",
+                        sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                    },
+                    select: {
+                        rows: {
+                            _: "%d lignes sélectionnées",
+                            0: "Aucune ligne sélectionnée",
+                            1: "1 ligne sélectionnée"
+                        }
+                    }
+                }
+            });
+
+            /* Setup - add a text input to each footer cell */
+            // adds a second header line with the first empty column
+            $('#datatables thead').append('<tr><th></th></tr>');
+            // gets the new header line to populate
+            let inputs = $('#datatables thead tr:last-child');
+            // for each parameter in the first header line
+            $('#datatables thead tr:first-child th').each( function (colIdx) {
+                // deselecting first, before last and last
+                if (![0,6,7].includes(colIdx)) {
+                    // appends a column with an input (with responsive width)
+                    inputs.append($('<th><input type="text" class="w-100"/></th>'));
+                    // selects the newly created input
+                    $(inputs).find('th:nth-child(' + (colIdx + 1) + ') input')
+                        // on text entered in input
+                        .on('keyup change', function (){
+                            // search in the nth column in the table
+                            table
+                                .column(colIdx)
+                                .search(this.value)
+                                .draw();
+                        });
+                }
+                else if(colIdx === 6){
+                    let selectOptions = stateValues.reduce(function(out, state){
+                        // adds a string with the option element to the previous string
+                        return out + '<option>' + state + '</option>';
+                    }, '');
+                    // creates a select element populate of status options
+                    inputs.append($(
+                        '<th>' +
+                            '<select id="stateSelect" class="w-100">' +
+                                '<option></option>' +
+                                selectOptions +
+                            '</select>' +
+                        '</th>'));
+                    // selects the newly created select element
+                    $(inputs).find('th:nth-child(' + (colIdx + 1) + ') select')
+                        // on text entered in input
+                        .on( 'change', function () {
+                            // search in the nth column in the table
+                            table
+                                .column( colIdx )
+                                .search( this.value )
+                                .draw();
+                        });
+                }
+                else if(colIdx === 7){
+                    // adds an empty column at the end
+                    inputs.append($('<th></th>'));
+                }
+            });
+        });
     </script>
 </div>
 

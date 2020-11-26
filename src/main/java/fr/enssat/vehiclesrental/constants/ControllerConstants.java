@@ -102,6 +102,7 @@ public class ControllerConstants {
         public static final class GetVehicles {
             private GetVehicles() {}
 
+            public static final String URL = BASE_URL;
             public static final String TITLE = "Liste des véhicules";
             public static final String VIEW = BASE_VIEW + "vehicles";
         }
@@ -213,6 +214,7 @@ public class ControllerConstants {
         public static final class GetEmployees {
             private GetEmployees() {}
 
+            public static final String URL = BASE_URL;
             public static final String TITLE = "Liste des collaborateurs";
             public static final String VIEW = BASE_VIEW + "employees";
         }
@@ -261,7 +263,7 @@ public class ControllerConstants {
         public static final class GetCharts {
             private GetCharts() {}
 
-            public static final String URL = "/statistiques";
+            public static final String URL = "/statistiques?type=MOST_RESERVER_CLIENT&interval=ONE_MONTH";
             public static final String TITLE = "Statistiques";
             public static final String VIEW = "charts";
         }
