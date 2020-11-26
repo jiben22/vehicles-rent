@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <div th:if="${vehicle != null}" class="card-body">
-                            <form action="#" method="post" th:action="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '/'+ vehicle.class.simpleName}}" th:object="${vehicle}" class="form-horizontal">
+                            <form method="post" th:action="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '/'+ vehicle.class.simpleName}}" th:object="${vehicle}" class="form-horizontal">
                                 <input type="hidden" th:field="*{id}" />
                                 <div class="row">
                                     <label class="col-md-2 col-form-label">Immatriculation</label>
@@ -160,8 +160,9 @@
                                     </div>
                                 </div>
                                 <div class="pull-right">
-                                    <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$AddVehicle).URL}}">
-                                        <button type="button" class="btn btn-secondary">Annuler</button>
+                                    <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$AddVehicle).URL}}"
+                                       class="btn btn-secondary">
+                                        Annuler
                                     </a>
                                     <button type="submit" class="btn btn-success">Enregistrer</button>
                                 </div>

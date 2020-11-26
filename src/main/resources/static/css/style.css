@@ -76,6 +76,7 @@ h3.alert {
 .dark-edition .sidebar .sidebar-background::after,
 .dark-edition .page-main-fragment .card,
 .dark-edition .modal-dialog .modal-content,
+.dark-edition .form-group .bootstrap-datetimepicker-widget,
 .dark-edition .page-main-fragment .custom-card > div {
     background-color: #222227 !important;
 }
