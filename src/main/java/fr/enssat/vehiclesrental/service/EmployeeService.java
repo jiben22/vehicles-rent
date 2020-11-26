@@ -78,6 +78,37 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
+    public List<Employee> searchEmployees(Position position, String firstname, String lastname, String email, String zipcode) {
+        Specification<Employee> employeeSpecification = buildSpecification(position, firstname, lastname, email, zipcode);
+        if (employeeSpecification != null) {
+            return repository.findAll(employeeSpecification);
+        } else {
+            return getEmployees();
+        }
+    }
+
+    private Specification<Employee> buildSpecification(Position position, String firstname, String lastname, String email, String zipcode) {
+        List<Specification<Employee>> specifications = new ArrayList<>();
+        if (position != null) specifications.add(hasPosition(position));
+        if (!firstname.isEmpty()) specifications.add(hasFirstname(firstname));
+        if (!lastname.isEmpty()) specifications.add(hasLastname(lastname));
+        if (!email.isEmpty()) specifications.add(hasEmail(email));
+        if (!zipcode.isEmpty()) specifications.add(hasZipcode(zipcode));
+
+        if (specifications.size() > 0) {
+            Specification<Employee> employeeSpecification = where(specifications.get(0));
+            specifications.remove(0);
+            for (Specification<Employee> specification: specifications) {
+                employeeSpecification = Objects.requireNonNull(employeeSpecification).and(specification);
+            }
+
+            return employeeSpecification;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
     public Employee addEmployee(Employee employee) {
         if (repository.existsById(employee.getId()))
             throw new EmployeeAlreadyExistException(employee);
