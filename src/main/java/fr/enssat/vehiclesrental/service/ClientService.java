@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import static fr.enssat.vehiclesrental.repository.ClientRepository.*;
 import static org.springframework.data.jpa.domain.Specification.where;
@@ -81,8 +82,11 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public void deleteClient(long id) {
-        repository.deleteById(id);
+    public void archiveClient(long id) {
+
+        Client client = getClient(id);
+        client.setIsArchived(true);
+        editClient(client);
     }
 
 }
