@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/head.html :: head"></head>
+
+<body class="">
+    <div class="wrapper ">
+        <div th:replace="fragments/menus.html :: SideBarMenu"></div>
+        <div class="main-panel">
+            <div th:replace="fragments/menus.html :: TopMenu"></div>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header card-header-primary card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">receipt_long</i>
+                            </div>
+                            <h4 class="card-title">Archiver une réservation</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="#" method="post" th:action="@{'/reservations/confirmer/archiver'}" th:object="${booking}" class="form-horizontal">
+                                <input type="hidden" th:field="*{id}" />
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Nombre de kilomètre parcouru</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input th:field="*{expectedNumberKm}" type="number" class="form-control ">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pull-right">
+                                    <a th:href="@{/reservations}">
+                                        <button type="button" class="btn btn-secondary">Annuler</button>
+                                    </a>
+                                    <button type="submit" class="btn btn-success">Confirmer archivage</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer th:replace="fragments/footer.html :: footer"></footer>
+        </div>
+    </div>
+</body>
+
+</html>
