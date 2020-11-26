@@ -30,7 +30,7 @@ public class ControllerConstants {
     public static final class ClientController {
         private ClientController() {}
         public static final String BASE_URL = "/clients";
-        private static final String BASE_VIEW = "vehicle/";
+        private static final String BASE_VIEW = "client/";
 
         public static final String CLIENT = "client";
         public static final String CLIENT_LABEL = CLIENT;
@@ -39,11 +39,53 @@ public class ControllerConstants {
 
         public static final String ICON = "people";
 
+        
+
+        public static final String REDIRECT_CLIENTS = "redirect:/clients";
+        public static final String REDIRECT_CLIENT_BY_ID = "redirect:/clients/%s";
+        public static final String CLIENTS = "clients";
+        public static final String CLIENT = "client";
+
         public static final class GetClients {
             private GetClients() {}
             public static final String URL = BASE_URL;
             public static final String TITLE = "Liste des clients";
-            public static final String VIEW = "clients";
+            public static final String VIEW = BASE_VIEW + "clients";
+        }
+
+        public static final class GetClientById {
+            private GetClientById() {}
+
+            public static final String URL = "/{id}";
+            public static final String TITLE = "Fiche du client";
+            public static final String VIEW = BASE_VIEW + "clients";
+        }
+
+        public static final class AddClient {
+            private AddClient() {}
+
+            public static final String URL = "/ajouter";
+            public static final String TITLE = "Ajouter un client";
+            public static final String VIEW = BASE_VIEW + "addClient";
+            public static final String ERROR_MESSAGE = "Impossible d'enregister le client";
+        }
+
+        public static final class UpdateClient {
+            private UpdateClient() {}
+
+            public static final String URL = "/modifier/{id}";
+            public static final String TITLE = "Modifier le client";
+            public static final String VIEW = BASE_VIEW + "editClient";
+            public static final String ERROR_MESSAGE = "Impossible de modifier le client";
+        }
+
+        public static final class ArchiveClient {
+            private ArchiveClient() {}
+
+            public static final String URL = "/supprimer/{id}";
+            public static final String TITLE = "Archiver le client";
+            public static final String VIEW = BASE_VIEW + "archiveClient";
+            public static final String ERROR_MESSAGE = "Impossible d'archiver le client";
         }
     }
 

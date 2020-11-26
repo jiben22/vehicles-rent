@@ -1,9 +1,12 @@
 package fr.enssat.vehiclesrental.service;
 
 import fr.enssat.vehiclesrental.model.Client;
+import fr.enssat.vehiclesrental.model.Employee;
+import fr.enssat.vehiclesrental.model.Vehicle;
 import fr.enssat.vehiclesrental.repository.ClientRepository;
 import fr.enssat.vehiclesrental.service.exception.alreadyexists.ClientAlreadyExistException;
 import fr.enssat.vehiclesrental.service.exception.notfound.ClientNotFoundException;
+import fr.enssat.vehiclesrental.service.exception.notfound.EmployeeNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -31,6 +34,11 @@ public class ClientService implements IClientService {
     @Override
     public Client getClient(long id) {
         return repository.findById(id).orElseThrow(() -> new ClientNotFoundException(String.valueOf(id)));
+    }
+
+    @Override
+    public Client getClientByEmail(String email) {
+        return repository.findByEmail(email).orElseThrow(() -> new ClientNotFoundException(email));
     }
 
     @Override
@@ -82,11 +90,10 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public void archiveClient(long id) {
-
+    public Client archiveClient(long id) {
         Client client = getClient(id);
-        client.setIsArchived(true);
-        editClient(client);
+        client.setArchived(true);
+        return repository.saveAndFlush(client);
     }
 
 }

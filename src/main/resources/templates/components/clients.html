@@ -10,34 +10,28 @@
                 <table id="clients_datatable" class="table table-striped table-no-bordered table-hover dataTable dtr-inline w-100" role="grid" aria-describedby="datatables_info" cellspacing="0">
                     <thead>
                     <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 181px;" aria-sort="ascending" aria-label="Lastname: activate to sort column descending">
+                        <th class="sorting_asc" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="Lastname: activate to sort column descending">
                             Nom
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 181px;" aria-label="Firstname: activate to sort column ascending">
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Firstname: activate to sort column ascending">
                             Prénom
                         </th>
-                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 181px;" aria-label="E-mail: activate to sort column ascending">
+                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 100px;" aria-label="Email: activate to sort column ascending">
                             E-mail
                         </th>
-                        <th class="disabled-sorting text-right sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 70px;"></th>
+                        <th class="disabled-sorting text-right sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" style="width: 70px;" aria-label="Actions: activate to sort column ascending"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="client, i : ${clients}" th:data-id="${client.id}" role="row" th:style="${i.odd}? 'odd' : 'even'" th:class="${client.id}">
-                        <!-- Lastname -->
-                        <td th:text="${client.lastname}" tabindex="0" class="sorting_1">Lastname</td>
-
-                        <!-- Firstname -->
-                        <td th:text="${client.firstname}">Firstname</td>
-
-                        <!-- E-mail -->
+                        <td th:text="${client.lastname}" tabindex="0" class="sorting_1">Nom</td>
+                        <td th:text="${client.firstname}">Prénom</td>
                         <td th:text="${client.email}">E-mail</td>
 
                         <!-- Actions -->
                         <td class="text-right">
-                            <a th:href="@{/client/edit/} + ${client.id}" class="btn btn-link btn-info btn-just-icon"><i class="material-icons">edit</i></a>
-                            <a th:href="@{/client/} + ${client.id}" class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
-                            <button class="btn btn-link btn-danger btn-just-icon remove" data-target="#deleteClientModal" data-toggle="modal"><i class="material-icons">close</i></button>
+                            <a th:href="@{/clients/} + ${client.id}" class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
+                            <button class="btn btn-link btn-danger btn-just-icon remove" data-target="#deleteClientModal" data-toggle="modal"><i class="material-icons">archive</i></button>
                         </td>
                     </tr>
                     </tbody>
@@ -53,10 +47,12 @@
                 that = $(this);
                 $(".remove-modal-btn").click(function(){
                     let tr = that.parent().parent()[0];
+                    let id = tr.dataset.id;
                     $(tr).fadeOut();
-                    $.get("client/delete/" + tr.dataset.id);
+                    $.get("clients/supprimer/" + id);
                 });
             });
         })(jQuery);
     </script>
 </div>
+
