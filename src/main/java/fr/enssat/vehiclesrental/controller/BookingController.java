@@ -241,4 +241,28 @@ public class BookingController {
 
         return REDIRECT_BOOKINGS;
     }
+
+    /**
+     * Démarre la location
+     * @param id ID de la réservation
+     * @param redirectAttributes Redirect attributes
+     * @return la liste des réservations ou un message d'erreur si le commencement de la location échoue
+     */
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
+    @GetMapping(RentedBooking.URL)
+    public String rentBooking(@PathVariable String id,
+                                 RedirectAttributes redirectAttributes) {
+        log.info(String.format("GET %s", StringUtils.replace(RentedBooking.URL, PATTERN_ID, id)));
+
+        try {
+            // Rent booking
+            //TODO: Inconsistent date :Start date is before today datenull
+            bookingService.rentBooking(Long.parseLong(id));
+        } catch (Exception exception) {
+            log.error(exception.getMessage() + exception.getCause());
+            redirectAttributes.addFlashAttribute(MESSAGE, RentedBooking.ERROR_MESSAGE);
+        }
+
+        return REDIRECT_BOOKINGS;
+    }
 }

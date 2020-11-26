@@ -31,9 +31,8 @@
                     </a>
                     <a th:if="${booking.status.name == 'Réservation prête'}" sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
-                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
-                       th:href="@{/reservations/louer/} + ${booking.id}">
-                        <button type="button" class="btn btn-success pull-right">Commencer location</button>
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)">
+                        <button type="button" class="btn btn-success pull-right rentBooking" data-target="#rentBookingModal" data-toggle="modal">Commencer la location</button>
                     </a>
                     <div class="card">
                         <div class="card-header card-header-primary card-header-icon">
@@ -105,10 +104,26 @@
                         </div>
                     </div>
                 </div>
+                <div th:replace="modals/bookingModals.html :: rentBookingModal"></div>
             </div>
             <footer th:replace="fragments/footer.html :: footer"></footer>
         </div>
     </div>
 </body>
+
+<script>
+    (function($) {
+        let that;
+        $(".rentBooking").click(function() {
+            that = $(this);
+            $(".rent-booking-modal-btn").click(function(){
+                let tr = that.parent().parent()[0];
+                let id = tr.dataset.id;
+                $(tr).fadeOut();
+                $.get("reservations/louer/" + id);
+            });
+        });
+    })(jQuery);
+</script>
 
 </html>
