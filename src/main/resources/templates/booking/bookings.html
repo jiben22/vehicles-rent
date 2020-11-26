@@ -12,15 +12,14 @@
             <div class="content">
                 <div sec:authorize="hasAnyAuthority(
                     T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
-                    T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
-                     class="col-sm-12 mt-4">
-                    <div class="col pl-0 mb-1">
+                    T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)" class="col-sm-12 mt-4">
+                    <div class="col-sm-12 mt-4">
                         <h3 th:text="${message}" th:if="${message != null}" class="alert m-0 h-100 py-3">Erreur</h3>
                     </div>
                     <div class="align-self-end mb-1">
-                        <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$AddVehicle).URL}}" class="btn">
+                        <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController$AddBookings).URL}}">
                             <i class="material-icons" style="font-size:30px;">control_point</i>
-                            [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$AddVehicle).TITLE} ]]
+                            [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController$AddBookings).TITLE} ]]
                         </a>
                     </div>
                 </div>
@@ -28,11 +27,11 @@
                     <div class="card">
                         <div class="card-header card-header-icon">
                             <div class="card-icon">
-                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON}"></i>
+                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController).ICON}"></i>
                             </div>
-                            <h4 class="card-title" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$GetVehicles).TITLE}"></h4>
+                            <h4 class="card-title" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController$GetBookings).TITLE}"></h4>
                         </div>
-                        <div th:replace="components/vehicles.html :: vehicles(vehicles=${vehicles})"></div>
+                        <div th:replace="components/bookings.html :: bookings(bookings=${bookings})"></div>
                     </div>
                 </div>
             </div>

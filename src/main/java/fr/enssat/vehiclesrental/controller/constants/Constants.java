@@ -31,7 +31,7 @@ public class Constants {
         public static final String CLIENTS = "clients";
         public static final String CLIENTS_LABEL = CLIENTS;
 
-        public static final String ICON = "person";
+        public static final String ICON = "people";
 
         public static final class GetClients {
             private GetClients() {}

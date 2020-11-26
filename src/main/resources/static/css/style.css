@@ -52,6 +52,11 @@ input.form-control {
     background-color: #111116;
 }
 
+h3.alert {
+    background-color: #86bbd8;
+    color: #606477;
+}
+
 .dark-edition #navigation,
 .dark-edition .footer,
 .dark-edition .sidebar,
@@ -84,10 +89,10 @@ input.form-control {
     background:linear-gradient(60deg, #333338 10%, #444449 50%);
 }
 
-.dark-edition .content .material-datatables tbody tr:nth-child(even) {
+.dark-edition .table-striped > tbody > tr:nth-of-type(2n+1) {
     background-color: #333338 !important;
 }
-.dark-edition .content .material-datatables tbody tr:nth-child(odd) {
+.dark-edition .table-striped > tbody > tr:nth-of-type(2n) {
     background-color: #444449 !important;
 }
 .dark-edition .content .material-datatables .btn-warning i {

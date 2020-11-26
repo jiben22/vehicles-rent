@@ -5,8 +5,7 @@
 <div th:fragment="SideBarMenu" class="sidebar"
      data-image="/img/sidebar-1.jpg" data-color="purple">
     <div class="logo my-0 py-1">
-        <!-- TODO : use constant -->
-        <a th:href="@{/}" class="simple-text logo-normal my-0">
+        <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.DashboardController$GetDashboard).URL}}" class="simple-text logo-normal my-0">
             Vehi'rental
         </a>
     </div>
