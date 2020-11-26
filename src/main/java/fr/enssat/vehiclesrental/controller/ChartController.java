@@ -12,11 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static fr.enssat.vehiclesrental.controller.constants.Constants.ClientController.CLIENTS;
 import static fr.enssat.vehiclesrental.controller.constants.Constants.Controller.TITLE;
@@ -30,7 +28,7 @@ public class ChartController {
 
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_COMMERCIAL.label)")
     @GetMapping(GetCharts.URL)
-    public String showStatistics(Model springModel, @PathVariable Type type, @PathVariable Interval interval) {
+    public String showStatistics(Model springModel, @RequestParam Type type, @RequestParam Interval interval) {
         log.info(String.format("GET %s", GetCharts.URL));
         springModel.addAttribute(TITLE, GetCharts.TITLE);
         springModel.addAttribute(GetCharts.TOP10, String.format(GetCharts.TOP10_NAME, type.name));
@@ -101,9 +99,10 @@ public class ChartController {
 
     private Map<String, Integer> createCharts(List<? extends Person> top10) {
         Map<String, Integer> clients = new LinkedHashMap<>();
-        for (Person person: top10) {
-            //TODO: replace 150 by the number of rows by client (count)
-            clients.put(String.format("%s %s", person.getLastname(), person.getFirstname()), 150);
+        List<Integer> points = Arrays.asList(10, 9, 8, 7, 6, 5, 4, 3, 2, 1);
+        for (int i = 0; i < top10.size(); i++) {
+            Person person = top10.get(i);
+            clients.put(String.format("%s %s", person.getLastname(), person.getFirstname()), points.get(i));
         }
 
         return clients;

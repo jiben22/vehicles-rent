@@ -3,6 +3,27 @@
 
 <div th:fragment="statistics">
     <div class="row">
+        <div class="offset-md-3 col-md-2">
+            <div class="form-group bmd-form-group">
+                <select id="selectType" class="form-control">
+                    <option th:each="type : ${T(fr.enssat.vehiclesrental.model.enums.Type).values()}" th:value="${type}" th:text="${type.name}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="form-group bmd-form-group">
+                <select id="selectInterval" class="form-control">
+                    <option th:each="interval : ${T(fr.enssat.vehiclesrental.model.enums.Interval).values()}" th:value="${interval}" th:text="${interval.name}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <a id="updateCharts" th:href="@{/statistiques?type=MOST_RESERVER_CLIENT&interval=ONE_MONTH}">
+                <button type="button" class="btn btn-secondary">Mettre à jour</button>
+            </a>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12">
             <div class="card card-chart">
                 <div class="card-header card-header-warning">
@@ -33,5 +54,37 @@
                 /*[[${clients.values()}]]*/ []
             ]
         });
+    </script>
+    <script>
+        $(document).ready(function() {
+            let type = getUrlParameter('type');
+            let interval = getUrlParameter('interval');
+            $('#selectType').val(type);
+            $('#selectInterval').val(interval);
+
+            $('#selectType').on('change', function() {
+                type = this.value;
+                $("#updateCharts").attr("href", `/statistiques?type=${type}&interval=${interval}`);
+            });
+            $('#selectInterval').on('change', function() {
+                interval = this.value;
+                $("#updateCharts").attr("href", `/statistiques?type=${type}&interval=${interval}`);
+            });
+        });
+
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                }
+            }
+        };
     </script>
 </div>
