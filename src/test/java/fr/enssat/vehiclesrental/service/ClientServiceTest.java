@@ -1,7 +1,9 @@
 package fr.enssat.vehiclesrental.service;
 
 import fr.enssat.vehiclesrental.factory.ClientFactory;
+import fr.enssat.vehiclesrental.factory.VehicleFactory;
 import fr.enssat.vehiclesrental.model.Client;
+import fr.enssat.vehiclesrental.model.Vehicle;
 import fr.enssat.vehiclesrental.repository.ClientRepository;
 import fr.enssat.vehiclesrental.service.exception.alreadyexists.ClientAlreadyExistException;
 import fr.enssat.vehiclesrental.service.exception.notfound.ClientNotFoundException;
@@ -99,12 +101,15 @@ public class ClientServiceTest {
         assertThrows(ClientNotFoundException.class, () -> clientService.editClient(ClientFactory.getClient()));
     }
 
-    @DisplayName("Achive a client")
+    @DisplayName("Archive a client")
     @Test
-    public void archiveClient() {
-        //TODO : Implémenter le tesr
-        clientService.archiveClient(4);
-        boolean test = false;
-        assertTrue(test);
+    public void archiveVehicle() {
+        Client client = ClientFactory.getClient();
+        when(clientRepository.findById(anyLong())).thenReturn(Optional.ofNullable(client));
+        client.setArchived(true);
+        when(clientRepository.saveAndFlush(any(Client.class))).thenReturn(client);
+
+        clientService.archiveClient(69L);
+        assertTrue(client.isArchived());
     }
 }
