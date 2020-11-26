@@ -3,6 +3,7 @@ package fr.enssat.vehiclesrental.repository;
 import fr.enssat.vehiclesrental.factory.BookingFactory;
 import fr.enssat.vehiclesrental.model.Booking;
 import fr.enssat.vehiclesrental.model.enums.Status;
+import org.apache.tomcat.jni.Local;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
@@ -76,16 +79,15 @@ public class BookingRepositoryTest {
         startDate.set(Calendar.HOUR_OF_DAY,0);
         startDate.set(Calendar.MINUTE,0);
         startDate.set(Calendar.SECOND,0);
-        Timestamp startTime = new Timestamp(startDate.getTimeInMillis());
-        startTime.setNanos(0);
+        LocalDate startTime = LocalDate.ofInstant(startDate.toInstant(), ZoneId.systemDefault());
+
 
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.DATE,7);
         endDate.set(Calendar.HOUR_OF_DAY,0);
         endDate.set(Calendar.MINUTE,0);
         endDate.set(Calendar.SECOND,0);
-        Timestamp endTime = new Timestamp(endDate.getTimeInMillis());
-        endTime.setNanos(0);
+        LocalDate endTime = LocalDate.ofInstant(endDate.toInstant(), ZoneId.systemDefault());
 
         List<Booking> bookings = bookingRepository.findAll(where(hasStatus(Status.RENTED)).and(hasStartDate(startTime).and(hasEndDate(endTime))));
         assertEquals(1, bookings.size());

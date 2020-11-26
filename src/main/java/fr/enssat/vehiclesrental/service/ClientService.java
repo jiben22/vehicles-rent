@@ -18,8 +18,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 import static fr.enssat.vehiclesrental.repository.ClientRepository.*;
+import static fr.enssat.vehiclesrental.repository.VehicleBaseRepository.isNotArchived;
 import static org.springframework.data.jpa.domain.Specification.where;
-
 @RequiredArgsConstructor
 @Service
 public class ClientService implements IClientService {
@@ -57,6 +57,7 @@ public class ClientService implements IClientService {
     }
     private Specification<Client> buildSpecification(String firstname, String lastname, String email, String zipcode) {
         List<Specification<Client>> specifications = new ArrayList<>();
+        specifications.add(ClientRepository.isNotArchived());
         if (!firstname.isEmpty()) specifications.add(hasFirstname(firstname));
         if (!lastname.isEmpty()) specifications.add(hasLastname(lastname));
         if (!email.isEmpty()) specifications.add(hasEmail(email));

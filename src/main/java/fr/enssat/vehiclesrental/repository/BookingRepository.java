@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -23,13 +24,13 @@ public interface BookingRepository extends JpaRepository<Booking,Long> , JpaSpec
      * @param endDateForEnd Date maximum de la fin de la réservation
      * @return Les réservations correspondants aux critères de recherche
      */
-    List<Booking> findBookingsByVehicleAndStartDateBetweenOrEndDateBetween(Vehicle vehicle, Date startDateForStart, Date endDateForStart,Date startDateForEnd, Date endDateForEnd);
+    List<Booking> findBookingsByVehicleAndStartDateBetweenOrEndDateBetween(Vehicle vehicle, LocalDate startDateForStart, LocalDate endDateForStart, LocalDate startDateForEnd, LocalDate endDateForEnd);
 
-    static Specification<Booking> hasStartDate(Date startDate) {
+    static Specification<Booking> hasStartDate(LocalDate startDate) {
         return (booking, cq, cb) -> cb.equal(booking.get("startDate"), startDate);
     }
 
-    static Specification<Booking> hasEndDate(Date endDate) {
+    static Specification<Booking> hasEndDate(LocalDate endDate) {
         return (booking, cq, cb) -> cb.equal(booking.get("endDate"), endDate);
     }
 
