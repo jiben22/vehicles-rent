@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/head.html :: head"></head>
+
+<body class="">
+    <div class="wrapper ">
+        <div th:replace="fragments/menus.html :: SideBarMenu"></div>
+        <div class="main-panel">
+            <div th:replace="fragments/menus.html :: TopMenu"></div>
+            <div class="content">
+                <div class="container-fluid">
+                    <div sec:authorize="hasAnyAuthority(
+                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)"
+                         class="container">
+                        <div class="offset-md-11">
+                            <a th:href="@{/clients/ajouter}" class="btn btn-primary">
+                                <i class="material-icons" style="font-size:30px;">control_point</i> Ajouter un client
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header card-header-primary card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">work</i>
+                            </div>
+                            <h4 class="card-title">Rechercher un client</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="#" method="post" th:action="@{'/clients/rechercher'}" th:object="${client}" class="form-horizontal">
+                                <input type="hidden" th:field="*{id}" />
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Nom</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input th:field="*{lastname}" type="text" class="form-control" required="">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">Prénom</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input th:field="*{firstname}" type="text" class="form-control" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Email</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input th:field="*{email}" type="text" class="form-control" required="">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">Code postal</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input th:field="*{zipcode}" type="text" class="form-control" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pull-right">
+                                    <button type="submit" class="btn btn-info">Rechercher</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer th:replace="fragments/footer.html :: footer"></footer>
+        </div>
+    </div>
+</body>
+
+</html>

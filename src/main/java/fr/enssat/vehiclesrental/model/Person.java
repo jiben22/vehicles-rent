@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -52,7 +53,7 @@ public abstract class Person implements Serializable {
      * Birthdate of a person. Used to know age of a person.
      */
     @Column(nullable = false)
-    @Size(min = 1, max = 45, message = "La date de naissance ne peut pas être vide et doit être une date valide !")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @NonNull
     private LocalDate birthdate;
 
@@ -60,8 +61,8 @@ public abstract class Person implements Serializable {
      * Name of the street where live a person
      */
     @Column(nullable = false, length = 128)
-    @NonNull
     @Size(min = 1, max = 128, message = "La rue ne peut pas être vide et ne doit pas dépasser les 128 caractères !")
+    @NonNull
     private String street;
 
     /**

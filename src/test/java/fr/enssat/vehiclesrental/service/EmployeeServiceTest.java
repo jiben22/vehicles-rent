@@ -17,7 +17,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -67,30 +66,6 @@ public class EmployeeServiceTest {
     public void getEmployeeByEmailException() {
         when(employeeRepository.findByEmail(anyString())).thenReturn(Optional.empty());
         assertThrows(EmployeeNotFoundException.class, () -> employeeService.getEmployeeByEmail("unknown@unknown.fr"));
-    }
-
-    @DisplayName("Get employee with a firstname")
-    @Test
-    public void getEmployeeByFirstname() {
-        when(employeeRepository.findByFirstname(anyString()))
-                .thenReturn(Collections.singletonList(EmployeeFactory.getEmployeeGestionnaireTechnique()));
-
-        List<Employee> employees = employeeService.getEmployeeByFirstname("Henry");
-        employees.forEach(employee ->
-                assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeGestionnaireTechnique(), "password").matches(employee))
-        );
-    }
-
-    @DisplayName("Get employee with a lastname")
-    @Test
-    public void getEmployeeByLastname() {
-        when(employeeRepository.findByLastname(anyString()))
-                .thenReturn(Collections.singletonList(EmployeeFactory.getEmployeeGestionnaireTechnique()));
-
-        List<Employee> employees = employeeService.getEmployeeByLastname("Jonathan");
-        employees.forEach(employee ->
-            assertTrue(new ReflectionEquals(EmployeeFactory.getEmployeeGestionnaireTechnique(), "password").matches(employee))
-        );
     }
 
     @DisplayName("Get all employees")

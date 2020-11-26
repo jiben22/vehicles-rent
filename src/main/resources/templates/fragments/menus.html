@@ -35,7 +35,7 @@
                     <ul class="list-unstyled">
                         <li class="nav-item" th:classappend="${title == 'Client' ? 'active' : ''}">
                             <!-- TODO : use constant -->
-                            <a class="nav-link my-0" th:href="@{/clients}">
+                            <a class="nav-link my-0" th:href="@{/clients/rechercher}">
                                 <i class="material-icons">person</i>
                                 <p>Clients</p>
                             </a>
@@ -65,8 +65,7 @@
                 </li>
                 <hr class="my-2"/>
                 <li class="nav-item" th:classappend="${title == 'Statistiques' ? 'active' : ''}">
-                    <!-- TODO : use constant -->
-                    <a class="nav-link my-0" th:href="@{/statistiques}">
+                    <a class="nav-link my-0" th:href="@{/statistiques?type=MOST_RESERVER_CLIENT&interval=ONE_MONTH}">
                         <i class="material-icons">poll</i>
                         <p>Statistiques</p>
                     </a>

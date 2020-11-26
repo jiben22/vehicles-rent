@@ -2,6 +2,7 @@ package fr.enssat.vehiclesrental.model;
 
 import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -16,16 +17,25 @@ import java.util.Set;
 @Table(name = "Client")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
 public class Client extends Person implements Serializable {
     /**
      * Constructor of a Client
      */
     @Builder
-    private Client(long id, String lastname, String firstname, LocalDate birthdate, String street, String zipcode, String city, String country, String email, String phone) {
+    private Client(long id, String lastname, String firstname, LocalDate birthdate, String street, String zipcode, String city, String country, String email, String phone, boolean isArchived) {
         super(id, lastname, firstname, birthdate, street, zipcode, city, country, email,phone);
+        this.isArchived = isArchived;
     }
+
+    /**
+     * Used to know if a client is archived
+     */
+    @Column(nullable = false)
+    @NonNull
+    private boolean isArchived;
 
     /**
      * Represent list of bookings link to the current client.
