@@ -12,7 +12,7 @@ INSERT INTO employee (id, lastname, firstname, birthdate, street, zipcode, city,
 (157314099170609, 'Rambeau', 'Monica', '1963-05-03', 'partout', '00', 'dans la', 'Galaxie', 'captainmarvel@marvel.com', '+33612482274','Collaborateur', '$2a$10$mPKK/CRsEA9Wz5K2mw3JGOJVysJV8CM0QSbm6ZLKZWKjhk6oxjOzu',4786),
 (157314099170610, 'Parker', 'Peter', '1969-05-03', 'quelque part', '000', 'New York', 'USA', 'spiderman@marvel.com', '+33612482274','Collaborateur', '$2a$10$9xb3/9UAmHG4pbUI8ipsH.cx912tRPr8ybg32Ocr538tURvHoZ7gC',893);
 
-INSERT INTO client (id, birthdate, city, country, email, firstname, lastname, phone, street, zipcode, isArchived) VALUES
+INSERT INTO client (id, birthdate, city, country, email, firstname, lastname, phone, street, zipcode, is_archived) VALUES
 (9143686792, '1998-12-06', 'Lannion', 'France', 'tim.bradstreet@gmail.com', 'Tim', 'Bradstreet', '+33938333613', '6 Rue des ARTILLEURS', '35288',false),
 (9143686793, '2001-08-07', 'New-York', 'Etats-Unis', 'garth.ennis@hotmail.eu', 'Garth', 'Ennis', '+33425464119', '5 Rue des CAMELIAS', '56925',false),
 (9143686794, '1956-01-14', 'Moscou', 'Russie', 'michael.straczynski@orange.ru', 'Michael', 'Straczynski', '+33786106413', '11 Rue du quai SOLIDOR', '92541',false);

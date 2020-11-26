@@ -15,7 +15,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 import static fr.enssat.vehiclesrental.repository.BookingRepository.*;
@@ -45,10 +46,10 @@ public class BookingService implements IBookingService{
         if(repository.existsById(booking.getId())){
             throw new BookingAlreadyExistsException(booking);
         }
-        if(booking.getStartDate().before(getTodayDate())){
+        if(booking.getStartDate().isBefore(getTodayDate())){
             throw new StartDateBeforeTodayException();
         }
-        if(booking.getStartDate().after(booking.getEndDate())){
+        if(booking.getStartDate().isAfter(booking.getEndDate())){
             throw new StartDateAfterEndDateExceptionException();
         }
         // Check if vehicle already reserved during ask period.
@@ -71,10 +72,10 @@ public class BookingService implements IBookingService{
         if(!repository.existsById(booking.getId())){
             throw new BookingNotFoundException(String.valueOf(booking.getId()));
         }
-        if(booking.getStartDate().before(getTodayDate())){
+        if(booking.getStartDate().isBefore(getTodayDate())){
             throw new StartDateBeforeTodayException();
         }
-        if(booking.getStartDate().after(booking.getEndDate())){
+        if(booking.getStartDate().isAfter(booking.getEndDate())){
             throw new StartDateAfterEndDateExceptionException();
         }
         // check in case of vehicle change, if new vehicle already reserved
@@ -102,7 +103,7 @@ public class BookingService implements IBookingService{
     }
 
     @Override
-    public List<Booking> searchBookings(Date startDate, Date endDate, Status status) {
+    public List<Booking> searchBookings(LocalDate startDate, LocalDate endDate, Status status) {
         Specification<Booking> bookingSpecification = buildSpecification(startDate, endDate, status);
         if (bookingSpecification != null) {
             return repository.findAll(bookingSpecification);
@@ -111,7 +112,7 @@ public class BookingService implements IBookingService{
         }
     }
 
-    private Specification<Booking> buildSpecification(Date startDate, Date endDate, Status status) {
+    private Specification<Booking> buildSpecification(LocalDate startDate, LocalDate endDate, Status status) {
         List<Specification<Booking>> specifications = new ArrayList<>();
         if (startDate != null) specifications.add(hasStartDate(startDate));
         if (endDate != null) specifications.add(hasEndDate(endDate));
@@ -133,6 +134,7 @@ public class BookingService implements IBookingService{
     @Override
     public void cancelBooking(long id) {
         Optional<Booking> booking = repository.findById(id);
+
         if(booking.isEmpty()){
             throw new BookingNotFoundException(String.valueOf(id));
         }
@@ -152,7 +154,7 @@ public class BookingService implements IBookingService{
         if(booking.isEmpty()){
             throw new BookingNotFoundException(String.valueOf(id));
         }
-        if(booking.get().getStartDate().before(getTodayDate())){
+        if(booking.get().getStartDate().isBefore(getTodayDate())){
             throw new StartDateBeforeTodayException();
         }
         booking.get().setStatus(Status.RENTED);
@@ -169,13 +171,12 @@ public class BookingService implements IBookingService{
         return repository.saveAndFlush(booking.get());
     }
 
-    private Date getTodayDate(){
+    private LocalDate getTodayDate(){
         Calendar todayDate = Calendar.getInstance();
         todayDate.set(Calendar.HOUR_OF_DAY,0);
         todayDate.set(Calendar.MINUTE,0);
         todayDate.set(Calendar.SECOND,0);
-        Timestamp startTime = new Timestamp(todayDate.getTimeInMillis());
-        startTime.setNanos(0);
-        return startTime;
+        LocalDate todayLocal = LocalDate.ofInstant(todayDate.toInstant(), ZoneId.systemDefault());
+        return todayLocal;
     }
 }
