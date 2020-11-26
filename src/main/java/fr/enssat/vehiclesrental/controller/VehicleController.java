@@ -68,6 +68,7 @@ public class VehicleController {
                 default:
                     log.error(String.valueOf(new IllegalStateException("Unexpected value: " + vehicleType)));
                     vehicles = Collections.emptyList();
+                    break;
             }
         } else {
             vehicles = vehicleService.getVehicles();
@@ -122,6 +123,7 @@ public class VehicleController {
                     break;
                 default:
                     log.error(String.valueOf(new IllegalStateException("Unexpected value: " + vehicleType)));
+                    break;
             }
         }
 

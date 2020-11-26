@@ -4,7 +4,6 @@ import fr.enssat.vehiclesrental.model.Booking;
 import fr.enssat.vehiclesrental.model.enums.Status;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public interface IBookingService {

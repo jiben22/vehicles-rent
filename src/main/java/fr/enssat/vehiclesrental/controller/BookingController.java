@@ -1,15 +1,12 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.constants.ControllerConstants;
 import fr.enssat.vehiclesrental.model.*;
 import fr.enssat.vehiclesrental.model.enums.Status;
-import fr.enssat.vehiclesrental.model.enums.VehicleType;
 import fr.enssat.vehiclesrental.service.BookingService;
 import fr.enssat.vehiclesrental.service.ClientService;
 import fr.enssat.vehiclesrental.service.VehicleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,18 +15,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.sound.midi.SysexMessage;
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import static fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController.*;
 import static fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController.CLIENTS;
 import static fr.enssat.vehiclesrental.constants.ControllerConstants.Controller.*;
-import static fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController.EMPLOYEE;
-import static fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController.REDIRECT_EMPLOYEES;
 import static fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController.VEHICLE;
 import static fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController.VEHICLES;
 import static java.time.temporal.ChronoUnit.DAYS;

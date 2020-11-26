@@ -1,8 +1,6 @@
 package fr.enssat.vehiclesrental.repository;
 
 import fr.enssat.vehiclesrental.model.Client;
-import fr.enssat.vehiclesrental.model.Employee;
-import fr.enssat.vehiclesrental.model.Vehicle;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

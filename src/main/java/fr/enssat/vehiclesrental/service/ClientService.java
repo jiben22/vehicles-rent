@@ -1,12 +1,9 @@
 package fr.enssat.vehiclesrental.service;
 
 import fr.enssat.vehiclesrental.model.Client;
-import fr.enssat.vehiclesrental.model.Employee;
-import fr.enssat.vehiclesrental.model.Vehicle;
 import fr.enssat.vehiclesrental.repository.ClientRepository;
 import fr.enssat.vehiclesrental.service.exception.alreadyexists.ClientAlreadyExistException;
 import fr.enssat.vehiclesrental.service.exception.notfound.ClientNotFoundException;
-import fr.enssat.vehiclesrental.service.exception.notfound.EmployeeNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -15,10 +12,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import static fr.enssat.vehiclesrental.repository.ClientRepository.*;
-import static fr.enssat.vehiclesrental.repository.VehicleBaseRepository.isNotArchived;
 import static org.springframework.data.jpa.domain.Specification.where;
 @RequiredArgsConstructor
 @Service
