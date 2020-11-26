@@ -12,5 +12,5 @@ public interface IClientService {
     List<Client> searchClients(String firstname, String lastname, String email, String zipcode);
     Client addClient(Client client);
     Client editClient(Client client);
-    void deleteClient(long id);
+    void archiveClient(long id);
 }
