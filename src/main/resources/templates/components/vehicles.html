@@ -7,26 +7,30 @@
     <div class="col material-datatables">
         <div class="d-flex flex-column flex-md-row justify-content-around align-items-center mb-2 border-bottom border-secondary pb-3">
             <div>
-                <a th:href="@{/vehicules}" class="btn" th:classappend="${param.vehicleType == null} ? btn-light : btn-secondary">
+                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL}}"
+                   class="btn" th:classappend="${param.vehicleType == null} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;">clear_all</i> Tous les véhicules
                 </a>
             </div>
             <div>
-                <a th:href="@{/vehicules?vehicleType=CAR}" class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'CAR'} ? btn-light : btn-secondary">
+                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '?vehicleType=CAR'}}"
+                   class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'CAR'} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;"
                        th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_CAR}"></i>
                     [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).CARS} ]]
                 </a>
             </div>
             <div>
-                <a th:href="@{/vehicules?vehicleType=MOTORBIKE}" class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'MOTORBIKE'} ? btn-light : btn-secondary">
+                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '?vehicleType=MOTORBIKE'}}"
+                   class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'MOTORBIKE'} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;"
                        th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_MOTORBIKE}"></i>
                     [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).MOTORBIKES} ]]
                 </a>
             </div>
             <div>
-                <a th:href="@{/vehicules?vehicleType=PLANE}" class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'PLANE'} ? btn-light : btn-secondary">
+                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '?vehicleType=PLANE'}}"
+                   class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'PLANE'} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;"
                        th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_PLANE}"></i>
                     [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).PLANES} ]]
@@ -62,7 +66,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!--TODO: use if-else block -->
                 <tr th:each="vehicle, i : ${vehicles}" th:data-id="${vehicle.id}" role="row" th:style="${i.odd}? 'odd' : 'even'" th:class="${vehicle.id}">
                     <td>
                         <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}">
@@ -85,9 +88,9 @@
                     <td th:text="${vehicle.nbSeats}">Nombre de sièges</td>
                     <td th:text="${vehicle.state.description}">État</td>
                     <td class="text-right">
-<!--                             <a th:href="@{/vehicule/modifier/} + ${vehicle.id}" class="btn btn-link btn-info btn-just-icon"><i class="material-icons">edit</i></a>-->
-                        <a th:href="@{/vehicules/} + ${vehicle.registration}" class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
-                        <button class="btn btn-link btn-danger btn-just-icon remove" data-target="#deleteVehicleModal" data-toggle="modal"><i class="material-icons">archive</i></button>
+                        <!-- <a th:href="@{/vehicule/modifier/} + ${vehicle.id}" class="btn btn-link btn-info btn-just-icon"><i class="material-icons">edit</i></a> -->
+                        <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$GetVehicleByRegistration).URL}(registration=${vehicle.registration})}"
+                           class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
                     </td>
                 </tr>
                 </tbody>
@@ -107,17 +110,6 @@
         /*]]>*/
 
         $(document).ready(function(){
-            let that;
-            // for each
-            $(".remove").click(function() {
-                that = $(this);
-                $(".remove-modal-btn").click(function(){
-                    let tr = that.parent().parent()[0];
-                    let id = tr.dataset.id;
-                    $(tr).fadeOut();
-                    $.get("vehicules/supprimer/" + id);
-                });
-            });
 
             // setup datatable with langage translation
             let table = $('#datatables').DataTable({
@@ -163,7 +155,7 @@
                 // deselecting first, before last and last
                 if (![0,6,7].includes(colIdx)) {
                     // appends a column with an input (with responsive width)
-                    inputs.append($('<th><input type="text" class="w-100"/></th>'));
+                    inputs.append($('<th><input type="text" class="w-100 form-control"/></th>'));
                     // selects the newly created input
                     $(inputs).find('th:nth-child(' + (colIdx + 1) + ') input')
                         // on text entered in input
@@ -183,7 +175,7 @@
                     // creates a select element populate of status options
                     inputs.append($(
                         '<th>' +
-                            '<select id="stateSelect" class="w-100">' +
+                            '<select id="stateSelect" class="w-100 form-control">' +
                                 '<option></option>' +
                                 selectOptions +
                             '</select>' +

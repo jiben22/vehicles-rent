@@ -18,4 +18,19 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            let that;
+            // for each
+            $(".remove").click(function () {
+                that = $(this);
+                $(".remove-modal-btn").click(function () {
+                    let tr = that.parent().parent()[0];
+                    let id = tr.dataset.id;
+                    $(tr).fadeOut();
+                    $.get("vehicules/supprimer/" + id);
+                });
+            });
+        });
+    </script>
 </div>

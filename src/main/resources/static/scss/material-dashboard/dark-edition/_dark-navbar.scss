@@ -26,7 +26,7 @@
     background: $navbar-color-links !important;
   }
 
-  @include navbar-colors('primary', $purple-light);
+  @include navbar-colors('primary', $deep-purple-default);
   @include navbar-colors('info', $info-dark);
   @include navbar-colors('warning', $warning-dark);
   @include navbar-colors('danger', $danger-dark);

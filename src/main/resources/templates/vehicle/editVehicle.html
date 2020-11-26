@@ -8,8 +8,8 @@
         <div th:replace="fragments/menus.html :: SideBarMenu"></div>
         <div class="main-panel">
             <div th:replace="fragments/menus.html :: TopMenu"></div>
-            <div class="content">
-                <div class="container-fluid">
+            <div class="page-main-fragment">
+                <div class="col-md-12">
                     <div class="card ">
                         <div class="card-header card-header-primary card-header-icon">
                             <div class="card-icon">
@@ -20,7 +20,7 @@
                             <h4 class="card-title" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$UpdateVehicle).TITLE}"></h4>
                         </div>
                         <div class="card-body">
-                            <form action="#" method="post" th:action="@{'/vehicules/'+ ${vehicle.class.simpleName} + '/' + ${vehicle.registration}}" th:object="${vehicle}" class="form-horizontal">
+                            <form method="post" th:action="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '/'+ vehicle.class.simpleName + '/' + vehicle.registration}}" th:object="${vehicle}" class="form-horizontal">
                                 <input type="hidden" th:field="*{id}" />
                                 <div class="row">
                                     <label class="col-md-2 col-form-label">Immatriculation</label>
@@ -128,10 +128,13 @@
                                     </div>
                                 </div>
                                 <div class="pull-right">
-                                    <a th:href="@{/vehicules}">
-                                        <button type="button" class="btn btn-secondary">Annuler</button>
+                                    <a class="btn btn-secondary"
+                                       th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL}}">
+                                        Annuler
                                     </a>
                                     <button type="submit" class="btn btn-warning">Modifier</button>
+                                    <a class="btn btn-danger remove" data-target="#deleteVehicleModal" data-toggle="modal">Archiver</a>
+                                    <div th:replace="modals/vehicleModals.html :: deleteVehicleModal"></div>
                                 </div>
                             </form>
                         </div>

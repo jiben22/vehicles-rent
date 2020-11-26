@@ -132,7 +132,7 @@ public class VehicleController {
     }
 
     /**
-     * Ajouter une voiture
+     * Ajouter un véhicule
      * @param vehicle Vehicule
      * @param result Binding result
      * @param springModel Modèle
@@ -173,11 +173,11 @@ public class VehicleController {
                 log.error(exception.getMessage() + exception.getCause());
                 redirectAttributes.addFlashAttribute(MESSAGE, AddVehicle.ERROR_MESSAGE);
 
-                return "redirect:/vehicules";
+                return String.format("redirect:%s", GetVehicles.URL);
             }
         }
 
-        return String.format("redirect:/vehicules/%s", vehicle.getRegistration());
+        return String.format("redirect:%s/%s", GetVehicles.URL, vehicle.getRegistration());
     }
 
     /**
@@ -276,7 +276,7 @@ public class VehicleController {
             log.error(exception.getMessage() + exception.getCause());
             redirectAttributes.addFlashAttribute(MESSAGE, UpdateVehicle.ERROR_MESSAGE);
 
-            return "redirect:/vehicules";
+            return String.format("redirect:%s", GetVehicles.URL);
         }
 
         return String.format("redirect:/vehicules/%s", vehicle.getRegistration());
@@ -352,6 +352,6 @@ public class VehicleController {
             redirectAttributes.addFlashAttribute(MESSAGE, ArchiveVehicle.ERROR_MESSAGE);
         }
 
-        return "redirect:/vehicules";
+        return String.format("redirect:%s", GetVehicles.URL);
     }
 }

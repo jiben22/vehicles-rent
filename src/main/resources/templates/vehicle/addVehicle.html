@@ -8,17 +8,17 @@
         <div th:replace="fragments/menus.html :: SideBarMenu"></div>
         <div class="main-panel">
             <div th:replace="fragments/menus.html :: TopMenu"></div>
-            <div class="content">
-                <div class="container-fluid">
+            <div class="page-main-fragment">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary card-header-icon">
                             <div class="card-icon">
-                                <i th:if="${vehicle != null} and ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}" class="material-icons"
-                                   th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_CAR}"></i>
-                                <i th:if="${vehicle != null} and ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" class="material-icons"
-                                   th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_MOTORBIKE}"></i>
-                                <i th:if="${vehicle != null} and ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" class="material-icons"
-                                   th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_PLANE}"></i>
+                                <i th:if="${vehicle != null} and ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}"
+                                   class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_CAR}"></i>
+                                <i th:if="${vehicle != null} and ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}"
+                                   class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_MOTORBIKE}"></i>
+                                <i th:if="${vehicle != null} and ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}"
+                                   class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_PLANE}"></i>
                                 <i th:if="${vehicle == null}" class="material-icons">directions_car</i>
                             </div>
                             <h4 th:if="${vehicle != null} and ${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}" class="card-title">Ajouter une voiture</h4>
@@ -28,21 +28,21 @@
                         </div>
                         <div th:if="${vehicle == null}" class="card-body">
                             <div class="row">
-                                <a href="/vehicules/ajouter?vehicleType=CAR" class="col-sm-4 col-md-4 col-xl-4">
+                                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$AddVehicle).URL + '?vehicleType=CAR'}}" class="col-sm-4 col-md-4 col-xl-4">
                                     <div id="card-vehicle" class="custom-card rounded position-relative m-4 px-0 w-75">
                                         <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
                                             <span>Voiture</span>
                                         </h4>
                                     </div>
                                 </a>
-                                <a href="/vehicules/ajouter?vehicleType=MOTORBIKE" class="col-sm-4 col-md-4 col-xl-4">
+                                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$AddVehicle).URL + '?vehicleType=MOTORBIKE'}}" class="col-sm-4 col-md-4 col-xl-4">
                                     <div id="card-vehicle" class="custom-card rounded position-relative m-4 px-0 w-75">
                                         <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
                                             <span>Moto</span>
                                         </h4>
                                     </div>
                                 </a>
-                                <a href="/vehicules/ajouter?vehicleType=PLANE" class="col-sm-4 col-md-4 col-xl-4">
+                                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$AddVehicle).URL + '?vehicleType=PLANE'}}" class="col-sm-4 col-md-4 col-xl-4">
                                     <div id="card-vehicle" class="custom-card rounded position-relative m-4 px-0 w-75">
                                         <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
                                             <span>Avion</span>
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <div th:if="${vehicle != null}" class="card-body">
-                            <form action="#" method="post" th:action="@{'/vehicules/'+ ${vehicle.class.simpleName}}" th:object="${vehicle}" class="form-horizontal">
+                            <form action="#" method="post" th:action="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '/'+ vehicle.class.simpleName}}" th:object="${vehicle}" class="form-horizontal">
                                 <input type="hidden" th:field="*{id}" />
                                 <div class="row">
                                     <label class="col-md-2 col-form-label">Immatriculation</label>
@@ -160,7 +160,7 @@
                                     </div>
                                 </div>
                                 <div class="pull-right">
-                                    <a th:href="@{/vehicules}">
+                                    <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$AddVehicle).URL}}">
                                         <button type="button" class="btn btn-secondary">Annuler</button>
                                     </a>
                                     <button type="submit" class="btn btn-success">Enregistrer</button>

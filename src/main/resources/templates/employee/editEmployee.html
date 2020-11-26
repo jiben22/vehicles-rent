@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments/head.html :: head"></head>
 
@@ -8,9 +8,9 @@
         <div th:replace="fragments/menus.html :: SideBarMenu"></div>
         <div class="main-panel">
             <div th:replace="fragments/menus.html :: TopMenu"></div>
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="card ">
+            <div class="page-main-fragment">
+                <div class="col-md-12">
+                    <div class="card">
                         <div class="card-header card-header-primary card-header-icon">
                             <div class="card-icon">
                                 <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).ICON}"></i>
@@ -18,7 +18,7 @@
                             <h4 class="card-title" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController$UpdateEmployee).TITLE}"></h4>
                         </div>
                         <div class="card-body">
-                            <form action="#" method="post" th:action="@{'/collaborateurs/modifier/'+ ${employee.id}}" th:object="${employee}" class="form-horizontal">
+                            <form method="post" th:action="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).BASE_URL + '/' + employee.id}}" th:object="${employee}" class="form-horizontal">
                                 <input type="hidden" th:field="*{id}" />
                                 <div class="row">
                                     <label class="col-md-2 col-form-label">Nom</label>
@@ -146,10 +146,13 @@
                                     </div>
                                 </div>
                                 <div class="pull-right">
-                                    <a th:href="@{/collaborateurs}">
-                                        <button type="button" class="btn btn-secondary">Annuler</button>
+                                    <a class="btn btn-secondary"
+                                       th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).BASE_URL}}">
+                                        Annuler
                                     </a>
                                     <button type="submit" class="btn btn-warning">Modifier</button>
+                                    <a class="btn btn-danger remove" data-target="#deleteEmployeeModal" data-toggle="modal">Supprimer</a>
+                                    <div th:replace="modals/employeeModals.html :: deleteEmployeeModal"></div>
                                 </div>
                             </form>
                         </div>
