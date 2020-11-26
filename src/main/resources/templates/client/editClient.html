@@ -43,12 +43,6 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-md-2 col-form-label">Numéro d'immatriculation</label>
-                                    <div class="col-md-2">
-                                        <div class="form-group has-default bmd-form-group">
-                                            <input th:field="*{serialNumber}" type="text" class="form-control">
-                                        </div>
-                                    </div>
                                     <label class="col-md-2 col-form-label">Téléphone</label>
                                     <div class="col-md-2">
                                         <div class="form-group has-default bmd-form-group">
@@ -57,9 +51,6 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="offset-md-2 col-md-2">
-                                        <span class="text-danger" th:errors="*{serialNumber}"> </span>
-                                    </div>
                                     <div class="offset-md-2 col-md-2">
                                         <span class="text-danger" th:errors="*{phone}"> </span>
                                     </div>
@@ -130,21 +121,7 @@
                                         <span class="text-danger" th:errors="*{country}"> </span>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <label class="col-md-2 col-form-label">Fonction</label>
-                                    <div class="col-md-2">
-                                        <div class="form-group bmd-form-group">
-                                            <select th:field="*{position}" class="form-control">
-                                                <option th:each="position : ${T(fr.enssat.vehiclesrental.model.enums.Position).values()}" th:value="${position}" th:text="${position.label}"></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="offset-md-2 col-md-2">
-                                        <span class="text-danger" th:errors="*{position}"> </span>
-                                    </div>
-                                </div>
+
                                 <div class="pull-right">
                                     <a th:href="@{/clients}">
                                         <button type="button" class="btn btn-secondary">Annuler</button>

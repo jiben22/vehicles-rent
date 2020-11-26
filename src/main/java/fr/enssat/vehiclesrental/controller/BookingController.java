@@ -1,5 +1,6 @@
 package fr.enssat.vehiclesrental.controller;
 
+import fr.enssat.vehiclesrental.constants.ControllerConstants;
 import fr.enssat.vehiclesrental.model.*;
 import fr.enssat.vehiclesrental.model.enums.Status;
 import fr.enssat.vehiclesrental.service.BookingService;
@@ -22,8 +23,10 @@ import java.util.Calendar;
 import java.util.List;
 
 import static fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController.*;
+import static fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController.CLIENT;
 import static fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController.CLIENTS;
 import static fr.enssat.vehiclesrental.constants.ControllerConstants.Controller.*;
+import static fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController.REDIRECT_EMPLOYEES;
 import static fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController.VEHICLE;
 import static fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController.VEHICLES;
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -93,10 +96,11 @@ public class BookingController {
 
         Booking booking = bookingService.getBooking(id);
         Vehicle vehicle = booking.getVehicle();
-        //Client client = booking.getClient();
+        Client client = booking.getClient();
 
         springModel.addAttribute(BOOKING, booking);
         springModel.addAttribute(VEHICLE, vehicle);
+        springModel.addAttribute(CLIENT, client);
         // @TODO Add client
         return GetBookingById.VIEW;
     }
@@ -121,6 +125,35 @@ public class BookingController {
         springModel.addAttribute(CLIENTS, clients);
 
         return CreateBooking.VIEW;
+    }
+
+    /**
+     * Mettre à jour le formulaire une réservation
+     * @param springModel Modèle
+     * @return le formulaire de mise à jour d'une réservation
+     */
+    @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
+    @GetMapping(EditBooking.URL)
+    public String showUpdateBooking(Model springModel,@PathVariable long id, RedirectAttributes redirectAttributes) {
+        log.info(String.format("GET %s", EditBooking.URL));
+        springModel.addAttribute(TITLE, EditBooking.TITLE);
+        try{
+            Booking booking = bookingService.getBooking(id);
+            springModel.addAttribute(BOOKING, booking);
+        } catch (Exception exception) {
+            log.error(exception.getMessage() + exception.getCause());
+            redirectAttributes.addFlashAttribute(MESSAGE, ControllerConstants.BookingController.EditBooking.ERROR_MESSAGE);
+
+            return REDIRECT_BOOKINGS;
+        }
+
+        List<Vehicle> vehicles = vehicleService.getVehicles();
+        springModel.addAttribute(VEHICLES, vehicles);
+
+        List<Client> clients = clientService.getClients();
+        springModel.addAttribute(CLIENTS, clients);
+
+        return EditBooking.VIEW;
     }
 
 

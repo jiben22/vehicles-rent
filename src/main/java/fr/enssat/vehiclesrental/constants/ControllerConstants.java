@@ -217,6 +217,15 @@ public class ControllerConstants {
             public static final String ERROR_MESSAGE = "Impossible d'archiver la réservation";
         }
 
+        public static final class EditBooking {
+            private EditBooking() {}
+
+            public static final String URL = BASE_URL+"/modifier/{id}";
+            public static final String TITLE = "Modifier la réservation";
+            public static final String VIEW = BASE_VIEW + "editBooking";
+            public static final String ERROR_MESSAGE = "Impossible de modifier la réservation";
+        }
+
         public static final class CompleteArchiveBooking {
             private CompleteArchiveBooking() {}
 
