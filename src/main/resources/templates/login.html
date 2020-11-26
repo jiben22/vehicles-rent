@@ -3,12 +3,12 @@
 
 <head th:replace="fragments/head.html :: head"></head>
 
-<body class="off-canvas-sidebar full-page"
+<body class="full-page"
       style="background-image: url('/img/wallpapers/devon-janse-van-rensburg.jpg'); background-size: cover; background-position: top center;">
-    <nav class="navbar navbar-expand-lg navbar-transparent text-white">
+    <nav class="navbar navbar-expand-lg navbar-transparent">
         <div class="container">
             <div class="navbar-wrapper">
-                <p class="navbar-brand">Connexion</p>
+                <p class="navbar-brand mt-3 px-3 alert alert-primary alert-link">Connexion</p>
             </div>
         </div>
     </nav>
@@ -20,7 +20,7 @@
                     <span class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
                         <form class="form" name='f' th:action="@{/connexion}" method="POST">
                             <div th:if="${param.error}">
-                                <div class="alert alert-danger">
+                                <div class="alert alert-primary">
                                     Identifiant ou mot de passe invalide
                                 </div>
                             </div>
@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             <div class="card card-login card-hidden">
-                                <div class="card-header card-header-info text-center">
+                                <div class="card-header card-header-primary text-center">
                                     <h3 class="card-title">
                                         Bienvenue sur votre espace personnel
                                     </h3>
@@ -68,7 +68,7 @@
                                     </span>
                                     <hr />
                                     <label class="form-check-label text-center d-block p-0">
-                                        <a th:href="@{/reinitialisation-mot-de-passe}">Mot de passe oublié ?</a>
+                                        <a  class="text-primary font-weight-bold" th:href="@{/reinitialisation-mot-de-passe}">Mot de passe oublié ?</a>
                                     </label>
                                 </div>
                                 <div class="card-footer justify-content-center">

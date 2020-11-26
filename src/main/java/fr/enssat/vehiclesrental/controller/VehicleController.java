@@ -87,6 +87,8 @@ public class VehicleController {
     public String showVehicleByRegistration(Model springModel, @PathVariable String registration) {
         //TODO: use replace {registration}
         log.info(String.format("GET %s/%s", BASE_URL, registration));
+        System.out.println(BASE_URL);
+        System.out.println(registration);
         springModel.addAttribute(TITLE, GetVehicleByRegistration.TITLE);
 
         Vehicle vehicle = vehicleService.getVehicleByRegistration(registration);

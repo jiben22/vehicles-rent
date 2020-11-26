@@ -60,7 +60,7 @@ input.form-control {
 .dark-edition .content .custom-card > div {
     background-color: #222227 !important;
 }
-.dark-edition .sidebar li.nav-item.active a.nav-link,
+
 .dark-edition .content .material-datatables a.btn.btn-light,
 .dark-edition .content .material-datatables #datatables_paginate .active a {
     background-color: #7777CC !important;
@@ -217,3 +217,4 @@ input.form-control {
 .sorting_desc:before {
     z-index: 1;
 }
+

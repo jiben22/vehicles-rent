@@ -32,7 +32,6 @@
                         <p th:text="T(fr.enssat.vehiclesrental.controller.constants.Constants.DashboardController$GetDashboard).TITLE"></p>
                     </a>
                 </li>
-
                 <hr class="my-2"/>
                 <li>
                     <p class="ml-4 text-uppercase font-weight-bold">Catégories</p>
@@ -107,7 +106,7 @@
                             const lightButton = document.getElementById("light-button");
 
                             const theme = localStorage.getItem('theme');
-                            if (theme === 'dark-edition') {
+                            if(theme === 'dark-edition'){
                                 document.body.classList.add('dark-edition');
                                 darkButton.style.display = 'none';
                             } else {
@@ -115,7 +114,7 @@
                             }
 
                             document.getElementById('dark-theme-switch').addEventListener('click', function (event) {
-                                if (localStorage.getItem('theme') !== 'dark-edition') {
+                                if(localStorage.getItem('theme') !== 'dark-edition'){
                                     darkButton.style.display = 'none';
                                     lightButton.style.display = '';
                                     document.body.classList.add('dark-edition');
