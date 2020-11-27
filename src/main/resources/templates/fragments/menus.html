@@ -101,10 +101,10 @@
                         <i class="material-icons" id="dark-button">brightness_2</i>
                         <i class="material-icons" id="light-button">brightness_7</i>
                         <script>
-                            const darkButton = document.getElementById("dark-button");
-                            const lightButton = document.getElementById("light-button");
+                            darkButton = document.getElementById("dark-button");
+                            lightButton = document.getElementById("light-button");
 
-                            const theme = localStorage.getItem('theme');
+                            theme = localStorage.getItem('theme');
                             if(theme === 'dark-edition'){
                                 document.body.classList.add('dark-edition');
                                 darkButton.style.display = 'none';

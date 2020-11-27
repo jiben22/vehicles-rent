@@ -12,17 +12,7 @@ input.form-control {
     height: 2.6rem;
 }
 
-.dark-edition .form-control {
-    background-color: #333338;
-    border-radius: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
 /* navigation */
-.card-profile i{
-    font-size: 6em;
-}
 
 #navigation {
     position: sticky;
@@ -33,6 +23,11 @@ input.form-control {
 }
 
 /* page disposition */
+
+.page-main-fragment {
+    flex:1 0 auto;
+}
+
 .full-page,
 .main-panel {
     display: flex;
@@ -65,11 +60,6 @@ input.form-control {
     background-color: #111116;
 }
 
-h3.alert {
-    background-color: #86bbd8;
-    color: #606477;
-}
-
 .dark-edition #navigation,
 .dark-edition .footer,
 .dark-edition .sidebar,
@@ -79,6 +69,13 @@ h3.alert {
 .dark-edition .form-group .bootstrap-datetimepicker-widget,
 .dark-edition .page-main-fragment .custom-card > div {
     background-color: #222227 !important;
+}
+
+.dark-edition .form-control {
+    background-color: #333338;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .dark-edition .page-main-fragment .material-datatables a.btn.btn-light,
@@ -138,12 +135,10 @@ h3.alert {
     color: #CCCCD1 !important;
 }
 
-
 .dark-edition .sidebar p,
 .dark-edition .sidebar i,
 .dark-edition #navigation i,
-.dark-edition .footer *
-{
+.dark-edition .footer * {
     color:#AAAAAF !important;
 }
 
@@ -165,6 +160,10 @@ h3.alert {
     box-shadow: 0.4em .6em 2em -1em #00000f;
     height: 200px;
     overflow:hidden;
+}
+
+.card-profile i {
+    font-size: 6em;
 }
 
 .custom-card h4 {
@@ -207,9 +206,6 @@ h3.alert {
 }
 
 /* footer */
-.page-main-fragment {
-    flex:1 0 auto;
-}
 
 .footer {
     flex:0 0 auto;
@@ -225,17 +221,12 @@ h3.alert {
 
 /* navbar */
 
-
 .navbar-nav li.nav-item:hover a.nav-link {
     cursor: pointer;
     background-color: #777;
 }
-.navbar-nav li.nav-item i {
-    margin-right: 0 !important;
-}
 
-
-
+/* datatables */
 
 .sorting:before,
 .sorting_asc:before,
@@ -243,6 +234,18 @@ h3.alert {
     z-index: 1;
 }
 
+/* datetime-picker */
+
+.form-group .bootstrap-datetimepicker-widget {
+    width: 15em;
+    max-width: 100%;
+}
 
 
+/* text */
+
+h3.alert {
+    background-color: #86bbd8;
+    color: #606477;
+}
 

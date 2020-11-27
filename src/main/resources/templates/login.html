@@ -8,7 +8,7 @@
     <nav class="navbar navbar-expand-lg navbar-transparent">
         <div class="container">
             <div class="navbar-wrapper">
-                <p class="navbar-brand mt-3 px-3 alert alert-primary alert-link">Connexion</p>
+                <p class="navbar-brand mt-3 px-3 alert alert-primary alert-link" th:text="${title}">Connexion</p>
             </div>
         </div>
     </nav>
@@ -17,7 +17,7 @@
         <div class="login-page header-filter" data-color="black">
             <div class="container">
                 <div class="row">
-                    <span class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
+                    <span class="col-10 col-xl-5 col-lg-6 col-md-8 col-sm-10 ml-auto mr-auto">
                         <form class="form" name='f' th:action="@{/connexion}" method="POST">
                             <div th:if="${param.error}">
                                 <div class="alert alert-primary">

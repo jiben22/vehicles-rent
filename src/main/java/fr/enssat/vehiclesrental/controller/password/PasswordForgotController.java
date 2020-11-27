@@ -8,11 +8,9 @@ import fr.enssat.vehiclesrental.repository.PasswordResetTokenRepository;
 import fr.enssat.vehiclesrental.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -34,7 +32,8 @@ public class PasswordForgotController {
     }
 
     @GetMapping
-    public String displayForgotPasswordPage() {
+    public String displayForgotPasswordPage(Model model) {
+        model.addAttribute("title", "Réinitialisation du mot de passe");
         return "forgotPassword";
     }
 
