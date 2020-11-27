@@ -23,6 +23,7 @@ import java.util.*;
 
 import static fr.enssat.vehiclesrental.constants.ControllerConstants.Controller.*;
 import static fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController.*;
+import static fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController.BASE_URL;
 import static fr.enssat.vehiclesrental.constants.MailConstants.*;
 
 @RequiredArgsConstructor

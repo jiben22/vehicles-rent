@@ -74,7 +74,7 @@ public class Booking implements Serializable {
      * Represent which state is a booking.
      */
     @Column(nullable = false, length = 45)
-    //@NonNull
+    @NonNull
     private Status status;
 
     /**
@@ -89,7 +89,7 @@ public class Booking implements Serializable {
      */
     @ManyToOne
     @JoinColumn(name="id_vehicle")
-    //@NonNull
+    @NonNull
     private Vehicle vehicle;
 
     @Builder

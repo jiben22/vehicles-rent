@@ -40,11 +40,30 @@ public class ClientController {
                               @RequestParam(defaultValue = "") String lastname,
                               @RequestParam(defaultValue = "") String firstname,
                               @RequestParam(defaultValue = "") String email,
-                              @RequestParam(defaultValue = "") String zipcode) {
-        log.info(String.format("GET %s", BASE_URL));
-        springModel.addAttribute(TITLE, GetClients.TITLE);
+                              @RequestParam(defaultValue = "") String zipcode,
+                               RedirectAttributes redirectAttributes) {
+        log.info(String.format("GET %s", GetClients.URL));
+
+        if(clientService == null){
+            return REDIRECT_CLIENTS;
+        }
 
         List<Client> clients = clientService.searchClients(firstname, lastname, email, zipcode);
+
+        try {
+            // Update client
+            if (clients.isEmpty()) {
+                redirectAttributes.addFlashAttribute(MESSAGE, SearchClient.ERROR_MESSAGE);
+                return REDIRECT_CLIENTS;
+            }
+        } catch (Exception exception) {
+            log.error(exception.getMessage() + exception.getCause());
+            redirectAttributes.addFlashAttribute(MESSAGE, SearchClient.ERROR_MESSAGE);
+            return REDIRECT_CLIENTS;
+        }
+
+        springModel.addAttribute(TITLE, GetClients.TITLE);
+
         springModel.addAttribute(CLIENTS, clients);
 
         return GetClients.VIEW;
@@ -245,9 +264,10 @@ public class ClientController {
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
     @PostMapping(SearchClient.URL)
     public String searchClient(@ModelAttribute(CLIENT) Client client,
-                               Model springModel) {
+                               Model springModel,
+                               RedirectAttributes redirectAttributes) {
         log.info(String.format("POST %s", SearchClient.URL));
 
-        return showClients(springModel, client.getLastname(), client.getFirstname(), client.getEmail(), client.getZipcode());
+        return showClients(springModel, client.getLastname(), client.getFirstname(), client.getEmail(), client.getZipcode(), redirectAttributes);
     }
 }

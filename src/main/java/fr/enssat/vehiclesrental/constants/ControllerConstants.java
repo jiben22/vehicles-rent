@@ -29,21 +29,16 @@ public class ControllerConstants {
 
     public static final class ClientController {
         private ClientController() {}
+
         public static final String BASE_URL = "/clients";
-
         private static final String BASE_VIEW = "client/";
-
         public static final String CLIENT = "client";
         public static final String CLIENT_LABEL = CLIENT;
         public static final String CLIENTS = "clients";
         public static final String CLIENTS_LABEL = CLIENTS;
-
         public static final String ICON = "people";
-
-        public static final String REDIRECT_CLIENTS = "redirect:/clients";
+        public static final String REDIRECT_CLIENTS = "redirect:/clients/rechercher";
         public static final String REDIRECT_CLIENT_BY_ID = "redirect:/clients/%s";
-
-
 
         public static final class GetClients {
             private GetClients() {}
@@ -82,8 +77,6 @@ public class ControllerConstants {
             private ArchiveClient() {}
 
             public static final String URL = BASE_URL + "/supprimer/{id}";
-            public static final String TITLE = "Archiver le client";
-            public static final String VIEW = BASE_VIEW + "archiveClient";
             public static final String ERROR_MESSAGE = "Impossible d'archiver le client";
         }
 
@@ -93,7 +86,7 @@ public class ControllerConstants {
             public static final String URL = BASE_URL + "/rechercher";
             public static final String TITLE = "Rechercher un client";
             public static final String VIEW = BASE_VIEW + "searchClients";
-            public static final String ERROR_MESSAGE = "Impossible de rechercher le client";
+            public static final String ERROR_MESSAGE = "Impossible de trouver le client";
         }
     }
 
@@ -319,17 +312,16 @@ public class ControllerConstants {
 
     public static final class ChartController {
         private ChartController() {}
-        public static final String BASE_URL = "/statistiques";
 
+        public static final String BASE_URL = "/statistiques";
         public static final String CHARTS = "charts";
         public static final String CHARTS_LABEL = "statistiques";
-
         public static final String ICON = "poll";
 
         public static final class GetCharts {
             private GetCharts() {}
 
-            public static final String URL = BASE_URL + "/{type}/{interval}";
+            public static final String URL = BASE_URL;
             public static final String TITLE = "Statistiques";
             public static final String VIEW = "charts/" + CHARTS;
 

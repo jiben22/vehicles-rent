@@ -18,7 +18,7 @@ $(function () {
             vertical: 'bottom'
         }
     });
-
+/*
     $('.datepickerUpdate').datetimepicker({
         locale:'fr',
         format:'DD/MM/YYYY',
@@ -38,7 +38,7 @@ $(function () {
             vertical: 'bottom'
         }
     });
-    $(".datepickerUpdate").val('01/01/2020');
+    $(".datepickerUpdate").val('01/01/2020');*/
 });
 
 function initValueDatetimepickerCalendar(date) {

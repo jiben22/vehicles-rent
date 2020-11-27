@@ -8,8 +8,8 @@
         <div th:replace="fragments/menus.html :: SideBarMenu"></div>
         <div class="main-panel">
             <div th:replace="fragments/menus.html :: TopMenu"></div>
-            <div class="content">
-                <div class="container-fluid">
+            <div class="page-main-fragment d-flex">
+                <div class="col-md-12 my-auto">
                     <div class="card">
                         <div class="card-header card-header-primary card-header-icon">
                             <div class="card-icon">
@@ -17,7 +17,6 @@
                             </div>
                             <h4 class="card-title">Modifier une réservation</h4>
                         </div>
-
                         <div class="card-body">
                             <form action="#" method="post" th:action="@{'/reservations/modifier/'+ ${booking.id}}" th:object="${booking}" class="form-horizontal">
                                 <input type="hidden" th:field="*{id}" />
@@ -65,7 +64,7 @@
                                     <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$GetBookings).URL}}">
                                         <button type="button" class="btn btn-secondary">Annuler</button>
                                     </a>
-                                    <button type="submit" class="btn btn-success">Mettre à jour</button>
+                                    <button type="submit" class="btn btn-warning ml-1">Mettre à jour</button>
                                 </div>
                             </form>
                         </div>

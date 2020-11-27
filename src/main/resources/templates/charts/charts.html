@@ -8,15 +8,16 @@
     <div th:replace="fragments/menus.html :: SideBarMenu"></div>
     <div class="main-panel">
         <div th:replace="fragments/menus.html :: TopMenu"></div>
-        <div class="content">
-            <div class="container-fluid">
-                <div sec:authorize="hasAnyAuthority(
+        <div class="page-main-fragment d-flex">
+            <div class="col my-auto">
+                <th:block sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                         T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_COMMERCIAL.label)"
-                     th:replace="components/charts.html :: statistics"></div>
+                     th:replace="components/charts.html :: statistics">
+                </th:block>
             </div>
-            <footer th:replace="fragments/footer.html :: footer "></footer>
         </div>
+        <footer th:replace="fragments/footer.html :: footer "></footer>
     </div>
 </div>
 </body>

@@ -10,30 +10,6 @@
             <div th:replace="fragments/menus.html :: TopMenu"></div>
             <div class="page-main-fragment">
                 <div class="container-fluid">
-                    <!--TODO: use constant -->
-                    <a sec:authorize="hasAnyAuthority(
-                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
-                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
-                       th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$UpdateBooking).URL}(id=${booking.id})}">
-                        <button type="button" class="btn btn-warning pull-right">Modifier</button>
-                    </a>
-                    <a th:if="${booking.status.name == 'En cours de location'}" sec:authorize="hasAnyAuthority(
-                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
-                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
-                       th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$ArchiveBooking).URL}(id=${booking.id})}">
-                        <button type="button" class="btn btn-danger pull-right">Archiver</button>
-                    </a>
-                    <a th:if="${booking.status.name == 'Réservation prête'}" sec:authorize="hasAnyAuthority(
-                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
-                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
-                       th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$CancelBooking).URL}(id=${booking.id})}">
-                        <button type="button" class="btn btn-danger pull-right">Annuler</button>
-                    </a>
-                    <a th:if="${booking.status.name == 'Réservation prête'}" sec:authorize="hasAnyAuthority(
-                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
-                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)">
-                        <button type="button" class="btn btn-success pull-right rentBooking" data-target="#rentBookingModal" data-toggle="modal">Commencer la location</button>
-                    </a>
                     <div class="card">
                         <div class="card-header card-header-primary card-header-icon">
                             <div class="card-icon">
@@ -42,65 +18,98 @@
                             <h4 class="card-title">Fiche de la réservation</h4>
                         </div>
                         <div class="card-body">
-                            <form action="#" th:object="${booking}" class="form-horizontal">
+                            <form th:object="${booking}" class="form-horizontal">
                                 <input type="hidden" th:field="*{id}" />
                                 <div class="row">
-                                    <label class="col-md-2 col-form-label">Date de début de location</label>
-                                    <div class="col-md-2">
+                                    <label class="col-md-3 col-form-label">Date de début de location</label>
+                                    <div class="col-md-3">
                                         <div class="form-group has-default bmd-form-group">
                                             <input disabled="" th:value="*{startDate}" type="text" class="form-control disabled">
                                         </div>
                                     </div>
-                                    <label class="col-md-2 col-form-label">Date de fin de location</label>
-                                    <div class="col-md-2">
+                                    <label class="col-md-3 col-form-label">Date de fin de location</label>
+                                    <div class="col-md-3">
                                         <div class="form-group has-default bmd-form-group">
                                             <input disabled="" th:value="*{endDate}" type="text" class="form-control disabled">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label th:if="${booking.expectedNumberKm != 0}" class="col-md-2 col-form-label">Nombre de kilomètres estimés</label>
-                                    <label th:if="${booking.expectedNumberHours != null}" class="col-md-2 col-form-label">Nombre d'heures estimées</label>
-                                    <div class="col-md-2">
+                                    <label th:if="${booking.expectedNumberKm != 0}" class="col-md-3 col-form-label">Nombre de kilomètres estimés</label>
+                                    <label th:if="${booking.expectedNumberHours != null}" class="col-md-3 col-form-label">Nombre d'heures estimées</label>
+                                    <div class="col-md-3">
                                         <div class="form-group has-default bmd-form-group">
                                             <input disabled="" th:if="${booking.expectedNumberKm != 0}" th:value="*{expectedNumberKm}" type="text" class="form-control disabled">
                                             <input disabled="" th:if="${booking.expectedNumberHours != null}" th:value="*{expectedNumberHours}" type="text" class="form-control disabled">
                                         </div>
                                     </div>
-                                    <label class="col-md-2 col-form-label">État de la réservation</label>
-                                    <div class="col-md-2">
+                                    <label class="col-md-3 col-form-label">État de la réservation</label>
+                                    <div class="col-md-3">
                                         <div class="form-group has-default bmd-form-group">
                                             <input disabled="" th:value="*{status.getName()}" type="text" class="form-control disabled">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-md-2 col-form-label">Prix estimé</label>
-                                    <div class="col-md-2">
+                                    <label class="col-md-3 col-form-label">Prix estimé</label>
+                                    <div class="col-md-3">
                                         <div class="form-group has-default bmd-form-group">
                                             <input disabled="" th:value="*{expectedPrice}" type="text" class="form-control disabled">
                                         </div>
                                     </div>
-                                    <label class="col-md-2 col-form-label">Montant de la promotion</label>
-                                    <div class="col-md-2">
+                                    <label class="col-md-3 col-form-label">Montant de la promotion</label>
+                                    <div class="col-md-3">
                                         <div class="form-group has-default bmd-form-group">
                                             <input disabled="" th:value="*{discount}" type="text" class="form-control disabled">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-md-2 col-form-label">Véhicule associé </label>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
+                                        <label class="col-form-label">Véhicule associé </label>
+                                        <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController$GetVehicleByRegistration).URL}(registration=${vehicle.registration})}"
+                                           class="btn btn-link btn-warning btn-just-icon pull-right"><i class="material-icons">dvr</i></a>
+                                    </div>
+                                    <div class="col-md-3">
                                         <input disabled="" th:value="*{vehicle.brand} +' '+ *{vehicle.model}" type="text" class="form-control disabled">
-                                        <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController$GetVehicleByRegistration)}(registration=${vehicle.registration})}"
-                                           class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
                                     </div>
-                                    <label class="col-md-2 col-form-label">Client associé </label>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
+                                        <label class="col-form-label">Client associé </label>
+                                        <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$GetClientById).URL}(id=${client.id})}"
+                                           class="btn btn-link btn-warning btn-just-icon pull-right"><i class="material-icons">dvr</i></a>
+                                    </div>
+                                    <div class="col-md-3">
                                         <input disabled="" th:value="*{client.lastname} +' '+ *{client.firstname}" type="text" class="form-control disabled">
-                                        <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$GetClientById)}(id=${client.id})}"
-                                           class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
                                     </div>
+                                </div>
+                                <div class="pull-right">
+                                    <a sec:authorize="hasAnyAuthority(
+                                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
+                                        th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$UpdateBooking).URL}(id=${booking.id})}"
+                                        class="btn btn-warning">
+                                            Modifier
+                                    </a>
+                                    <a th:if="${booking.status.name == 'En cours de location'}" sec:authorize="hasAnyAuthority(
+                                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
+                                        th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$ArchiveBooking).URL}(id=${booking.id})}"
+                                        class="btn btn-danger ml-1">
+                                            Archiver
+                                    </a>
+                                    <a th:if="${booking.status.name == 'Réservation prête'}" sec:authorize="hasAnyAuthority(
+                                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
+                                        th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$CancelBooking).URL}(id=${booking.id})}"
+                                        class="btn btn-danger ml-1">
+                                            Annuler
+                                    </a>
+                                    <a th:if="${booking.status.name == 'Réservation prête'}" sec:authorize="hasAnyAuthority(
+                                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
+                                        class="btn btn-success rentBooking ml-1" data-target="#rentBookingModal" data-toggle="modal">
+                                            Commencer la location
+                                    </a>
                                 </div>
                             </form>
                         </div>

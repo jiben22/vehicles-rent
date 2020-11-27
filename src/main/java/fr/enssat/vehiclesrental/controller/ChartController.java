@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
@@ -28,21 +29,21 @@ public class ChartController {
 
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_COMMERCIAL.label)")
     @GetMapping(GetCharts.URL)
-    public String showStatistics(Model springModel, @RequestParam(defaultValue = "MOST_SPENDER_CLIENT") String typeString, @RequestParam(defaultValue = "ONE_YEAR") String intervalString) {
+    public String showStatistics(Model springModel, @RequestParam(defaultValue = "MOST_SPENDER_CLIENT") String type, @RequestParam(defaultValue = "ONE_YEAR") String interval) {
         log.info(String.format("GET %s", GetCharts.URL));
         springModel.addAttribute(TITLE, GetCharts.TITLE);
-        Interval interval = Interval.valueOf(intervalString);
-        Type type = Type.valueOf(typeString);
-        springModel.addAttribute(GetCharts.TOP10, String.format(GetCharts.TOP10_NAME, type.name));
-        springModel.addAttribute(GetCharts.INTERVAL, String.format(GetCharts.INTERVAL_NAME, interval.name));
+        Interval i = Interval.valueOf(interval);
+        Type t = Type.valueOf(type);
+        springModel.addAttribute(GetCharts.TOP10, String.format(GetCharts.TOP10_NAME, t.name));
+        springModel.addAttribute(GetCharts.INTERVAL, String.format(GetCharts.INTERVAL_NAME, i.name));
 
         Map<String, Integer> clients;
-        switch (type){
+        switch (t){
             case MOST_RESERVER_CLIENT:
-                clients = getTop10Reserver(interval);
+                clients = getTop10Reserver(i);
                 break;
             case MOST_SPENDER_CLIENT:
-                clients = getTop10Spender(interval);
+                clients = getTop10Spender(i);
                 break;
             default:
                 log.error(String.valueOf(new IllegalStateException("Unexpected value: " + type)));

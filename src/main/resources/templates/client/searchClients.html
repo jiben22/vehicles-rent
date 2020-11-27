@@ -13,57 +13,62 @@
                     <div sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                         T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)"
-                         class="container">
-                        <div class="offset-md-11">
+                         class="d-flex col-sm-12 mt-4">
+                        <div class="col pl-0 mb-1">
+                            <h3 th:text="${message}" th:if="${message != null}" class="alert m-0 h-100 py-3">Erreur</h3>
+                        </div>
+                        <div class="align-self-end mb-1">
                             <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$AddClient).URL}}" class="btn btn-primary">
                                 <i class="material-icons" style="font-size:30px;">control_point</i>
                                 [[ ${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$AddClient).TITLE} ]]
                             </a>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header card-header-primary card-header-icon">
-                            <div class="card-icon">
-                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController).ICON}"></i>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController).ICON}"></i>
+                                </div>
+                                <h4 class="card-title" th:text="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$SearchClient).TITLE}}"></h4>
                             </div>
-                            <h4 class="card-title" th:text="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$SearchClient).TITLE}}"></h4>
-                        </div>
-                        <div class="card-body">
-                            <form action="#" method="post" th:action="@{@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$SearchClient).URL}}}"
-                                  th:object="${client}" class="form-horizontal">
-                                <input type="hidden" th:field="*{id}" />
-                                <div class="row">
-                                    <label class="col-md-2 col-form-label">Nom</label>
-                                    <div class="col-md-2">
-                                        <div class="form-group has-default bmd-form-group">
-                                            <input th:field="*{lastname}" type="text" class="form-control" required="">
+                            <div class="card-body">
+                                <form action="#" method="post" th:action="@{@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$SearchClient).URL}}}"
+                                      th:object="${client}" class="form-horizontal">
+                                    <input type="hidden" th:field="*{id}" />
+                                    <div class="row">
+                                        <label class="col-md-2 col-form-label">Nom</label>
+                                        <div class="col-md-2">
+                                            <div class="form-group has-default bmd-form-group">
+                                                <input th:field="*{lastname}" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <label class="col-md-2 col-form-label">Prénom</label>
+                                        <div class="col-md-2">
+                                            <div class="form-group has-default bmd-form-group">
+                                                <input th:field="*{firstname}" type="text" class="form-control">
+                                            </div>
                                         </div>
                                     </div>
-                                    <label class="col-md-2 col-form-label">Prénom</label>
-                                    <div class="col-md-2">
-                                        <div class="form-group has-default bmd-form-group">
-                                            <input th:field="*{firstname}" type="text" class="form-control" required="">
+                                    <div class="row">
+                                        <label class="col-md-2 col-form-label">Email</label>
+                                        <div class="col-md-2">
+                                            <div class="form-group has-default bmd-form-group">
+                                                <input th:field="*{email}" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <label class="col-md-2 col-form-label">Code postal</label>
+                                        <div class="col-md-2">
+                                            <div class="form-group has-default bmd-form-group">
+                                                <input th:field="*{zipcode}" type="text" class="form-control">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-md-2 col-form-label">Email</label>
-                                    <div class="col-md-2">
-                                        <div class="form-group has-default bmd-form-group">
-                                            <input th:field="*{email}" type="text" class="form-control" required="">
-                                        </div>
+                                    <div class="pull-right">
+                                        <button type="submit" class="btn btn-info">Rechercher</button>
                                     </div>
-                                    <label class="col-md-2 col-form-label">Code postal</label>
-                                    <div class="col-md-2">
-                                        <div class="form-group has-default bmd-form-group">
-                                            <input th:field="*{zipcode}" type="text" class="form-control" required="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="pull-right">
-                                    <button type="submit" class="btn btn-info">Rechercher</button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
