@@ -1,6 +1,5 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController.*;
 import fr.enssat.vehiclesrental.model.Car;
 import fr.enssat.vehiclesrental.model.Motorbike;
 import fr.enssat.vehiclesrental.model.Plane;
@@ -29,7 +28,6 @@ import static fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleCont
 @RequiredArgsConstructor
 @Controller
 @Slf4j
-@RequestMapping(BASE_URL)
 public class VehicleController {
 
     private final VehicleService vehicleService;
@@ -43,7 +41,7 @@ public class VehicleController {
      * @param nbSeats Nombre de sièges dans le véhicule
      * @return la liste des véhicules correspondant aux paramètres de requête
      */
-    @GetMapping
+    @GetMapping(GetVehicles.URL)
     public String showVehicles(Model springModel,
                               @RequestParam Optional<String> vehicleType,
                               @RequestParam(defaultValue = "") String model,

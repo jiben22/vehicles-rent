@@ -1,6 +1,5 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.constants.ControllerConstants;
 import fr.enssat.vehiclesrental.model.*;
 import fr.enssat.vehiclesrental.model.enums.Status;
 import fr.enssat.vehiclesrental.service.BookingService;
@@ -142,7 +141,7 @@ public class BookingController {
             springModel.addAttribute(BOOKING, booking);
         } catch (Exception exception) {
             log.error(exception.getMessage() + exception.getCause());
-            redirectAttributes.addFlashAttribute(MESSAGE, ControllerConstants.BookingController.EditBooking.ERROR_MESSAGE);
+            redirectAttributes.addFlashAttribute(MESSAGE, EditBooking.ERROR_MESSAGE);
 
             return REDIRECT_BOOKINGS;
         }
@@ -177,7 +176,7 @@ public class BookingController {
             springModel.addAttribute(BOOKING, b);
         } catch (Exception exception) {
             log.error(exception.getMessage() + exception.getCause());
-            redirectAttributes.addFlashAttribute(MESSAGE, ControllerConstants.BookingController.EditBooking.ERROR_MESSAGE);
+            redirectAttributes.addFlashAttribute(MESSAGE, EditBooking.ERROR_MESSAGE);
 
             return REDIRECT_BOOKINGS;
         }

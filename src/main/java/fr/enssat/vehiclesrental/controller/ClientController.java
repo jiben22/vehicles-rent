@@ -1,6 +1,5 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController.*;
 import fr.enssat.vehiclesrental.model.Client;
 import fr.enssat.vehiclesrental.service.ClientService;
 import fr.enssat.vehiclesrental.service.exception.notfound.ClientNotFoundException;
@@ -23,7 +22,6 @@ import static fr.enssat.vehiclesrental.constants.ControllerConstants.Controller.
 @RequiredArgsConstructor
 @Controller
 @Slf4j
-@RequestMapping(BASE_URL)
 public class ClientController {
 
     private final ClientService clientService;
@@ -37,6 +35,7 @@ public class ClientController {
      * @param zipcode Code postal
      * @return la liste des clients correspondant aux paramètres de requête
      */
+    @GetMapping(GetClients.URL)
     private String showClients(Model springModel,
                               @RequestParam(defaultValue = "") String lastname,
                               @RequestParam(defaultValue = "") String firstname,

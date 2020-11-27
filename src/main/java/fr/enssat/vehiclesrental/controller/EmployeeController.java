@@ -1,6 +1,5 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController.*;
 import fr.enssat.vehiclesrental.controller.utils.MailSender;
 import fr.enssat.vehiclesrental.model.Employee;
 import fr.enssat.vehiclesrental.model.enums.Position;
@@ -29,7 +28,6 @@ import static fr.enssat.vehiclesrental.constants.MailConstants.*;
 @RequiredArgsConstructor
 @Controller
 @Slf4j
-@RequestMapping(BASE_URL)
 public class EmployeeController {
 
 
@@ -47,7 +45,7 @@ public class EmployeeController {
      * @return la liste des collaborateurs correspondant aux paramètres de requête
      */
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label)")
-    @GetMapping
+    @GetMapping(GetEmployees.URL)
     public String showEmployees(Model springModel,
                                 @RequestParam Optional<String> position,
                                 @RequestParam(defaultValue = "") String firstname,
