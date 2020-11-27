@@ -35,7 +35,32 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <!--<div class="row">
+                                    <label class="col-md-2 col-form-label" >Selectionnez le véhicule</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group bmd-form-group">
+                                            <select th:field="*{vehicle}" class="form-control">
+                                                <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.registration}+' '+${vehicle.brand}+' '+${vehicle.model}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label" >Selectionnez le client</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group bmd-form-group">
+                                            <select th:field="*{client}" class="form-control">
+                                                <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.lastname}+' '+${client.firstname}+' '+${client.email}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Nombre de kilomètres (voiture ou moto) ou heures estimés (avions) selon le véhicule</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input required th:field="*{expectedNumberKm}" type="number" th:min="0" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>-->
                                 <div class="pull-right">
                                     <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$GetBookings).URL}}">
                                         <button type="button" class="btn btn-secondary">Annuler</button>

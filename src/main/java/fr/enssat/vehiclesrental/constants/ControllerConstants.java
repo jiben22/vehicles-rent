@@ -331,7 +331,7 @@ public class ControllerConstants {
 
             public static final String URL = BASE_URL + "/{type}/{interval}";
             public static final String TITLE = "Statistiques";
-            public static final String VIEW = "components/statistics";
+            public static final String VIEW = "charts";
 
             public static final String TOP10 = "top10";
             public static final String INTERVAL = "interval";

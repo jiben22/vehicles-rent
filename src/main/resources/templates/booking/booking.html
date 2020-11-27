@@ -10,6 +10,7 @@
             <div th:replace="fragments/menus.html :: TopMenu"></div>
             <div class="page-main-fragment">
                 <div class="container-fluid">
+                    <!--TODO: use constant -->
                     <a sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                         T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
