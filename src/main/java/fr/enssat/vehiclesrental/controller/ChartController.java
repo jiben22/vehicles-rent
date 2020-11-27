@@ -1,6 +1,6 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.controller.constants.Constants.ChartController.GetCharts;
+import fr.enssat.vehiclesrental.constants.ControllerConstants.ChartController.GetCharts;
 import fr.enssat.vehiclesrental.model.Person;
 import fr.enssat.vehiclesrental.model.enums.Interval;
 import fr.enssat.vehiclesrental.model.enums.Type;
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
-import static fr.enssat.vehiclesrental.controller.constants.Constants.ClientController.CLIENTS;
-import static fr.enssat.vehiclesrental.controller.constants.Constants.Controller.TITLE;
+import static fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController.CLIENTS;
+import static fr.enssat.vehiclesrental.constants.ControllerConstants.Controller.TITLE;
 
 @RequiredArgsConstructor
 @Controller

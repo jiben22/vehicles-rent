@@ -30,14 +30,14 @@
                         <div class="card-header card-header-primary card-header-icon">
                             <div class="card-icon">
                                 <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}" class="material-icons"
-                                   th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_CAR}"></i>
+                                   th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_CAR}"></i>
                                 <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}" class="material-icons"
-                                   th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_MOTORBIKE}"></i>
+                                   th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_MOTORBIKE}"></i>
                                 <i th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}" class="material-icons"
-                                   th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_PLANE}"></i>
+                                   th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_PLANE}"></i>
                             </div>
                             <h4 class="card-title"
-                                th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$GetVehicleByRegistration).TITLE}"></h4>
+                                th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController$GetVehicleByRegistration).TITLE}"></h4>
                         </div>
                         <div class="card-body">
                             <form action="#" th:object="${vehicle}" class="form-horizontal">

@@ -5,7 +5,7 @@
 <div th:fragment="SideBarMenu" class="sidebar"
      data-image="/img/sidebar-1.jpg" data-color="purple">
     <div class="logo my-0 py-1">
-        <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.DashboardController$GetDashboard).URL}}" class="simple-text logo-normal my-0">
+        <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.DashboardController$GetDashboard).URL}}" class="simple-text logo-normal my-0">
             Vehi'rental
         </a>
     </div>
@@ -24,11 +24,11 @@
                 <!-- /* using $ instead of . to access nested class */ -->
                 <!-- /* checks if the request URI equals to the base url constant of the controller */ -->
                 <li class="nav-item" th:classappend="${ #httpServletRequest.requestURI ==
-                    T(fr.enssat.vehiclesrental.controller.constants.Constants.DashboardController).BASE_URL ? 'active' : '' }">
+                    T(fr.enssat.vehiclesrental.constants.ControllerConstants.DashboardController).BASE_URL ? 'active' : '' }">
                     <a class="nav-link my-0"
-                       th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.DashboardController$GetDashboard).URL}}">
-                        <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.DashboardController).ICON}"></i>
-                        <p th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.DashboardController$GetDashboard).TITLE}"></p>
+                       th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.DashboardController$GetDashboard).URL}}">
+                        <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.DashboardController).ICON}"></i>
+                        <p th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.DashboardController$GetDashboard).TITLE}"></p>
                     </a>
                 </li>
                 <hr class="my-2"/>
@@ -36,41 +36,41 @@
                     <p class="ml-4 text-uppercase font-weight-bold">Catégories</p>
                     <ul class="list-unstyled">
                         <li class="nav-item" th:classappend="${#strings.startsWith(#httpServletRequest.requestURI,
-                            T(fr.enssat.vehiclesrental.controller.constants.Constants.ClientController).BASE_URL) ? 'active' : '' }">
-                            <a class="nav-link my-0" th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.ClientController$GetClients).URL}}">
-                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ClientController).ICON}"></i>
-                                <p th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ClientController).CLIENTS_LABEL}"></p>
+                            T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController).BASE_URL) ? 'active' : '' }">
+                            <a class="nav-link my-0" th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$GetClients).URL}}">
+                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController).ICON}"></i>
+                                <p th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController).CLIENTS_LABEL}"></p>
                             </a>
                         </li>
                         <li class="nav-item" th:classappend="${#strings.startsWith(#httpServletRequest.requestURI,
-                            T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL) ? 'active' : '' }">
-                            <a class="nav-link my-0" th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$GetVehicles).URL}}">
-                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON}"></i>
-                                <p th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).VEHICLES_LABEL}"></p>
+                            T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).BASE_URL) ? 'active' : '' }">
+                            <a class="nav-link my-0" th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController$GetVehicles).URL}}">
+                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON}"></i>
+                                <p th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).VEHICLES_LABEL}"></p>
                             </a>
                         </li>
                         <li class="nav-item" th:classappend="${#strings.startsWith(#httpServletRequest.requestURI,
-                            T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController).BASE_URL) ? 'active' : '' }">
-                            <a class="nav-link my-0" th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController$GetBookings).URL}}">
-                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController).ICON}"></i>
-                                <p th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController).BOOKINGS_LABEL}"></p>
+                            T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController).BASE_URL) ? 'active' : '' }">
+                            <a class="nav-link my-0" th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$GetBookings).URL}}">
+                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController).ICON}"></i>
+                                <p th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController).BOOKINGS_LABEL}"></p>
                             </a>
                         </li>
                         <li class="nav-item" th:classappend="${#strings.startsWith(#httpServletRequest.requestURI,
-                            T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).BASE_URL) ? 'active' : '' }">
-                            <a class="nav-link my-0" th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController$GetEmployees).URL}}">
-                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).ICON}"></i>
-                                <p th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).EMPLOYEES_LABEL}"></p>
+                            T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController).BASE_URL) ? 'active' : '' }">
+                            <a class="nav-link my-0" th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController$GetEmployees).URL}}">
+                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController).ICON}"></i>
+                                <p th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController).EMPLOYEES_LABEL}"></p>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <hr class="my-2"/>
                 <li class="nav-item" th:classappend="${#strings.startsWith(#httpServletRequest.requestURI,
-                            T(fr.enssat.vehiclesrental.controller.constants.Constants.ChartController).BASE_URL) ? 'active' : '' }">
-                    <a class="nav-link my-0" th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.ChartController$GetCharts).URL}}">
-                        <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ChartController).ICON}"></i>
-                        <p th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ChartController).CHARTS_LABEL}"></p>
+                            T(fr.enssat.vehiclesrental.constants.ControllerConstants.ChartController).BASE_URL) ? 'active' : '' }">
+                    <a class="nav-link my-0" th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ChartController$GetCharts).URL}}">
+                        <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ChartController).ICON}"></i>
+                        <p th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ChartController).CHARTS_LABEL}"></p>
                     </a>
                 </li>
             </ul>

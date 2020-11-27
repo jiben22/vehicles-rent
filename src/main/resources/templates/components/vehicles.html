@@ -16,24 +16,24 @@
                 <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '?vehicleType=CAR'}}"
                    class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'CAR'} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;"
-                       th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_CAR}"></i>
-                    [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).CARS} ]]
+                       th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_CAR}"></i>
+                    [[ ${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).CARS} ]]
                 </a>
             </div>
             <div>
                 <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '?vehicleType=MOTORBIKE'}}"
                    class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'MOTORBIKE'} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;"
-                       th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_MOTORBIKE}"></i>
-                    [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).MOTORBIKES} ]]
+                       th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_MOTORBIKE}"></i>
+                    [[ ${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).MOTORBIKES} ]]
                 </a>
             </div>
             <div>
                 <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '?vehicleType=PLANE'}}"
                    class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'PLANE'} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;"
-                       th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_PLANE}"></i>
-                    [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).PLANES} ]]
+                       th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_PLANE}"></i>
+                    [[ ${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).PLANES} ]]
                 </a>
             </div>
         </div>
@@ -70,15 +70,15 @@
                     <td>
                         <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}">
                             <i class="material-icons"
-                               th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_CAR}">
+                               th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_CAR}">
                             </i></span>
                         <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}">
                             <i class="material-icons"
-                               th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_MOTORBIKE}">
+                               th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_MOTORBIKE}">
                             </i></span>
                         <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}">
                             <i class="material-icons"
-                               th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_PLANE}">
+                               th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_PLANE}">
                             </i></span>
                     </td>
                     <td th:text="${vehicle.brand}" tabindex="0" class="sorting_1">Marque</td>

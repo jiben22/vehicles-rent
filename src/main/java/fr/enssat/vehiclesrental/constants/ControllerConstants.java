@@ -43,22 +43,34 @@ public class ControllerConstants {
 
         public static final String REDIRECT_CLIENTS = "redirect:/clients";
         public static final String REDIRECT_CLIENT_BY_ID = "redirect:/clients/%s";
+<<<<<<< refs/remotes/origin/front
         public static final String CLIENTS = "clients";
+=======
+        private static final String BASE_VIEW = "client/";
+>>>>>>> Fixes after merge
         public static final String CLIENT = "client";
+        public static final String CLIENT_LABEL = CLIENT;
+        public static final String CLIENTS = "clients";
+        public static final String CLIENTS_LABEL = CLIENTS;
+
+        public static final String ICON = "people";
 
         public static final class GetClients {
             private GetClients() {}
+<<<<<<< refs/remotes/origin/front
             public static final String URL = BASE_URL;
+=======
+            public static final String URL = "/clients/rechercher";
+>>>>>>> Fixes after merge
             public static final String TITLE = "Liste des clients";
-            public static final String VIEW = BASE_VIEW + "clients";
+            public static final String VIEW = BASE_VIEW + CLIENTS;
         }
-
         public static final class GetClientById {
             private GetClientById() {}
 
             public static final String URL = "/{id}";
             public static final String TITLE = "Fiche du client";
-            public static final String VIEW = BASE_VIEW + "client";
+            public static final String VIEW = BASE_VIEW + CLIENT;
         }
 
         public static final class AddClient {
@@ -107,7 +119,10 @@ public class ControllerConstants {
         public static final String REDIRECT_VEHICLE_BY_REGISTRATION = "redirect:/vehicules/%s";
         public static final String PATTERN_REGISTRATION = "{registration}";
         private static final String BASE_VIEW = "vehicle/";
+<<<<<<< refs/remotes/origin/front
 
+=======
+>>>>>>> Fixes after merge
         public static final String VEHICLE = "vehicle";
         public static final String VEHICLE_LABEL = "véhicule";
         public static final String VEHICLES = "vehicles";
@@ -132,7 +147,7 @@ public class ControllerConstants {
         public static final class GetVehicleByRegistration {
             private GetVehicleByRegistration() {}
 
-            public static final String URL = "/{registration}";
+            public static final String URL = BASE_URL + "/{registration}";
             public static final String TITLE = "Fiche du véhicule";
             public static final String VIEW = BASE_VIEW + VEHICLE;
         }
@@ -140,10 +155,10 @@ public class ControllerConstants {
         public static final class AddVehicle {
             private AddVehicle() {}
 
-            public static final String URL = "/ajouter";
-            public static final String URL_CAR = "/Car";
-            public static final String URL_MOTORBIKE = "/Motorbike";
-            public static final String URL_PLANE = "/Plane";
+            public static final String URL = BASE_URL + "/ajouter";
+            public static final String URL_CAR = BASE_URL + "/Car";
+            public static final String URL_MOTORBIKE = BASE_URL + "/Motorbike";
+            public static final String URL_PLANE = BASE_URL + "/Plane";
             public static final String TITLE = "Ajouter un véhicule";
             public static final String VIEW = BASE_VIEW + "addVehicle";
             public static final String ERROR_MESSAGE = "Impossible d'enregister le véhicule";
@@ -152,10 +167,10 @@ public class ControllerConstants {
         public static final class UpdateVehicle {
             private UpdateVehicle() {}
 
-            public static final String URL = "/modifier/{registration}";
-            public static final String URL_CAR = "/Car/{registration}";
-            public static final String URL_MOTORBIKE = "/Motorbike/{registration}";
-            public static final String URL_PLANE = "/Plane/{registration}";
+            public static final String URL = BASE_URL + "/modifier/{registration}";
+            public static final String URL_CAR = BASE_URL + "/Car/{registration}";
+            public static final String URL_MOTORBIKE = BASE_URL + "/Motorbike/{registration}";
+            public static final String URL_PLANE = BASE_URL + "/Plane/{registration}";
             public static final String TITLE = "Modifier le véhicule";
             public static final String VIEW = BASE_VIEW + "editVehicle";
             public static final String ERROR_MESSAGE = "Impossible de modifier le véhicule";
@@ -164,7 +179,7 @@ public class ControllerConstants {
         public static final class ArchiveVehicle {
             private ArchiveVehicle() {}
 
-            public static final String URL = "/supprimer/{id}";
+            public static final String URL = BASE_URL + "/supprimer/{id}";
             public static final String TITLE = "Archiver le véhicule";
             public static final String VIEW = BASE_VIEW + "archiveVehicle";
             public static final String ERROR_MESSAGE = "Impossible d'archiver le véhicule";
@@ -176,18 +191,34 @@ public class ControllerConstants {
 
         public static final String BASE_URL = "/reservations";
         private static final String BASE_VIEW = "booking/";
+<<<<<<< refs/remotes/origin/front
         
         public static final String BOOKINGS = "bookings";
         public static final String BOOKINGS_LABEL = "réservations";
         public static final String BOOKING = "booking";
         public static final String BOOKING_LABEL = "réservation";
+=======
+
+        public static final String BOOKING = "booking";
+        public static final String BOOKING_LABEL = "réservation";
+        public static final String BOOKINGS = "bookings";
+        public static final String BOOKINGS_LABEL = "réservations";
+
+        public static final String ICON = "receipt_long";
+        public static final String REDIRECT_BOOKINGS = "redirect:/reservations";
+        public static final String REDIRECT_BOOKING_BY_ID = "redirect:/reservations/%s";
+>>>>>>> Fixes after merge
 
         public static final class GetBookings {
             private GetBookings() {}
 
             public static final String URL = BASE_URL;
             public static final String TITLE = "Liste des réservations";
+<<<<<<< refs/remotes/origin/front
             public static final String VIEW = BASE_VIEW+BOOKINGS;
+=======
+            public static final String VIEW = BASE_VIEW + BOOKINGS;
+>>>>>>> Fixes after merge
         }
 
         public static final class GetBookingById {
@@ -246,7 +277,7 @@ public class ControllerConstants {
         public static final class GetEmployeeById {
             private GetEmployeeById() {}
 
-            public static final String URL = "/{id}";
+            public static final String URL = BASE_URL + "/{id}";
             public static final String TITLE = "Fiche du collaborateur";
             public static final String VIEW = BASE_VIEW + "employee";
         }
@@ -254,7 +285,7 @@ public class ControllerConstants {
         public static final class AddEmployee {
             private AddEmployee() {}
 
-            public static final String URL = "/ajouter";
+            public static final String URL = BASE_URL + "/ajouter";
             public static final String TITLE = "Ajouter un collaborateur";
             public static final String VIEW = BASE_VIEW + "addEmployee";
             public static final String ERROR_MESSAGE = "Impossible d'enregister le collaborateur";
@@ -263,7 +294,7 @@ public class ControllerConstants {
         public static final class UpdateEmployee {
             private UpdateEmployee() {}
 
-            public static final String URL = "/modifier/{id}";
+            public static final String URL = BASE_URL + "/modifier/{id}";
             public static final String TITLE = "Modifier le collaborateur";
             public static final String VIEW = BASE_VIEW + "editEmployee";
             public static final String ERROR_MESSAGE = "Impossible de modifier le collaborateur";
@@ -272,7 +303,7 @@ public class ControllerConstants {
         public static final class DeleteEmployee {
             private DeleteEmployee() {}
 
-            public static final String URL = "/supprimer/{id}";
+            public static final String URL = BASE_URL + "/supprimer/{id}";
             public static final String TITLE = "Supprimer le collaborateur";
             public static final String VIEW = BASE_VIEW + "deleteVehicle";
             public static final String ERROR_MESSAGE = "Impossible de supprimer le collaborateur";
@@ -294,7 +325,11 @@ public class ControllerConstants {
 
             public static final String URL = BASE_URL + "/{type}/{interval}";
             public static final String TITLE = "Statistiques";
+<<<<<<< refs/remotes/origin/front
             public static final String VIEW = "statistics";
+=======
+            public static final String VIEW = "charts";
+>>>>>>> Fixes after merge
             public static final String TOP10 = "top10";
             public static final String INTERVAL = "interval";
             public static final String TOP10_NAME = "TOP 10 : %s";
