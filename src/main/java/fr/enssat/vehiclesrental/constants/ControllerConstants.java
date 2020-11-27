@@ -49,6 +49,7 @@ public class ControllerConstants {
             private GetClients() {}
             public static final String URL = BASE_URL;
             public static final String TITLE = "Liste des clients";
+
             public static final String VIEW = BASE_VIEW + CLIENTS;
         }
         public static final class GetClientById {
@@ -209,6 +210,37 @@ public class ControllerConstants {
             public static final String VIEW = BASE_VIEW + "createBooking";
             public static final String ERROR_MESSAGE = "Impossible de créer la réservation";
         }
+
+        public static final class EditBooking {
+            private EditBooking() {}
+
+            public static final String URL = BASE_URL+"/edit";
+            public static final String TITLE = "modifier une réservation";
+            public static final String VIEW = BASE_VIEW + "createBooking";
+        }
+
+        public static final class ArchiveBooking {
+            private ArchiveBooking() {}
+
+            public static final String URL = BASE_URL+"/archiver";
+            public static final String TITLE = "archiver une réservation";
+            public static final String VIEW = BASE_VIEW + "archiveBooking";
+        }
+
+        public static final class CompleteArchiveBooking {
+            private CompleteArchiveBooking() {}
+
+            public static final String URL = BASE_URL+"/archive";
+            public static final String TITLE = "archiver une réservation";
+        }
+
+        public static final class ConfirmArchiveBooking {
+            private ConfirmArchiveBooking() {}
+
+            public static final String URL = BASE_URL+"/archive";
+            public static final String TITLE = "archiver une réservation";
+        }
+
 
         public static final class CancelBooking {
             private CancelBooking() {}
