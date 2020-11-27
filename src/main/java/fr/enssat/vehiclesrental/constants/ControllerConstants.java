@@ -55,7 +55,7 @@ public class ControllerConstants {
         public static final class GetClientById {
             private GetClientById() {}
 
-            public static final String URL = "/" + CLIENT + "/{id}";
+            public static final String URL = BASE_URL + "/{id}";
             public static final String TITLE = "Fiche du client";
             public static final String VIEW = BASE_VIEW + CLIENT;
         }
@@ -205,41 +205,41 @@ public class ControllerConstants {
         public static final class CreateBooking {
             private CreateBooking() {}
 
-            public static final String URL = BASE_URL+"/creer";
+            public static final String URL = BASE_URL + "/creer";
             public static final String TITLE = "Créer une réservation";
             public static final String VIEW = BASE_VIEW + "createBooking";
             public static final String ERROR_MESSAGE = "Impossible de créer la réservation";
         }
 
-        public static final class EditBooking {
-            private EditBooking() {}
+        public static final class UpdateBooking {
+            private UpdateBooking() {}
 
-            public static final String URL = BASE_URL+"/edit/{id}";
-            public static final String TITLE = "modifier une réservation";
-            public static final String VIEW = BASE_VIEW + "createBooking";
+            public static final String URL = BASE_URL + "/modifier/{id}";
+            public static final String TITLE = "Modifier une réservation";
+            public static final String VIEW = BASE_VIEW + "editBooking";
             public static final String ERROR_MESSAGE = "Impossible de modifier la réservation";
         }
 
         public static final class ArchiveBooking {
             private ArchiveBooking() {}
 
-            public static final String URL = BASE_URL+"/archiver/{id}";
-            public static final String TITLE = "archiver une réservation";
+            public static final String URL = BASE_URL + "/archiver/{id}";
+            public static final String TITLE = "Archiver une réservation";
             public static final String VIEW = BASE_VIEW + "archiveBooking";
         }
 
         public static final class CompleteArchiveBooking {
             private CompleteArchiveBooking() {}
 
-            public static final String URL = BASE_URL+"/archive";
-            public static final String TITLE = "archiver une réservation";
+            public static final String URL = BASE_URL+"/completer/archiver";
+            public static final String TITLE = "Compléter l'archivage d'une réservation";
         }
 
         public static final class ConfirmArchiveBooking {
             private ConfirmArchiveBooking() {}
 
-            public static final String URL = BASE_URL+"/archive";
-            public static final String TITLE = "archiver une réservation";
+            public static final String URL = BASE_URL+"/confirmer/archiver";
+            public static final String TITLE = "Confirmer l'archivage d'une réservation";
             public static final String VIEW = BASE_VIEW + "confirmArchiveBooking";
         }
 

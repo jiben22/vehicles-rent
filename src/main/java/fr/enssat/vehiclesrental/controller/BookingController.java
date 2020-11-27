@@ -132,16 +132,16 @@ public class BookingController {
      * @return le formulaire de mise à jour d'une réservation
      */
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
-    @GetMapping(EditBooking.URL)
+    @GetMapping(UpdateBooking.URL)
     public String showUpdateBooking(Model springModel,@PathVariable long id, RedirectAttributes redirectAttributes) {
-        log.info(String.format("GET %s", EditBooking.URL));
-        springModel.addAttribute(TITLE, EditBooking.TITLE);
+        log.info(String.format("GET %s", UpdateBooking.URL));
+        springModel.addAttribute(TITLE, UpdateBooking.TITLE);
         try{
             Booking booking = bookingService.getBooking(id);
             springModel.addAttribute(BOOKING, booking);
         } catch (Exception exception) {
             log.error(exception.getMessage() + exception.getCause());
-            redirectAttributes.addFlashAttribute(MESSAGE, EditBooking.ERROR_MESSAGE);
+            redirectAttributes.addFlashAttribute(MESSAGE, UpdateBooking.ERROR_MESSAGE);
 
             return REDIRECT_BOOKINGS;
         }
@@ -152,7 +152,7 @@ public class BookingController {
         List<Client> clients = clientService.getClients();
         springModel.addAttribute(CLIENTS, clients);
 
-        return EditBooking.VIEW;
+        return UpdateBooking.VIEW;
     }
 
     /**
@@ -161,27 +161,27 @@ public class BookingController {
      * @return Une réservation mise à jour
      */
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)")
-    @PostMapping(EditBooking.URL)
+    @PostMapping(UpdateBooking.URL)
     public String updateBooking(@Valid @ModelAttribute(BOOKING)  Booking booking,
                                 BindingResult result,
                                 Model springModel,
                                 RedirectAttributes redirectAttributes) {
-        log.info(String.format("GET %s", EditBooking.URL));
-        springModel.addAttribute(TITLE, EditBooking.TITLE);
+        log.info(String.format("GET %s", UpdateBooking.URL));
+        springModel.addAttribute(TITLE, UpdateBooking.TITLE);
         try{
             Booking b = bookingService.getBooking(booking.getId());
             b.setStartDate(booking.getStartDate());
             b.setEndDate(booking.getEndDate());
-            bookingService.editBooking(b);
+            bookingService.UpdateBooking(b);
             springModel.addAttribute(BOOKING, b);
         } catch (Exception exception) {
             log.error(exception.getMessage() + exception.getCause());
-            redirectAttributes.addFlashAttribute(MESSAGE, EditBooking.ERROR_MESSAGE);
+            redirectAttributes.addFlashAttribute(MESSAGE, UpdateBooking.ERROR_MESSAGE);
 
             return REDIRECT_BOOKINGS;
         }
 
-        return EditBooking.VIEW;
+        return UpdateBooking.VIEW;
     }
 
 
@@ -319,7 +319,7 @@ public class BookingController {
             book.setExpectedPrice(reducePrice);
         }**/
 
-        bookingService.editBooking(book);
+        bookingService.UpdateBooking(book);
 
         springModel.addAttribute(BOOKING, book);
 

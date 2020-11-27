@@ -14,19 +14,19 @@
                     <a sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                         T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
-                       th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController&EditBooking).URL}} + ${booking.id}">
+                       th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$EditBooking).URL}(id=${booking.id})}">
                         <button type="button" class="btn btn-warning pull-right">Modifier</button>
                     </a>
                     <a th:if="${booking.status.name == 'En cours de location'}" sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                         T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
-                       th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController&ArchiveBooking).URL}(id=${booking.id})}">
+                       th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$ArchiveBooking).URL}(id=${booking.id})}">
                         <button type="button" class="btn btn-danger pull-right">Archiver</button>
                     </a>
                     <a th:if="${booking.status.name == 'Réservation prête'}" sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                         T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
-                       th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController&CancelBooking).URL}(id=${booking.id})}">
+                       th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$CancelBooking).URL}(id=${booking.id})}">
                         <button type="button" class="btn btn-danger pull-right">Annuler</button>
                     </a>
                     <a th:if="${booking.status.name == 'Réservation prête'}" sec:authorize="hasAnyAuthority(
@@ -92,13 +92,13 @@
                                     <label class="col-md-2 col-form-label">Véhicule associé </label>
                                     <div class="col-md-2">
                                         <input disabled="" th:value="*{vehicle.brand} +' '+ *{vehicle.model}" type="text" class="form-control disabled">
-                                        <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController&GetVehicleByRegistration)}(registration=${vehicle.registration})}"
+                                        <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController$GetVehicleByRegistration)}(registration=${vehicle.registration})}"
                                            class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
                                     </div>
                                     <label class="col-md-2 col-form-label">Client associé </label>
                                     <div class="col-md-2">
                                         <input disabled="" th:value="*{client.lastname} +' '+ *{client.firstname}" type="text" class="form-control disabled">
-                                        <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController&GetClientById)}(id=${client.id})}"
+                                        <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$GetClientById)}(id=${client.id})}"
                                            class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
                                     </div>
                                 </div>

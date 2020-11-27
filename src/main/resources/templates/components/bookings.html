@@ -110,7 +110,7 @@
 
             /* Setup - add a text input to each footer cell */
             // adds a second header line with the first empty column
-            $('#datatables thead').append('<tr><th></th></tr>');
+            $('#datatables thead').append('<tr></tr>');
             // gets the new header line to populate
             let inputs = $('#datatables thead tr:last-child');
             // for each parameter in the first header line
@@ -154,10 +154,10 @@
                                 .draw();
                         });
                 }
-                else if([3,4,5].includes(colIdx)){
-                    // adds an empty column at the end
-                    inputs.append($('<th></th>'));
-                }
+                // else if([3,4,5].includes(colIdx)){
+                //     // adds an empty column at the end
+                //     inputs.append($('<th></th>'));
+                // }
             });
         });
     </script>

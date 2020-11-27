@@ -20,6 +20,7 @@ import java.util.Optional;
 import static fr.enssat.vehiclesrental.repository.ClientRepository.*;
 import static fr.enssat.vehiclesrental.repository.VehicleBaseRepository.isNotArchived;
 import static org.springframework.data.jpa.domain.Specification.where;
+
 @RequiredArgsConstructor
 @Service
 public class ClientService implements IClientService {

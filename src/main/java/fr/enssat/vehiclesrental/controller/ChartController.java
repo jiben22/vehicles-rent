@@ -28,9 +28,11 @@ public class ChartController {
 
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_COMMERCIAL.label)")
     @GetMapping(GetCharts.URL)
-    public String showStatistics(Model springModel, @RequestParam Type type, @RequestParam Interval interval) {
+    public String showStatistics(Model springModel, @RequestParam(defaultValue = "MOST_SPENDER_CLIENT") String typeString, @RequestParam(defaultValue = "ONE_YEAR") String intervalString) {
         log.info(String.format("GET %s", GetCharts.URL));
         springModel.addAttribute(TITLE, GetCharts.TITLE);
+        Interval interval = Interval.valueOf(intervalString);
+        Type type = Type.valueOf(typeString);
         springModel.addAttribute(GetCharts.TOP10, String.format(GetCharts.TOP10_NAME, type.name));
         springModel.addAttribute(GetCharts.INTERVAL, String.format(GetCharts.INTERVAL_NAME, interval.name));
 
