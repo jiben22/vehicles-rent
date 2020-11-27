@@ -1,9 +1,7 @@
 package fr.enssat.vehiclesrental.service;
 
 import fr.enssat.vehiclesrental.factory.ClientFactory;
-import fr.enssat.vehiclesrental.factory.VehicleFactory;
 import fr.enssat.vehiclesrental.model.Client;
-import fr.enssat.vehiclesrental.model.Vehicle;
 import fr.enssat.vehiclesrental.repository.ClientRepository;
 import fr.enssat.vehiclesrental.service.exception.alreadyexists.ClientAlreadyExistException;
 import fr.enssat.vehiclesrental.service.exception.notfound.ClientNotFoundException;
@@ -22,7 +20,8 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.Optional.ofNullable;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
