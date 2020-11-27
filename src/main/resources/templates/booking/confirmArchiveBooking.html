@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/head.html :: head"></head>
+
+<body class="">
+    <div class="wrapper ">
+        <div th:replace="fragments/menus.html :: SideBarMenu"></div>
+        <div class="main-panel">
+            <div th:replace="fragments/menus.html :: TopMenu"></div>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header card-header-primary card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">receipt_long</i>
+                            </div>
+                            <h4 class="card-title">Confirmer archivage</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="#" th:object="${booking}" class="form-horizontal">
+                                <input type="hidden" th:field="*{id}" />
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Date de fin de location</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input th:value="*{endDate}" type="text" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label" >Prix à payer</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input th:if="${booking.expectedPrice}" th:value="*{expectedPrice}+'€'" type="text" class="form-control disabled" >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <a class="text-center" th:href="@{/reservations/complete/archiver/}+${booking.id}">
+                                        <button type="button" class="btn btn-success pull-right" >Archiver</button>
+                                    </a>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer th:replace="fragments/footer.html :: footer"></footer>
+        </div>
+    </div>
+</body>
+
+</html>

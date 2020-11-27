@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/head.html :: head"></head>
+
+<body class="">
+    <div class="wrapper ">
+        <div th:replace="fragments/menus.html :: SideBarMenu"></div>
+        <div class="main-panel">
+            <div th:replace="fragments/menus.html :: TopMenu"></div>
+            <div class="content">
+                <div class="container-fluid">
+                    <!--TODO: use constant -->
+                    <a sec:authorize="hasAnyAuthority(
+                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)"
+                       th:href="@{/reservations/modifier/} + ${booking.id}">
+                        <button th:if="${booking.status.name != 'En cours de location'}" type="button" class="btn btn-warning pull-right">Modifier</button>
+                    </a>
+                    <a th:if="${booking.status.name == 'En cours de location'}" sec:authorize="hasAnyAuthority(
+                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)"
+                       th:href="@{/reservations/archiver/} + ${booking.id}">
+                        <button type="button" class="btn btn-danger pull-right">Archiver</button>
+                    </a>
+                    <a th:if="${booking.status.name == 'Réservation prête'}" sec:authorize="hasAnyAuthority(
+                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)"
+                       th:href="@{/reservations/annuler/} + ${booking.id}">
+                        <button type="button" class="btn btn-danger pull-right">Annuler</button>
+                    </a>
+                    <a th:if="${booking.status.name == 'Réservation prête'}" sec:authorize="hasAnyAuthority(
+                        T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
+                        T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)">
+                        <button type="button" class="btn btn-success pull-right rentBooking" data-target="#rentBookingModal" data-toggle="modal">Commencer la location</button>
+                    </a>
+                    <div class="card">
+                        <div class="card-header card-header-primary card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">receipt_long</i>
+                            </div>
+                            <h4 class="card-title">Fiche de la réservation</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="#" th:object="${booking}" class="form-horizontal">
+                                <input id="bookingId" type="hidden" th:field="*{id}" />
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Date de début de location</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input disabled="" th:value="*{startDate}" type="text" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">Date de fin de location</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input disabled="" th:value="*{endDate}" type="text" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label th:if="${booking.expectedNumberKm != 0}" class="col-md-2 col-form-label">Nombre de kilomètres estimés</label>
+                                    <label th:if="${booking.expectedNumberHours != null}" class="col-md-2 col-form-label">Nombre d'heures estimées</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input disabled="" th:if="${booking.expectedNumberKm != 0}" th:value="*{expectedNumberKm}" type="text" class="form-control disabled">
+                                            <input disabled="" th:if="${booking.expectedNumberHours != null}" th:value="*{expectedNumberHours}" type="text" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">État de la réservation</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input disabled="" th:value="*{status.getName()}" type="text" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Prix estimé</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input disabled="" th:value="*{expectedPrice}" type="text" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">Montant de la promotion</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input disabled="" th:value="*{discount}" type="text" class="form-control disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Véhicule associé </label>
+                                    <div class="col-md-2">
+                                        <input disabled="" th:value="*{vehicle.brand} +' '+ *{vehicle.model}" type="text" class="form-control disabled">
+                                        <a th:href="@{/vehicules/} + ${vehicle.registration}" class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">Client associé </label>
+                                    <div class="col-md-2">
+                                        <input disabled="" th:value="*{client.lastname} +' '+ *{client.firstname}" type="text" class="form-control disabled">
+                                        <a th:href="@{/clients/} + ${client.id}" class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div th:replace="modals/bookingModals.html :: rentBookingModal"></div>
+            </div>
+            <footer th:replace="fragments/footer.html :: footer"></footer>
+        </div>
+    </div>
+    <script>
+        (function($) {
+            $(".rentBooking").click(function() {
+                $(".rent-booking-modal-btn").click(function(){
+                    let id = $('#bookingId').val();
+                    $.get("/reservations/louer/" + id);
+                    window.location.href('/reservations');
+                });
+            });
+        })(jQuery);
+    </script>
+</body>
+
+</html>

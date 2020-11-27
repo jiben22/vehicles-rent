@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head.html :: head"></head>
+
+<body class="off-canvas-sidebar">
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top text-white">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <p class="navbar-brand">Connexion</p>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="wrapper wrapper-full-page">
+        <div class="page-header login-page header-filter" filter-color="black"
+            style="background-image: url('/img/wallpapers/devon-janse-van-rensburg.jpg'); background-size: cover; background-position: top center;">
+            <div class="container">
+                <div class="row">
+                    <span class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
+                        <form class="form" name='f' th:action="@{/connexion}" method="POST">
+                            <div th:if="${param.error}">
+                                <div class="alert alert-danger">
+                                    Identifiant ou mot de passe invalide
+                                </div>
+                            </div>
+                            <div th:if="${param.logout}">
+                                <div class="alert alert-info">
+                                    Vous avez été déconnecté
+                                </div>
+                            </div>
+                            <div th:if="${param.resetSuccess}">
+                                <div class="alert alert-info">
+                                    Votre mot de passe a été réinitialisé avec succès
+                                </div>
+                            </div>
+                            <div class="card card-login card-hidden">
+                                <div class="card-header card-header-primary text-center">
+                                    <h3 class="card-title">
+                                        Bienvenue sur votre espace personnel
+                                    </h3>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-description text-center">
+                                        Accédez à votre espace dédié pour gérer les locations de véhicules.
+                                    </p>
+                                    <span class="bmd-form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="material-icons">email</i>
+                                                </span>
+                                            </div>
+                                            <input name="username" type="email" class="form-control"
+                                                placeholder="Identifiant..." />
+                                        </div>
+                                    </span>
+                                    <span class="bmd-form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="material-icons">lock_outline</i>
+                                                </span>
+                                            </div>
+                                            <input name="password" type="password" class="form-control"
+                                                placeholder="Mot de passe..." />
+                                        </div>
+                                    </span>
+                                    <hr />
+                                    <label class="form-check-label">
+                                        <a th:href="@{/reinitialisation-mot-de-passe}">Mot de passe oublié ?</a>
+                                    </label>
+                                </div>
+                                <div class="card-footer justify-content-center">
+                                    <button name="submit" type="submit" value="submit"
+                                        class="btn btn-primary btn-link btn-lg">Connexion</button>
+                                </div>
+                            </div>
+                        </form>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="fragments/footer.html :: footer"></footer>
+    </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+# Spring configuration
+spring:
+  datasource:
+    url: jdbc:mysql://vps817240.ovh.net:3306/team3_schema?serverTimezone=UTC
+    username: team3
+    password: 70JDogNy
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # ===============================
+  # = JPA configurations
+  # ===============================
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: update # auto create or update database schema
+    database: mysql
+  # dev: auto reload thymeleaf templates without restart
+  # https://attacomsian.com/blog/spring-boot-auto-reload-thymeleaf-templates/ #2
+  profiles:
+    active: dev
+  # ===============================
+  # = MAIL configurations
+  # ===============================
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    username: klozinn@gmail.com
+    password:
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    protocol: smtp
+    test-connection: false
+
+# Logger
+logging:
+  level:
+    root: INFO
+    com.memorynotfound: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: INFO
