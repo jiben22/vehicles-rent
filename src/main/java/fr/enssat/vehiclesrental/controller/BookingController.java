@@ -172,7 +172,7 @@ public class BookingController {
             Booking b = bookingService.getBooking(booking.getId());
             b.setStartDate(booking.getStartDate());
             b.setEndDate(booking.getEndDate());
-            bookingService.UpdateBooking(b);
+            bookingService.editBooking(b);
             springModel.addAttribute(BOOKING, b);
         } catch (Exception exception) {
             log.error(exception.getMessage() + exception.getCause());
@@ -319,7 +319,7 @@ public class BookingController {
             book.setExpectedPrice(reducePrice);
         }**/
 
-        bookingService.UpdateBooking(book);
+        bookingService.editBooking(book);
 
         springModel.addAttribute(BOOKING, book);
 
