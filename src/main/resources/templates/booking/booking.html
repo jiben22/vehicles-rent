@@ -14,7 +14,7 @@
                     <a sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                         T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
-                       th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$EditBooking).URL}(id=${booking.id})}">
+                       th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$UpdateBooking).URL}(id=${booking.id})}">
                         <button type="button" class="btn btn-warning pull-right">Modifier</button>
                     </a>
                     <a th:if="${booking.status.name == 'En cours de location'}" sec:authorize="hasAnyAuthority(

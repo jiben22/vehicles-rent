@@ -329,7 +329,6 @@ public class ControllerConstants {
         public static final class GetCharts {
             private GetCharts() {}
 
-
             public static final String URL = BASE_URL + "/{type}/{interval}";
             public static final String TITLE = "Statistiques";
             public static final String VIEW = "charts";
