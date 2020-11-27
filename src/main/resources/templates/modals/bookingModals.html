@@ -37,4 +37,18 @@
             </div>
         </div>
     </div>
+    <script>
+        (function($) {
+            let that;
+            $(".remove").click(function() {
+                that = $(this);
+                $(".remove-modal-btn").click(function(){
+                    let tr = that.parent().parent()[0];
+                    let id = tr.dataset.id;
+                    $(tr).fadeOut();
+                    $.get("vehicules/supprimer/" + id);
+                });
+            });
+        })(jQuery);
+    </script>
 </div>
