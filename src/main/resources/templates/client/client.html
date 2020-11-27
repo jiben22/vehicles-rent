@@ -13,7 +13,7 @@
                     <!--TODO: use constant -->
                     <a sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label)"
-                       th:href="@{/clients/modifier/} + ${client.id}">
+                       th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$UpdateClient).URL}(id=${client.id})}">
                         <button type="button" class="btn btn-warning pull-right">Modifier</button>
                     </a>
                     <div class="card">
@@ -21,7 +21,7 @@
                             <div class="card-icon">
                                 <i class="material-icons">work</i>
                             </div>
-                            <h4 class="card-title">Fiche du client</h4>
+                            <h4 class="card-title" th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$GetClientById).TITLE}"></h4>
                         </div>
                         <div class="card-body">
                             <form action="#" th:object="${client}" class="form-horizontal">

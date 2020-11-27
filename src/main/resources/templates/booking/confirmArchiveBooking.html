@@ -35,10 +35,9 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <a class="text-center" th:href="@{/reservations/complete/archiver/}+${booking.id}">
+                                    <a class="text-center" th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$ArchiveBooking).URL}(id=${booking.id})}">
                                         <button type="button" class="btn btn-success pull-right" >Archiver</button>
                                     </a>
-
                                 </div>
                             </form>
                         </div>

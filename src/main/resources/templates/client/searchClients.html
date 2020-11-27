@@ -15,20 +15,22 @@
                         T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)"
                          class="container">
                         <div class="offset-md-11">
-                            <a th:href="@{/clients/ajouter}" class="btn btn-primary">
-                                <i class="material-icons" style="font-size:30px;">control_point</i> Ajouter un client
+                            <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$AddClient).URL}}" class="btn btn-primary">
+                                <i class="material-icons" style="font-size:30px;">control_point</i>
+                                [[ ${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$AddClient).TITLE} ]]
                             </a>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header card-header-primary card-header-icon">
                             <div class="card-icon">
-                                <i class="material-icons">work</i>
+                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController).ICON}"></i>
                             </div>
-                            <h4 class="card-title">Rechercher un client</h4>
+                            <h4 class="card-title" th:text="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$SearchClient).TITLE}}"></h4>
                         </div>
                         <div class="card-body">
-                            <form action="#" method="post" th:action="@{'/clients/rechercher'}" th:object="${client}" class="form-horizontal">
+                            <form action="#" method="post" th:action="@{@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$SearchClient).URL}}}"
+                                  th:object="${client}" class="form-horizontal">
                                 <input type="hidden" th:field="*{id}" />
                                 <div class="row">
                                     <label class="col-md-2 col-form-label">Nom</label>

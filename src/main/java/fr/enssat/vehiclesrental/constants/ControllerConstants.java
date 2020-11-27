@@ -55,7 +55,7 @@ public class ControllerConstants {
         public static final class GetClientById {
             private GetClientById() {}
 
-            public static final String URL = "/{id}";
+            public static final String URL = "/" + CLIENT + "/{id}";
             public static final String TITLE = "Fiche du client";
             public static final String VIEW = BASE_VIEW + CLIENT;
         }
@@ -63,7 +63,7 @@ public class ControllerConstants {
         public static final class AddClient {
             private AddClient() {}
 
-            public static final String URL = "/ajouter";
+            public static final String URL = BASE_URL + "/ajouter";
             public static final String TITLE = "Ajouter un client";
             public static final String VIEW = BASE_VIEW + "addClient";
             public static final String ERROR_MESSAGE = "Impossible d'enregister le client";
@@ -72,7 +72,7 @@ public class ControllerConstants {
         public static final class UpdateClient {
             private UpdateClient() {}
 
-            public static final String URL = "/modifier/{id}";
+            public static final String URL = BASE_URL + "/modifier/{id}";
             public static final String TITLE = "Modifier le client";
             public static final String VIEW = BASE_VIEW + "editClient";
             public static final String ERROR_MESSAGE = "Impossible de modifier le client";
@@ -81,7 +81,7 @@ public class ControllerConstants {
         public static final class ArchiveClient {
             private ArchiveClient() {}
 
-            public static final String URL = "/supprimer/{id}";
+            public static final String URL = BASE_URL + "/supprimer/{id}";
             public static final String TITLE = "Archiver le client";
             public static final String VIEW = BASE_VIEW + "archiveClient";
             public static final String ERROR_MESSAGE = "Impossible d'archiver le client";
@@ -90,7 +90,7 @@ public class ControllerConstants {
         public static final class SearchClient {
             private SearchClient() {}
 
-            public static final String URL = "/rechercher";
+            public static final String URL = BASE_URL + "/rechercher";
             public static final String TITLE = "Rechercher un client";
             public static final String VIEW = BASE_VIEW + "searchClients";
             public static final String ERROR_MESSAGE = "Impossible de rechercher le client";
@@ -214,7 +214,7 @@ public class ControllerConstants {
         public static final class EditBooking {
             private EditBooking() {}
 
-            public static final String URL = BASE_URL+"/edit";
+            public static final String URL = BASE_URL+"/edit/{id}";
             public static final String TITLE = "modifier une réservation";
             public static final String VIEW = BASE_VIEW + "createBooking";
             public static final String ERROR_MESSAGE = "Impossible de modifier la réservation";
@@ -223,7 +223,7 @@ public class ControllerConstants {
         public static final class ArchiveBooking {
             private ArchiveBooking() {}
 
-            public static final String URL = BASE_URL+"/archiver";
+            public static final String URL = BASE_URL+"/archiver/{id}";
             public static final String TITLE = "archiver une réservation";
             public static final String VIEW = BASE_VIEW + "archiveBooking";
         }

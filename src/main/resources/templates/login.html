@@ -68,7 +68,9 @@
                                     </span>
                                     <hr />
                                     <label class="form-check-label text-center d-block p-0">
-                                        <a  class="text-primary font-weight-bold" th:href="@{/reinitialisation-mot-de-passe}">Mot de passe oublié ?</a>
+                                        <a class="text-primary font-weight-bold"
+                                           th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.PasswordForgotController).BASE_URL}}">
+                                            Mot de passe oublié ?</a>
                                     </label>
                                 </div>
                                 <div class="card-footer justify-content-center">
