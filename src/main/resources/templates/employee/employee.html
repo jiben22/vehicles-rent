@@ -18,7 +18,7 @@
                     </div>
                     <div class="align-self-end mb-1">
                         <a class="btn btn-primary pull-right"
-                           th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController$UpdateEmployee).URL}(id=${employee.id})}">
+                           th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController$UpdateEmployee).URL}(id=${employee.id})}">
                             Modifier
                         </a>
                     </div>
@@ -26,10 +26,11 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary card-header-icon">
-                            <div class="card-icon">
-                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).ICON}"></i>
-                            </div>
-                            <h4 class="card-title" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController$GetEmployeeById).TITLE}"></h4>
+                            <div class="card-icon"><i class="material-icons"
+                                                      th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController).ICON}">
+                            </i></div>
+                            <h4 class="card-title"
+                                th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController$GetEmployeeById).TITLE}"></h4>
                         </div>
                         <div class="card-body">
                             <form action="#" th:object="${employee}" class="form-horizontal">

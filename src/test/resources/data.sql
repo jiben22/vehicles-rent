@@ -36,5 +36,5 @@ INSERT INTO plane (id, brand, maximum_speed, model, nb_seats, rent_price_per_day
 
 INSERT INTO booking (id, discount, end_date, expected_number_km, expected_price, is_discount, start_date, status, id_client, id_vehicle) VALUES
 (148632579, 200.5, concat(YEAR(CURRENT_DATE),'-',MONTH(CURRENT_DATE),'-20'), 2500, 2000.5, true, concat(YEAR(CURRENT_DATE),'-',MONTH(CURRENT_DATE),'-14'), 'Réservation prête', 9143686792, 782),
-(148632581, 200.5, TIMESTAMPADD(DAY, 7, CURRENT_DATE), 250, 1000, true, CURRENT_DATE, 'Réservation prête', 9143686793, 12679),
+(148632581, 200.5, TIMESTAMPADD(DAY, 7, CURRENT_DATE), 250, 1000, true, CURRENT_DATE, 'En cours de location', 9143686793, 12679),
 (148632580, 0, concat(YEAR(CURRENT_DATE),'-10-12'), 500, 300, false, concat(YEAR(CURRENT_DATE),'-10-15'), 'Réservation prête', 9143686794, 44);

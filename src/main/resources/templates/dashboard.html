@@ -15,17 +15,17 @@
                     <div class="row justify-content-around">
                         <div id="card-vehicle" class="custom-card col-sm-6 col-md-4 col-xl-3 rounded position-relative m-4 px-0 w-75">
                             <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
-                                <span th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).VEHICLES_LABEL}"></span>
+                                <span th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).VEHICLES_LABEL}"></span>
                             </h4>
                             <div class="bg-white w-100 d-flex justify-content-around">
-                                <a class="w-100 h-100 text-center py-2" th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$GetVehicles).URL}}">
+                                <a class="w-100 h-100 text-center py-2" th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController$GetVehicles).URL}}">
                                     <i class="material-icons">list</i>
                                 </a>
                                 <a sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                         T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
                                    class="w-100 h-100 border-left text-center py-2"
-                                   th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$AddVehicle).URL}}">
+                                   th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController$AddVehicle).URL}}">
                                     <i class="material-icons">add</i>
                                 </a>
 
@@ -33,48 +33,46 @@
                         </div>
                         <div id="card-client" class="custom-card col-sm-6 col-md-4 col-xl-3 rounded position-relative m-4 px-0 w-75">
                             <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
-                                <span th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ClientController).CLIENTS_LABEL}"></span>
+                                <span th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController).CLIENTS_LABEL}"></span>
                             </h4>
                             <div class="bg-white w-100 d-flex justify-content-around">
-                                <a class="w-100 h-100 text-center py-2" th:href="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ClientController$GetClients).URL}">
+                                <a class="w-100 h-100 text-center py-2" th:href="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$GetClients).URL}">
                                     <i class="material-icons">list</i>
                                 </a>
-                                <!--
                                 <a sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                         T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)"
-                                   class="w-100 h-100 border-left text-center py-2" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ClientController$AddClient).URL}">
+                                   class="w-100 h-100 border-left text-center py-2" th:href="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ClientController$AddClient).URL}">
                                     <i class="material-icons">add</i>
-                                </a>-->
+                                </a>
                             </div>
                         </div>
                         <div id="card-booking" class="custom-card col-sm-6 col-md-4 col-xl-3 rounded position-relative m-4 px-0 w-75">
                             <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
-                                <span th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController).BOOKINGS_LABEL}"></span>
+                                <span th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController).BOOKINGS_LABEL}"></span>
                             </h4>
                             <div class="bg-white w-100 d-flex justify-content-around">
-                                <a class="w-100 h-100 text-center py-2" th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController$GetBookings).URL}}">
+                                <a class="w-100 h-100 text-center py-2" th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$GetBookings).URL}}">
                                     <i class="material-icons">list</i>
                                 </a>
-                                <!--
                                 <a sec:authorize="hasAnyAuthority(
                         T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                         T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)"
-                                   class="w-100 h-100 border-left text-center py-2" th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController$AddBooking).URL}}">
+                                   class="w-100 h-100 border-left text-center py-2" th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$CreateBooking).URL}}">
                                     <i class="material-icons">add</i>
-                                </a>-->
+                                </a>
                             </div>
                         </div>
                         <div sec:authorize="hasAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label)"
                              id="card-employee" class="custom-card col-sm-6 col-md-4 col-xl-3 rounded position-relative m-4 px-0 w-75">
                             <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
-                                <span th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).EMPLOYEES_LABEL}"></span>
+                                <span th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController).EMPLOYEES_LABEL}"></span>
                             </h4>
                             <div class="bg-white w-100 d-flex justify-content-around">
-                                <a class="w-100 h-100 text-center py-2" th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController$GetEmployees).URL}}">
+                                <a class="w-100 h-100 text-center py-2" th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController$GetEmployees).URL}}">
                                     <i class="material-icons">list</i>
                                 </a>
-                                <a class="w-100 h-100 border-left text-center py-2" th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController$AddEmployee).URL}}">
+                                <a class="w-100 h-100 border-left text-center py-2" th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController$AddEmployee).URL}}">
                                     <i class="material-icons">add</i>
                                 </a>
                             </div>
@@ -85,7 +83,7 @@
                              id="card-statistic"
                              class="custom-card col-sm-6 col-md-4 col-xl-3 rounded position-relative m-4 px-0 w-75">
                             <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
-                                <span th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.ChartController).CHARTS_LABEL}">Statistics</span>
+                                <span th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.ChartController).CHARTS_LABEL}">Statistics</span>
                             </h4>
                             <div class="bg-white w-100 d-flex justify-content-around">
                                 <a class="w-100 h-100 text-center py-2" href="#">

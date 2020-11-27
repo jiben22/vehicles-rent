@@ -18,7 +18,7 @@
                             <h4 class="card-title">Ajouter un collaborateur</h4>
                         </div>
                         <div class="card-body">
-                            <form method="post" th:action="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController$AddEmployee).URL}}" th:object="${employee}" class="form-horizontal">
+                            <form method="post" th:action="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController$AddEmployee).URL}}" th:object="${employee}" class="form-horizontal">
                                 <input type="hidden" th:field="*{id}" />
                                 <div class="row">
                                     <label class="col-md-2 col-form-label">Nom</label>
@@ -146,7 +146,7 @@
                                     </div>
                                 </div>
                                 <div class="pull-right">
-                                    <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).BASE_URL}}"
+                                    <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController).BASE_URL}}"
                                        class="btn btn-secondary">Annuler
                                     </a>
                                     <button type="submit" class="btn btn-success">Enregistrer</button>

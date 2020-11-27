@@ -18,7 +18,8 @@ import java.util.Set;
 @Table(name = "Client")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = true)
 @PrimaryKeyJoinColumn(name = "id")
 public class Client extends Person implements Serializable {
@@ -36,7 +37,7 @@ public class Client extends Person implements Serializable {
      */
     @Column(nullable = false)
     @NonNull
-    private Boolean isArchived;
+    private boolean isArchived;
 
     /**
      * Represent list of bookings link to the current client.

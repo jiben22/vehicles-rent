@@ -1,6 +1,6 @@
 package fr.enssat.vehiclesrental.controller;
 
-import fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController.*;
+import fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController.*;
 import fr.enssat.vehiclesrental.model.Car;
 import fr.enssat.vehiclesrental.model.Motorbike;
 import fr.enssat.vehiclesrental.model.Plane;
@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -22,13 +23,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static fr.enssat.vehiclesrental.controller.constants.Constants.Controller.MESSAGE;
-import static fr.enssat.vehiclesrental.controller.constants.Constants.Controller.TITLE;
-import static fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController.*;
+import static fr.enssat.vehiclesrental.constants.ControllerConstants.Controller.*;
+import static fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController.*;
 
 @RequiredArgsConstructor
 @Controller
 @Slf4j
+@RequestMapping(BASE_URL)
 public class VehicleController {
 
     private final VehicleService vehicleService;
@@ -42,13 +43,13 @@ public class VehicleController {
      * @param nbSeats Nombre de sièges dans le véhicule
      * @return la liste des véhicules correspondant aux paramètres de requête
      */
-    @GetMapping(GetVehicles.URL)
+    @GetMapping
     public String showVehicles(Model springModel,
                               @RequestParam Optional<String> vehicleType,
                               @RequestParam(defaultValue = "") String model,
                               @RequestParam(defaultValue = "") String brand,
                               @RequestParam(defaultValue = "0") int nbSeats) {
-        log.info(String.format("GET %s", GetVehicles.URL));
+        log.info(String.format("GET %s", BASE_URL));
         springModel.addAttribute(TITLE, GetVehicles.TITLE);
 
         List<? extends Vehicle> vehicles;
@@ -67,6 +68,7 @@ public class VehicleController {
                 default:
                     log.error(String.valueOf(new IllegalStateException("Unexpected value: " + vehicleType)));
                     vehicles = Collections.emptyList();
+                    break;
             }
         } else {
             vehicles = vehicleService.getVehicles();
@@ -85,10 +87,7 @@ public class VehicleController {
      */
     @GetMapping(GetVehicleByRegistration.URL)
     public String showVehicleByRegistration(Model springModel, @PathVariable String registration) {
-        //TODO: use replace {registration}
-        log.info(String.format("GET %s/%s", BASE_URL, registration));
-        System.out.println(BASE_URL);
-        System.out.println(registration);
+        log.info(String.format("GET %s", StringUtils.replace(GetVehicleByRegistration.URL, PATTERN_REGISTRATION, registration)));
         springModel.addAttribute(TITLE, GetVehicleByRegistration.TITLE);
 
         Vehicle vehicle = vehicleService.getVehicleByRegistration(registration);
@@ -100,6 +99,7 @@ public class VehicleController {
     /**
      * Afficher le formulaire d'ajout d'un véhicule
      * @param springModel Modèle
+     * @param vehicleType Type du véhicule
      * @return le formulaire d'ajout
      */
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
@@ -123,6 +123,7 @@ public class VehicleController {
                     break;
                 default:
                     log.error(String.valueOf(new IllegalStateException("Unexpected value: " + vehicleType)));
+                    break;
             }
         }
 
@@ -155,7 +156,6 @@ public class VehicleController {
             return AddVehicle.VIEW;
         }
 
-        // TODO: reduce code complexity
         try {
             Vehicle existedVehicle = vehicleService.getVehicleByRegistration(vehicle.getRegistration());
             if (existedVehicle != null) {
@@ -173,11 +173,11 @@ public class VehicleController {
                 log.error(exception.getMessage() + exception.getCause());
                 redirectAttributes.addFlashAttribute(MESSAGE, AddVehicle.ERROR_MESSAGE);
 
-                return String.format("redirect:%s", GetVehicles.URL);
+                return REDIRECT_VEHICLES;
             }
         }
 
-        return String.format("redirect:%s/%s", GetVehicles.URL, vehicle.getRegistration());
+        return String.format(REDIRECT_VEHICLE_BY_REGISTRATION, vehicle.getRegistration());
     }
 
     /**
@@ -234,8 +234,7 @@ public class VehicleController {
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
     @GetMapping(UpdateVehicle.URL)
     public String showUpdateVehicle(Model springModel, @PathVariable String registration) {
-        //TODO: replace {registration}
-        log.info(String.format("GET %s", UpdateVehicle.URL));
+        log.info(String.format("GET %s", StringUtils.replace(UpdateVehicle.URL, PATTERN_REGISTRATION, registration)));
         springModel.addAttribute(TITLE, UpdateVehicle.TITLE);
 
         Vehicle vehicle = vehicleService.getVehicleByRegistration(registration);
@@ -247,15 +246,17 @@ public class VehicleController {
     /**
      * Met à jour un véhicule
      * @param vehicle Véhicule
+     * @param registration Immatriculation du véhicule
      * @param result Binding result
      * @param redirectAttributes Redirect attributes
      * @return la fiche du véhicule mise à jour ou le formulaire de modification avec les erreurs
      */
     private String updateVehicle(@Valid @ModelAttribute(VEHICLE) Vehicle vehicle,
+                                String registration,
                                 BindingResult result,
                                 Model springModel,
                                 RedirectAttributes redirectAttributes) {
-        log.info(String.format("Update vehicle %s", vehicle.getRegistration()));
+        log.info(String.format("Update vehicle %s", registration));
         springModel.addAttribute(TITLE, UpdateVehicle.TITLE);
 
         if (result.hasErrors()) {
@@ -276,15 +277,16 @@ public class VehicleController {
             log.error(exception.getMessage() + exception.getCause());
             redirectAttributes.addFlashAttribute(MESSAGE, UpdateVehicle.ERROR_MESSAGE);
 
-            return String.format("redirect:%s", GetVehicles.URL);
+            return REDIRECT_VEHICLES;
         }
 
-        return String.format("redirect:/vehicules/%s", vehicle.getRegistration());
+        return String.format(REDIRECT_VEHICLE_BY_REGISTRATION, vehicle.getRegistration());
     }
 
     /**
      * Met à jour la fiche d'une voiture
      * @param car Instance d'une voiture
+     * @param registration Immatriculation de la voiture
      * @param result Binding result
      * @param springModel Modèle
      * @param redirectAttributes Redirect attributes
@@ -292,15 +294,19 @@ public class VehicleController {
      */
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
     @PostMapping(UpdateVehicle.URL_CAR)
-    public String updateCar(@Valid @ModelAttribute(VEHICLE) Car car, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
-        //TODO: replace {registration}
-        log.info(String.format("POST %s", UpdateVehicle.URL_CAR));
-        return updateVehicle(car, result, springModel, redirectAttributes);
+    public String updateCar(@Valid @ModelAttribute(VEHICLE) Car car,
+                            @PathVariable String registration,
+                            BindingResult result,
+                            Model springModel,
+                            RedirectAttributes redirectAttributes) {
+        log.info(String.format("POST %s", StringUtils.replace(UpdateVehicle.URL_CAR, PATTERN_REGISTRATION, registration)));
+        return updateVehicle(car, registration, result, springModel, redirectAttributes);
     }
 
     /**
      * Met à jour la fiche d'une moto
      * @param motorbike Instance d'une moto
+     * @param registration Immatriculation de la moto
      * @param result Binding result
      * @param springModel Modèle
      * @param redirectAttributes Redirect attributes
@@ -308,15 +314,19 @@ public class VehicleController {
      */
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
     @PostMapping(UpdateVehicle.URL_MOTORBIKE)
-    public String updateMotorbike(@Valid @ModelAttribute(VEHICLE) Motorbike motorbike, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
-        //TODO: replace {registration}
-        log.info(String.format("POST %s", UpdateVehicle.URL_MOTORBIKE));
-        return updateVehicle(motorbike, result, springModel, redirectAttributes);
+    public String updateMotorbike(@Valid @ModelAttribute(VEHICLE) Motorbike motorbike,
+                                  @PathVariable String registration,
+                                  BindingResult result,
+                                  Model springModel,
+                                  RedirectAttributes redirectAttributes) {
+        log.info(String.format("POST %s", StringUtils.replace(UpdateVehicle.URL_MOTORBIKE, PATTERN_REGISTRATION, registration)));
+        return updateVehicle(motorbike, registration, result, springModel, redirectAttributes);
     }
 
     /**
      * Met à jour la fiche d'un avion
      * @param plane Instance d'un avion
+     * @param registration Immatriculation de l'avion
      * @param result Binding result
      * @param springModel Modèle
      * @param redirectAttributes Redirect attributes
@@ -324,14 +334,17 @@ public class VehicleController {
      */
     @PreAuthorize(value = "hasAnyAuthority(T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label, T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)")
     @PostMapping(UpdateVehicle.URL_PLANE)
-    public String updatePlane(@Valid @ModelAttribute(VEHICLE) Plane plane, BindingResult result, Model springModel, RedirectAttributes redirectAttributes) {
-        //TODO: replace {registration}
-        log.info(String.format("POST %s", UpdateVehicle.URL_PLANE));
-        return updateVehicle(plane, result, springModel, redirectAttributes);
+    public String updatePlane(@Valid @ModelAttribute(VEHICLE) Plane plane,
+                              @PathVariable String registration,
+                              BindingResult result,
+                              Model springModel,
+                              RedirectAttributes redirectAttributes) {
+        log.info(String.format("POST %s", StringUtils.replace(UpdateVehicle.URL_PLANE, PATTERN_REGISTRATION, registration)));
+        return updateVehicle(plane, registration, result, springModel, redirectAttributes);
     }
 
     /**
-     * Supprimer un véhicule
+     * Archiver un véhicule
      * @param id ID du véhicule
      * @param redirectAttributes Redirect attributes
      * @return la liste des véhicules ou un message d'erreur si l'archivage échoue
@@ -340,18 +353,16 @@ public class VehicleController {
     @GetMapping(ArchiveVehicle.URL)
     public String archiveVehicle(@PathVariable String id,
                               RedirectAttributes redirectAttributes) {
-        //TODO: replace {id}
-        log.info(String.format("GET %s", ArchiveVehicle.URL));
+        log.info(String.format("GET %s", StringUtils.replace(ArchiveVehicle.URL, PATTERN_ID, id)));
 
         try {
-            //TODO: archive vehicle / NOT delete
-            // Delete vehicle
-            vehicleService.deleteVehicle(Long.parseLong(id));
+            // Archive vehicle
+            vehicleService.archiveVehicle(Long.parseLong(id));
         } catch (Exception exception) {
             log.error(exception.getMessage() + exception.getCause());
             redirectAttributes.addFlashAttribute(MESSAGE, ArchiveVehicle.ERROR_MESSAGE);
         }
 
-        return String.format("redirect:%s", GetVehicles.URL);
+        return REDIRECT_VEHICLES;
     }
 }

@@ -5,39 +5,39 @@
 <head th:replace="fragments/head.html :: head"></head>
 
 <body>
-    <div class="wrapper">
-        <div th:replace="fragments/menus.html :: SideBarMenu"></div>
-        <div class="main-panel">
-            <div th:replace="fragments/menus.html :: TopMenu"></div>
-            <div class="content">
-                <div sec:authorize="hasAnyAuthority(
+<div class="wrapper">
+    <div th:replace="fragments/menus.html :: SideBarMenu"></div>
+    <div class="main-panel">
+        <div th:replace="fragments/menus.html :: TopMenu"></div>
+        <div class="page-main-fragment">
+            <div sec:authorize="hasAnyAuthority(
                     T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                     T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)" class="col-sm-12 mt-4">
-                    <div class="col-sm-12 mt-4">
-                        <h3 th:text="${message}" th:if="${message != null}" class="alert m-0 h-100 py-3">Erreur</h3>
-                    </div>
-                    <div class="align-self-end mb-1">
-                        <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController$AddBookings).URL}}">
-                            <i class="material-icons" style="font-size:30px;">control_point</i>
-                            [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController$AddBookings).TITLE} ]]
-                        </a>
-                    </div>
+                <div class="col-sm-12 mt-4">
+                    <h3 th:text="${message}" th:if="${message != null}" class="alert m-0 h-100 py-3">Erreur</h3>
                 </div>
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header card-header-icon">
-                            <div class="card-icon">
-                                <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController).ICON}"></i>
-                            </div>
-                            <h4 class="card-title" th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.BookingController$GetBookings).TITLE}"></h4>
-                        </div>
-                        <div th:replace="components/bookings.html :: bookings(bookings=${bookings})"></div>
-                    </div>
+                <div class="align-self-end mb-1">
+                    <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$CreateBooking).URL}}">
+                        <i class="material-icons" style="font-size:30px;">control_point</i>
+                        [[ ${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$CreateBooking).TITLE} ]]
+                    </a>
                 </div>
             </div>
-            <footer th:replace="fragments/footer.html :: footer"></footer>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons" th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController).ICON}"></i>
+                        </div>
+                        <h4 class="card-title" th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.BookingController$GetBookings).TITLE}"></h4>
+                    </div>
+                    <div th:replace="components/bookings.html :: bookings(bookings=${bookings})"></div>
+                </div>
+            </div>
         </div>
+        <footer th:replace="fragments/footer.html :: footer"></footer>
     </div>
+</div>
 </body>
 
 </html>

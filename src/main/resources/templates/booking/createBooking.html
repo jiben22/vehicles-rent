@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head.html :: head"></head>
+
+<body class="">
+    <div class="wrapper ">
+        <div th:replace="fragments/menus.html :: SideBarMenu"></div>
+        <div class="main-panel">
+            <div th:replace="fragments/menus.html :: TopMenu"></div>
+            <div class="page-main-fragment">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header card-header-primary card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">receipt_long</i>
+                            </div>
+                            <h4 class="card-title">Créer une réservation</h4>
+                        </div>
+
+                        <div class="card-body">
+                            <form action="#" method="post" th:action="@{'/reservations/creer'}" th:object="${booking}" class="form-horizontal">
+                                <input type="hidden" th:field="*{id}" />
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Date de début de location</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input required th:field="*{startDate}" type="text" class="form-control datepicker datepickerCalendar">
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label">Date de fin de location</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input required th:field="*{endDate}" type="text" class="form-control datepicker datepickerCalendar">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label" >Selectionnez le véhicule</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group bmd-form-group">
+                                            <select th:field="*{vehicle}" class="form-control">
+                                                <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.registration}+' '+${vehicle.brand}+' '+${vehicle.model}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <label class="col-md-2 col-form-label" >Selectionnez le client</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group bmd-form-group">
+                                            <select th:field="*{client}" class="form-control">
+                                                <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.lastname}+' '+${client.firstname}+' '+${client.email}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2 col-form-label">Nombre de kilomètres (voiture ou moto) ou heures estimés (avions) selon le véhicule</label>
+                                    <div class="col-md-2">
+                                        <div class="form-group has-default bmd-form-group">
+                                            <input required th:field="*{expectedNumberKm}" type="number" th:min="0" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pull-right">
+                                    <a th:href="@{/reservations}">
+                                        <button type="button" class="btn btn-secondary">Annuler</button>
+                                    </a>
+                                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer th:replace="fragments/footer.html :: footer"></footer>
+        </div>
+    </div>
+</body>
+
+</html>

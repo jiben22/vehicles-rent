@@ -7,25 +7,25 @@
     <div class="col material-datatables">
         <div class="d-flex flex-column flex-md-row justify-content-around align-items-center mb-2 border-bottom border-secondary pb-3">
             <div>
-                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).BASE_URL}}"
+                <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController).BASE_URL}}"
                    class="btn" th:classappend="${param.position == null} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;">clear_all</i> Tous les collaborateurs
                 </a>
             </div>
             <div>
-                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).BASE_URL + '?position=GESTIONNAIRE_COMMERCIAL'}}"
+                <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController).BASE_URL + '?position=GESTIONNAIRE_COMMERCIAL'}}"
                    class="btn" th:classappend="${#httpServletRequest.getParameter('position') == 'GESTIONNAIRE_COMMERCIAL'} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;">person</i> Gestionnaires commerciaux
                 </a>
             </div>
             <div>
-                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).BASE_URL + '?position=GESTIONNAIRE_TECHNIQUE'}}"
+                <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController).BASE_URL + '?position=GESTIONNAIRE_TECHNIQUE'}}"
                    class="btn" th:classappend="${#httpServletRequest.getParameter('position') == 'GESTIONNAIRE_TECHNIQUE'} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;">person</i> Gestionnaires techniques
                 </a>
             </div>
             <div>
-                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).BASE_URL + '?position=GESTIONNAIRE_CLIENT'}}"
+                <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController).BASE_URL + '?position=GESTIONNAIRE_CLIENT'}}"
                    class="btn" th:classappend="${#httpServletRequest.getParameter('position') == 'GESTIONNAIRE_CLIENT'} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;">person</i> Gestionnaires clients
                 </a>
@@ -62,7 +62,7 @@
                     <td th:text="${employee.position.label}">Fonction</td>
                     <td class="text-right">
 <!--                             <a th:href="@{/vehicule/modifier/} + ${vehicle.id}" class="btn btn-link btn-info btn-just-icon"><i class="material-icons">edit</i></a>-->
-                        <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).BASE_URL + '/' + employee.id}}"
+                        <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController).BASE_URL + '/' + employee.id}}"
                            class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
                     </td>
                 </tr>

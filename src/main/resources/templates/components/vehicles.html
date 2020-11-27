@@ -7,33 +7,33 @@
     <div class="col material-datatables">
         <div class="d-flex flex-column flex-md-row justify-content-around align-items-center mb-2 border-bottom border-secondary pb-3">
             <div>
-                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL}}"
+                <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).BASE_URL}}"
                    class="btn" th:classappend="${param.vehicleType == null} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;">clear_all</i> Tous les véhicules
                 </a>
             </div>
             <div>
-                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '?vehicleType=CAR'}}"
+                <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).BASE_URL + '?vehicleType=CAR'}}"
                    class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'CAR'} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;"
-                       th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_CAR}"></i>
-                    [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).CARS} ]]
+                       th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_CAR}"></i>
+                    [[ ${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).CARS} ]]
                 </a>
             </div>
             <div>
-                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '?vehicleType=MOTORBIKE'}}"
+                <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).BASE_URL + '?vehicleType=MOTORBIKE'}}"
                    class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'MOTORBIKE'} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;"
-                       th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_MOTORBIKE}"></i>
-                    [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).MOTORBIKES} ]]
+                       th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_MOTORBIKE}"></i>
+                    [[ ${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).MOTORBIKES} ]]
                 </a>
             </div>
             <div>
-                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '?vehicleType=PLANE'}}"
+                <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).BASE_URL + '?vehicleType=PLANE'}}"
                    class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'PLANE'} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;"
-                       th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_PLANE}"></i>
-                    [[ ${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).PLANES} ]]
+                       th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_PLANE}"></i>
+                    [[ ${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).PLANES} ]]
                 </a>
             </div>
         </div>
@@ -70,15 +70,15 @@
                     <td>
                         <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Car)}">
                             <i class="material-icons"
-                               th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_CAR}">
+                               th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_CAR}">
                             </i></span>
                         <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Motorbike)}">
                             <i class="material-icons"
-                               th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_MOTORBIKE}">
+                               th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_MOTORBIKE}">
                             </i></span>
                         <span th:if="${vehicle instanceof T(fr.enssat.vehiclesrental.model.Plane)}">
                             <i class="material-icons"
-                               th:text="${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).ICON_PLANE}">
+                               th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_PLANE}">
                             </i></span>
                     </td>
                     <td th:text="${vehicle.brand}" tabindex="0" class="sorting_1">Marque</td>
@@ -89,7 +89,7 @@
                     <td th:text="${vehicle.state.description}">État</td>
                     <td class="text-right">
                         <!-- <a th:href="@{/vehicule/modifier/} + ${vehicle.id}" class="btn btn-link btn-info btn-just-icon"><i class="material-icons">edit</i></a> -->
-                        <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$GetVehicleByRegistration).URL}(registration=${vehicle.registration})}"
+                        <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController$GetVehicleByRegistration).URL}(registration=${vehicle.registration})}"
                            class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
                     </td>
                 </tr>
