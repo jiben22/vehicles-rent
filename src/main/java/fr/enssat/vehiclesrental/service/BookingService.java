@@ -72,9 +72,7 @@ public class BookingService implements IBookingService{
         if(!repository.existsById(booking.getId())){
             throw new BookingNotFoundException(String.valueOf(booking.getId()));
         }
-        if(booking.getStartDate().isBefore(getTodayDate())){
-            throw new StartDateBeforeTodayException();
-        }
+
         if(booking.getStartDate().isAfter(booking.getEndDate())){
             throw new StartDateAfterEndDateExceptionException();
         }

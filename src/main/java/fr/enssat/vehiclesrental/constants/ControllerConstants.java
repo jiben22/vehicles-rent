@@ -189,7 +189,7 @@ public class ControllerConstants {
 
             public static final String URL = BASE_URL+"/annuler/{id}";
             public static final String TITLE = "Annuler une réservation";
-            public static final String VIEW = BASE_VIEW + "cancelVehicle";
+            public static final String VIEW = BASE_VIEW + "cancelBooking";
             public static final String ERROR_MESSAGE = "Impossible d'annuler la réservation";
         }
 
@@ -198,6 +198,42 @@ public class ControllerConstants {
 
             public static final String URL = BASE_URL+"/louer/{id}";
             public static final String ERROR_MESSAGE = "Impossible de commencer la location";
+        }
+
+        public static final class ConfirmArchiveBooking {
+            private ConfirmArchiveBooking() {}
+
+            public static final String URL = BASE_URL+"/confirmer/archiver";
+            public static final String TITLE = "Confirmer archivage d'une réservation";
+            public static final String VIEW = BASE_VIEW + "confirmArchiveBooking";
+            public static final String ERROR_MESSAGE = "Impossible d'archiver la réservation";
+        }
+
+        public static final class ArchiveBooking {
+            private ArchiveBooking() {}
+
+            public static final String URL = BASE_URL+"/archiver/{id}";
+            public static final String TITLE = "Archiver une réservation";
+            public static final String VIEW = BASE_VIEW + "archiveBooking";
+            public static final String ERROR_MESSAGE = "Impossible d'archiver la réservation";
+        }
+
+        public static final class EditBooking {
+            private EditBooking() {}
+
+            public static final String URL = BASE_URL+"/modifier/{id}";
+            public static final String TITLE = "Modifier la réservation";
+            public static final String VIEW = BASE_VIEW + "editBooking";
+            public static final String ERROR_MESSAGE = "Impossible de modifier la réservation";
+        }
+
+        public static final class CompleteArchiveBooking {
+            private CompleteArchiveBooking() {}
+
+            public static final String URL = BASE_URL+"/complete/archiver/{id}";
+            public static final String TITLE = "Confirme archivage d'une réservation";
+            public static final String VIEW = BASE_VIEW + "completeArchiveBooking";
+            public static final String ERROR_MESSAGE = "Impossible d'archiver la réservation";
         }
     }
 
