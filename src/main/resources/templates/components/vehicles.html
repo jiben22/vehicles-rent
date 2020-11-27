@@ -7,13 +7,13 @@
     <div class="col material-datatables">
         <div class="d-flex flex-column flex-md-row justify-content-around align-items-center mb-2 border-bottom border-secondary pb-3">
             <div>
-                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL}}"
+                <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).BASE_URL}}"
                    class="btn" th:classappend="${param.vehicleType == null} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;">clear_all</i> Tous les véhicules
                 </a>
             </div>
             <div>
-                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '?vehicleType=CAR'}}"
+                <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).BASE_URL + '?vehicleType=CAR'}}"
                    class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'CAR'} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;"
                        th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_CAR}"></i>
@@ -21,7 +21,7 @@
                 </a>
             </div>
             <div>
-                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '?vehicleType=MOTORBIKE'}}"
+                <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).BASE_URL + '?vehicleType=MOTORBIKE'}}"
                    class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'MOTORBIKE'} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;"
                        th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_MOTORBIKE}"></i>
@@ -29,7 +29,7 @@
                 </a>
             </div>
             <div>
-                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '?vehicleType=PLANE'}}"
+                <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).BASE_URL + '?vehicleType=PLANE'}}"
                    class="btn" th:classappend="${#httpServletRequest.getParameter('vehicleType') == 'PLANE'} ? btn-light : btn-secondary">
                     <i class="material-icons" style="font-size:30px;"
                        th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).ICON_PLANE}"></i>
@@ -89,7 +89,7 @@
                     <td th:text="${vehicle.state.description}">État</td>
                     <td class="text-right">
                         <!-- <a th:href="@{/vehicule/modifier/} + ${vehicle.id}" class="btn btn-link btn-info btn-just-icon"><i class="material-icons">edit</i></a> -->
-                        <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$GetVehicleByRegistration).URL}(registration=${vehicle.registration})}"
+                        <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController$GetVehicleByRegistration).URL}(registration=${vehicle.registration})}"
                            class="btn btn-link btn-warning btn-just-icon"><i class="material-icons">dvr</i></a>
                     </td>
                 </tr>

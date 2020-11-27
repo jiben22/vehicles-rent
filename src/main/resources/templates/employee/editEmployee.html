@@ -18,7 +18,7 @@
                             <h4 class="card-title" th:text="${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController$UpdateEmployee).TITLE}"></h4>
                         </div>
                         <div class="card-body">
-                            <form method="post" th:action="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).BASE_URL + '/' + employee.id}}" th:object="${employee}" class="form-horizontal">
+                            <form method="post" th:action="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController).BASE_URL + '/' + employee.id}}" th:object="${employee}" class="form-horizontal">
                                 <input type="hidden" th:field="*{id}" />
                                 <div class="row">
                                     <label class="col-md-2 col-form-label">Nom</label>
@@ -147,7 +147,7 @@
                                 </div>
                                 <div class="pull-right">
                                     <a class="btn btn-secondary"
-                                       th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.EmployeeController).BASE_URL}}">
+                                       th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.EmployeeController).BASE_URL}}">
                                         Annuler
                                     </a>
                                     <button type="submit" class="btn btn-warning">Modifier</button>

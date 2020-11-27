@@ -30,6 +30,7 @@ public class ControllerConstants {
     public static final class ClientController {
         private ClientController() {}
         public static final String BASE_URL = "/clients";
+
         private static final String BASE_VIEW = "client/";
 
         public static final String CLIENT = "client";
@@ -38,30 +39,15 @@ public class ControllerConstants {
         public static final String CLIENTS_LABEL = CLIENTS;
 
         public static final String ICON = "people";
-
-        
 
         public static final String REDIRECT_CLIENTS = "redirect:/clients";
         public static final String REDIRECT_CLIENT_BY_ID = "redirect:/clients/%s";
-<<<<<<< refs/remotes/origin/front
-        public static final String CLIENTS = "clients";
-=======
-        private static final String BASE_VIEW = "client/";
->>>>>>> Fixes after merge
-        public static final String CLIENT = "client";
-        public static final String CLIENT_LABEL = CLIENT;
-        public static final String CLIENTS = "clients";
-        public static final String CLIENTS_LABEL = CLIENTS;
 
-        public static final String ICON = "people";
+
 
         public static final class GetClients {
             private GetClients() {}
-<<<<<<< refs/remotes/origin/front
             public static final String URL = BASE_URL;
-=======
-            public static final String URL = "/clients/rechercher";
->>>>>>> Fixes after merge
             public static final String TITLE = "Liste des clients";
             public static final String VIEW = BASE_VIEW + CLIENTS;
         }
@@ -119,10 +105,7 @@ public class ControllerConstants {
         public static final String REDIRECT_VEHICLE_BY_REGISTRATION = "redirect:/vehicules/%s";
         public static final String PATTERN_REGISTRATION = "{registration}";
         private static final String BASE_VIEW = "vehicle/";
-<<<<<<< refs/remotes/origin/front
 
-=======
->>>>>>> Fixes after merge
         public static final String VEHICLE = "vehicle";
         public static final String VEHICLE_LABEL = "véhicule";
         public static final String VEHICLES = "vehicles";
@@ -139,7 +122,7 @@ public class ControllerConstants {
 
         public static final class GetVehicles {
             private GetVehicles() {}
-
+            public static final String URL = BASE_URL;
             public static final String TITLE = "Liste des véhicules";
             public static final String VIEW = BASE_VIEW + VEHICLES;
         }
@@ -191,34 +174,23 @@ public class ControllerConstants {
 
         public static final String BASE_URL = "/reservations";
         private static final String BASE_VIEW = "booking/";
-<<<<<<< refs/remotes/origin/front
-        
-        public static final String BOOKINGS = "bookings";
-        public static final String BOOKINGS_LABEL = "réservations";
-        public static final String BOOKING = "booking";
-        public static final String BOOKING_LABEL = "réservation";
-=======
 
-        public static final String BOOKING = "booking";
-        public static final String BOOKING_LABEL = "réservation";
         public static final String BOOKINGS = "bookings";
         public static final String BOOKINGS_LABEL = "réservations";
+        public static final String BOOKING = "booking";
+        public static final String BOOKING_LABEL = "réservation";
 
         public static final String ICON = "receipt_long";
         public static final String REDIRECT_BOOKINGS = "redirect:/reservations";
         public static final String REDIRECT_BOOKING_BY_ID = "redirect:/reservations/%s";
->>>>>>> Fixes after merge
 
         public static final class GetBookings {
             private GetBookings() {}
 
             public static final String URL = BASE_URL;
             public static final String TITLE = "Liste des réservations";
-<<<<<<< refs/remotes/origin/front
-            public static final String VIEW = BASE_VIEW+BOOKINGS;
-=======
             public static final String VIEW = BASE_VIEW + BOOKINGS;
->>>>>>> Fixes after merge
+
         }
 
         public static final class GetBookingById {
@@ -270,6 +242,7 @@ public class ControllerConstants {
         public static final class GetEmployees {
             private GetEmployees() {}
 
+            public static final String URL = BASE_URL;
             public static final String TITLE = "Liste des collaborateurs";
             public static final String VIEW = BASE_VIEW + "employees";
         }
@@ -325,11 +298,8 @@ public class ControllerConstants {
 
             public static final String URL = BASE_URL + "/{type}/{interval}";
             public static final String TITLE = "Statistiques";
-<<<<<<< refs/remotes/origin/front
-            public static final String VIEW = "statistics";
-=======
             public static final String VIEW = "charts";
->>>>>>> Fixes after merge
+
             public static final String TOP10 = "top10";
             public static final String INTERVAL = "interval";
             public static final String TOP10_NAME = "TOP 10 : %s";

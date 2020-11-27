@@ -29,15 +29,15 @@ public class Booking implements Serializable {
      * Date when a location should start
      */
     @Column(nullable = false, columnDefinition = "DATETIME")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date startDate;
+    //@Temporal(TemporalType.TIMESTAMP)
+    private LocalDate startDate;
 
     /**
      * Date when a location should end
      */
     @Column(nullable = false, columnDefinition = "DATETIME")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endDate;
+    //@Temporal(TemporalType.TIMESTAMP)
+    private LocalDate endDate;
 
     /**
      * Expected number of kilometer define when create booking
@@ -73,7 +73,7 @@ public class Booking implements Serializable {
      * Represent which state is a booking.
      */
     @Column(nullable = false, length = 45)
-    @NonNull
+    //@NonNull
     private Status status;
 
     /**
@@ -88,7 +88,7 @@ public class Booking implements Serializable {
      */
     @ManyToOne
     @JoinColumn(name="id_vehicle")
-    @NonNull
+    //@NonNull
     private Vehicle vehicle;
 
     @Builder

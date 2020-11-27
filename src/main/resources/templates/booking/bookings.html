@@ -9,7 +9,7 @@
     <div th:replace="fragments/menus.html :: SideBarMenu"></div>
     <div class="main-panel">
         <div th:replace="fragments/menus.html :: TopMenu"></div>
-        <div class="content">
+        <div class="page-main-fragment">
             <div sec:authorize="hasAnyAuthority(
                     T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                     T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_CLIENT.label)" class="col-sm-12 mt-4">

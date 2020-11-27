@@ -12,8 +12,7 @@
             <div sec:authorize="hasAnyAuthority(
                     T(fr.enssat.vehiclesrental.model.enums.Position).RESPONSABLE_LOCATION.label,
                     T(fr.enssat.vehiclesrental.model.enums.Position).GESTIONNAIRE_TECHNIQUE.label)"
-                 class="d-flex col-sm-12 mt-4"
-            >
+                 class="d-flex col-sm-12 mt-4">
                 <div class="col pl-0 mb-1">
                     <h3 th:text="${message}" th:if="${message != null}" class="alert m-0 h-100 py-3">Erreur</h3>
                 </div>

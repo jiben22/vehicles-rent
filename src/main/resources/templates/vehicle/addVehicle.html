@@ -28,21 +28,21 @@
                         </div>
                         <div th:if="${vehicle == null}" class="card-body">
                             <div class="row">
-                                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$AddVehicle).URL + '?vehicleType=CAR'}}" class="col-sm-4 col-md-4 col-xl-4">
+                                <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController$AddVehicle).URL + '?vehicleType=CAR'}}" class="col-sm-4 col-md-4 col-xl-4">
                                     <div id="card-vehicle" class="custom-card rounded position-relative m-4 px-0 w-75">
                                         <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
                                             <span>Voiture</span>
                                         </h4>
                                     </div>
                                 </a>
-                                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$AddVehicle).URL + '?vehicleType=MOTORBIKE'}}" class="col-sm-4 col-md-4 col-xl-4">
+                                <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController$AddVehicle).URL + '?vehicleType=MOTORBIKE'}}" class="col-sm-4 col-md-4 col-xl-4">
                                     <div id="card-vehicle" class="custom-card rounded position-relative m-4 px-0 w-75">
                                         <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
                                             <span>Moto</span>
                                         </h4>
                                     </div>
                                 </a>
-                                <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$AddVehicle).URL + '?vehicleType=PLANE'}}" class="col-sm-4 col-md-4 col-xl-4">
+                                <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController$AddVehicle).URL + '?vehicleType=PLANE'}}" class="col-sm-4 col-md-4 col-xl-4">
                                     <div id="card-vehicle" class="custom-card rounded position-relative m-4 px-0 w-75">
                                         <h4 class="text-white text-center font-weight-bold py-2 my-0 d-flex align-items-center justify-content-center">
                                             <span>Avion</span>
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <div th:if="${vehicle != null}" class="card-body">
-                            <form method="post" th:action="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController).BASE_URL + '/'+ vehicle.class.simpleName}}" th:object="${vehicle}" class="form-horizontal">
+                            <form method="post" th:action="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController).BASE_URL + '/'+ vehicle.class.simpleName}}" th:object="${vehicle}" class="form-horizontal">
                                 <input type="hidden" th:field="*{id}" />
                                 <div class="row">
                                     <label class="col-md-2 col-form-label">Immatriculation</label>
@@ -160,7 +160,7 @@
                                     </div>
                                 </div>
                                 <div class="pull-right">
-                                    <a th:href="@{${T(fr.enssat.vehiclesrental.controller.constants.Constants.VehicleController$AddVehicle).URL}}"
+                                    <a th:href="@{${T(fr.enssat.vehiclesrental.constants.ControllerConstants.VehicleController$AddVehicle).URL}}"
                                        class="btn btn-secondary">
                                         Annuler
                                     </a>
