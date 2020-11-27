@@ -217,6 +217,7 @@ public class ControllerConstants {
             public static final String URL = BASE_URL+"/edit";
             public static final String TITLE = "modifier une réservation";
             public static final String VIEW = BASE_VIEW + "createBooking";
+            public static final String ERROR_MESSAGE = "Impossible de modifier la réservation";
         }
 
         public static final class ArchiveBooking {
@@ -239,6 +240,7 @@ public class ControllerConstants {
 
             public static final String URL = BASE_URL+"/archive";
             public static final String TITLE = "archiver une réservation";
+            public static final String VIEW = BASE_VIEW + "confirmArchiveBooking";
         }
 
 
